@@ -194,7 +194,7 @@ const ManageproductsNoDelivery = (props) => {
                                 <div className='name-page-employer'>
                                     <h4> Order processing </h4>
                                     <div className='more-employer'>
-                                        <b>Giao hàng tiết kiệm</b>
+                                        <b>{user?.account?.nameUnit?.NameUnit}</b>
 
 
                                     </div>
@@ -244,18 +244,8 @@ const ManageproductsNoDelivery = (props) => {
                                                 <Link to="/Manageproducts_delivery_Three" style={{ textDecoration: "none", color: "#474141" }}>Đơn huỷ giao hàng ({dataNumber.delivery_cancel})</Link>
 
                                             </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Manageproducts_delivery_Four" style={{ textDecoration: "none", color: "#474141" }}>Đơn giao lại sau ({dataNumber.delivery_again}) </Link>
 
-                                            </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                {/* <Link to="/listuserbygroupStaff" style={{ textDecoration: "none", color: "#474141" }}>Staff </Link> */}
-                                                Đơn đã thanh toán
-                                            </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                {/* <Link to="/listuserbygroupStaff" style={{ textDecoration: "none", color: "#474141" }}>Staff </Link> */}
-                                                Đơn chưa thanh toán
-                                            </div>
+
 
 
                                         </div>
@@ -266,7 +256,7 @@ const ManageproductsNoDelivery = (props) => {
                                         <div className='container'>
                                             <div className='title-employer-one my-3'>Đơn hàng chưa giao ({listProjectbyUnitLenght})</div>
                                             <hr />
-                                            <div className='sub'>
+                                            <div className='d-flex justify-content-end'>
                                                 < ReactPaginate
                                                     nextLabel="next >"
                                                     onPageChange={handlePageClick}
@@ -332,23 +322,64 @@ const ManageproductsNoDelivery = (props) => {
                                                                     <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
                                                                     <td> {item?.name_customer}</td>
                                                                     <td>
-                                                                        {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
-                                                                        <br />
-
-
-
-                                                                    </td>
-                                                                    <td>
-                                                                        {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa xử lý"}
-
-                                                                    </td>
-                                                                    <td>
-                                                                        <span style={{ color: "red", fontWeight: "700" }}>
-                                                                            {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
-
+                                                                        <span >
+                                                                            {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
                                                                         </span>
+                                                                        <br />
+                                                                        {item.User_PickUp && item.Number_PickUp &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_PickUp}-{item.Number_PickUp}</b>
+                                                                            </span>
+
+                                                                        }
+
+
                                                                     </td>
-                                                                    <td>{item?.receiveMoneyId?.status ? item?.receiveMoneyId?.status : "chưa thanh toán "}</td>
+
+                                                                    <td>
+
+                                                                        <span >
+                                                                            {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa xử lý"}
+                                                                        </span>
+                                                                        <br />
+                                                                        {item.User_Warehouse && item.Number_Warehouse
+                                                                            &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_Warehouse}-{item.Number_Warehouse}</b>
+                                                                            </span>
+
+                                                                        }
+
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <span style={{ color: "red" }}>
+                                                                            {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
+                                                                        </span>
+                                                                        <br />
+                                                                        {item.User_Delivery && item.Number_Delivery &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_Delivery}-{item.Number_Delivery}</b>
+                                                                            </span>
+
+                                                                        }
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <span >
+                                                                            {item?.Status_Received_money?.status ? item?.Status_Received_money?.status : "chưa thanh toán "}
+                                                                        </span>
+                                                                        <br />
+                                                                        {item.User_Overview && item.Number_Overview &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_Overview}-{item.Number_Overview} </b>
+                                                                            </span>
+                                                                        }
+                                                                    </td>
                                                                     <td>{item.createdBy}</td>
                                                                     <td>
 
@@ -384,7 +415,7 @@ const ManageproductsNoDelivery = (props) => {
                                 {isSearch === true &&
                                     <div className='table-wrapper-employer-one'>
                                         <div className='container'>
-                                            <div className='title-employer-one my-3'>Đơn hàng chưa giao ({listProjectSearch.length})</div>
+                                            <div className='title-employer-one my-3'>Kết quả tìm kiếm ({listProjectSearch.length})</div>
                                             <hr />
 
                                             <table class="table table-bordered">
@@ -426,20 +457,64 @@ const ManageproductsNoDelivery = (props) => {
                                                                     <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
                                                                     <td> {item?.name_customer}</td>
                                                                     <td>
-                                                                        {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
-                                                                        <br />
-                                                                    </td>
-                                                                    <td>
-                                                                        {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa xử lý"}
-
-                                                                    </td>
-                                                                    <td>
-                                                                        <span style={{ color: "red", fontWeight: "700" }}>
-                                                                            {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
-
+                                                                        <span >
+                                                                            {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
                                                                         </span>
+                                                                        <br />
+                                                                        {item.User_PickUp && item.Number_PickUp &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_PickUp}-{item.Number_PickUp}</b>
+                                                                            </span>
+
+                                                                        }
+
+
                                                                     </td>
-                                                                    <td>{item?.receiveMoneyId?.status ? item?.receiveMoneyId?.status : "chưa thanh toán "}</td>
+
+                                                                    <td>
+
+                                                                        <span >
+                                                                            {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa xử lý"}
+                                                                        </span>
+                                                                        <br />
+                                                                        {item.User_Warehouse && item.Number_Warehouse
+                                                                            &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_Warehouse}-{item.Number_Warehouse}</b>
+                                                                            </span>
+
+                                                                        }
+
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <span style={{ color: "red" }}>
+                                                                            {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
+                                                                        </span>
+                                                                        <br />
+                                                                        {item.User_Delivery && item.Number_Delivery &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_Delivery}-{item.Number_Delivery}</b>
+                                                                            </span>
+
+                                                                        }
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <span >
+                                                                            {item?.Status_Received_money?.status ? item?.Status_Received_money?.status : "chưa thanh toán "}
+                                                                        </span>
+                                                                        <br />
+                                                                        {item.User_Overview && item.Number_Overview &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_Overview}-{item.Number_Overview} </b>
+                                                                            </span>
+                                                                        }
+                                                                    </td>
                                                                     <td>{item.createdBy}</td>
                                                                     <td>
 
@@ -458,7 +533,7 @@ const ManageproductsNoDelivery = (props) => {
                                                         <td colSpan={14}>
                                                             <div className='d-flex align-item-center justify-content-center'>
 
-                                                                <h5> Đơn hàng đã được xử lý hết và chưa phát sinh đơn hàng mới</h5>
+                                                                <h5> Không tìm thấy</h5>
 
                                                             </div>
 

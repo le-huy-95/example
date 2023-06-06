@@ -296,28 +296,12 @@ const Overview = (props) => {
                                                                             </span>
                                                                         </td>
 
-                                                                        {item.receiveMoneyId < 1
-                                                                            &&
-
-                                                                            <td style={{ color: "red", fontWeight: "600" }}>Chưa đối soát </td>
-
-
+                                                                        {item.receiveMoneyId === 0 &&
+                                                                            <td style={{ color: "orange", fontWeight: "600" }}>{item?.Status_Received_money?.status ? item?.Status_Received_money?.status : "Chưa xử lý"} </td>
 
                                                                         }
-                                                                        {item.receiveMoneyId === 1
-                                                                            &&
-
-                                                                            <td style={{ color: "yellow", fontWeight: "600" }}>{item?.Status_Received_money?.status} </td>
-
-
-
-                                                                        }
-                                                                        {item.receiveMoneyId > 1
-                                                                            &&
-
-                                                                            <td style={{ color: "blue", fontWeight: "600" }}>{item?.Status_Received_money?.status} </td>
-
-
+                                                                        {item.receiveMoneyId > 0 &&
+                                                                            <td style={{ color: "blue", fontWeight: "600" }}>{item?.Status_Received_money?.status ? item?.Status_Received_money?.status : "Chưa xử lý"} </td>
 
                                                                         }
 
@@ -362,23 +346,20 @@ const Overview = (props) => {
                                                                             {item.Number_Overview && item.Number_Overview}
 
                                                                         </td>
+                                                                        {item.receiveMoneyId === 0 &&
+                                                                            <td>
+                                                                                <button className='btn btn-danger mb-3' onClick={() => update(item)} > nhận đơn</button>
 
-                                                                        {!item.User_Overview && !item.Number_Overview &&
-                                                                            < td >
-                                                                                <button className='btn btn-danger' onClick={() => update(item)}> Nhận đơn</button>
                                                                             </td>
+
                                                                         }
-                                                                        {+item.receiveMoneyId == 1 &&
-                                                                            < td >
-                                                                                <span className=' mb-3' style={{ color: "blue", fontWeight: "600" }}> Đang đối soát</span>
+                                                                        {item.receiveMoneyId === 1 &&
+                                                                            <td style={{ color: "orange", fontWeight: "600" }}>Đang đối soát </td>
 
-                                                                            </td>
                                                                         }
-                                                                        {+item.receiveMoneyId > 1 &&
-                                                                            < td >
-                                                                                <span className=' mb-3' style={{ color: "green", fontWeight: "600" }}> Đối soát xong</span>
+                                                                        {item.receiveMoneyId === 2 || item.receiveMoneyId === 3 &&
+                                                                            <td style={{ color: "blue", fontWeight: "600" }}>Đối soát xong </td>
 
-                                                                            </td>
                                                                         }
                                                                     </tr>
 
@@ -583,6 +564,7 @@ const Overview = (props) => {
 
                                                                         </span>
                                                                     </td>
+
                                                                     {!item.receiveMoneyId &&
                                                                         <td style={{ color: "orange", fontWeight: "600" }}>{item?.Status_Received_money?.status ? item?.Status_Received_money?.status : "Chưa xử lý"} </td>
 
@@ -616,7 +598,7 @@ const Overview = (props) => {
                                                                     {item.Mode_of_payment === "Nhận tiền thanh toán ở trung tâm" &&
                                                                         <td>
                                                                             <span>
-                                                                                <b>hình thức:</b> <span style={{ color: "red", fontWeight: "600" }}>{item?.Mode_of_payment ? item?.Mode_of_payment : ""}</span>
+                                                                                <b>hình thức:</b>   <span style={{ color: "red", fontWeight: "600" }}>{item?.Mode_of_payment ? item?.Mode_of_payment : ""}</span>
                                                                             </span>
 
                                                                         </td>
@@ -651,7 +633,6 @@ const Overview = (props) => {
 
                                                                         </td>
                                                                     }
-
                                                                 </tr>
 
                                                             </tbody>

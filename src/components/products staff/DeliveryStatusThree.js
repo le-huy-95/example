@@ -60,28 +60,7 @@ const DeliveryStatusThree = (props) => {
 
     }, 200)
 
-    const completePickup = async (item) => {
-        let res = await updateDeliveryInProject(item.id, +user.account.shippingUnit_Id, 2, user.account.username, user.account.phone, "", "", item.Delivery_time, new Date())
-        if (res && +res.EC === 0) {
-            await fetchProjectUser()
-        } else {
-            toast.error(res.EM)
-        }
-    }
-    const updateDelivery = async (item) => {
 
-        if (!item.User_Delivery && !item.Number_Delivery) {
-            let res = await updateDeliveryInProject(item.id, +user.account.shippingUnit_Id, 1, user.account.username, user.account.phone, "", "", new Date(), "")
-            if (res && +res.EC === 0) {
-                console.log("res", res)
-                await fetchProjectUser()
-                await HandleSearchData(valueSearch)
-            } else {
-                toast.error(res.EM)
-            }
-        }
-
-    }
 
     const fetchProjectUser = async () => {
 
@@ -141,12 +120,12 @@ const DeliveryStatusThree = (props) => {
                             <div className="container">
                                 <div className='name-page-employer-Delivery'>
                                     <h4> List Delivery </h4>
-                                    <div className='more-employer-Delivery'>
-                                        <b>Giao hàng tiết kiệm</b>
+                                    <div className='more-employer-pickup'>
+                                        <b>{user?.account?.nameUnit?.NameUnit}</b>
 
 
                                     </div>
-                                    <span> nhân viên giao hàng</span>
+                                    <span>{user?.account?.Position}</span>
 
                                 </div>
                                 <div className='sort_Delivery my-3'>

@@ -18,20 +18,14 @@ const DeliveryStatusTwo = (props) => {
     const [collapsed, setCollapsed] = useState(false)
     const [isSearch, SetIsSearch] = useState(false)
     const [listProjectbyStaffDelivery, setListProjectbyStaffDelivey] = useState([])
-    const [listProjectbyuserStaff, setListProjectbyuserStaff] = useState([])
 
     const [listProjectSearch, setListProjectSearch] = useState([])
-    const [valueSearch, setvalueSearch] = useState("")
-    const [showModal, SetshowModal] = useState(false)
-    const [action, setAction] = useState(0)
-    const [dataCancel, setDataCancel] = useState([])
-    const [dataAgain, setDataAgain] = useState([])
+
 
 
 
     const HandleSearchData = debounce(async (value) => {
         let data = value
-        setvalueSearch(value)
         if (data) {
             SetIsSearch(true)
             let res = await getDataSearchByEmplyer(data, user.account.Position, +user.account.shippingUnit_Id)
@@ -110,13 +104,12 @@ const DeliveryStatusTwo = (props) => {
                             <div className="container">
                                 <div className='name-page-employer-Delivery'>
                                     <h4> List Delivery </h4>
-                                    <div className='more-employer-Delivery'>
-                                        <b>Giao hàng tiết kiệm</b>
+                                    <div className='more-employer-pickup'>
+                                        <b>{user?.account?.nameUnit?.NameUnit}</b>
 
 
                                     </div>
-                                    <span> nhân viên giao hàng</span>
-
+                                    <span>{user?.account?.Position}</span>
                                 </div>
                                 <div className='sort_Delivery my-3'>
                                     <div className='container my-3'>

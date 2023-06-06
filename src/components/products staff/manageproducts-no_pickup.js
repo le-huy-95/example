@@ -16,13 +16,14 @@ const ManageproductsNoPickup = (props) => {
     const { user } = React.useContext(UserContext);
     const [collapsed, setCollapsed] = useState(false)
     const [listProjectbyAllstatusPIckup, setListProjectbyAllstatusPIckup] = useState([])
+    const [lenghtArr, setLenghtArr] = useState([])
 
 
     const [currentPage, setCurrentPage] = useState(
         localStorage.getItem("infomation Page employer one") ? localStorage.getItem("infomation Page employer one") : 1
 
     )
-    const [currentLimit, setCurrentLimit] = useState(1)
+    const [currentLimit, setCurrentLimit] = useState(6)
     const [isLoading, SetIsLoading] = useState(false)
     const [totalPage, setTotalPage] = useState(0)
     const [showModal, setShowModal] = useState(false)
@@ -75,9 +76,8 @@ const ManageproductsNoPickup = (props) => {
             }
             if (res.DT.totalPage > 0 && res.DT.dataProject.length > 0) {
                 let data = res.DT.dataProject
-
+                setLenghtArr(res.DT.totalProject)
                 if (data) {
-                    setListProjectbyAllstatusPIckup(res.DT.totalProject)
                     setListProjectbyAllstatusPIckup(data)
                     SetIsLoading(true)
 
@@ -85,7 +85,7 @@ const ManageproductsNoPickup = (props) => {
             }
             if (res.DT.totalPage === 0 && res.DT.dataProject.length === 0) {
                 let data = res.DT.dataProject
-                setListProjectbyAllstatusPIckup(res.DT.totalProject)
+                setLenghtArr(res.DT.totalProject)
 
                 setListProjectbyAllstatusPIckup(data)
                 SetIsLoading(true)
@@ -194,12 +194,8 @@ const ManageproductsNoPickup = (props) => {
                                 <div className='name-page-employer'>
                                     <h4> Order processing </h4>
                                     <div className='more-employer'>
-                                        <b>Giao hàng tiết kiệm</b>
-
-
+                                        <b>{user?.account?.nameUnit?.NameUnit}</b>
                                     </div>
-
-
                                 </div>
                                 <div className='sort my-3'>
                                     <div className='container my-3'>
@@ -246,18 +242,8 @@ const ManageproductsNoPickup = (props) => {
                                                 <Link to="/Manageproducts_delivery_Three" style={{ textDecoration: "none", color: "#474141" }}>Đơn huỷ giao hàng ({dataNumber.delivery_cancel})</Link>
 
                                             </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Manageproducts_delivery_Four" style={{ textDecoration: "none", color: "#474141" }}>Đơn giao lại sau ({dataNumber.delivery_again})</Link>
 
-                                            </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                {/* <Link to="/listuserbygroupStaff" style={{ textDecoration: "none", color: "#474141" }}>Staff </Link> */}
-                                                Đơn đã thanh toán
-                                            </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                {/* <Link to="/listuserbygroupStaff" style={{ textDecoration: "none", color: "#474141" }}>Staff </Link> */}
-                                                Đơn chưa thanh toán
-                                            </div>
+
 
 
                                         </div>
@@ -266,9 +252,9 @@ const ManageproductsNoPickup = (props) => {
                                 {isSearch === false &&
                                     <div className='table-wrapper-employer-one'>
                                         <div className='container'>
-                                            <div className='title-employer-one my-3'>Tất cả đơn hàng chưa lấy ({listProjectbyAllstatusPIckup.length})</div>
+                                            <div className='title-employer-one my-3'>Tất cả đơn hàng chưa lấy ({lenghtArr})</div>
                                             <hr />
-                                            <div className='sub'>
+                                            <div className='d-flex justify-content-end'>
                                                 < ReactPaginate
                                                     nextLabel="next >"
                                                     onPageChange={handlePageClick}

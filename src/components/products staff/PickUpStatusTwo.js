@@ -114,11 +114,11 @@ const PickUpStatusTwo = (props) => {
                                 <div className='name-page-employer-pickup'>
                                     <h4> List Pick-up </h4>
                                     <div className='more-employer-pickup'>
-                                        <b>Giao hàng tiết kiệm</b>
+                                        <b>{user?.account?.nameUnit?.NameUnit}</b>
 
 
                                     </div>
-                                    <span> nhân viên lấy hàng</span>
+                                    <span>{user?.account?.Position}</span>
                                 </div>
                                 <div className='sort_pickup my-3'>
                                     <div className='container my-3'>

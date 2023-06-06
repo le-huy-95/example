@@ -46,7 +46,6 @@ import ManageproductsNoDelivery from "../products staff/manageproducts-no-delive
 import ManageproductsDeliveryStatusOne from "../products staff/manageproducts-status-one-delivery"
 import ManageproductsDeliveryStatusTwo from "../products staff/manageproducts-status-two-delivery"
 import ManageproductsDeliveryStatusThree from "../products staff/manageproducts-status-three-delivery"
-import ManageproductsDeliveryStatusFour from "../products staff/manageproducts-status-four-delivery"
 import PickUpNoStatus from "../products staff/PickUpNoStatus"
 import PickUpStatusOne from "../products staff/PickUpStatusOne"
 import PickUpStatusTwo from "../products staff/PickUpStatusTwo"
@@ -119,8 +118,7 @@ const AppRoutes = (props) => {
                 />
                 <PrivateRoutes path="/Pick_up_no_status" component={PickUpNoStatus}
                 />
-                <PrivateRoutes path="/Manageproducts_delivery_Four" component={ManageproductsDeliveryStatusFour}
-                />
+
                 <PrivateRoutes path="/Manageproducts_delivery_Three" component={ManageproductsDeliveryStatusThree}
                 />
                 <PrivateRoutes path="/Manageproducts_delivery_Two" component={ManageproductsDeliveryStatusTwo}

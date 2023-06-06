@@ -267,8 +267,7 @@ const ProductsWithStatusdeliveryNull = (props) => {
 
 
     const fetchProjectUser = async () => {
-        let statusdeliveryId = null
-        let res = await getProjectWithPaginationStatusDelivery(+currentPage, +currentLimit, user.account.phone, statusdeliveryId)
+        let res = await getProjectWithPaginationStatusDelivery(+currentPage, +currentLimit, user.account.phone, 0)
         console.log("res", res)
         if (res && +res.EC === 0) {
             SetIsLoading(true)
@@ -276,12 +275,24 @@ const ProductsWithStatusdeliveryNull = (props) => {
             setTotalPage(+res.DT.totalPage)
             if (res.DT.totalPage > 0 && res.DT.dataProject.length === 0) {
                 setCurrentPage(+res.DT.totalPage)
-                await getProjectWithPaginationStatusDelivery(+res.DT.totalPage, +currentLimit, user.account.phone, statusdeliveryId)
+                await getProjectWithPaginationStatusDelivery(+res.DT.totalPage, +currentLimit, user.account.phone, 0)
             }
             if (res.DT.totalPage > 0 && res.DT.dataProject.length > 0) {
                 let data = res.DT.dataProject
+                console.log("data", data)
                 if (data && data.length > 0) {
                     setListProjectbyUser(data)
+                } else {
+                    setListProjectbyUser([])
+
+
+                }
+            } if (res.DT.totalPage === 0 && res.DT.dataProject.length === 0) {
+                let data = res.DT.dataProject
+                if (data && data.length > 0) {
+                    setListProjectbyUser(data)
+                    SetIsLoading(true)
+
                 } else {
                     setListProjectbyUser([])
 
@@ -332,15 +343,14 @@ const ProductsWithStatusdeliveryNull = (props) => {
     }, [StartDateCalendar, endDateCalendar])
 
     const getDataWithcurrentPage = async () => {
-        let statusdeliveryId = null
         let currentPageAfterRefesh = +localStorage.getItem("infomation Page 2")
-        let res = await getProjectWithPaginationStatusDelivery(currentPageAfterRefesh, +currentLimit, user.account.phone, statusdeliveryId)
+        let res = await getProjectWithPaginationStatusDelivery(currentPageAfterRefesh, +currentLimit, user.account.phone, 0)
         if (res && +res.EC === 0) {
             SetIsLoading(true)
             setTotalPage(+res.DT.totalPage)
             if (res.DT.totalPage > 0 && res.DT.dataProject.length === 0) {
                 setCurrentPage(+res.DT.totalPage)
-                await getProjectWithPaginationStatusDelivery(+res.DT.totalPage, +currentLimit, user.account.phone, statusdeliveryId)
+                await getProjectWithPaginationStatusDelivery(+res.DT.totalPage, +currentLimit, user.account.phone, 0)
             }
             if (res.DT.totalPage > 0 && res.DT.dataProject.length > 0) {
                 let data = res.DT.dataProject

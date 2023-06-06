@@ -223,11 +223,22 @@
                         font-weight: 700;
                     }
 
-                    .sub {
+                    .sub-tittle {
                         display: flex;
                         align-items: center;
-                        justify-content: flex-end;
+                        justify-content: space-between;
+
+                        .sub-left {
+                            display: flex;
+                        }
+
+                        .sub-right {
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-end;
+                        }
                     }
+
 
 
                 }

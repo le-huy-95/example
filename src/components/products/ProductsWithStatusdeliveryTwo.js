@@ -277,10 +277,22 @@ const ProductsWithStatusdeliveryTwo = (props) => {
             }
             if (res.DT.totalPage > 0 && res.DT.dataProject.length > 0) {
                 let data = res.DT.dataProject
+                console.log("data", data)
                 if (data) {
                     setListProjectbyUser(data)
                 } else {
                     setListProjectbyUser([])
+
+                }
+            } if (res.DT.totalPage === 0 && res.DT.dataProject.length === 0) {
+                let data = res.DT.dataProject
+                if (data && data.length > 0) {
+                    setListProjectbyUser(data)
+                    SetIsLoading(true)
+
+                } else {
+                    setListProjectbyUser([])
+
 
                 }
             }
@@ -938,8 +950,10 @@ const ProductsWithStatusdeliveryTwo = (props) => {
                                                                                 <div style={{ backgroundColor: "gray", width: "20px", height: "20px", borderRadius: "50%" }}></div>
                                                                                 : "Đang xử lý"}</td>
                                                                         } */}
-                                                                        {item?.Status_Delivery?.status === "Đơn đã giao" &&
-                                                                            <td style={{ color: "gray", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
+                                                                        {item?.Status_Delivery?.status === "Đã giao hàng xong" &&
+                                                                            <td style={{ color: "gray", fontWeight: "700" }} >{item?.Status_Payment?.status ?
+                                                                                <div style={{ backgroundColor: "gray", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                : "Đang xử lý"}</td>
 
                                                                         }
                                                                         {/* <td>{item.money}</td> */}

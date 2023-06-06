@@ -127,13 +127,12 @@ const WarehouseStatusOne = (props) => {
                             <div className="container">
                                 <div className='name-page-employer-warehouse'>
                                     <h4> List Warehouse </h4>
-                                    <div className='more-employer-warehouse'>
-                                        <b>Giao hàng tiết kiệm</b>
+                                    <div className='more-employer-pickup'>
+                                        <b>{user?.account?.nameUnit?.NameUnit}</b>
 
 
                                     </div>
-                                    <b> nhân viên Kho</b>
-                                    <span> Kho hà nội</span>
+                                    <span>{user?.account?.Position}</span>
 
                                 </div>
                                 <div className='sort_warehouse my-3'>

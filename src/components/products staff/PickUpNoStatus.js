@@ -41,7 +41,8 @@ const PickUpNoStatus = (props) => {
             SetIsSearch(true)
             let res = await getDataSearchByEmplyer(data, user.account.Position, +user.account.shippingUnit_Id)
             if (res && +res.EC === 0) {
-                setListProjectSearch(res.DT)
+                let data = res.DT.filter(item => item.statuspickupId === 0)
+                setListProjectSearch(data)
             }
 
         } else {
@@ -133,11 +134,11 @@ const PickUpNoStatus = (props) => {
                                 <div className='name-page-employer-pickup'>
                                     <h4> List Pick-up </h4>
                                     <div className='more-employer-pickup'>
-                                        <b>Giao hàng tiết kiệm</b>
+                                        <b>{user?.account?.nameUnit?.NameUnit}</b>
 
 
                                     </div>
-                                    <span> nhân viên lấy hàng</span>
+                                    <span>{user?.account?.Position}</span>
                                 </div>
                                 <div className='sort_pickup my-3'>
                                     <div className='container my-3'>
@@ -288,6 +289,7 @@ const PickUpNoStatus = (props) => {
                                             <table class="table table-bordered table-body-employer-search">
                                                 <thead>
                                                     <tr className='table-secondary'>
+                                                        <th></th>
                                                         <th scope="col">Id</th>
 
                                                         <th scope="col">Mã đơn</th>
@@ -311,36 +313,55 @@ const PickUpNoStatus = (props) => {
 
                                                     listProjectSearch.map((item, index) => {
                                                         return (
-                                                            <tbody key={`item-${index}`}>
+                                                            <tbody>
 
-                                                                <tr class="table-primary">
+                                                                <tr >
+                                                                    {item?.flag === true ?
+                                                                        <td>
+                                                                            <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                            </span>
+                                                                        </td>
+                                                                        :
+                                                                        <td></td>
+
+                                                                    }
+
 
                                                                     <td>{item.id}</td>
                                                                     <td>{item.order}</td>
-                                                                    <td> {item?.Warehouse?.product}</td>
+
+                                                                    <td>
+                                                                        {item?.Warehouse?.product}</td>
                                                                     <td>{item.quantity}</td>
                                                                     <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
                                                                     <td>
-                                                                        {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
+                                                                        <span style={{ color: "red", fontWeight: "700" }}>
+                                                                            {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
+                                                                        </span>
+
                                                                     </td>
                                                                     <td>{item?.Detail_Place_of_receipt},{item?.Address_Ward.name},{item?.Address_District.name},{item?.Address_Province.name}</td>
+
+
+
                                                                     <td>{item?.pickup_time ? moment(`${item?.pickup_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                     <td>{item?.pickupDone_time ? moment(`${item?.pickupDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
+                                                                    <td>
+                                                                        {item?.User_PickUp ? item?.User_PickUp : "chưa ai nhận đơn"}
+                                                                        -
+                                                                        {item?.Number_PickUp ? item?.Number_PickUp : ""}
 
-                                                                    <td> {item?.User_PickUp ? item?.User_PickUp : "chưa ai nhận đơn"}- {item?.Number_PickUp ? item?.Number_PickUp : "0"}</td>
-                                                                    {!item?.statuspickupId || item?.statuspickupId === 1 ?
+                                                                    </td>
+                                                                    <td>
+                                                                        {!item?.User_PickUp &&
 
-                                                                        <td>
-                                                                            <button className='btn btn-info mx-3 my-1' > Hoàn thành</button>
-                                                                            <br />
-                                                                            <button className='btn btn-warning mx-3 my-1' onClick={() => updatePickup(item)}>Hủy nhận đơn</button>
+                                                                            <button className='btn btn-danger' onClick={() => updatePickup(item)}> Nhận đơn</button>
 
-                                                                        </td>
-                                                                        :
-                                                                        <td>
-                                                                            <button className="btn btn-succes"></button>
-                                                                        </td>
-                                                                    }
+                                                                        }
+
+
+                                                                    </td>
                                                                 </tr>
                                                             </tbody>
                                                         )

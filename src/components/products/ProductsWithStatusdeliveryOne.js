@@ -282,6 +282,17 @@ const ProductsWithStatusdeliveryOne = (props) => {
                     setListProjectbyUser([])
 
                 }
+            } if (res.DT.totalPage === 0 && res.DT.dataProject.length === 0) {
+                let data = res.DT.dataProject
+                if (data && data.length > 0) {
+                    setListProjectbyUser(data)
+                    SetIsLoading(true)
+
+                } else {
+                    setListProjectbyUser([])
+
+
+                }
             }
 
         }
@@ -938,7 +949,7 @@ const ProductsWithStatusdeliveryOne = (props) => {
                                                                             <td style={{ color: "red", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
 
                                                                         }
-                                                                        {item?.Status_Delivery?.status === "Đơn đang giao" &&
+                                                                        {item?.Status_Delivery?.status === "Đang giao hàng" &&
                                                                             <td style={{ color: "orange", fontWeight: "700" }} >{item?.Status_Payment?.status ?
                                                                                 <div style={{ backgroundColor: "orange", width: "20px", height: "20px", borderRadius: "50%" }}></div>
                                                                                 : "Đang xử lý"}</td>

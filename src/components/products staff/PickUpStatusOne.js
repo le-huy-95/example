@@ -41,7 +41,9 @@ const PickUpStatusOne = (props) => {
             SetIsSearch(true)
             let res = await getDataSearchByEmplyer(data, user.account.Position, +user.account.shippingUnit_Id)
             if (res && +res.EC === 0) {
-                setListProjectSearch(res.DT)
+                let data = res.DT.filter(item => item.statuspickupId === 1)
+
+                setListProjectSearch(data)
             }
 
         } else {
@@ -133,11 +135,11 @@ const PickUpStatusOne = (props) => {
                                 <div className='name-page-employer-pickup'>
                                     <h4> List Pick-up </h4>
                                     <div className='more-employer-pickup'>
-                                        <b>Giao hàng tiết kiệm</b>
+                                        <b>{user?.account?.nameUnit?.NameUnit}</b>
 
 
                                     </div>
-                                    <span> nhân viên lấy hàng</span>
+                                    <span>{user?.account?.Position}</span>
                                 </div>
                                 <div className='sort_pickup my-3'>
                                     <div className='container my-3'>

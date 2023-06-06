@@ -292,6 +292,16 @@ const ProductsWithStatuspayment = (props) => {
                     setListProjectbyUser([])
 
                 }
+            } if (res.DT.totalPage === 0 && res.DT.dataProject.length === 0) {
+                let data = res.DT.dataProject
+                if (data && data.length > 0) {
+                    setListProjectbyUser(data)
+
+                } else {
+                    setListProjectbyUser([])
+
+
+                }
             }
 
         }

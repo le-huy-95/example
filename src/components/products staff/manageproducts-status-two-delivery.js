@@ -4,11 +4,13 @@ import SidebarStaff from "../sidebar/sidebar staff"
 import { Link, NavLink, useHistory } from "react-router-dom"
 import React, { useEffect, useState } from 'react'
 import { UserContext } from "../../contexApi/UserContext"
-import { getProjectWithPaginationWithALlStatusDelivery, getAllStatusProductWithEmployer } from "../services/ProjectService"
+import { getProjectWithPaginationWithALlStatusDelivery, getAllStatusProductWithEmployer, getDataSearchByEmplyer } from "../services/ProjectService"
 import ReactPaginate from 'react-paginate';
 import ModalChatWithCutomer from "./modalChatWithCutomer"
 import moment from "moment"
 import { toast } from 'react-toastify'
+import _, { debounce } from "lodash"
+
 const ManageproductsDeliveryStatusTwo = (props) => {
     let history = useHistory()
     const { user } = React.useContext(UserContext);
@@ -16,19 +18,36 @@ const ManageproductsDeliveryStatusTwo = (props) => {
     const [listProjectbyUnit, setListProjectbyUnit] = useState([])
     const [listProjectbyUnitLenght, setListProjectbyUnitLenghtt] = useState([])
 
-    const [listProjectbyUnitWithFlag, setListProjectbyUnitWithFlag] = useState([])
-
+    const [isSearch, SetIsSearch] = useState(false)
+    const [listProjectSearch, setListProjectSearch] = useState([])
     const [currentPage, setCurrentPage] = useState(
         localStorage.getItem("infomation Page employer eight") ? localStorage.getItem("infomation Page employer eight") : 1
 
     )
     const [currentLimit, setCurrentLimit] = useState(6)
-    const [isLoading, SetIsLoading] = useState(false)
     const [totalPage, setTotalPage] = useState(0)
     const [showModal, setShowModal] = useState(false)
     const [dataChatOne, setDataChatOnet] = useState([])
     const [dataNumber, setdataNumber] = useState([])
 
+
+    const HandleSearchData = debounce(async (value) => {
+        let data = value
+        if (data) {
+            SetIsSearch(true)
+            let res = await getDataSearchByEmplyer(data, "", +user.account.shippingUnit_Id)
+            if (res && +res.EC === 0) {
+                let data = res.DT.filter(item => item.statusDeliveryId === 2)
+                setListProjectSearch(data)
+            }
+
+        } else {
+            SetIsSearch(false)
+            await fetchAllNumberProject()
+
+        }
+
+    }, 200)
     const handleShowModal = (item) => {
         setShowModal(!showModal)
         setDataChatOnet(item)
@@ -62,8 +81,6 @@ const ManageproductsDeliveryStatusTwo = (props) => {
                 if (data) {
                     setListProjectbyUnitLenghtt(res.DT.totalProject)
                     setListProjectbyUnit(data)
-                    SetIsLoading(true)
-                    console.log("res.DT", res.DT.dataProject)
 
                 }
             }
@@ -72,7 +89,6 @@ const ManageproductsDeliveryStatusTwo = (props) => {
                 setListProjectbyUnitLenghtt(res.DT.totalProject)
 
                 setListProjectbyUnit(data)
-                SetIsLoading(true)
 
             }
         }
@@ -109,8 +125,6 @@ const ManageproductsDeliveryStatusTwo = (props) => {
                 if (data) {
                     setListProjectbyUnitLenghtt(res.DT.totalProject)
                     setListProjectbyUnit(data)
-                    SetIsLoading(true)
-                    console.log("res.DT", res.DT.dataProject)
 
                 }
             }
@@ -119,7 +133,6 @@ const ManageproductsDeliveryStatusTwo = (props) => {
                 setListProjectbyUnitLenghtt(res.DT.totalProject)
 
                 setListProjectbyUnit(data)
-                SetIsLoading(true)
 
             }
         }
@@ -165,6 +178,7 @@ const ManageproductsDeliveryStatusTwo = (props) => {
                                 <input
                                     type="text"
                                     placeholder='Search infomation'
+                                    onChange={(event) => HandleSearchData(event.target.value)}
 
                                 />
                             </div>
@@ -174,12 +188,8 @@ const ManageproductsDeliveryStatusTwo = (props) => {
                                 <div className='name-page-employer'>
                                     <h4> Order processing </h4>
                                     <div className='more-employer'>
-                                        <b>Giao hàng tiết kiệm</b>
-
-
+                                        <b>{user?.account?.nameUnit?.NameUnit}</b>
                                     </div>
-
-
                                 </div>
                                 <div className='sort my-3'>
                                     <div className='container my-3'>
@@ -224,183 +234,307 @@ const ManageproductsDeliveryStatusTwo = (props) => {
                                                 <Link to="/Manageproducts_delivery_Three" style={{ textDecoration: "none", color: "#474141" }}> Đơn huỷ giao hàng ({dataNumber.delivery_cancel})</Link>
 
                                             </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Manageproducts_delivery_Four" style={{ textDecoration: "none", color: "#474141" }}> Đơn giao lại sau ({dataNumber.delivery_again}) </Link>
-
-                                            </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                {/* <Link to="/listuserbygroupStaff" style={{ textDecoration: "none", color: "#474141" }}>Staff </Link> */}
-                                                Đơn đã thanh toán
-                                            </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                {/* <Link to="/listuserbygroupStaff" style={{ textDecoration: "none", color: "#474141" }}>Staff </Link> */}
-                                                Đơn chưa thanh toán
-                                            </div>
 
 
                                         </div>
                                     </div>
                                 </div>
+                                {isSearch === false &&
+                                    <div className='table-wrapper-employer-one'>
+                                        <div className='container'>
+                                            <div className='title-employer-one my-3'>Đơn hàng chưa giao ({listProjectbyUnitLenght})</div>
+                                            <hr />
+                                            <div className='d-flex justify-content-end'>
+                                                < ReactPaginate
+                                                    nextLabel="next >"
+                                                    onPageChange={handlePageClick}
+                                                    pageRangeDisplayed={2}
+                                                    marginPagesDisplayed={3}
+                                                    pageCount={totalPage}
+                                                    previousLabel="< previous"
+                                                    pageClassName="page-item"
+                                                    pageLinkClassName="page-link"
+                                                    previousClassName="page-item"
+                                                    previousLinkClassName="page-link"
+                                                    nextClassName="page-item"
+                                                    nextLinkClassName="page-link"
+                                                    breakLabel="..."
+                                                    breakClassName="page-item"
+                                                    breakLinkClassName="page-link"
+                                                    containerClassName="pagination"
+                                                    activeClassName="active"
+                                                    renderOnZeroPageCount={null}
+                                                    forcePage={+currentPage - 1}
 
-                                <div className='table-wrapper-employer-one'>
-                                    <div className='container'>
-                                        <div className='title-employer-one my-3'>Đơn hàng chưa giao ({listProjectbyUnitLenght})</div>
-                                        <hr />
-                                        <div className='sub'>
-                                            < ReactPaginate
-                                                nextLabel="next >"
-                                                onPageChange={handlePageClick}
-                                                pageRangeDisplayed={2}
-                                                marginPagesDisplayed={3}
-                                                pageCount={totalPage}
-                                                previousLabel="< previous"
-                                                pageClassName="page-item"
-                                                pageLinkClassName="page-link"
-                                                previousClassName="page-item"
-                                                previousLinkClassName="page-link"
-                                                nextClassName="page-item"
-                                                nextLinkClassName="page-link"
-                                                breakLabel="..."
-                                                breakClassName="page-item"
-                                                breakLinkClassName="page-link"
-                                                containerClassName="pagination"
-                                                activeClassName="active"
-                                                renderOnZeroPageCount={null}
-                                                forcePage={+currentPage - 1}
+                                                />
+                                            </div>
 
-                                            />
+                                            <table class="table table-bordered">
+
+                                                <thead>
+                                                    <tr className='table-secondary'>
+
+                                                        <th scope="col">No</th>
+                                                        <th scope="col">id</th>
+
+                                                        <th scope="col">Mã đơn</th>
+                                                        <th scope="col">Mặt hàng</th>
+                                                        <th scope="col">Số lượng</th>
+                                                        <th scope="col">Thời gian tạo</th>
+                                                        <th scope="col">Người nhận</th>
+                                                        <th scope="col">T/T lấy hàng</th>
+                                                        <th scope="col">T/T Nhập kho</th>
+                                                        <th scope="col">T/T Giao hàng</th>
+                                                        <th scope="col">T/T Thanh toán</th>
+                                                        <th scope="col">SĐT người tạo đơn</th>
+                                                        <th scope="col">Thao tác</th>
+
+
+                                                    </tr>
+                                                </thead>
+                                                {listProjectbyUnit && listProjectbyUnit.length > 0
+                                                    ?
+                                                    listProjectbyUnit.map((item, index) => {
+                                                        return (
+
+                                                            <tbody key={`item-${index}`}>
+                                                                <tr class="table-info">
+
+
+                                                                    <td >{(currentPage - 1) * currentLimit + index + 1}</td>
+                                                                    <td>{item.id}</td>
+
+                                                                    <td>{item.order}</td>
+                                                                    <td> {item?.Warehouse?.product}</td>
+                                                                    <td>{item.quantity}</td>
+                                                                    <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
+                                                                    <td> {item?.name_customer}</td>
+                                                                    <td>
+                                                                        <span >
+                                                                            {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
+                                                                        </span>
+                                                                        <br />
+                                                                        {item.User_PickUp && item.Number_PickUp &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_PickUp}-{item.Number_PickUp}</b>
+                                                                            </span>
+
+                                                                        }
+
+
+                                                                    </td>
+
+                                                                    <td>
+
+                                                                        <span >
+                                                                            {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa xử lý"}
+                                                                        </span>
+                                                                        <br />
+                                                                        {item.User_Warehouse && item.Number_Warehouse
+                                                                            &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_Warehouse}-{item.Number_Warehouse}</b>
+                                                                            </span>
+
+                                                                        }
+
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <span style={{ color: "red" }}>
+                                                                            {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
+                                                                        </span>
+                                                                        <br />
+                                                                        {item.User_Delivery && item.Number_Delivery &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_Delivery}-{item.Number_Delivery}</b>
+                                                                            </span>
+
+                                                                        }
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <span >
+                                                                            {item?.Status_Received_money?.status ? item?.Status_Received_money?.status : "chưa thanh toán "}
+                                                                        </span>
+                                                                        <br />
+                                                                        {item.User_Overview && item.Number_Overview &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_Overview}-{item.Number_Overview} </b>
+                                                                            </span>
+                                                                        }
+                                                                    </td>
+                                                                    <td>{item.createdBy}</td>
+                                                                    <td>
+
+                                                                        <span className='mx-2' style={{ color: "blue", cursor: "pointer" }} title='Nhắn tin với Người tạo đơn' onClick={() => handleShowModal(item)}>
+                                                                            <i class="fa fa-comments" aria-hidden="true"></i>
+
+                                                                        </span>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        )
+                                                    })
+                                                    :
+                                                    <tr class="table-info">
+                                                        <td colSpan={14}>
+                                                            <div className='d-flex align-item-center justify-content-center'>
+
+                                                                <h5> Đơn hàng đã được xử lý hết và chưa phát sinh đơn hàng mới</h5>
+
+                                                            </div>
+
+                                                        </td>
+
+                                                    </tr>
+                                                }
+
+                                            </table>
                                         </div>
 
-                                        <table class="table table-bordered">
-
-                                            <thead>
-                                                <tr className='table-secondary'>
-
-                                                    <th scope="col">No</th>
-                                                    <th scope="col">id</th>
-
-                                                    <th scope="col">Mã đơn</th>
-                                                    <th scope="col">Mặt hàng</th>
-                                                    <th scope="col">Số lượng</th>
-                                                    <th scope="col">Thời gian tạo</th>
-                                                    <th scope="col">Người nhận</th>
-                                                    <th scope="col">T/T lấy hàng</th>
-                                                    <th scope="col">T/T Nhập kho</th>
-                                                    <th scope="col">T/T Giao hàng</th>
-                                                    <th scope="col">T/T Thanh toán</th>
-                                                    <th scope="col">SĐT người tạo đơn</th>
-                                                    <th scope="col">Thao tác</th>
-
-
-                                                </tr>
-                                            </thead>
-                                            {listProjectbyUnit && listProjectbyUnit.length > 0
-                                                ?
-                                                listProjectbyUnit.map((item, index) => {
-                                                    return (
-
-                                                        <tbody key={`item-${index}`}>
-                                                            <tr class="table-info">
-
-
-                                                                <td >{(currentPage - 1) * currentLimit + index + 1}</td>
-                                                                <td>{item.id}</td>
-
-                                                                <td>{item.order}</td>
-                                                                <td> {item?.Warehouse?.product}</td>
-                                                                <td>{item.quantity}</td>
-                                                                <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
-                                                                <td> {item?.name_customer}</td>
-                                                                <td>
-                                                                    <span >
-                                                                        {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
-                                                                    </span>
-                                                                    <br />
-                                                                    {item.User_PickUp && item.Number_PickUp &&
-                                                                        <span>Nhân viên :
-                                                                            <br />
-                                                                            <b>{item.User_PickUp}-{item.Number_PickUp}</b>
-                                                                        </span>
-
-                                                                    }
-
-
-                                                                </td>
-
-                                                                <td>
-
-                                                                    <span >
-                                                                        {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa xử lý"}
-                                                                    </span>
-                                                                    <br />
-                                                                    {item.User_Warehouse && item.Number_Warehouse
-                                                                        &&
-                                                                        <span>Nhân viên :
-                                                                            <br />
-                                                                            <b>{item.User_Warehouse}-{item.Number_Warehouse}</b>
-                                                                        </span>
-
-                                                                    }
-
-
-                                                                </td>
-                                                                <td>
-                                                                    <span style={{ color: "red" }}>
-                                                                        {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
-                                                                    </span>
-                                                                    <br />
-                                                                    {item.User_Delivery && item.Number_Delivery &&
-                                                                        <span>Nhân viên :
-                                                                            <br />
-                                                                            <b>{item.User_Delivery}-{item.Number_Delivery}</b>
-                                                                        </span>
-
-                                                                    }
-
-                                                                </td>
-                                                                <td>
-                                                                    <span >
-                                                                        {item?.Status_Received_money?.status ? item?.Status_Received_money?.status : "chưa thanh toán "}
-                                                                    </span>
-                                                                    <br />
-                                                                    {item.User_Overview && item.Number_Overview &&
-                                                                        <span>Nhân viên :
-                                                                            <br />
-                                                                            <b>{item.User_Overview}-{item.Number_Overview} </b>
-                                                                        </span>
-                                                                    }
-                                                                </td>
-                                                                <td>{item.createdBy}</td>
-                                                                <td>
-
-                                                                    <span className='mx-2' style={{ color: "blue", cursor: "pointer" }} title='Nhắn tin với Người tạo đơn' onClick={() => handleShowModal(item)}>
-                                                                        <i class="fa fa-comments" aria-hidden="true"></i>
-
-                                                                    </span>
-                                                                </td>
-                                                            </tr>
-
-                                                        </tbody>
-                                                    )
-                                                })
-                                                :
-                                                <tr class="table-info">
-                                                    <td colSpan={14}>
-                                                        <div className='d-flex align-item-center justify-content-center'>
-
-                                                            <h5> Đơn hàng đã được xử lý hết và chưa phát sinh đơn hàng mới</h5>
-
-                                                        </div>
-
-                                                    </td>
-
-                                                </tr>
-                                            }
-
-                                        </table>
                                     </div>
+                                }
+                                {isSearch === true &&
+                                    <div className='table-wrapper-employer-one'>
+                                        <div className='container'>
+                                            <div className='title-employer-one my-3'>Kết quả tìm kiếm ({listProjectSearch.length})</div>
+                                            <hr />
 
-                                </div>
+                                            <table class="table table-bordered">
+
+                                                <thead>
+                                                    <tr className='table-secondary'>
+
+                                                        <th scope="col">id</th>
+
+                                                        <th scope="col">Mã đơn</th>
+                                                        <th scope="col">Mặt hàng</th>
+                                                        <th scope="col">Số lượng</th>
+                                                        <th scope="col">Thời gian tạo</th>
+                                                        <th scope="col">Người nhận</th>
+                                                        <th scope="col">T/T lấy hàng</th>
+                                                        <th scope="col">T/T Nhập kho</th>
+                                                        <th scope="col">T/T Giao hàng</th>
+                                                        <th scope="col">T/T Thanh toán</th>
+                                                        <th scope="col">SĐT người tạo đơn</th>
+                                                        <th scope="col">Thao tác</th>
+
+
+                                                    </tr>
+                                                </thead>
+                                                {listProjectSearch && listProjectSearch.length > 0
+                                                    ?
+                                                    listProjectSearch.map((item, index) => {
+                                                        return (
+
+                                                            <tbody key={`item-${index}`}>
+                                                                <tr class="table-info">
+
+
+                                                                    <td>{item.id}</td>
+
+                                                                    <td>{item.order}</td>
+                                                                    <td> {item?.Warehouse?.product}</td>
+                                                                    <td>{item.quantity}</td>
+                                                                    <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
+                                                                    <td> {item?.name_customer}</td>
+                                                                    <td>
+                                                                        <span >
+                                                                            {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
+                                                                        </span>
+                                                                        <br />
+                                                                        {item.User_PickUp && item.Number_PickUp &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_PickUp}-{item.Number_PickUp}</b>
+                                                                            </span>
+
+                                                                        }
+
+
+                                                                    </td>
+
+                                                                    <td>
+
+                                                                        <span >
+                                                                            {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa xử lý"}
+                                                                        </span>
+                                                                        <br />
+                                                                        {item.User_Warehouse && item.Number_Warehouse
+                                                                            &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_Warehouse}-{item.Number_Warehouse}</b>
+                                                                            </span>
+
+                                                                        }
+
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <span style={{ color: "red" }}>
+                                                                            {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
+                                                                        </span>
+                                                                        <br />
+                                                                        {item.User_Delivery && item.Number_Delivery &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_Delivery}-{item.Number_Delivery}</b>
+                                                                            </span>
+
+                                                                        }
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <span >
+                                                                            {item?.Status_Received_money?.status ? item?.Status_Received_money?.status : "chưa thanh toán "}
+                                                                        </span>
+                                                                        <br />
+                                                                        {item.User_Overview && item.Number_Overview &&
+                                                                            <span>Nhân viên :
+                                                                                <br />
+                                                                                <b>{item.User_Overview}-{item.Number_Overview} </b>
+                                                                            </span>
+                                                                        }
+                                                                    </td>
+                                                                    <td>{item.createdBy}</td>
+                                                                    <td>
+
+                                                                        <span className='mx-2' style={{ color: "blue", cursor: "pointer" }} title='Nhắn tin với Người tạo đơn' onClick={() => handleShowModal(item)}>
+                                                                            <i class="fa fa-comments" aria-hidden="true"></i>
+
+                                                                        </span>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        )
+                                                    })
+                                                    :
+                                                    <tr class="table-info">
+                                                        <td colSpan={14}>
+                                                            <div className='d-flex align-item-center justify-content-center'>
+
+                                                                <h5> Không tìm thấy</h5>
+
+                                                            </div>
+
+                                                        </td>
+
+                                                    </tr>
+                                                }
+
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                }
 
                             </div>
 

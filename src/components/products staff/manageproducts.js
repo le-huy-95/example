@@ -5,7 +5,7 @@ import { Link, NavLink, useHistory } from "react-router-dom"
 import React, { useEffect, useState } from 'react'
 import { UserContext } from "../../contexApi/UserContext"
 import {
-    getProjectWithPaginationWithEmployer, getProjectWithPaginationWithEmployerWithFlag, updateFlagInProject,
+    getProjectWithPaginationWithEmployer, updateFlagInProject,
     getAllStatusProductWithEmployer, getDataSearchByEmplyer, createNotification
 } from "../services/ProjectService"
 import ReactPaginate from 'react-paginate';
@@ -21,7 +21,6 @@ const Manageproducts = (props) => {
     const [listProjectbyUnitLenght, setListProjectbyUnitLenghtt] = useState([])
     const [listProjectSearch, setListProjectSearch] = useState([])
 
-    const [listProjectbyUnitWithFlag, setListProjectbyUnitWithFlag] = useState([])
 
     const [currentPage, setCurrentPage] = useState(
         localStorage.getItem("infomation Page employer") ? localStorage.getItem("infomation Page employer") : 1
@@ -50,7 +49,6 @@ const Manageproducts = (props) => {
 
         } else {
             SetIsSearch(false)
-            await fetchProjectUserWithFlag()
             await fetchAllNumberProject()
 
         }
@@ -73,7 +71,6 @@ const Manageproducts = (props) => {
             if (res && +res.EC === 0) {
                 let abc = await createNotification(item.id, item.order, "nhân viên chuyển trạng tái sang bình thường", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 1, item.shippingUnit_Id)
                 if (abc && +abc.EC === 0) {
-                    await fetchProjectUserWithFlag()
                     await fetchProjectUser()
                 }
             } else {
@@ -85,7 +82,6 @@ const Manageproducts = (props) => {
             if (res && +res.EC === 0) {
                 let abc = await createNotification(item.id, item.order, "nhân viên chuyển trạng tái sang gấp", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 1, item.shippingUnit_Id)
                 if (abc && +abc.EC === 0) {
-                    await fetchProjectUserWithFlag()
                     await fetchProjectUser()
                 }
             } else {
@@ -94,15 +90,7 @@ const Manageproducts = (props) => {
         }
 
     }
-    const fetchProjectUserWithFlag = async () => {
-        let res = await getProjectWithPaginationWithEmployerWithFlag(+user.account.shippingUnit_Id)
-        if (res && +res.EC === 0) {
-            setListProjectbyUnitWithFlag(res.DT)
-        } else {
-            toast.error(res.EM)
-        }
 
-    }
 
     const fetchProjectUser = async () => {
 
@@ -184,7 +172,6 @@ const Manageproducts = (props) => {
     }, [window.location.reload])
     useEffect(() => {
 
-        fetchProjectUserWithFlag()
         fetchAllNumberProject()
     }, [])
 
@@ -234,12 +221,8 @@ const Manageproducts = (props) => {
                                 <div className='name-page-employer'>
                                     <h4> Order processing </h4>
                                     <div className='more-employer'>
-                                        <b>Giao hàng tiết kiệm</b>
-
-
+                                        <b>{user?.account?.nameUnit?.NameUnit}</b>
                                     </div>
-
-
                                 </div>
                                 <div className='sort my-3'>
                                     <div className='container my-3'>
@@ -283,18 +266,8 @@ const Manageproducts = (props) => {
                                                 <Link to="/Manageproducts_delivery_Three" style={{ textDecoration: "none", color: "#474141" }}>Đơn huỷ giao hàng ({dataNumber.delivery_cancel})</Link>
 
                                             </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Manageproducts_delivery_Four" style={{ textDecoration: "none", color: "#474141" }}>Đơn giao lại sau ({dataNumber.delivery_again}) </Link>
 
-                                            </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                {/* <Link to="/listuserbygroupStaff" style={{ textDecoration: "none", color: "#474141" }}>Staff </Link> */}
-                                                Đơn đã thanh toán
-                                            </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                {/* <Link to="/listuserbygroupStaff" style={{ textDecoration: "none", color: "#474141" }}>Staff </Link> */}
-                                                Đơn chưa thanh toán
-                                            </div>
+
 
 
                                         </div>
@@ -303,188 +276,49 @@ const Manageproducts = (props) => {
                                 {isSearch === false
                                     &&
                                     <>
-                                        <div className='table-wrapper-employer my-5'>
 
-                                            <div className='container'>
-                                                <div className='title-employer my-3'>Đơn hàng cần xử lý gấp ({listProjectbyUnitWithFlag.length})</div>
-                                                <hr />
-                                                <table class="table table-bordered table-body-employer">
-                                                    <thead>
-                                                        <tr className='table-secondary'>
-                                                            <th scope="col">id</th>
-
-                                                            <th scope="col">Mã đơn</th>
-                                                            <th scope="col">Mặt hàng</th>
-                                                            <th scope="col">Số lượng</th>
-                                                            <th scope="col">Thời gian tạo</th>
-                                                            <th scope="col">Người nhận</th>
-                                                            <th scope="col" style={{ width: "150px" }}>T/T lấy hàng</th>
-                                                            <th scope="col" style={{ width: "150px" }}>T/T Nhập kho</th>
-                                                            <th scope="col" style={{ width: "150px" }}>T/T Giao hàng</th>
-                                                            <th scope="col" style={{ width: "150px" }}>T/T Thanh toán </th>
-                                                            <th scope="col">Người tạo đơn</th>
-                                                            <th scope="col">Thao tác</th>
-
-                                                        </tr>
-                                                    </thead>
-                                                    {listProjectbyUnitWithFlag && listProjectbyUnitWithFlag.length > 0
-                                                        ?
-
-                                                        listProjectbyUnitWithFlag.map((item, index) => {
-                                                            return (
-                                                                <tbody key={`list-${index}`}>
-
-                                                                    <tr class="table-danger">
-                                                                        <td>{item.id}</td>
-                                                                        <td>{item.order}</td>
-                                                                        <td>{item?.Warehouse?.product}</td>
-                                                                        <td>{item.quantity}</td>
-                                                                        <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
-                                                                        <td> {item?.name_customer}
-                                                                            <br />
-                                                                            {item?.phoneNumber_customer}
-                                                                        </td>
-                                                                        <td>
-                                                                            <span style={{ color: "red" }}>
-                                                                                {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
-                                                                            </span>
-                                                                            <br />
-                                                                            {item.User_PickUp && item.Number_PickUp &&
-                                                                                <span>Nhân viên :
-                                                                                    <br />
-
-                                                                                    <b>{item.User_PickUp}-{item.Number_PickUp} </b>
-
-                                                                                </span>
-
-                                                                            }
-
-                                                                        </td>
-
-                                                                        <td>
-
-                                                                            <span style={{ color: "red" }}>
-                                                                                {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa xử lý"}
-                                                                            </span>
-                                                                            <br />
-                                                                            {item.User_Warehouse && item.Number_Warehouse
-                                                                                &&
-                                                                                <span>Nhân viên :
-                                                                                    <br />
-
-                                                                                    <b>{item.User_Warehouse}-{item.Number_Warehouse} </b>
-                                                                                </span>
-
-                                                                            }
-
-
-                                                                        </td>
-                                                                        <td>
-                                                                            <span style={{ color: "red" }}>
-                                                                                {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
-                                                                            </span>
-                                                                            <br />
-                                                                            {item.User_Delivery && item.Number_Delivery &&
-                                                                                <span>Nhân viên :
-                                                                                    <br />
-
-                                                                                    <b>{item.User_Delivery}-{item.Number_Delivery}</b>
-                                                                                </span>
-
-                                                                            }
-
-                                                                        </td>
-                                                                        <td>
-                                                                            <span style={{ color: "red" }}>
-                                                                                {item?.Status_Received_money?.status ? item?.Status_Received_money?.status : "chưa thanh toán "}
-                                                                            </span>
-                                                                            <br />
-                                                                            {item.User_Overview && item.Number_Overview &&
-                                                                                <span>Nhân viên :
-                                                                                    <br />
-                                                                                    <b>{item.User_Overview}-{item.Number_Overview} </b>
-                                                                                </span>
-                                                                            }
-                                                                        </td>
-                                                                        <td>
-                                                                            {item?.createdByName}
-                                                                            <br />
-                                                                            {item?.createdBy}
-
-                                                                        </td>
-                                                                        <td>
-                                                                            <span className='mx-2' style={{ color: "red", cursor: "pointer" }} title='chuyển trang thái đơn hàng bình thường' onClick={() => updateFlag(item)}>
-                                                                                <i class="fa fa-toggle-on" aria-hidden="true"></i>
-
-                                                                            </span>
-                                                                            <br />
-                                                                            <span className='mx-2' style={{ color: "red", cursor: "pointer" }} title='Nhắn tin với Người tạo đơn' onClick={() => handleShowModal(item)}>
-                                                                                <i class="fa fa-comments" aria-hidden="true"></i>
-
-                                                                            </span>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            )
-
-                                                        }
-
-
-                                                        )
-                                                        :
-                                                        <tr class="table-danger">
-                                                            <td colSpan={14}>
-                                                                <div className='d-flex align-item-center justify-content-center'>
-
-                                                                    <h5> Không có đơn hàng nào ở trang thái cần xử lý gấp</h5>
-
-                                                                </div>
-
-                                                            </td>
-
-                                                        </tr>
-                                                    }
-
-                                                </table>
-                                            </div>
-
-
-                                        </div>
 
                                         <div className='table-wrapper-employer-one'>
                                             <div className='container'>
-                                                <div className='title-employer-one my-3'>Đơn hàng trạng thái bình thường ({listProjectbyUnitLenght})</div>
+                                                <div className='title-employer-one my-3'>Tất cả đơn hàng ({listProjectbyUnitLenght})</div>
                                                 <hr />
-                                                <div className='sub'>
-                                                    < ReactPaginate
-                                                        nextLabel="next >"
-                                                        onPageChange={handlePageClick}
-                                                        pageRangeDisplayed={2}
-                                                        marginPagesDisplayed={3}
-                                                        pageCount={totalPage}
-                                                        previousLabel="< previous"
-                                                        pageClassName="page-item"
-                                                        pageLinkClassName="page-link"
-                                                        previousClassName="page-item"
-                                                        previousLinkClassName="page-link"
-                                                        nextClassName="page-item"
-                                                        nextLinkClassName="page-link"
-                                                        breakLabel="..."
-                                                        breakClassName="page-item"
-                                                        breakLinkClassName="page-link"
-                                                        containerClassName="pagination"
-                                                        activeClassName="active"
-                                                        renderOnZeroPageCount={null}
-                                                        forcePage={+currentPage - 1}
+                                                <div className='sub-tittle'>
+                                                    <div className='sub-left '>
+                                                        <div className=' mx-3' style={{ color: "red" }}><i class="fa fa-flag" aria-hidden="true"></i>
+                                                        </div>
+                                                        <div className='NameColor'> Đơn gấp</div>
 
-                                                    />
+                                                    </div>
+                                                    <div className='sub-right'>
+                                                        < ReactPaginate
+                                                            nextLabel="next >"
+                                                            onPageChange={handlePageClick}
+                                                            pageRangeDisplayed={2}
+                                                            marginPagesDisplayed={3}
+                                                            pageCount={totalPage}
+                                                            previousLabel="< previous"
+                                                            pageClassName="page-item"
+                                                            pageLinkClassName="page-link"
+                                                            previousClassName="page-item"
+                                                            previousLinkClassName="page-link"
+                                                            nextClassName="page-item"
+                                                            nextLinkClassName="page-link"
+                                                            breakLabel="..."
+                                                            breakClassName="page-item"
+                                                            breakLinkClassName="page-link"
+                                                            containerClassName="pagination"
+                                                            activeClassName="active"
+                                                            renderOnZeroPageCount={null}
+                                                            forcePage={+currentPage - 1}
+
+                                                        />
+                                                    </div>
                                                 </div>
-
                                                 <table class="table table-bordered">
 
                                                     <thead>
                                                         <tr className='table-secondary'>
-
+                                                            <th></th>
                                                             <th scope="col">No</th>
                                                             <th scope="col">id</th>
 
@@ -511,7 +345,16 @@ const Manageproducts = (props) => {
                                                                 <tbody key={`item-${index}`}>
                                                                     <tr class="table-info">
 
+                                                                        {item?.flag === true ?
+                                                                            <td>
+                                                                                <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                    <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                </span>
+                                                                            </td>
+                                                                            :
+                                                                            <td></td>
 
+                                                                        }
                                                                         <td >{(currentPage - 1) * currentLimit + index + 1}</td>
                                                                         <td>{item.id}</td>
 
@@ -560,6 +403,10 @@ const Manageproducts = (props) => {
                                                                                 {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
                                                                             </span>
                                                                             <br />
+                                                                            {item?.Cancel_reason &&
+                                                                                (<span style={{ fontWeight: "800", color: "black" }}>{item?.Cancel_reason}</span>)
+                                                                            }
+                                                                            <br />
                                                                             {item.User_Delivery && item.Number_Delivery &&
                                                                                 <span>Nhân viên :
                                                                                     <br />
@@ -568,6 +415,7 @@ const Manageproducts = (props) => {
                                                                                 </span>
 
                                                                             }
+
 
                                                                         </td>
                                                                         <td>

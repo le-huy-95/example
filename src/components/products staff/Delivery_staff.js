@@ -194,12 +194,12 @@ const Delivery_staff = (props) => {
                             <div className="container">
                                 <div className='name-page-employer-Delivery'>
                                     <h4> List Delivery </h4>
-                                    <div className='more-employer-Delivery'>
-                                        <b>Giao hàng tiết kiệm</b>
+                                    <div className='more-employer-pickup'>
+                                        <b>{user?.account?.nameUnit?.NameUnit}</b>
 
 
                                     </div>
-                                    <span> nhân viên giao hàng</span>
+                                    <span>{user?.account?.Position}</span>
 
                                 </div>
                                 <div className='sort_Delivery my-3'>
