@@ -1358,7 +1358,7 @@ const ModalViewNotification = (props) => {
                                         })
 
                                     }
-                                    {user.account.Position === "Nhân viên kho hàng" && listStaff && listStaff.length > 0
+                                    {user.account.Position === "Nhân viên kho hàng" && ListFillterNosee && ListFillterNosee.length > 0
                                         &&
                                         listStaff.map((item, index) => {
                                             return (
@@ -1487,7 +1487,7 @@ const ModalViewNotification = (props) => {
                                         })
 
                                     }
-                                    {user.account.Position === "Nhân viên giao hàng" && listStaff && listStaff.length > 0
+                                    {user.account.Position === "Nhân viên giao hàng" && ListFillterNosee && ListFillterNosee.length > 0
                                         &&
                                         listStaff.map((item, index) => {
                                             return (
@@ -1663,7 +1663,7 @@ const ModalViewNotification = (props) => {
                                         })
 
                                     }
-                                    {user.account.Position === "Nhân viên kế toán" && listStaff && listStaff.length > 0
+                                    {user.account.Position === "Nhân viên kế toán" && ListFillterNosee && ListFillterNosee.length > 0
                                         &&
                                         listStaff.map((item, index) => {
                                             return (
@@ -1774,11 +1774,11 @@ const ModalViewNotification = (props) => {
 
                                     }
                                     {user && user?.account?.groupWithRound?.name === "Customer" && ListFillterNosee.length === 0 &&
-                                        <div className='Not-Found'> Bạn không có thông báo nào </div >
+                                        <div className='Not-Found'> Bạn không có thông báo nào chưa đọc </div >
 
                                     }
-                                    {user && user?.account?.groupWithRound?.name === "Staff" && listStaff.length === 0 &&
-                                        <div className='Not-Found'> Bạn không có thông báo nào </div >
+                                    {user && user?.account?.groupWithRound?.name === "Staff" && ListFillterNosee.length === 0 &&
+                                        <div className='Not-Found'> Bạn không có thông báo nào chưa đọc </div >
 
                                     }
                                     {user.isAuthenticated === false &&
