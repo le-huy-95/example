@@ -533,7 +533,7 @@ const Warehouse = (props) => {
                                                                         <td scope="row">{(currentPage - 1) * currentLimit + index + 1}</td>
                                                                         <td scope="row" >{item.id}</td>
                                                                         <td scope="row" onClick={() => handleClickImage("http://localhost:3030/image/" + item.image)} style={{ cursor: "pointer", width: "70px", height: "70px" }}>
-                                                                            <img style={{ width: "100%", height: "100%" }} src={"http://localhost:3030/image/" + item.image} alt="" />
+                                                                            <img style={{ borderRadius: "50%", width: "100%", height: "100%" }} src={"http://localhost:3030/image/" + item.image} alt="" />
                                                                         </td>
                                                                         <td>{item?.product}</td>
                                                                         {item?.Product_status?.status === "mới nhập" &&

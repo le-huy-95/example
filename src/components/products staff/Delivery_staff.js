@@ -63,7 +63,7 @@ const Delivery_staff = (props) => {
     const completePickup = async (item) => {
         let res = await updateDeliveryInProject(item.id, +user.account.shippingUnit_Id, 2, user.account.username, user.account.phone, "", "", item.Delivery_time, new Date(), "")
         if (res && +res.EC === 0) {
-            let abc = await createNotification(item.id, item.order, "đơn hàng giao xong", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 1, item.shippingUnit_Id)
+            let abc = await createNotification(item.id, item.order, "đơn hàng giao xong", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 0, item.shippingUnit_Id)
             if (abc && +abc.EC === 0) {
                 await fetchProjectUserWithUsername()
                 await fetchProjectUser()

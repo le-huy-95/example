@@ -59,7 +59,7 @@ const PickUpStatusOne = (props) => {
     const completePickup = async (item) => {
         let res = await updatePickupInProject(+user.account.shippingUnit_Id, item.id, user.account.username, user.account.phone, 2, item.pickup_time, new Date())
         if (res && +res.EC === 0) {
-            let abc = await createNotification(item.id, item.order, "đơn hàng đã lấy thành công", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 1, item.shippingUnit_Id)
+            let abc = await createNotification(item.id, item.order, "đơn hàng đã lấy thành công", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 0, item.shippingUnit_Id)
             if (abc && +abc.EC === 0) {
 
                 await fetchProjectUser()

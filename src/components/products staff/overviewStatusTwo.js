@@ -44,30 +44,6 @@ const OverviewStatusTwo = (props) => {
 
     }, 200)
 
-    const complete = async (item) => {
-        if (item.Mode_of_payment === "Nhận tiền thanh toán qua tài khoản ngân hàng") {
-            let res = await updateOverviewInProject(item.id, +user.account.shippingUnit_Id, user.account.username, user.account.phone, 2, item.Overview_time, new Date(), 1)
-            if (res && +res.EC === 0) {
-                await fetchProjectUser()
-                await HandleSearchData(valueSearch)
-
-            } else {
-                toast.error(res.EM)
-            }
-        }
-        if (item.User_Overview && item.Number_Overview && item.Mode_of_payment === "Nhận tiền thanh toán ở trung tâm") {
-            let res = await updateOverviewInProject(item.id, +user.account.shippingUnit_Id, user.account.username, user.account.phone, 3, item.Overview_time, new Date(), 1)
-            if (res && +res.EC === 0) {
-                await fetchProjectUser()
-                await HandleSearchData(valueSearch)
-
-            } else {
-                toast.error(res.EM)
-            }
-        }
-
-    }
-
 
 
 

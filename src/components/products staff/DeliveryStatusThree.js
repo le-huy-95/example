@@ -32,12 +32,7 @@ const DeliveryStatusThree = (props) => {
         setAction("Cancel")
         setDataCancel(item)
     }
-    const handleShowModalAgain = (item) => {
-        SetshowModal(!showModal)
-        setAction("Again")
-        setDataAgain(item)
 
-    }
 
 
     const HandleSearchData = debounce(async (value) => {

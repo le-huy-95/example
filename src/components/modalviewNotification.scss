@@ -20,13 +20,16 @@
 
         .item-One {
             padding: 10px 30px;
-            background-color: aqua;
             border-radius: 50px;
+            cursor: pointer;
 
         }
 
         .item-Two {
             padding: 10px 30px;
+            border-radius: 50px;
+
+            cursor: pointer;
 
         }
     }
@@ -51,5 +54,6 @@
     .Not-Found {
         display: flex;
         justify-content: center;
+        font-weight: 800;
     }
 }

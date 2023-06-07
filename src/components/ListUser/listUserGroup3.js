@@ -25,7 +25,7 @@ const UserGroupBoss = (props) => {
         localStorage.getItem("infomation Page userBoss") ? localStorage.getItem("infomation Page userBoss") : 1
 
     )
-    const [currentLimit, setCurrentLimit] = useState(1)
+    const [currentLimit, setCurrentLimit] = useState(6)
     const [totalPage, setTotalPage] = useState(0)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [dataModelDelete, setDataModelDelete] = useState({})

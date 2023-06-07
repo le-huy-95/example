@@ -43,7 +43,7 @@ const DeliveryStatusFour = (props) => {
     const completePickup = async (item) => {
         let res = await updateDeliveryInProject(item.id, +user.account.shippingUnit_Id, 2, user.account.username, user.account.phone, "", "", item.Delivery_time, new Date(), "")
         if (res && +res.EC === 0) {
-            let abc = await createNotification(item.id, item.order, "đơn hàng giao xong", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 1, item.shippingUnit_Id)
+            let abc = await createNotification(item.id, item.order, "đơn hàng giao xong", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 0, item.shippingUnit_Id)
             if (abc && +abc.EC === 0) {
                 await fetchProjectUser()
             }
@@ -51,19 +51,7 @@ const DeliveryStatusFour = (props) => {
             toast.error(res.EM)
         }
     }
-    // const updateDelivery = async (item) => {
 
-    //     if (!item.User_Delivery && !item.Number_Delivery) {
-    //         let res = await updateDeliveryInProject(item.id, +user.account.shippingUnit_Id, 1, user.account.username, user.account.phone, "", "", new Date(), "")
-    //         if (res && +res.EC === 0) {
-    //             await fetchProjectUser()
-    //             await HandleSearchData(valueSearch)
-    //         } else {
-    //             toast.error(res.EM)
-    //         }
-    //     }
-
-    // }
 
     const fetchProjectUserWithUsername = async () => {
         let res = await getProjectWithPaginationWithEmployerDelivery_user(+user.account.shippingUnit_Id, user.account.username, user.account.phone)

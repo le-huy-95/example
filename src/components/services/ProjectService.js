@@ -193,6 +193,9 @@ const createNotification = (ProjectId, Order, Change_content, ChangeBy, CreatedB
 const getAllNotificaltion = (unitId, user) => {
     return axios.get(`/api/v4/getNotification?unitId=${unitId}&user=${user}`)
 }
+const UpdateStatusNotification = (data) => {
+    return axios.put("/api/v4/change/status/notification", { ...data })
+}
 export {
     getProjectWithPagination, fetchProjectByid, CreateProject, getSaleChannel, getStastusPayment,
     updateProject, deleteProject, createChatProject, updateProjectChat, deleteChatProject, getDataSearch,
@@ -209,5 +212,6 @@ export {
     updateDeliveryInProject, getProjectWithPaginationWithALlStatusPickup, getProjectWithPaginationWithALlStatusWarehouse,
     getProjectWithPaginationWithALlStatusDelivery, getAllStatusProductWithEmployer, getDataSearchByEmplyer, getDataSortByPickup,
     getDataSortByWarehouse, getDataSortByDelivery, getDataSortByOverview, getProjectWithPaginationWithEmployerOverview,
-    getProjectWithPaginationWithEmployerOverview_user, updateOverviewInProject, createNotification, getAllNotificaltion
+    getProjectWithPaginationWithEmployerOverview_user, updateOverviewInProject, createNotification, getAllNotificaltion,
+    UpdateStatusNotification
 }

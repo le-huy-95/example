@@ -53,7 +53,7 @@ const Warehouse_staff = (props) => {
     const complete = async (item) => {
         let res = await updateWarehouseInProject(item.id, +user.account.shippingUnit_Id, "", user.account.username, user.account.phone, 2, item.warehouse_time, new Date())
         if (res && +res.EC === 0) {
-            let abc = await createNotification(item.id, item.order, "đơn hàng đã xuất kho", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 1, item.shippingUnit_Id)
+            let abc = await createNotification(item.id, item.order, "đơn hàng đã xuất kho", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 0, item.shippingUnit_Id)
             if (abc && +abc.EC === 0) {
                 await fetchProjectUserWithUsername()
                 await fetchProjectUser()
