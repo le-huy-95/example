@@ -63,6 +63,53 @@ const ModalSendEmailResetPass = (props) => {
         }
 
     }
+    const handleUpdatePassWord = async () => {
+        if (!otp) {
+            setcheckValidateOtp(false)
+            toast.error("Can not empty otp")
+            return;
+        }
+        if (!PassWord) {
+            setcheckValidatePassWord(false)
+            toast.error("Can not empty PassWord")
+            return;
+
+        }
+        if (!ConfirmPassWord) {
+            setcheckValidateConfirmPassWord(false)
+            toast.error("Can not empty ConfirmPassWord")
+            return;
+
+        }
+        if (PassWord !== ConfirmPassWord) {
+            setcheckValidateConfirmPassWord(false)
+            setcheckValidatePassWord(false)
+            toast.error("password is not the same as confirm password")
+            return;
+
+        }
+        if (otp && PassWord && ConfirmPassWord && PassWord === ConfirmPassWord) {
+            let res = await validateInfomationChangePass({
+                email: email,
+                phone: phone,
+                otp: otp,
+                PassWord: PassWord
+            })
+            if (res && +res.EC === 0) {
+                setSendUpdateInfo("1")
+                toast.success("Otp code has been sent to your gmail")
+                setCheckValidateEmail(true)
+                setcheckValidateEmailReceiveOtp(true)
+                setcheckPhone(true)
+            } else {
+                toast.error(res.EM)
+                setCheckValidateEmail(false)
+                setcheckPhone(false)
+
+            }
+        }
+
+    }
 
     return (
         <Modal show={showModalSendemail} onHide={handleShowhideEmail} animation={false} size='lg' centered >
@@ -242,9 +289,16 @@ const ModalSendEmailResetPass = (props) => {
                 <Button variant="secondary" onClick={handleShowhideEmail}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={() => handleVerifyInfomationForgotPassWord()} >
-                    Save
-                </Button>
+                {sendUpdateInfo === "0" ?
+                    <Button variant="primary" onClick={() => handleVerifyInfomationForgotPassWord()} >
+                        Save
+                    </Button>
+                    :
+                    <Button variant="primary" onClick={() => handleUpdatePassWord()} >
+                        Save
+                    </Button>
+                }
+
             </Modal.Footer>
         </Modal >);
 }

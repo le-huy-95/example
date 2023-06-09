@@ -202,6 +202,9 @@ const ChangePassWord = (data) => {
 const validateInfomationChangePass = (data) => {
     return axios.put("/api/v4/send/email/forgetPassWord", { ...data })
 }
+const UpdateNewPassword = (data) => {
+    return axios.put("/api/v4/reset/PassWord", { ...data })
+}
 export {
     getProjectWithPagination, fetchProjectByid, CreateProject, getSaleChannel, getStastusPayment,
     updateProject, deleteProject, createChatProject, updateProjectChat, deleteChatProject, getDataSearch,
@@ -219,5 +222,5 @@ export {
     getProjectWithPaginationWithALlStatusDelivery, getAllStatusProductWithEmployer, getDataSearchByEmplyer, getDataSortByPickup,
     getDataSortByWarehouse, getDataSortByDelivery, getDataSortByOverview, getProjectWithPaginationWithEmployerOverview,
     getProjectWithPaginationWithEmployerOverview_user, updateOverviewInProject, createNotification, getAllNotificaltion,
-    UpdateStatusNotification, ChangePassWord, validateInfomationChangePass
+    UpdateStatusNotification, ChangePassWord, validateInfomationChangePass, UpdateNewPassword
 }
