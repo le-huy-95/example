@@ -5,12 +5,18 @@ import React, { useEffect, useState, useContext } from 'react'
 import { toast } from 'react-toastify'
 import { LoginUser } from "../services/userService"
 import { UserContext } from "../../contexApi/UserContext"
+import ModalSendEmailResetPass from "../ModalSendEmail"
 const Login = (props) => {
     const { user, login } = React.useContext(UserContext);
     let history = useHistory()
     const [password, setPassword] = useState()
     const [valueLogin, setValuelogin] = useState()
+    const [showModalSendemail, setShowModalSendemail] = useState(false)
 
+
+    const handleShowhideEmail = () => {
+        setShowModalSendemail(!showModalSendemail)
+    }
 
     const handleCreatNewAccount = () => {
         history.push("/register")
@@ -133,7 +139,7 @@ const Login = (props) => {
                         <button className='btn btn-primary' onClick={() => handleLogin()}> Login</button>
 
                         <span className='text-center'>
-                            <a className='forgot-password'> Forgot you password</a>
+                            <a className='forgot-password' onClick={() => handleShowhideEmail()}> Forgot you password</a>
                         </span>
                         <hr />
                         <div className='text-center' >
@@ -153,6 +159,11 @@ const Login = (props) => {
 
                 </div>
             </div>
+            <ModalSendEmailResetPass
+                showModalSendemail={showModalSendemail}
+                handleShowhideEmail={handleShowhideEmail}
+            />
+
         </div >
     )
 

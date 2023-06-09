@@ -13,7 +13,7 @@ import logo from "../../img/logo.svg"
 import { toast } from 'react-toastify'
 import ModalViewNotification from "../modalviewNotification"
 import { NotificationContext } from "../../contexApi/NotificationContext"
-
+import ModalChangePass from "../modalChangePass"
 const NavHeader = (props) => {
     const location = useLocation()
     const history = useHistory()
@@ -22,6 +22,13 @@ const NavHeader = (props) => {
 
 
     const [show, setShow] = useState(false)
+    const [showModalChangePass, setShowModalChangePass] = useState(false)
+
+    const handleShowChanePassModal = () => {
+        setShowModalChangePass(!showModalChangePass)
+    }
+
+
     const handleShowNotificationModal = () => {
         setShow(!show)
     }
@@ -114,7 +121,7 @@ const NavHeader = (props) => {
                                                 Welcome <b> {user.account.username.toLocaleUpperCase()}</b> !
                                             </Nav.Item>
                                             <NavDropdown title="Settings" id="basic-nav-dropdown">
-                                                <NavDropdown.Item >Change Password</NavDropdown.Item>
+                                                <NavDropdown.Item onClick={() => handleShowChanePassModal()} >Change Password</NavDropdown.Item>
                                                 <NavDropdown.Item >
                                                     <span onClick={() => handleLogOut()}> Log out</span>
                                                 </NavDropdown.Item>
@@ -159,6 +166,10 @@ const NavHeader = (props) => {
                 <ModalViewNotification
                     handleShowNotificationModal={handleShowNotificationModal}
                     show={show}
+                />
+                <ModalChangePass
+                    showModalChangePass={showModalChangePass}
+                    handleShowChanePassModal={handleShowChanePassModal}
                 />
 
             </>

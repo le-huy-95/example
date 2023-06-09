@@ -196,6 +196,12 @@ const getAllNotificaltion = (unitId, user) => {
 const UpdateStatusNotification = (data) => {
     return axios.put("/api/v4/change/status/notification", { ...data })
 }
+const ChangePassWord = (data) => {
+    return axios.put("/api/v4/change/PassWord", { ...data })
+}
+const validateInfomationChangePass = (data) => {
+    return axios.put("/api/v4/send/email/forgetPassWord", { ...data })
+}
 export {
     getProjectWithPagination, fetchProjectByid, CreateProject, getSaleChannel, getStastusPayment,
     updateProject, deleteProject, createChatProject, updateProjectChat, deleteChatProject, getDataSearch,
@@ -213,5 +219,5 @@ export {
     getProjectWithPaginationWithALlStatusDelivery, getAllStatusProductWithEmployer, getDataSearchByEmplyer, getDataSortByPickup,
     getDataSortByWarehouse, getDataSortByDelivery, getDataSortByOverview, getProjectWithPaginationWithEmployerOverview,
     getProjectWithPaginationWithEmployerOverview_user, updateOverviewInProject, createNotification, getAllNotificaltion,
-    UpdateStatusNotification
+    UpdateStatusNotification, ChangePassWord, validateInfomationChangePass
 }
