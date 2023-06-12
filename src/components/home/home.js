@@ -1,20 +1,27 @@
 import { useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import './home.scss'
+import { useTranslation, Trans } from 'react-i18next';
 
 
 const Home = (props) => {
+    const { t, i18n } = useTranslation();
 
     return (
         <div className="home-container ">
             <div className="header  ">
                 <div className="container ">
                     <div className="header-left-mb container  d-sm-none col-12  d-flex flex-column ">
-                        <h2 className="col-12 py-3"> Kinh Doanh Dễ Dàng Và Tăng Trưởng Hiệu Quả Với Phần Mềm Quản Lý Đơn Hàng</h2>
+                        <h2 className="col-12 py-3">
+                            {t('homePage.headerLeftOne')}
+                        </h2>
                         <h5 className="col-12 py-3">
-                            Quản lý đơn hàng đa kênh dễ dàng, nhanh chóng và tiết kiệm thời gian hơn</h5>
+                            {t('homePage.headerLeftTwo')}
+                        </h5>
                         <div>
-                            <button className="btn btn-warning"> Trải nghiệm miễn phí</button>
+                            <button className="btn btn-warning">
+                                {t('homePage.headerLeftThree')}
+                            </button>
 
                         </div>
                     </div>
@@ -22,11 +29,17 @@ const Home = (props) => {
 
 
                         <div className="header-left  py-3 d-none d-sm-block col-sm-7  d-flex flex-column ">
-                            <h2 className="col-12 py-3"> Kinh Doanh Dễ Dàng Và Tăng Trưởng Hiệu Quả Với Phần Mềm Quản Lý Đơn Hàng</h2>
+                            <h2 className="col-12 py-3">
+                                {t('homePage.headerLeftOne')}
+                            </h2>
                             <h5 className="col-12 py-3">
-                                Quản lý đơn hàng đa kênh dễ dàng, nhanh chóng và tiết kiệm thời gian hơn</h5>
+                                {t('homePage.headerLeftTwo')}
+
+                            </h5>
                             <div>
-                                <button className="btn btn-warning"> Trải nghiệm miễn phí</button>
+                                <button className="btn btn-warning">
+                                    {t('homePage.headerLeftThree')}
+                                </button>
 
                             </div>
                         </div>
@@ -46,17 +59,19 @@ const Home = (props) => {
             <div className="body-first ">
                 <div className="container">
                     <div className="title container d-none d-sm-flex  ">
-                        <h2 >GIẢI PHÁP PHẦN MỀM GIÚP QUẢN LÝ
+                        <h2 >
+                            {t('homePage.BodyOne.titleOne')}
                         </h2>
                         <h2>
-                            ĐƠN HÀNG HIỆU QUẢ
+                            {t('homePage.BodyOne.titleTwo')}
                         </h2>
                     </div>
                     <div className="title-mb container  d-sm-none col-12 ">
-                        <h2 >GIẢI PHÁP PHẦN MỀM GIÚP QUẢN LÝ
+                        <h2 >
+                            {t('homePage.BodyOne.titleOne')}
                         </h2>
                         <h2>
-                            ĐƠN HÀNG HIỆU QUẢ
+                            {t('homePage.BodyOne.titleTwo')}
                         </h2>
                     </div>
 
@@ -66,7 +81,9 @@ const Home = (props) => {
                                 <img src="https://www.iconpacks.net/icons/2/free-free-shipping-icon-2048-thumb.png" alt="" />
                             </div>
                             <div className=" card-content container mt-3 ">
-                                <span>Tránh tình trạng tồn kho hoặc thiếu hụt hàng hoá</span>
+                                <span>
+                                    {t('homePage.BodyOne.itemOne')}
+                                </span>
                             </div>
                         </div>
 
@@ -78,9 +95,27 @@ const Home = (props) => {
                             <div className="card-img">
                                 <img src="https://www.iconpacks.net/icons/2/free-store-icon-2017-thumb.png" alt="" />
                             </div>
-                            <div className=" card-content container">
-                                <span>Giảm thiểu sai sót trong quá trình xử lý đơn hàng</span>
-                            </div>
+                            {i18n.language === "en" ?
+                                <>
+                                    <br />
+                                    <br />
+
+                                    <div className=" card-content container">
+                                        <span>
+                                            {t('homePage.BodyOne.itemTwo')}
+                                        </span>
+                                    </div>
+                                </>
+                                :
+                                <>
+                                    <div className=" card-content container">
+                                        <span>
+                                            {t('homePage.BodyOne.itemTwo')}
+                                        </span>
+                                    </div>
+                                </>
+                            }
+
                         </div>
 
 
@@ -88,11 +123,26 @@ const Home = (props) => {
                             <div className="card-img">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/A_Friendly_Shipping_Guy_Cartoon.svg" alt="" />
                             </div>
-                            <br />
+                            {
+                                i18n.language === "en" ?
+                                    <>
+                                        <br />
 
-                            <div className=" card-content container">
-                                <span>Tiết kiệm thời gian và nhân sự</span>
-                            </div>
+                                        <div className=" card-content container">
+                                            <span>
+                                                {t('homePage.BodyOne.itemThree')}
+                                            </span>
+                                        </div>
+                                    </>
+                                    :
+                                    <>
+                                        <div className=" card-content container">
+                                            <span>
+                                                {t('homePage.BodyOne.itemThree')}
+                                            </span>
+                                        </div>
+                                    </>
+                            }
 
                         </div>
 
@@ -105,7 +155,9 @@ const Home = (props) => {
                                 <img src="https://www.iconpacks.net/icons/2/free-free-shipping-icon-2048-thumb.png" alt="" />
                             </div>
                             <div className=" card-content container mt-3 ">
-                                <span>Tránh tình trạng tồn kho hoặc thiếu hụt hàng hoá</span>
+                                <span>
+                                    {t('homePage.BodyOne.itemOne')}
+                                </span>
                             </div>
                         </div>
 
@@ -118,7 +170,9 @@ const Home = (props) => {
                             </div>
                             <br />
                             <div className=" card-content container">
-                                <span>Giảm thiểu sai sót trong quá trình xử lý đơn hàng</span>
+                                <span>
+                                    {t('homePage.BodyOne.itemTwo')}
+                                </span>
                             </div>
                         </div>
 
@@ -131,7 +185,9 @@ const Home = (props) => {
                             <br />
 
                             <div className=" card-content container">
-                                <span>Tiết kiệm thời gian và nhân sự</span>
+                                <span>
+                                    {t('homePage.BodyOne.itemThree')}
+                                </span>
                             </div>
 
                         </div>

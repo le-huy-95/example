@@ -13,11 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BallTriangle } from 'react-loader-spinner'
 import { Scrollbars } from 'react-custom-scrollbars';
-import UserRouter from "./components/routes/UserRouter"
-import PrivateRoutes from "./components/routes/PrivateRouter"
-import Products from "./components/products/products"
-import About from "./components/About/About"
-import Home from './components/home/home';
+
 
 function App() {
   const { user } = React.useContext(UserContext);

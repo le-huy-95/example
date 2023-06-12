@@ -7,6 +7,7 @@ import "font-awesome/css/font-awesome.min.css"
 import { UserProvider } from "./contexApi/UserContext"
 import SimpleReactLightbox from 'simple-react-lightbox'
 import { NotificationProvider } from "./contexApi/NotificationContext"
+import i18n from "./components/i18n";
 
 
 ReactDOM.render(

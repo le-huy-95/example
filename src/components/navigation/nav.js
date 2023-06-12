@@ -14,6 +14,7 @@ import { toast } from 'react-toastify'
 import ModalViewNotification from "../modalviewNotification"
 import { NotificationContext } from "../../contexApi/NotificationContext"
 import ModalChangePass from "../modalChangePass"
+import Language from "../navigation/language"
 const NavHeader = (props) => {
     const location = useLocation()
     const history = useHistory()
@@ -151,11 +152,7 @@ const NavHeader = (props) => {
                                     </button>
 
                                 </Nav.Item>
-                                <Nav>
-                                    <div className="nav-link  image" title='Change language' >
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/2000px-Flag_of_Vietnam.svg.png" alt="" />
-                                    </div >
-                                </Nav>
+                                <Language />
                             </Navbar.Collapse>
                         </Container>
 

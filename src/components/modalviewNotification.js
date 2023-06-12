@@ -53,6 +53,7 @@ const ModalViewNotification = (props) => {
     }, [showStatusNoSee])
     useEffect(() => {
         getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+        console.log("list", list)
     }, [show])
 
     return (
