@@ -28,11 +28,26 @@ const ModalSendEmailResetPass = (props) => {
     const [checkValidateConfirmPassWord, setcheckValidateConfirmPassWord] = useState(true)
     let pin = Math.floor(Math.random() * 1000000)
 
-    const TIME_LIMIT = 100;
+    const TIME_LIMIT = 180;
     // thời gian giới hạn
     const [timeLeft, setTimeLeft] = useState(0);
 
-
+    const cancel = () => {
+        setSendUpdateInfo("0")
+        handleShowhideEmail()
+        setEmail("")
+        setEmailReceiveOtp("")
+        setPhone("")
+        setOtp("")
+        setPassWord("")
+        setConfirmPassWord("")
+        setCheckValidateEmail(true)
+        setcheckValidateEmailReceiveOtp(true)
+        setcheckPhone(true)
+        setcheckValidateOtp(true)
+        setcheckValidatePassWord(true)
+        setcheckValidateConfirmPassWord(true)
+    }
     const RetryOtp = () => {
         setSendUpdateInfo("0")
         setcheckValidateOtp(true)
@@ -152,7 +167,7 @@ const ModalSendEmailResetPass = (props) => {
     }, [timeLeft])
 
     return (
-        <Modal show={showModalSendemail} onHide={handleShowhideEmail} animation={false} size='lg' centered >
+        <Modal show={showModalSendemail} onHide={() => cancel()} animation={false} size='lg' centered >
             <Modal.Header closeButton>
                 <Modal.Title>
                     <div >
@@ -347,7 +362,7 @@ const ModalSendEmailResetPass = (props) => {
 
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleShowhideEmail}>
+                <Button variant="secondary" onClick={() => cancel()}>
                     Close
                 </Button>
                 {sendUpdateInfo === "0" ?

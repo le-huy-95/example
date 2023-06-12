@@ -5,9 +5,9 @@ const CountDownAnimation = (props) => {
     const { timeLeft, TIME_LIMIT, setTimeLeft } = props
     const FULL_DASH_ARRAY = 283;
     // thời gian nền
-    const WARNING_THRESHOLD = 100;
+    const WARNING_THRESHOLD = 50;
     // thời gian chuyển màu vàng
-    const ALERT_THRESHOLD = 50;
+    const ALERT_THRESHOLD = 10;
     // thời gian chuyển màu đỏ
 
     const COLOR_CODES = {
