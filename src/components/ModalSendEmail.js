@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Link, NavLink, useHistory } from "react-router-dom"
-import { validateInfomationChangePass } from "./services/ProjectService"
+import { validateInfomationChangePass, UpdateNewPassword } from "./services/ProjectService"
 import { UserContext } from "../contexApi/UserContext"
 import { toast } from 'react-toastify';
 import './ModalSendEmail.scss'
-
+import OtpInput from 'react-otp-input';
+import CountDownAnimation from "./countDown"
 
 const ModalSendEmailResetPass = (props) => {
     const { user } = React.useContext(UserContext);
@@ -25,10 +26,32 @@ const ModalSendEmailResetPass = (props) => {
     const [checkValidateOtp, setcheckValidateOtp] = useState(true)
     const [checkValidatePassWord, setcheckValidatePassWord] = useState(true)
     const [checkValidateConfirmPassWord, setcheckValidateConfirmPassWord] = useState(true)
+    let pin = Math.floor(Math.random() * 1000000)
+
+    const TIME_LIMIT = 100;
+    // thời gian giới hạn
+    const [timeLeft, setTimeLeft] = useState(0);
 
 
+    const RetryOtp = () => {
+        setSendUpdateInfo("0")
+        setcheckValidateOtp(true)
+        setcheckValidatePassWord(true)
+        setcheckValidateConfirmPassWord(true)
+
+    }
+
+    useEffect(() => {
+        if (sendUpdateInfo === "0") {
+            setTimeLeft(0)
+        }
+        if (sendUpdateInfo === "1") {
+            setTimeLeft(TIME_LIMIT)
+        }
+    }, [sendUpdateInfo])
 
     const handleVerifyInfomationForgotPassWord = async () => {
+
         if (!email) {
             setCheckValidateEmail(false)
             toast.error("Can not empty email")
@@ -46,7 +69,7 @@ const ModalSendEmailResetPass = (props) => {
                 email: email,
                 phone: phone,
                 emailReceiveOtp: emailReceiveOtp,
-                name: user.account.username
+                pin: pin
             })
             if (res && +res.EC === 0) {
                 setSendUpdateInfo("1")
@@ -63,6 +86,15 @@ const ModalSendEmailResetPass = (props) => {
         }
 
     }
+    const DeletePinAfterOver = async () => {
+        await validateInfomationChangePass({
+            email: email,
+            phone: phone,
+            emailReceiveOtp: emailReceiveOtp,
+            pin: ""
+        })
+    }
+
     const handleUpdatePassWord = async () => {
         if (!otp) {
             setcheckValidateOtp(false)
@@ -89,7 +121,7 @@ const ModalSendEmailResetPass = (props) => {
 
         }
         if (otp && PassWord && ConfirmPassWord && PassWord === ConfirmPassWord) {
-            let res = await validateInfomationChangePass({
+            let res = await UpdateNewPassword({
                 email: email,
                 phone: phone,
                 otp: otp,
@@ -97,27 +129,34 @@ const ModalSendEmailResetPass = (props) => {
             })
             if (res && +res.EC === 0) {
                 setSendUpdateInfo("1")
-                toast.success("Otp code has been sent to your gmail")
-                setCheckValidateEmail(true)
-                setcheckValidateEmailReceiveOtp(true)
-                setcheckPhone(true)
+                toast.success(res.EM)
+                setcheckValidateOtp(true)
+                setcheckValidatePassWord(true)
+                setcheckValidateConfirmPassWord(true)
+                DeletePinAfterOver()
+                handleShowhideEmail()
             } else {
                 toast.error(res.EM)
-                setCheckValidateEmail(false)
-                setcheckPhone(false)
+
 
             }
         }
 
     }
 
+    useEffect(() => {
+        if (timeLeft === 0) {
+            DeletePinAfterOver()
+        }
+
+    }, [timeLeft])
+
     return (
         <Modal show={showModalSendemail} onHide={handleShowhideEmail} animation={false} size='lg' centered >
             <Modal.Header closeButton>
                 <Modal.Title>
-                    <div>
-                        <div> {sendUpdateInfo === "0" ? "Forgot Password" : "Update Password"}</div>
-                        <div>Otp expire after 2 minutes</div>
+                    <div >
+                        <div className='d-flex align-items-center '> {sendUpdateInfo === "0" ? "Send Otp" : "Update Password"}</div>
                     </div>
                 </Modal.Title>
             </Modal.Header>
@@ -150,6 +189,7 @@ const ModalSendEmailResetPass = (props) => {
                                         />
                                     </fieldset>
                                 </div>
+
                                 <div className='col-12 py-3'>
                                     <fieldset className='border rounded-3 p-3' >
                                         <legend className='float-none w-auto '>
@@ -188,9 +228,10 @@ const ModalSendEmailResetPass = (props) => {
 
                                         <input
                                             id='input-password'
-                                            type="password"
+                                            type="number"
                                             className={checkPhone === true ? "form-control  " : "form-control is-invalid"}
                                             placeholder='Phone number'
+                                            value={phone}
                                             onChange={(event) => setPhone(event.target.value)}
 
 
@@ -209,31 +250,51 @@ const ModalSendEmailResetPass = (props) => {
                                     <fieldset className='border rounded-3 p-3' >
                                         <legend className='float-none w-auto '>
                                             <div className='d-flex align-items-center px-2 '>
-                                                <div>Otp{checkValidateOtp === false &&
+                                                <div>Otp {checkValidateOtp === false &&
                                                     <span style={{ color: "red" }}><i class="fa fa-times" aria-hidden="true"></i>
                                                     </span>
                                                 }  </div>
                                             </div>
 
                                         </legend>
+                                        <div className='Otp'>
+                                            <OtpInput
+                                                value={otp}
+                                                onChange={setOtp}
+                                                numInputs={6}
+                                                renderSeparator={<span>-</span>}
+                                                renderInput={(props) => <input {...props} />}
+                                                inputStyle={"inputStyle"}
+                                            />
+                                            <div className='my-3'>
+                                                Otp expire after :
+                                            </div>
+                                            <div >
+                                                <CountDownAnimation
+                                                    TIME_LIMIT={TIME_LIMIT}
+                                                    timeLeft={timeLeft}
+                                                    setTimeLeft={setTimeLeft}
+                                                />
 
-                                        <input
-                                            id='input-password'
-                                            type="email"
-                                            className={checkValidateOtp === true ? "form-control  " : "form-control is-invalid"}
-                                            placeholder='Email'
-                                            value={otp}
-                                            onChange={(event) => setOtp(event.target.value)}
+                                            </div>
+                                            {timeLeft === 0 &&
 
+                                                <button className='btn btn-primary mt-3' onClick={() => RetryOtp()}>Lấy lại mã Otp </button>
 
-                                        />
+                                            }
+
+                                        </div>
+                                        <div className='time-Stamp'>
+
+                                        </div>
+
                                     </fieldset>
                                 </div>
                                 <div className='col-12 py-3'>
                                     <fieldset className='border rounded-3 p-3' >
                                         <legend className='float-none w-auto '>
                                             <div className='d-flex align-items-center px-3 '>
-                                                <div>New password{checkValidatePassWord === false &&
+                                                <div>New password {checkValidatePassWord === false &&
                                                     <span style={{ color: "red" }}><i class="fa fa-times" aria-hidden="true"></i>
                                                     </span>
                                                 } </div>
