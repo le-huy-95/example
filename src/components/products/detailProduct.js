@@ -641,13 +641,13 @@ const DetailProduct = (props) => {
 
             let projectId = projects.id
 
-            let order = projects.order
-
-            let data = await fetchImagebyOrder(order)
+            let orders = projects.order
+            console.log("orders", orders)
+            let data = await fetchImagebyOrder(projects.order)
             if (data && +data.EC === 0) {
 
                 let ImageId = data.DT;
-
+                console.log("ImageId", data.DT)
 
                 let dataAssignDataToProjectImage = await assignDataToProjectImage(projectId, ImageId)
                 if (dataAssignDataToProjectImage && +dataAssignDataToProjectImage.EC === 0) {

@@ -133,7 +133,7 @@ const Products = (props) => {
     const [totalPage, setTotalPage] = useState(0)
     let orderNumber = Math.floor(Math.random() * 1000000)
 
-    const [order, setOrder] = useState(`#${orderNumber}`)
+    const [order, setOrder] = useState(`${orderNumber}`)
 
     const [showModalCreatNewProject, setShowModalCreatNewProject] = useState(false);
 
