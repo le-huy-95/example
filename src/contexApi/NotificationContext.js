@@ -21,7 +21,6 @@ const NotificationProvider = ({ children }) => {
                     item.Change_content !== "huỷ đơn gấp" && item.Change_content !== "đơn gấp" && item.Change_content !== "thay đổi địa chỉ người bán" &&
                     item.Change_content !== "thay đổi thông tin đơn hàng" && item.Change_content !== "thay đổi địa chỉ người nhận")
                 setList(data)
-                console.log("data", data)
             }
         } else if (shippingUnit_Id) {
             let res = await getAllNotificaltion(shippingUnit_Id, phone)
@@ -36,7 +35,6 @@ const NotificationProvider = ({ children }) => {
                         item.Change_content !== "nhân viên chuyển trạng tái sang bình thường" && item.Change_content !== "nhân viên chuyển trạng tái sang gấp"
 
                     )
-                    console.log("dataOne", dataOne)
                     seListStaff(dataOne)
                 }
                 if (position === "Nhân viên kho hàng") {
@@ -48,7 +46,6 @@ const NotificationProvider = ({ children }) => {
 
 
                     )
-                    console.log("dataOne", dataOne)
                     seListStaff(dataOne)
                 }
                 if (position === "Nhân viên giao hàng") {
@@ -61,7 +58,6 @@ const NotificationProvider = ({ children }) => {
 
 
                     )
-                    console.log("dataOne", dataOne)
                     seListStaff(dataOne)
                 }
                 if (position === "Nhân viên kế toán") {
@@ -74,7 +70,6 @@ const NotificationProvider = ({ children }) => {
                         && item.Change_content !== "nhân viên chuyển trạng tái sang bình thường" && item.Change_content !== "nhân viên chuyển trạng tái sang gấp"
 
                     )
-                    console.log("dataOne", dataOne)
                     seListStaff(dataOne)
                 }
             }

@@ -146,6 +146,8 @@
                 display: flex;
                 flex-direction: column;
                 font-size: 15px;
+                max-height: 240px;
+                overflow: auto;
 
                 .card-img {
                     display: flex;
@@ -162,6 +164,9 @@
                 }
 
                 .card-content {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     height: 50%;
                     margin: 0;
                     font-size: 25px;

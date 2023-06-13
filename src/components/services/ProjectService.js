@@ -205,6 +205,9 @@ const validateInfomationChangePass = (data) => {
 const UpdateNewPassword = (data) => {
     return axios.put("/api/v4/reset/PassWord", { ...data })
 }
+const checkExist = (data) => {
+    return axios.put("/api/v4/check/Living/notification", { ...data })
+}
 export {
     getProjectWithPagination, fetchProjectByid, CreateProject, getSaleChannel, getStastusPayment,
     updateProject, deleteProject, createChatProject, updateProjectChat, deleteChatProject, getDataSearch,
@@ -222,5 +225,5 @@ export {
     getProjectWithPaginationWithALlStatusDelivery, getAllStatusProductWithEmployer, getDataSearchByEmplyer, getDataSortByPickup,
     getDataSortByWarehouse, getDataSortByDelivery, getDataSortByOverview, getProjectWithPaginationWithEmployerOverview,
     getProjectWithPaginationWithEmployerOverview_user, updateOverviewInProject, createNotification, getAllNotificaltion,
-    UpdateStatusNotification, ChangePassWord, validateInfomationChangePass, UpdateNewPassword
+    UpdateStatusNotification, ChangePassWord, validateInfomationChangePass, UpdateNewPassword, checkExist
 }

@@ -3,11 +3,12 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Link, NavLink, useHistory } from "react-router-dom"
 import './modalviewNotification.scss'
-import { UpdateStatusNotification } from "./services/ProjectService"
+import { UpdateStatusNotification, checkExist } from "./services/ProjectService"
 import { UserContext } from "../contexApi/UserContext"
 import { NotificationContext } from "../contexApi/NotificationContext"
 
 import moment from "moment"
+import { toast } from 'react-toastify';
 
 
 const ModalViewNotification = (props) => {
@@ -20,9 +21,120 @@ const ModalViewNotification = (props) => {
     const [ListFillterNosee, setListFillterNosee] = useState(false)
     const [listStaffFillterNosee, setlistStaffFillterNosee] = useState(false)
 
-    const handleViewProduct = (item) => {
-        history.push(`/detailProduct/${item.ProjectId}`)
-        handleShowNotificationModal()
+    const handleViewProductStaff = async (item) => {
+        let res = await checkExist(item)
+        console.log("res", item)
+        if (res && +res.EC === 0) {
+            if (user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "thêm mới") {
+                history.push(`/Pick_up_no_status`)
+            }
+            if (user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "thay đổi địa chỉ người bán") {
+                history.push(`/Pickup_staff`)
+            }
+            if (user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "người tạo vừa chat") {
+                history.push(`/order-processing`)
+            }
+            if (user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "đơn hàng đang lấy hàng") {
+                history.push(`/Pick_up_status_one`)
+            }
+            if (user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "đơn hàng đã lấy thành công") {
+                history.push(`/Pick_up_status_two`)
+            }
+            if (user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "đơn hàng trì hoãn") {
+                history.push(`/Pick_up_no_status`)
+            }
+            if (user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "đơn gấp") {
+                history.push(`/Pickup_staff`)
+            }
+            if (user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "huỷ đơn gấp") {
+                history.push(`/Pickup_staff`)
+            }
+            if (user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn hàng đã lấy thành công") {
+                history.push(`/Warehouse_no_status`)
+            }
+            if (user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn gấp") {
+                history.push(`/Warehouse_staff`)
+            }
+            if (user.account.Position === "Nhân viên kho hàng" && item.Change_content === "huỷ đơn gấp") {
+                history.push(`/Warehouse_staff`)
+            }
+            if (user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn hàng đã nhập kho") {
+                history.push(`/Warehouse_status_one`)
+            }
+            if (user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn hàng trì hoãn nhập kho") {
+                history.push(`/Warehouse_no_status`)
+            }
+            if (user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn hàng đã xuất kho") {
+                history.push(`/Warehouse_status_two`)
+            }
+            if (user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn hàng trì hoãn") {
+                history.push(`/Warehouse_staff`)
+            }
+            if (user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng đã xuất kho") {
+                history.push(`/Delivery_no_status`)
+            }
+            if (user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn gấp") {
+                history.push(`/Delivery_staff`)
+            }
+            if (user.account.Position === "Nhân viên giao hàng" && item.Change_content === "huỷ đơn gấp") {
+                history.push(`/Delivery_staff`)
+            }
+            if (user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng đang giao") {
+                history.push(`/Delivery_status_one`)
+            }
+            if (user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng trì hoãn giao") {
+                history.push(`/Delivery_no_status`)
+            }
+            if (user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng giao xong") {
+                history.push(`/Delivery_status_two`)
+            }
+            if (user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng giao lại") {
+                history.push(`/Delivery_status_four`)
+            }
+            if (user.account.Position === "Nhân viên giao hàng" && item.Change_content === "người tạo vừa chat") {
+                history.push(`/order-processing`)
+            }
+            if (user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng hủy giao") {
+                history.push(`/Delivery_status_three`)
+            }
+            if (user.account.Position === "Nhân viên giao hàng" && item.Change_content === "thay đổi địa chỉ người nhận") {
+                history.push(`/Delivery_staff`)
+            }
+            if (user.account.Position === "Nhân viên kế toán" && item.Change_content === "đơn hàng giao xong") {
+                history.push(`/Overview_no_status`)
+            }
+            if (user.account.Position === "Nhân viên kế toán" && item.Change_content === "đơn hàng đang đối soát") {
+                history.push(`/Overview_status-one`)
+            }
+            if (user.account.Position === "Nhân viên kế toán" && item.Change_content === "đơn hàng đối soát xong bằng chuyển khoản") {
+                history.push(`/Overview_status-two`)
+            }
+            if (user.account.Position === "Nhân viên kế toán" && item.Change_content === "đơn hàng đối soát xong bằng tiền mặt") {
+                history.push(`/Overview_status-three`)
+            }
+            if (user.account.Position === "Nhân viên kế toán" && item.Change_content === "thay đổi thông tin đơn hàng") {
+                history.push(`/order-processing`)
+            }
+            if (user.account.Position === "Nhân viên kế toán" && item.Change_content === "người tạo vừa chat") {
+                history.push(`/order-processing`)
+            }
+            handleShowNotificationModal()
+        } else {
+            toast.error("This notices no longer exists in List ")
+        }
+
+    }
+
+
+    const handleViewProduct = async (item) => {
+        let res = await checkExist(item)
+        if (res && +res.EC === 0) {
+            history.push(`/detailProduct/${item.ProjectId}`)
+            handleShowNotificationModal()
+        } else {
+            toast.error("This notices no longer exists in List")
+        }
+
     }
     const UpdateStatusProduct = async (item) => {
         let data = {
@@ -53,7 +165,6 @@ const ModalViewNotification = (props) => {
     }, [showStatusNoSee])
     useEffect(() => {
         getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-        console.log("list", list)
     }, [show])
 
     return (
@@ -368,7 +479,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "thêm mới" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Pick_up_no_status`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> mới được tạo
@@ -384,7 +495,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "thay đổi địa chỉ người bán" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Pickup_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> đã cập nhật địa chỉ lấy hàng bởi người tạo
@@ -400,7 +511,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "người tạo vừa chat" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/order-processing`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> vừa có tin nhắn mới từ người tạo đơn
@@ -416,7 +527,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "đơn hàng đang lấy hàng" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Pick_up_status_one`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Nhân viên <b>{item.ChangeBy}</b> đang đi lấy đơn đơn hàng</span><b>{item.Order}</b>
@@ -432,7 +543,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "đơn hàng đã lấy thành công" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Pick_up_status_two`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Nhân viên <b>{item.ChangeBy}</b> đã lấy đơn đơn hàng</span><b>{item.Order}</b> thành công
@@ -448,7 +559,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "đơn hàng trì hoãn" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Pick_up_no_status`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Nhân viên <b>{item.ChangeBy}</b> đã trì hoãn lấy đơn hàng</span><b>{item.Order}</b>
@@ -465,7 +576,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "đơn gấp" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Pickup_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> vừa chuyển trạng thái <b>bình thường</b>  sang <b>gấp</b>
@@ -481,7 +592,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "huỷ đơn gấp" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Pickup_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> vừa chuyển trạng thái <b>gấp</b> sang <b>bình thường</b>
@@ -513,7 +624,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn hàng đã lấy thành công" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Warehouse_no_status`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> đã đến kho
@@ -529,7 +640,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn gấp" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Warehouse_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> đã cập nhật trạng thái từ <b>bình thường </b>sang <b>gấp</b>
@@ -545,7 +656,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kho hàng" && item.Change_content === "huỷ đơn gấp" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Warehouse_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> đã cập nhật trạng thái từ <b>gấp</b> sang <b>bình thường</b>
@@ -561,7 +672,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn hàng đã nhập kho" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Warehouse_status_one`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Nhân viên <b>{item.ChangeBy}</b> đã nhập kho đơn hàng</span><b>{item.Order}</b>
@@ -577,7 +688,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn hàng trì hoãn nhập kho" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Warehouse_no_status`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Nhân viên <b>{item.ChangeBy}</b> đã trì hoãn nhập kho đơn hàng</span><b>{item.Order}</b>
@@ -593,7 +704,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn hàng đã xuất kho" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Warehouse_status_two`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Nhân viên <b>{item.ChangeBy}</b> đã xuât kho đơn hàng</span><b>{item.Order}</b>
@@ -609,7 +720,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn hàng trì hoãn" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Warehouse_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order} đã trì hoãn việc đến kho hàng</b>
@@ -642,7 +753,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng đã xuất kho" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_no_status`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> đã xuất kho sẵn sàng giao hàng
@@ -658,7 +769,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn gấp" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> đã cập nhật trạng thái từ <b>bình thường </b>sang <b>gấp</b>
@@ -674,7 +785,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "huỷ đơn gấp" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> đã cập nhật trạng thái từ <b>gấp</b> sang <b>bình thường</b>
@@ -690,7 +801,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng đang giao" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_status_one`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Nhân viên <b>{item.ChangeBy}</b> đang giao đơn hàng</span><b>{item.Order}</b>
@@ -706,7 +817,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng trì hoãn giao" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_no_status`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Nhân viên <b>{item.ChangeBy}</b> đã trì hoãn giao đơn hàng</span><b>{item.Order}</b>
@@ -722,7 +833,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng giao xong" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_status_two`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Nhân viên <b>{item.ChangeBy}</b> đã giao xong đơn hàng</span><b>{item.Order}</b>
@@ -738,7 +849,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng giao lại" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_status_four`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Người nhận yêu cầu đơn hàng</span><b>{item.Order}</b> giao lại
@@ -755,7 +866,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "người tạo vừa chat" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/order-processing`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> vừa có tin nhắn mới từ người tạo đơn
@@ -771,7 +882,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng hủy giao" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_status_three`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> Giao hàng thất bại
@@ -787,7 +898,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "thay đổi địa chỉ người nhận" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> vừa cập nhật đại chỉ giao hàng
@@ -818,7 +929,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kế toán" && item.Change_content === "đơn hàng giao xong" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Overview_no_status`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> đang chờ đối soát
@@ -834,7 +945,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kế toán" && item.Change_content === "đơn hàng đang đối soát" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Overview_status-one`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Nhân viên <b>{item.ChangeBy}</b> đang đối soát đơn hàng</span><b>{item.Order}</b>
@@ -850,7 +961,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kế toán" && item.Change_content === "đơn hàng đối soát xong bằng chuyển khoản" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Overview_status-two`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Nhân viên <b>{item.ChangeBy}</b> đã đối soát xong đơn hàng</span><b>{item.Order}</b>
@@ -866,7 +977,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kế toán" && item.Change_content === "đơn hàng đối soát xong bằng tiền mặt" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Overview_status-three`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Nhân viên <b>{item.ChangeBy}</b> đã đối soát xong đơn hàng</span><b>{item.Order}</b>
@@ -882,7 +993,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kế toán" && item.Change_content === "thay đổi thông tin đơn hàng" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/order-processing`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order} </b> đã cập nhật thông tin đối soát
@@ -898,7 +1009,7 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kế toán" && item.Change_content === "người tạo vừa chat" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/order-processing`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
                                                                     </span>} Đơn hàng</span><b>{item.Order}</b> vừa có tin nhắn mới từ người tạo đơn

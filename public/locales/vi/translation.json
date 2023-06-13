@@ -9,6 +9,78 @@
             "itemOne": "Tránh tình trạng tồn kho hoặc thiếu hụt hàng hoá",
             "itemTwo": "Giảm thiểu sai sót trong quá trình xử lý đơn hàng",
             "itemThree": "Tiết kiệm thời gian và nhân sự"
+        },
+        "BodyTwo": {
+            "titleOne": "PHẦN MỀM QUẢN LÝ ĐƠN HÀNG GIÚP BẠN TỐI ƯU",
+            "titleTwo": "QUẢN LÝ BÁN HÀNG VÀ THÚC ĐẨY DOANH THU",
+            "titleThree": "Đồng bộ đơn hàng đa kênh",
+            "titleFour": "Hệ thống đồng bộ khi đơn hàng phát sinh trên các kênh",
+            "itemOne": " Phần mềm  giúp kết nối và đồng bộ đơn hàng khi phát sinh trên Website,Mạng xã hội (Facebook, Zalo, Instagram),Sàn TMĐT (Shopee, Tiki, Lazada, Tiktokshop) hay tại Cửa hàng về một nơi duy nhất giúp bạn quản lý đơn hàng dễ dàng",
+            "itemTwo": " Tạo đơn hàng nhanh khi Chat hoặc khách ghé thăm Cửa hàng và đồng bộ về một nơi trên hệ thống"
+        },
+        "BodyThree": {
+            "titleOne": "XỬ LÝ ĐƠN HÀNG TẬP TRUNG",
+            "titleTwo": " Xử lý đơn hàng tập trung theo quy trình chuyên nghiệp và tối ưu nhất cho nhà bán hàng :",
+            "titleThree": " Xử lý khi đơn hàng bị hoàn trả hoặc huỷ đơn",
+            "titleFour": " Xuất dữ liệu đơn hàng",
+            "titleFive": " Kết nối vận chuyển xử lý đơn nhanh chóng",
+            "itemOne": " Xác thực đơn hàng (đảm bảo không có sai sót) ",
+            "itemTwo": " Xử lý giao hàng (Kết nối, Lựa chọn và chuyển đơn nhanh chóng sang nhà vận chuyển)",
+            "itemThree": "Xác nhận thanh toán (Hình thức thanh toán, tình trạng thanh toán)",
+            "itemFour": "Xử lý khi phát sinh đơn hàng hoàn trả, bị lỗi hoặc huỷ… ",
+            "itemFive": "Kết nối hơn 15 nhà vận chuyển phổ biến giúp bạn so sánh và lựa chọn nhà vận chuyển giá tốt nhất theo khu vực, đơn hàng sau khi được xử lý sẽ tự động chuyển đến đơn vị giao hàng đã được chỉ định một cách nhanh chóng … ",
+            "itemSix": "Hệ thống cho phép xử lý các đơn Hoàn trả, bị Huỷ hoặc bị Lỗi, đồng thời cập nhật trạng thái đơn hàng giúp bạn kiểm soát việc kinh doanh hiệu quả hơn ",
+            "itemSeven": "Dễ dàng xuất dữ liệu đơn hàng theo bộ lọc để phục vụ cho các công việc kinh doanh khác "
+        },
+        "BodyFour": {
+            "titleOne": "THEO DÕI VÀ QUẢN LÝ ĐƠN HÀNG ",
+            "titleTwo": "Chính xác, giảm sai sót và thất thoát",
+            "titleThree": "Lọc đơn hàng nhanh chóng",
+            "titleFour": "Kiểm soát giao hàng hiệu quả",
+            "titleFive": "Cập nhật trạng thái đơn hàng",
+            "itemOne": "Bộ lọc đơn hàng nâng cao giúp dễ dàng tra cứu đơn hàng theo khách hàng, kênh bán, tình trạng giao hàng, tình trạng thanh toán hoặc giá trị đơn hàng…",
+            "itemTwo": "Theo dõi trạng thái giao hàng từ nhiều nhà vận chuyển ngay trên phần mềm quản lý đơn hàng online Haravan, giám sát tình trạng đơn hàng một cách chính xác từ lấy hàng trong kho đến khi giao hàng cho khách.",
+            "itemThree": "Cập nhật trạng thái đơn hàng qua Email, Zalo, SMS, Messenger cho khách hàng, thể hiện sự chuyên nghiệp và gắn kết với khách hàng."
+        },
+        "BodyFive": {
+            "titleOne": "BÁN HÀNG NHÀN TÊNH HƠN VỚI",
+            "titleTwo": "CÁC TÍNH NĂNG BỔ TRỢ TỪ ",
+            "titleThree": "APP QUẢN LÝ ĐƠN HÀNG ",
+            "titleFour": "IN HOÁ ĐƠN BÁN HÀNG, PHIẾU VẬN CHUYỂN ",
+            "titleFive": "QUẢN LÝ TỒN KHO ",
+            "titleSix": "XEM BÁO CÁO DOANH THU",
+            "itemOne": "Chọn in vận đơn nhanh chóng từ 1 hoặc nhiều đơn hàng, đảm bảo đầy đủ các thông tin tới khách hàng cũng như nhà vận chuyển",
+            "itemTwo": "Số lượng tồn kho sản phẩm luôn được cập nhật theo thời gian thực khi đơn hàng phát sinh tránh trường hợp thiếu hụt hoặc tồn kho hàng hoá",
+            "itemThree": "Phần mềm quản lý đơn hàng giúp tích hợp tất cả các phương thức thanh toán online vào hệ thống giúp bạn dễ dàng theo dõi tình trạng thanh toán; xem báo cáo bán hàng, sổ quỹ Thu - Chi cũng như theo dõi công nợ nhà cung cấp, công nợ đối tác vận chuyển… "
+        },
+        "BodySix": {
+            "titleOne": "PHẦN MỀM QUẢN LÝ ĐƠN HÀNG",
+            "titleTwo": "TỐI ƯU HIỆU SUẤT BÁN HÀNG",
+            "titleThree": "TĂNG TRƯỞNG HIỆU QUẢ HƠN "
+        },
+        "BodySeven": {
+            "titleOne": "HƠN 50.000 NGƯỜI KINH DOANH VÀ",
+            "titleTwo": "THƯƠNG HIỆU BẬC NHẤT ĐANG TIN DÙNG"
+        },
+        "BodyEight": {
+            "titleOne": "Những điều thú vị và thành quả mà HUY LE muốn được chia sẻ với các bạn.",
+            "titleTwo": "Chúng tôi là đối tác công nghệ đầu tiên tại Việt Nam vinh dự được Google đề xuất là Nền tảng cho Nhà bán lẻ, cung cấp hình thức Google Ads giúp doanh nghiệp tiếp cận hàng triệu người tìm kiếm thông tin mua sắm mỗi ngày trên các nền tảng của Google. ",
+            "titleThree": "Vinh dự là Meta Business Partner và là đối tác Việt Nam duy nhất nằm trong danh sách nhà phát triển nền tảng công nghệ hỗ trợ kinh doanh trên Facebook Messenger. ",
+            "titleFour": "KẾT NỐI VỚI CHÚNG TÔI ",
+            "titleFive": "TẢI ỨNG DỤNG TRÊN MOBILE",
+            "titleSix": "Điện thoại hỗ trợ :",
+            "titleSeven": "Email liên hệ :"
         }
+    },
+    "Product": {
+        "tittleOne": "Danh sách đơn hàng",
+        "tittleTwo": "Thống kê chi tiết",
+        "tittleThree": "Xuất dữ liệu",
+        "tittleFour": "Tạo đơn hàng mới",
+        "tittleTable": "Tất cả đơn hàng",
+        "tittleTableOne": "Đơn chưa thanh toán",
+        "tittleTableTwo": "Đơn chưa giao",
+        "tittleTableThree": "Đơn đang giao",
+        "tittleTableFoure": "Đơn đã giao"
     }
 }

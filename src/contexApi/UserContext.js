@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { GetUserAccount } from "../components/services/userService"
 // tao gia tri mac dinh cho con text tao gia tri khoi tao  the nao cung duoc vi du :null
+import { Suspense } from 'react';
+
 const UserContext = React.createContext(null);
 
 
@@ -72,10 +74,15 @@ const UserProvider = ({ children }) => {
 
 
     return (
-        <UserContext.Provider value={{ user, login, logout }}>
-            {children}
-        </UserContext.Provider>
+        <Suspense fallback={<div>Loading... </div>}>
+
+            <UserContext.Provider value={{ user, login, logout }}>
+                {children}
+            </UserContext.Provider>
+        </Suspense>
+
     );
+
 }
 
 

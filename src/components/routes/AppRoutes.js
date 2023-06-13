@@ -61,10 +61,12 @@ import OverviewNoStatus from "../products staff/overviewStatusNo"
 import OverviewStatusOne from "../products staff/overviewStatusOne"
 import OverviewStatusTwo from "../products staff/overviewStatusTwo"
 import OverviewStatusThree from "../products staff/overviewStatusThree"
+import { Suspense } from 'react';
+
 const AppRoutes = (props) => {
 
     return (
-        <>
+        <Suspense fallback={<div>Loading... </div>}>
 
             <Switch>
                 <Route path="/login">
@@ -184,7 +186,7 @@ const AppRoutes = (props) => {
                 <Route path="*" component={NotFound} />
             </Switch>
 
-        </>
+        </Suspense>
     )
 }
 

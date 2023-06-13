@@ -76,12 +76,12 @@ const Home = (props) => {
                     </div>
 
                     <div className="card-container col-12 mt-3">
-                        <div className="card  col-12  container col d-none d-sm-block">
+                        <div className="card  col-12 container col d-none d-xxl-block">
                             <div className="card-img col ">
                                 <img src="https://www.iconpacks.net/icons/2/free-free-shipping-icon-2048-thumb.png" alt="" />
                             </div>
                             <div className=" card-content container mt-3 ">
-                                <span>
+                                <span className="d-flex align-item-center justify-content-center">
                                     {t('homePage.BodyOne.itemOne')}
                                 </span>
                             </div>
@@ -91,25 +91,27 @@ const Home = (props) => {
 
 
 
-                        <div className="card  col-12  container col d-none d-sm-block">
-                            <div className="card-img">
+                        <div className="card  col-12  container col d-none d-xxl-block">
+                            <div className="card-img py-2">
                                 <img src="https://www.iconpacks.net/icons/2/free-store-icon-2017-thumb.png" alt="" />
                             </div>
                             {i18n.language === "en" ?
                                 <>
                                     <br />
-                                    <br />
 
                                     <div className=" card-content container">
-                                        <span>
+
+
+                                        <span className="d-flex align-item-center justify-content-center">
                                             {t('homePage.BodyOne.itemTwo')}
                                         </span>
+
                                     </div>
                                 </>
                                 :
                                 <>
                                     <div className=" card-content container">
-                                        <span>
+                                        <span className="d-flex align-item-center justify-content-center">
                                             {t('homePage.BodyOne.itemTwo')}
                                         </span>
                                     </div>
@@ -119,17 +121,17 @@ const Home = (props) => {
                         </div>
 
 
-                        <div className="card  col-12  container col d-none d-sm-block">
-                            <div className="card-img">
+                        <div className="card  col-12  container col d-none d-xxl-block">
+                            <div className="card-img py-2">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/A_Friendly_Shipping_Guy_Cartoon.svg" alt="" />
                             </div>
                             {
                                 i18n.language === "en" ?
                                     <>
-                                        <br />
 
                                         <div className=" card-content container">
-                                            <span>
+
+                                            <span className="d-flex align-item-center justify-content-center">
                                                 {t('homePage.BodyOne.itemThree')}
                                             </span>
                                         </div>
@@ -137,7 +139,7 @@ const Home = (props) => {
                                     :
                                     <>
                                         <div className=" card-content container">
-                                            <span>
+                                            <span className="d-flex align-item-center justify-content-center">
                                                 {t('homePage.BodyOne.itemThree')}
                                             </span>
                                         </div>
@@ -150,12 +152,12 @@ const Home = (props) => {
                     <div className="card-container-mb col-12 mt-3">
 
 
-                        <div className="card-mb d-sm-none  col-12 container  ">
+                        <div className="card-mb d-xxl-none  col-12 container  ">
                             <div className="card-img col">
                                 <img src="https://www.iconpacks.net/icons/2/free-free-shipping-icon-2048-thumb.png" alt="" />
                             </div>
                             <div className=" card-content container mt-3 ">
-                                <span>
+                                <span className="d-flex align-item-center justify-content-center">
                                     {t('homePage.BodyOne.itemOne')}
                                 </span>
                             </div>
@@ -164,20 +166,20 @@ const Home = (props) => {
 
 
 
-                        <div className="card-mb d-sm-none  col-12 container">
+                        <div className="card-mb d-xxl-none  col-12 container">
                             <div className="card-img">
                                 <img src="https://www.iconpacks.net/icons/2/free-store-icon-2017-thumb.png" alt="" />
                             </div>
                             <br />
                             <div className=" card-content container">
-                                <span>
+                                <span className="d-flex align-item-center justify-content-center">
                                     {t('homePage.BodyOne.itemTwo')}
                                 </span>
                             </div>
                         </div>
 
 
-                        <div className="card-mb d-sm-none  col-12 container">
+                        <div className="card-mb d-xxl-none  col-12 container">
                             <div className="card-img">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/A_Friendly_Shipping_Guy_Cartoon.svg" alt="" />
                             </div>
@@ -185,7 +187,7 @@ const Home = (props) => {
                             <br />
 
                             <div className=" card-content container">
-                                <span>
+                                <span className="d-flex align-item-center justify-content-center">
                                     {t('homePage.BodyOne.itemThree')}
                                 </span>
                             </div>
@@ -197,17 +199,19 @@ const Home = (props) => {
             <div className="body-second ">
                 <div className="container">
                     <div className="title d-none d-sm-block ">
-                        <h2 >PHẦN MỀM QUẢN LÝ ĐƠN HÀNG  GIÚP BẠN TỐI ƯU
+                        <h2 >
+                            {t('homePage.BodyTwo.titleOne')}
                         </h2>
                         <h2>
-                            QUẢN LÝ BÁN HÀNG VÀ THÚC ĐẨY DOANH THU
+                            {t('homePage.BodyTwo.titleTwo')}
                         </h2>
                     </div>
                     <div className="title-mb  d-sm-none col-12">
-                        <h2 >PHẦN MỀM QUẢN LÝ ĐƠN HÀNG  GIÚP BẠN TỐI ƯU
+                        <h2 >
+                            {t('homePage.BodyTwo.titleOne')}
                         </h2>
                         <h2>
-                            QUẢN LÝ BÁN HÀNG VÀ THÚC ĐẨY DOANH THU
+                            {t('homePage.BodyTwo.titleTwo')}
                         </h2>
 
 
@@ -215,17 +219,24 @@ const Home = (props) => {
 
                     <div className="content d-none d-sm-flex ">
                         <div className="content-left ">
-                            <h4>ĐỒNG BỘ ĐƠN HÀNG ĐA KÊNH</h4>
+                            <h4>
+                                {t('homePage.BodyTwo.titleThree')}
+                            </h4>
 
-                            <b>Hệ thống đồng bộ khi đơn hàng phát sinh trên các kênh</b>
-                            <p>Phần mềm  giúp kết nối và đồng bộ đơn hàng khi phát sinh trên Website,
-                                Mạng xã hội (Facebook, Zalo, Instagram),
-                                Sàn TMĐT (Shopee, Tiki, Lazada, Tiktokshop)
-                                hay tại Cửa hàng về một nơi duy nhất giúp bạn quản lý
-                                đơn hàng dễ dàng</p>
+                            <b>
+                                {t('homePage.BodyTwo.titleFour')}
+                            </b>
+                            <p>
+                                {t('homePage.BodyTwo.itemOne')}
+
+                            </p>
                             <div className="my-3"></div>
-                            <b>Hệ thống đồng bộ khi đơn hàng phát sinh trên các kênh</b>
-                            <p>Tạo đơn hàng nhanh khi Chat hoặc khách ghé thăm Cửa hàng và đồng bộ về một nơi trên hệ thống</p>
+                            <b>
+                                {t('homePage.BodyTwo.titleFour')}
+                            </b>
+                            <p>
+                                {t('homePage.BodyTwo.itemTwo')}
+                            </p>
                         </div>
 
                         <div className="content-right col-12 col-sm-6 container">
@@ -236,17 +247,24 @@ const Home = (props) => {
 
                     <div className="content-mb d-sm-none">
                         <div className="content-left-mb d-sm-none ">
-                            <h4>ĐỒNG BỘ ĐƠN HÀNG ĐA KÊNH</h4>
+                            <h4>
+                                {t('homePage.BodyTwo.titleThree')}
+                            </h4>
 
-                            <b>Hệ thống đồng bộ khi đơn hàng phát sinh trên các kênh</b>
-                            <p>Phần mềm  giúp kết nối và đồng bộ đơn hàng khi phát sinh trên Website,
-                                Mạng xã hội (Facebook, Zalo, Instagram),
-                                Sàn TMĐT (Shopee, Tiki, Lazada, Tiktokshop)
-                                hay tại Cửa hàng về một nơi duy nhất giúp bạn quản lý
-                                đơn hàng dễ dàng</p>
+                            <b>
+                                {t('homePage.BodyTwo.titleFour')}
+                            </b>
+                            <p>
+                                {t('homePage.BodyTwo.itemOne')}
+
+                            </p>
                             <div className="my-3"></div>
-                            <b>Hệ thống đồng bộ khi đơn hàng phát sinh trên các kênh</b>
-                            <p>Tạo đơn hàng nhanh khi Chat hoặc khách ghé thăm Cửa hàng và đồng bộ về một nơi trên hệ thống</p>
+                            <b>
+                                {t('homePage.BodyTwo.titleFour')}
+                            </b>
+                            <p>
+                                {t('homePage.BodyTwo.itemTwo')}
+                            </p>
                         </div>
                         <div className="content-right-mb col-12 col-sm-6 container">
                             <img src="https://file.hstatic.net/1000001117/file/orders-mng-1_29d1f349522f488dac67405766968a2a.jpg" alt="" />
@@ -259,149 +277,218 @@ const Home = (props) => {
             <div className="body-Third ">
                 <div className="container">
 
-                    <div className="body-Third-header d-none d-sm-flex">
+                    <div className="body-Third-header d-none d-xl-flex">
                         <div className="left">
                             <img src="https://file.hstatic.net/1000001117/file/orders-mng-2_03471c492ac94fd291ca86cfb490e3f4.png" alt="" />
                         </div>
                         <div className="right">
-                            <h4 className="mb-3">XỬ LÝ ĐƠN HÀNG TẬP TRUNG</h4>
-                            <span>Xử lý đơn hàng tập trung theo quy trình chuyên nghiệp
-                                và tối ưu nhất cho nhà bán hàng :
+                            <h4 className="mb-3">
+                                {t('homePage.BodyThree.titleOne')}
+                            </h4>
+                            <span>
+                                {t('homePage.BodyThree.titleTwo')}
+
                             </span>
                             <div className="right-text my-3">
                                 <span className="number mx-3">1</span>
-                                <span className="text">Xác thực đơn hàng (đảm bảo không có sai sót)</span>
+                                <span className="text">
+                                    {t('homePage.BodyThree.itemOne')}
+                                </span>
                             </div>
                             <div className="right-text my-3">
                                 <span className="number mx-3">2</span>
-                                <span className="text">Xử lý giao hàng (Kết nối, Lựa chọn và chuyển đơn nhanh chóng sang nhà vận chuyển)</span>
+                                <span className="text">
+                                    {t('homePage.BodyThree.itemTwo')}
+                                </span>
                             </div>
                             <div className="right-text my-3">
                                 <span className="number mx-3">3</span>
-                                <span className="text">Xác nhận thanh toán (Hình thức thanh toán, tình trạng thanh toán)</span>
+                                <span className="text">
+                                    {t('homePage.BodyThree.itemThree')}
+                                </span>
                             </div>
                             <div className="right-text my-3">
                                 <span className="number mx-3">4</span>
-                                <span className="text">Xử lý khi phát sinh đơn hàng hoàn trả, bị lỗi hoặc huỷ…
+                                <span className="text">
+                                    {t('homePage.BodyThree.itemFour')}
                                 </span>
                             </div>
-                            <span className="my-3">Xử lý đơn hàng tập trung theo quy trình chuyên nghiệp
-                                và tối ưu nhất cho nhà bán hàng :
+                            <span className="my-3">
+                                {t('homePage.BodyThree.titleFive')}
                             </span>
-                            <p> kết nối hơn 15 nhà vận chuyển phổ biến giúp bạn so sánh và lựa chọn nhà vận chuyển giá tốt nhất theo khu vực, đơn hàng sau khi được xử lý sẽ tự động chuyển đến đơn vị giao hàng đã được chỉ định một cách nhanh chóng.</p>
+                            <p>
+                                {t('homePage.BodyThree.itemFive')}
+                            </p>
 
                         </div>
                     </div>
 
 
-                    <div className="body-Third-header-mb  d-sm-none col-12">
+                    <div className="body-Third-header-mb  d-xl-none col-12">
                         <div className="left container">
                             <img src="https://file.hstatic.net/1000001117/file/orders-mng-2_03471c492ac94fd291ca86cfb490e3f4.png" alt="" />
                         </div>
                         <div className="right">
-                            <h4 className="mb-3">XỬ LÝ ĐƠN HÀNG TẬP TRUNG</h4>
-                            <span>Xử lý đơn hàng tập trung theo quy trình chuyên nghiệp
-                                và tối ưu nhất cho nhà bán hàng :
+                            <h4 className="mb-3">
+                                {t('homePage.BodyThree.titleOne')}
+                            </h4>
+                            <span>
+                                {t('homePage.BodyThree.titleTwo')}
                             </span>
                             <div className="right-text my-3">
                                 <span className="number mx-3">1</span>
-                                <span className="text">Xác thực đơn hàng (đảm bảo không có sai sót)</span>
+                                <span className="text">
+                                    {t('homePage.BodyThree.itemOne')}
+                                </span>
                             </div>
                             <div className="right-text my-3">
                                 <span className="number mx-3">2</span>
-                                <span className="text">Xử lý giao hàng (Kết nối, Lựa chọn và chuyển đơn nhanh chóng sang nhà vận chuyển)</span>
+                                <span className="text">
+                                    {t('homePage.BodyThree.itemTwo')}
+                                </span>
                             </div>
                             <div className="right-text my-3">
                                 <span className="number mx-3">3</span>
-                                <span className="text">Xác nhận thanh toán (Hình thức thanh toán, tình trạng thanh toán)</span>
+                                <span className="text">
+                                    {t('homePage.BodyThree.itemThree')}
+                                </span>
                             </div>
                             <div className="right-text my-3">
                                 <span className="number mx-3">4</span>
-                                <span className="text">Xử lý khi phát sinh đơn hàng hoàn trả, bị lỗi hoặc huỷ…
+                                <span className="text">
+                                    {t('homePage.BodyThree.itemFour')}
                                 </span>
                             </div>
-                            <span className="my-3">Xử lý đơn hàng tập trung theo quy trình chuyên nghiệp
-                                và tối ưu nhất cho nhà bán hàng :
+                            <span className="my-3">
+                                {t('homePage.BodyThree.titleFive')}
                             </span>
-                            <p> kết nối hơn 15 nhà vận chuyển phổ biến giúp bạn so sánh và lựa chọn nhà vận chuyển giá tốt nhất theo khu vực, đơn hàng sau khi được xử lý sẽ tự động chuyển đến đơn vị giao hàng đã được chỉ định một cách nhanh chóng.</p>
+                            <p>
+                                {t('homePage.BodyThree.itemFive')}
+                            </p>
 
                         </div>
                     </div>
 
 
-                    <div className="body-Third-footer d-none d-sm-flex my-3">
+                    <div className="body-Third-footer d-none d-xl-flex my-3">
                         <div className="left">
-                            <h4 className="my-3">Xử lý khi đơn hàng bị hoàn trả hoặc huỷ đơn</h4>
-                            <span className="my-3">Hệ thống cho phép xử lý các đơn Hoàn trả, bị Huỷ hoặc bị Lỗi, đồng thời cập nhật trạng thái đơn hàng giúp bạn kiểm soát việc kinh doanh hiệu quả hơn</span>
-                            <h4 className="my-3">Xuất dữ liệu đơn hàng</h4>
-                            <span className="my-3">Dễ dàng xuất dữ liệu đơn hàng theo bộ lọc để phục vụ cho các công việc kinh doanh khác</span>
+                            <h4 className="my-3">
+                                {t('homePage.BodyThree.titleThree')}
+                            </h4>
+                            <span className="my-3">
+                                {t('homePage.BodyThree.itemSix')}
+                            </span>
+                            <h4 className="my-3">
+                                {t('homePage.BodyThree.titleFour')}
+                            </h4>
+                            <span className="my-3">
+                                {t('homePage.BodyThree.itemSeven')}
+                            </span>
                         </div>
                         <div className="right">
                             <img src="https://file.hstatic.net/1000001117/file/orders-mng-3_bf25330b5b7149d8b708f90941adf3ae.png" alt="" />
                         </div>
                     </div>
 
-                    <div className="body-Third-footer-mb  d-sm-none col-12 my-3">
+                    <div className="body-Third-footer-mb  d-xl-none col-12 my-3">
                         <div className="right container">
                             <img src="https://file.hstatic.net/1000001117/file/orders-mng-3_bf25330b5b7149d8b708f90941adf3ae.png" alt="" />
                         </div>
                         <div className="left">
-                            <h4 className="my-3">Xử lý khi đơn hàng bị hoàn trả hoặc huỷ đơn</h4>
-                            <span className="my-3">Hệ thống cho phép xử lý các đơn Hoàn trả, bị Huỷ hoặc bị Lỗi, đồng thời cập nhật trạng thái đơn hàng giúp bạn kiểm soát việc kinh doanh hiệu quả hơn</span>
-                            <h4 className="my-3">Xuất dữ liệu đơn hàng</h4>
-                            <span className="my-3">Dễ dàng xuất dữ liệu đơn hàng theo bộ lọc để phục vụ cho các công việc kinh doanh khác</span>
+                            <h4 className="my-3">
+                                {t('homePage.BodyThree.titleThree')}
+                            </h4>
+                            <span className="my-3">
+                                {t('homePage.BodyThree.itemSix')}
+                            </span>
+                            <h4 className="my-3">
+                                {t('homePage.BodyThree.titleFour')}
+                            </h4>
+                            <span className="my-3">
+                                {t('homePage.BodyThree.itemSeven')}
+                            </span>
                         </div>
 
                     </div>
                 </div>
 
             </div>
-            <div className="body-Fourth d-none d-sm-flex">
+            <div className="body-Fourth d-none d-lg-flex">
                 <div className="container">
-                    <h3 className="my-3">THEO DÕI VÀ QUẢN LÝ ĐƠN HÀNG</h3>
-                    <h4 className="my-3">Chính xác, giảm sai sót và thất thoát</h4>
+                    <h3 className="my-3">
+                        {t('homePage.BodyFour.titleOne')}
+                    </h3>
+                    <h4 className="my-3">
+                        {t('homePage.BodyFour.titleTwo')}
+                    </h4>
                     <div className="image mx-3 ">
                         <img src="https://file.hstatic.net/1000001117/file/orders-mng-4_46a3c37184fe437bac32c8bab9f196a0.png" alt="" />
                     </div>
-                    <div className="text  container">
+                    <div className="text container">
                         <div className="text-item  ">
-                            <h5>Lọc đơn hàng nhanh chóng</h5>
-                            <span>Bộ lọc đơn hàng nâng cao giúp dễ dàng tra cứu đơn hàng theo khách hàng, kênh bán, tình trạng giao hàng, tình trạng thanh toán hoặc giá trị đơn hàng…</span>
-                        </div>
-                        <div className="text-item ">
-                            <h5>Kiểm soát giao hàng hiệu quả
+                            <h5>
+                                {t('homePage.BodyFour.titleThree')}
                             </h5>
-                            <span>Theo dõi trạng thái giao hàng từ nhiều nhà vận chuyển ngay trên phần mềm quản lý đơn hàng online Haravan, giám sát tình trạng đơn hàng một cách chính xác từ lấy hàng trong kho đến khi giao hàng cho khách.</span>
+                            <span>
+                                {t('homePage.BodyFour.itemOne')}
+                            </span>
                         </div>
                         <div className="text-item ">
-                            <h5>Cập nhật trạng thái đơn hàng</h5>
-                            <span>Cập nhật trạng thái đơn hàng qua Email, Zalo, SMS, Messenger cho khách hàng, thể hiện sự chuyên nghiệp và gắn kết với khách hàng.</span>
+                            <h5>
+                                {t('homePage.BodyFour.titleFour')}
+                            </h5>
+                            <span>
+                                {t('homePage.BodyFour.itemTwo')}
+                            </span>
+                        </div>
+                        <div className="text-item ">
+                            <h5>
+                                {t('homePage.BodyFour.titleFive')}
+                            </h5>
+                            <span>
+                                {t('homePage.BodyFour.itemThree')}
+                            </span>
                         </div>
 
                     </div>
                 </div>
             </div>
 
-            <div className="body-Fourth-mb  d-sm-none col-12">
+            <div className="body-Fourth-mb d-lg-none col-12">
                 <div className="container">
-                    <h3 className="my-3">THEO DÕI VÀ QUẢN LÝ ĐƠN HÀNG</h3>
-                    <h4 className="my-3">Chính xác, giảm sai sót và thất thoát</h4>
+                    <h3 className="my-3">
+                        {t('homePage.BodyFour.titleOne')}
+                    </h3>
+                    <h4 className="my-3">
+                        {t('homePage.BodyFour.titleTwo')}
+                    </h4>
                     <div className="image mx-3 container">
                         <img src="https://file.hstatic.net/1000001117/file/orders-mng-4_46a3c37184fe437bac32c8bab9f196a0.png" alt="" />
                     </div>
-                    <div className="text  container">
+                    <div className="text container">
                         <div className="text-item  ">
-                            <h5>Lọc đơn hàng nhanh chóng</h5>
-                            <span>Bộ lọc đơn hàng nâng cao giúp dễ dàng tra cứu đơn hàng theo khách hàng, kênh bán, tình trạng giao hàng, tình trạng thanh toán hoặc giá trị đơn hàng…</span>
-                        </div>
-                        <div className="text-item ">
-                            <h5>Kiểm soát giao hàng hiệu quả
+                            <h5>
+                                {t('homePage.BodyFour.titleThree')}
                             </h5>
-                            <span>Theo dõi trạng thái giao hàng từ nhiều nhà vận chuyển ngay trên phần mềm quản lý đơn hàng online Haravan, giám sát tình trạng đơn hàng một cách chính xác từ lấy hàng trong kho đến khi giao hàng cho khách.</span>
+                            <span>
+                                {t('homePage.BodyFour.itemOne')}
+                            </span>
                         </div>
                         <div className="text-item ">
-                            <h5>Cập nhật trạng thái đơn hàng</h5>
-                            <span>Cập nhật trạng thái đơn hàng qua Email, Zalo, SMS, Messenger cho khách hàng, thể hiện sự chuyên nghiệp và gắn kết với khách hàng.</span>
+                            <h5>
+                                {t('homePage.BodyFour.titleFour')}
+                            </h5>
+                            <span>
+                                {t('homePage.BodyFour.itemTwo')}
+                            </span>
+                        </div>
+                        <div className="text-item ">
+                            <h5>
+                                {t('homePage.BodyFour.titleFive')}
+                            </h5>
+                            <span>
+                                {t('homePage.BodyFour.itemThree')}
+                            </span>
                         </div>
 
                     </div>
@@ -411,14 +498,13 @@ const Home = (props) => {
                 <div className="container">
                     <div className="title  ">
                         <h2 >
-                            BÁN HÀNG NHÀN TÊNH HƠN VỚI
+                            {t('homePage.BodyFive.titleOne')}
                         </h2>
-                        <h2>CÁC TÍNH NĂNG BỔ TRỢ TỪ
-
-                        </h2>
-
                         <h2>
-                            APP QUẢN LÝ ĐƠN HÀNG
+                            {t('homePage.BodyFive.titleTwo')}
+                        </h2>
+                        <h2>
+                            {t('homePage.BodyFive.titleThree')}
                         </h2>
                     </div>
                     <div className="content">
@@ -430,10 +516,14 @@ const Home = (props) => {
                                             <i className="fa fa-minus-circle" aria-hidden="true"></i>
                                         </h4>
                                         <div className="text">
-                                            <h4    >IN HOÁ ĐƠN BÁN HÀNG, PHIẾU VẬN CHUYỂN</h4>
+                                            <h4>
+                                                {t('homePage.BodyFive.titleFour')}
+                                            </h4>
 
-                                            <p>Chọn in vận đơn nhanh chóng từ 1 hoặc nhiều đơn hàng, đảm bảo đầy đủ
-                                                các thông tin tới khách hàng cũng như nhà vận chuyển</p>
+                                            <p>
+                                                {t('homePage.BodyFive.itemOne')}
+
+                                            </p>
                                         </div>
                                     </div>
                                     <div className="left-text d-flex text-centrel gap-3 col-xm-6">
@@ -442,9 +532,13 @@ const Home = (props) => {
 
                                         </h4>
                                         <div className="text">
-                                            <h4    >QUẢN LÝ TỒN KHO</h4>
+                                            <h4>
+                                                {t('homePage.BodyFive.titleFive')}
+                                            </h4>
 
-                                            <p>Số lượng tồn kho sản phẩm luôn được cập nhật theo thời gian thực khi đơn hàng phát sinh tránh trường hợp thiếu hụt hoặc tồn kho hàng hoá.</p>
+                                            <p>
+                                                {t('homePage.BodyFive.itemTwo')}
+                                            </p>
                                         </div>
                                     </div>
                                     <div className="left-text d-flex text-centrel gap-3 col-xm-6">
@@ -452,10 +546,13 @@ const Home = (props) => {
                                             <i className="fa fa-minus-circle" aria-hidden="true"></i>
                                         </h4>
                                         <div className="text">
-                                            <h4    >IN HOÁ ĐƠN BÁN HÀNG, PHIẾU VẬN CHUYỂN</h4>
+                                            <h4>
+                                                {t('homePage.BodyFive.titleSix')}
+                                            </h4>
 
-                                            <p>Chọn in vận đơn nhanh chóng từ 1 hoặc nhiều đơn hàng, đảm bảo đầy đủ
-                                                các thông tin tới khách hàng cũng như nhà vận chuyển</p>
+                                            <p>
+                                                {t('homePage.BodyFive.itemThree')}
+                                            </p>
                                         </div>
                                     </div>
 
@@ -478,14 +575,13 @@ const Home = (props) => {
                 <div className="container">
                     <div className="title  ">
                         <h2 >
-                            BÁN HÀNG NHÀN TÊNH HƠN VỚI
+                            {t('homePage.BodyFive.titleOne')}
                         </h2>
-                        <h2>CÁC TÍNH NĂNG BỔ TRỢ TỪ
-
-                        </h2>
-
                         <h2>
-                            APP QUẢN LÝ ĐƠN HÀNG
+                            {t('homePage.BodyFive.titleTwo')}
+                        </h2>
+                        <h2>
+                            {t('homePage.BodyFive.titleThree')}
                         </h2>
                     </div>
                     <div className="content">
@@ -496,10 +592,14 @@ const Home = (props) => {
                                         <i className="fa fa-minus-circle" aria-hidden="true"></i>
                                     </h4>
                                     <div className="text ">
-                                        <h4    >IN HOÁ ĐƠN BÁN HÀNG, PHIẾU VẬN CHUYỂN</h4>
+                                        <h4>
+                                            {t('homePage.BodyFive.titleFour')}
+                                        </h4>
 
-                                        <p>Chọn in vận đơn nhanh chóng từ 1 hoặc nhiều đơn hàng, đảm bảo đầy đủ
-                                            các thông tin tới khách hàng cũng như nhà vận chuyển</p>
+                                        <p>
+                                            {t('homePage.BodyFive.itemOne')}
+
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="left-text d-flex text-centrel gap-3 col-xm-6">
@@ -508,9 +608,13 @@ const Home = (props) => {
 
                                     </h4>
                                     <div className="text">
-                                        <h4    >QUẢN LÝ TỒN KHO</h4>
+                                        <h4>
+                                            {t('homePage.BodyFive.titleFive')}
+                                        </h4>
 
-                                        <p>Số lượng tồn kho sản phẩm luôn được cập nhật theo thời gian thực khi đơn hàng phát sinh tránh trường hợp thiếu hụt hoặc tồn kho hàng hoá.</p>
+                                        <p>
+                                            {t('homePage.BodyFive.itemTwo')}
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="left-text d-flex text-centrel gap-3 col-xm-6">
@@ -518,10 +622,14 @@ const Home = (props) => {
                                         <i className="fa fa-minus-circle" aria-hidden="true"></i>
                                     </h4>
                                     <div className="text">
-                                        <h4    >IN HOÁ ĐƠN BÁN HÀNG, PHIẾU VẬN CHUYỂN</h4>
+                                        <h4>
+                                            {t('homePage.BodyFive.titleSix')}
+                                        </h4>
 
-                                        <p>Chọn in vận đơn nhanh chóng từ 1 hoặc nhiều đơn hàng, đảm bảo đầy đủ
-                                            các thông tin tới khách hàng cũng như nhà vận chuyển</p>
+                                        <p>
+                                            {t('homePage.BodyFive.itemThree')}
+
+                                        </p>
                                     </div>
 
                                 </div>
@@ -543,11 +651,15 @@ const Home = (props) => {
                 <div className="container">
                     <div className="content d-flex text-centrel flex-column gap-3">
 
-                        <h2>PHẦN MỀM QUẢN LÝ ĐƠN HÀNG </h2>
-
-                        <h2> TỐI ƯU HIỆU SUẤT BÁN HÀNG
+                        <h2>
+                            {t('homePage.BodySix.titleOne')}
                         </h2>
-                        <h2>TĂNG TRƯỞNG HIỆU QUẢ HƠN</h2>
+                        <h2>
+                            {t('homePage.BodySix.titleTwo')}
+                        </h2>
+                        <h2>
+                            {t('homePage.BodySix.titleThree')}
+                        </h2>
 
                     </div>
                     <div className="simple_shapes d-none d-xl-block">
@@ -573,11 +685,16 @@ const Home = (props) => {
             <div className="body-Sixth-mb d-sm-none col-12">
                 <div className="content d-flex text-centrel flex-column gap-3 container">
 
-                    <h2>PHẦN MỀM QUẢN LÝ ĐƠN HÀNG </h2>
-
-                    <h2> TỐI ƯU HIỆU SUẤT BÁN HÀNG
+                    <h2>
+                        {t('homePage.BodySix.titleOne')}
                     </h2>
-                    <h2>TĂNG TRƯỞNG HIỆU QUẢ HƠN</h2>
+
+                    <h2>
+                        {t('homePage.BodySix.titleTwo')}
+                    </h2>
+                    <h2>
+                        {t('homePage.BodySix.titleThree')}
+                    </h2>
                 </div>
                 <div className="simple_shapes d-none d-xl-block">
                     <span className="shape-1">
@@ -601,8 +718,12 @@ const Home = (props) => {
             <div className="body-Seventh  d-none d-sm-flex">
                 <div className="container">
                     <div className="content">
-                        <h2>HƠN 50.000 NGƯỜI KINH DOANH VÀ</h2>
-                        <h2>THƯƠNG HIỆU BẬC NHẤT ĐANG TIN DÙNG</h2>
+                        <h2>
+                            {t('homePage.BodySeven.titleOne')}
+                        </h2>
+                        <h2>
+                            {t('homePage.BodySeven.titleTwo')}
+                        </h2>
                     </div>
                     <div className="brand py-3 ">
                         <div className="container">
@@ -661,8 +782,12 @@ const Home = (props) => {
             <div className="body-Seventh-mb d-sm-none col-12">
                 <div className="container">
                     <div className="content">
-                        <h2>HƠN 50.000 NGƯỜI KINH DOANH VÀ</h2>
-                        <h2>THƯƠNG HIỆU BẬC NHẤT ĐANG TIN DÙNG</h2>
+                        <h2>
+                            {t('homePage.BodySeven.titleOne')}
+                        </h2>
+                        <h2>
+                            {t('homePage.BodySeven.titleTwo')}
+                        </h2>
                     </div>
                     <div className="brand py-3 ">
                         <div className="container">
@@ -721,7 +846,8 @@ const Home = (props) => {
                 <div className="container">
                     <div className="first">
                         <h2> HUY LE</h2>
-                        <h5>Những điều thú vị và thành quả mà HUY LE muốn được chia sẻ với các bạn.
+                        <h5>
+                            {t('homePage.BodyEight.titleOne')}
                         </h5>
                     </div>
                     <hr />
@@ -734,7 +860,9 @@ const Home = (props) => {
                                             <div className="image">
                                                 <img src="https://www.logo.wine/a/logo/Google/Google-Logo.wine.svg" alt="" />
                                             </div>
-                                            <p>Chúng tôi là đối tác công nghệ đầu tiên tại Việt Nam vinh dự được Google đề xuất là Nền tảng cho Nhà bán lẻ, cung cấp hình thức Google Ads giúp doanh nghiệp tiếp cận hàng triệu người tìm kiếm thông tin mua sắm mỗi ngày trên các nền tảng của Google.</p>
+                                            <p>
+                                                {t('homePage.BodyEight.titleTwo')}
+                                            </p>
 
                                         </div>
                                         <div className="item d-flex">
@@ -742,7 +870,9 @@ const Home = (props) => {
                                                 <img src="https://download.logo.wine/logo/Meta_Platforms/Meta_Platforms-Logo.wine.png" alt="" />
                                             </div>
 
-                                            <p>Vinh dự là Meta Business Partner và là đối tác Việt Nam duy nhất nằm trong danh sách nhà phát triển nền tảng công nghệ hỗ trợ kinh doanh trên Facebook Messenger.</p>
+                                            <p>
+                                                {t('homePage.BodyEight.titleThree')}
+                                            </p>
                                         </div>
 
                                     </div>
@@ -760,9 +890,10 @@ const Home = (props) => {
                     <div className="first">
                         <div className="container">
                             <h2> HUY LE</h2>
-                            <h5>Những điều thú vị và thành quả mà
+                            <h5>
+                                {t('homePage.BodyEight.titleOne')}
                             </h5>
-                            <h5>HUY LE muốn được chia sẻ với các bạn.</h5>
+
                         </div>
                     </div>
                     <hr />
@@ -775,7 +906,9 @@ const Home = (props) => {
                                             <div className="image">
                                                 <img src="https://www.logo.wine/a/logo/Google/Google-Logo.wine.svg" alt="" />
                                             </div>
-                                            <p>Chúng tôi là đối tác công nghệ đầu tiên tại Việt Nam vinh dự được Google đề xuất là Nền tảng cho Nhà bán lẻ, cung cấp hình thức Google Ads giúp doanh nghiệp tiếp cận hàng triệu người tìm kiếm thông tin mua sắm mỗi ngày trên các nền tảng của Google.</p>
+                                            <p>
+                                                {t('homePage.BodyEight.titleTwo')}
+                                            </p>
 
                                         </div>
                                         <div className="item d-flex">
@@ -783,7 +916,9 @@ const Home = (props) => {
                                                 <img src="https://download.logo.wine/logo/Meta_Platforms/Meta_Platforms-Logo.wine.png" alt="" />
                                             </div>
 
-                                            <p>Vinh dự là Meta Business Partner và là đối tác Việt Nam duy nhất nằm trong danh sách nhà phát triển nền tảng công nghệ hỗ trợ kinh doanh trên Facebook Messenger.</p>
+                                            <p>
+                                                {t('homePage.BodyEight.titleThree')}
+                                            </p>
                                         </div>
 
                                     </div>
@@ -802,7 +937,9 @@ const Home = (props) => {
                     <div className="social  ">
                         <div className="container">
                             <div className="row">
-                                <h3 className=" title" >Kết nối với chúng tôi</h3>
+                                <h3 className=" title" >
+                                    {t('homePage.BodyEight.titleFour')}
+                                </h3>
 
                                 <div className="icon  facebook   col">
                                     <i className="fa fa-facebook-square" aria-hidden="true" title="Facebook"></i>
@@ -826,7 +963,9 @@ const Home = (props) => {
                     <div className="store  ">
 
                         <div className="container">
-                            <h3 className="title">tải ứng dụng trên mobile </h3>
+                            <h3 className="title">
+                                {t('homePage.BodyEight.titleFive')}
+                            </h3>
                             <div className="store-Mobile">
                                 <div className="appstore item  ">
                                     <img src="https://www.logo.wine/a/logo/App_Store_(iOS)/App_Store_(iOS)-Badge-Alternative-Logo.wine.svg
@@ -846,7 +985,9 @@ const Home = (props) => {
                     <div className="social  ">
                         <div className="container">
                             <div className="row">
-                                <h3 className=" title" >Kết nối với chúng tôi</h3>
+                                <h3 className=" title" >
+                                    {t('homePage.BodyEight.titleFour')}
+                                </h3>
 
                                 <div className="icon  facebook   col">
                                     <i className="fa fa-facebook-square" aria-hidden="true" title="Facebook"></i>
@@ -870,7 +1011,9 @@ const Home = (props) => {
                     <div className="store  ">
 
                         <div className="container">
-                            <h3 className="title">tải ứng dụng trên mobile </h3>
+                            <h3 className="title">
+                                {t('homePage.BodyEight.titleFive')}
+                            </h3>
                             <div className="store-Mobile">
                                 <div className="appstore item  ">
                                     <img src="https://www.logo.wine/a/logo/App_Store_(iOS)/App_Store_(iOS)-Badge-Alternative-Logo.wine.svg
@@ -889,13 +1032,17 @@ const Home = (props) => {
                     <div className="row">
                         <div className="col phone">
 
-                            <span> Điện thoại hỗ trợ :</span>
+                            <span>
+                                {t('homePage.BodyEight.titleSix')}
+                            </span>
                             <b>077777777777</b>
 
                         </div>
                         <div className="email col">
 
-                            <span>Email liên hệ :</span>
+                            <span>
+                                {t('homePage.BodyEight.titleSeven')}
+                            </span>
                             <b>khakha057@gmail.com</b>
                         </div>
                     </div>

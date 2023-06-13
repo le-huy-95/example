@@ -21,8 +21,11 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { useRef } from 'react';
 import { Bars } from 'react-loader-spinner'
 import * as XLSX from 'xlsx';
+import { useTranslation, Trans } from 'react-i18next';
 
 const Products = (props) => {
+    const { t, i18n } = useTranslation();
+
     let history = useHistory()
     let refCalendar = useRef(null)
     const { user } = React.useContext(UserContext);
@@ -128,8 +131,9 @@ const Products = (props) => {
 
     const [listProjectbyUser, setListProjectbyUser] = useState([])
     const [totalPage, setTotalPage] = useState(0)
+    let orderNumber = Math.floor(Math.random() * 1000000)
 
-    const [order, setOrder] = useState(uuidv4())
+    const [order, setOrder] = useState(`#${orderNumber}`)
 
     const [showModalCreatNewProject, setShowModalCreatNewProject] = useState(false);
 
@@ -591,7 +595,7 @@ const Products = (props) => {
                         let ImageId = data.DT;
                         await assignDataToProjectImage(projectId, ImageId)
                         await fetchProjectUser()
-
+                        setOrder(`#-${orderNumber}`)
 
 
                     } else {
@@ -712,14 +716,16 @@ const Products = (props) => {
                             <div className="container">
                                 <div className='name-page'>
                                     <div className='title_name_page'>
-                                        <h4> Orders  </h4>
+                                        <h4>
+                                            {t('Product.tittleOne')}
+                                        </h4>
                                         <Link to="/dashboard_Product" style={{ textDecoration: "none", color: "#474141" }}>
                                             <button className='btn btn-primary'>
                                                 <span>
                                                     <i class="fa fa-line-chart" aria-hidden="true"></i>
                                                 </span>
                                                 <span className='mx-3'>
-                                                    Thống kê chi tiết
+                                                    {t('Product.tittleTwo')}
                                                 </span>
                                             </button>
                                         </Link>
@@ -728,11 +734,11 @@ const Products = (props) => {
 
                                         <button className='btn btn-warning' onClick={() => handleExportData()}>
                                             <i class="fa fa-cloud-download" aria-hidden="true"></i>
-                                            Export data
+                                            {t('Product.tittleThree')}
                                         </button>
                                         <button className='btn btn-primary' onClick={() => handleShowHideModalCreatNewProject()}>
                                             <i className="fa fa-plus-circle" aria-hidden="true"></i>
-                                            Create Orders
+                                            {t('Product.tittleFour')}
                                         </button>
                                     </div>
 
@@ -743,18 +749,28 @@ const Products = (props) => {
 
                                     <div className="container">
                                         <div className='header-table '>
-                                            <span onClick={() => handlegetAllProject()} style={{ borderBottom: "6px solid #61dafb " }}>Tất cả đơn hàng</span>
-                                            <span style={{ borderBottom: "6px solid white" }}>
-                                                <Link to="/ProductsWithStatuspayment" style={{ textDecoration: "none", color: "#474141" }}>Đơn chưa thanh toán</Link>
+                                            <span onClick={() => handlegetAllProject()} style={{ borderBottom: "6px solid #61dafb " }}>
+                                                {t('Product.tittleTable')}
                                             </span>
                                             <span style={{ borderBottom: "6px solid white" }}>
-                                                <Link to="/ProductsWithStatusdeliveryNull" style={{ textDecoration: "none", color: "#474141" }}>Đơn chưa giao</Link>
+                                                <Link to="/ProductsWithStatuspayment" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Product.tittleTableOne')}
+                                                </Link>
                                             </span>
                                             <span style={{ borderBottom: "6px solid white" }}>
-                                                <Link to="/ProductsWithStatusdeliveryOne" style={{ textDecoration: "none", color: "#474141" }}>Đơn đang giao</Link>
+                                                <Link to="/ProductsWithStatusdeliveryNull" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Product.tittleTableTwo')}
+                                                </Link>
                                             </span>
                                             <span style={{ borderBottom: "6px solid white" }}>
-                                                <Link to="/ProductsWithStatusdeliveryTwo" style={{ textDecoration: "none", color: "#474141" }}>  Đơn đã giao </Link>
+                                                <Link to="/ProductsWithStatusdeliveryOne" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Product.tittleTableThree')}
+                                                </Link>
+                                            </span>
+                                            <span style={{ borderBottom: "6px solid white" }}>
+                                                <Link to="/ProductsWithStatusdeliveryTwo" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Product.tittleTableFoure')}
+                                                </Link>
                                             </span>
 
 
