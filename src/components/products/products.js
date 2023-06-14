@@ -539,6 +539,13 @@ const Products = (props) => {
             toast.error("can not empty Main Account")
             return;
         }
+        if (userdata[arr[25]] === "Lựa chọn") {
+            let _validInput = _.cloneDeep(ValidInputsDefault);
+            _validInput.Main_Account = false
+            setValidInput(_validInput)
+            toast.error(" Empty Mode_of_payment !!!")
+            return;
+        }
 
         for (let i = 0; i < arr.length; i++) {
             if (!userdata[arr[i]]) {
@@ -780,7 +787,7 @@ const Products = (props) => {
                                             <div className='container '>
                                                 <div className='row '>
                                                     <div className='col-3' style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                                        Lọc đơn hàng theo thời gian :
+                                                        {t('Product.TimeTittle')}
                                                     </div>
                                                     <div className='col-2'>
                                                         <input
@@ -805,7 +812,7 @@ const Products = (props) => {
                                                         title='Lọc đơn hàng theo thời gian'
                                                     >
                                                         <button className='btn btn-primary'>
-                                                            Chọn thời gian
+                                                            {t('Product.tittleTimeSelectButton')}
                                                         </button>
 
                                                     </div>
@@ -816,7 +823,8 @@ const Products = (props) => {
                                                     >
 
                                                         <button className='btn btn-light'>
-                                                            Xóa
+                                                            {t('Product.tittleTimeDeleteButton')}
+
                                                         </button>
                                                     </div>
                                                     <div></div>
@@ -847,15 +855,21 @@ const Products = (props) => {
                                                 <div className='my-2 d-flex align-item-center gap-3'>
                                                     <div className='my-2 d-flex align-item-center gap-2'>
                                                         <div style={{ backgroundColor: "blue", width: "30px", height: "30px", borderRadius: "50%" }}></div>
-                                                        <div style={{ fontSize: "20px", fontWeight: "700" }}>Đã thanh toán toàn bộ</div>
+                                                        <div style={{ fontSize: "20px", fontWeight: "700" }}>
+                                                            {t('Product.tittleBodyOne')}
+                                                        </div>
                                                     </div>
                                                     <div className='my-2 d-flex align-item-center gap-2'>
                                                         <div style={{ backgroundColor: "violet", width: "30px", height: "30px", borderRadius: "50%" }}></div>
-                                                        <div style={{ fontSize: "20px", fontWeight: "700" }}>Thanh toán khi giao hàng</div>
+                                                        <div style={{ fontSize: "20px", fontWeight: "700" }}>
+                                                            {t('Product.tittleBodyTwo')}
+                                                        </div>
                                                     </div>
                                                     <div className='my-2 d-flex align-item-center gap-2'>
                                                         <div style={{ backgroundColor: "#A0522D", width: "30px", height: "30px", borderRadius: "50%" }}></div>
-                                                        <div style={{ fontSize: "20px", fontWeight: "700" }}>Đã thanh toán trước một phần</div>
+                                                        <div style={{ fontSize: "20px", fontWeight: "700" }}>
+                                                            {t('Product.tittleBodyThree')}
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -894,13 +908,22 @@ const Products = (props) => {
                                                 <thead className='table-success'>
                                                     <tr>
                                                         <th></th>
-                                                        <th scope="col">Done</th>
-                                                        <th scope="col" >No</th>
-                                                        <th scope="col" style={{ width: "50px" }} >Mã</th>
-                                                        <th scope="col" style={{ width: "57px" }} >
+                                                        <th scope="col">
+                                                            {t('Product.tittleBodyOrdersOne')}
+
+                                                        </th>
+                                                        <th scope="col" >
+                                                            {t('Product.tittleBodyOrdersTwo')}
+
+                                                        </th>
+                                                        <th scope="col" style={{ width: "50px" }} >
+                                                            {t('Product.tittleBodyOrdersThree')}
+
+                                                        </th>
+                                                        <th scope="col" style={{ width: "70px" }} >
                                                             {sortId === true ?
                                                                 <span>
-                                                                    Id
+                                                                    {t('Product.tittleBodyOrdersFour')}
                                                                     <span style={{ paddingLeft: "10px", cursor: "pointer" }}
                                                                     >
                                                                         <span onClick={() =>
@@ -913,7 +936,7 @@ const Products = (props) => {
                                                                 </span>
                                                                 :
                                                                 <span>
-                                                                    Id
+                                                                    {t('Product.tittleBodyOrdersFour')}
                                                                     <span style={{ paddingLeft: "10px", cursor: "pointer" }}
                                                                     >
                                                                         <span onClick={() =>
@@ -932,7 +955,7 @@ const Products = (props) => {
                                                         <th >
                                                             {sorttime === true ?
                                                                 <span>
-                                                                    Ngày Tạo
+                                                                    {t('Product.tittleBodyOrdersFive')}
                                                                     <span style={{ paddingLeft: "10px", cursor: "pointer" }}
                                                                     >
                                                                         <span onClick={() =>
@@ -945,7 +968,7 @@ const Products = (props) => {
                                                                 </span>
                                                                 :
                                                                 <span>
-                                                                    Ngày Tạo
+                                                                    {t('Product.tittleBodyOrdersFive')}
                                                                     <span style={{ paddingLeft: "10px", cursor: "pointer" }}
                                                                     >
                                                                         <span onClick={() =>
@@ -961,13 +984,33 @@ const Products = (props) => {
 
 
                                                         </th>
-                                                        <th scope="col" >Khách hàng</th>
-                                                        <th scope="col" >Sản phẩm</th>
-                                                        <th scope="col" >Thanh toán</th>
-                                                        <th scope="col" >Giao hàng</th>
-                                                        <th scope="col" >Tổng Tiền</th>
-                                                        <th scope="col" >Kênh</th>
-                                                        <th scope="col" >Thao tác</th>
+                                                        <th scope="col" >
+                                                            {t('Product.tittleBodyOrdesSix')}
+
+                                                        </th>
+                                                        <th scope="col" >
+                                                            {t('Product.tittleBodyOrdesSeven')}
+                                                        </th>
+                                                        <th scope="col" >
+                                                            {t('Product.tittleBodyOrdesEight')}
+
+                                                        </th>
+                                                        <th scope="col" >
+                                                            {t('Product.tittleBodyOrdesNight')}
+
+                                                        </th>
+                                                        <th scope="col" >
+                                                            {t('Product.tittleBodyOrdesTen')}
+
+                                                        </th>
+                                                        <th scope="col" >
+                                                            {t('Product.tittleBodyOrdeseleven')}
+
+                                                        </th>
+                                                        <th scope="col" >
+                                                            {t('Product.tittleBodyOrdestwelve')}
+
+                                                        </th>
 
                                                     </tr>
                                                 </thead>

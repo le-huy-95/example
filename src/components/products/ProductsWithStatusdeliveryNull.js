@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { UserContext } from "../../contexApi/UserContext"
 import { fetchImagebyOrder, assignDataToProjectImage } from "../services/imageService"
 import { CreateProject, getDataWithTime } from "../services/ProjectService"
-import { getProjectWithPagination, updateProject, updateNumberProductInWarehouse } from "../services/ProjectService"
+import { createNotification, updateProject, updateNumberProductInWarehouse } from "../services/ProjectService"
 
 import { toast } from 'react-toastify';
 import _, { debounce } from "lodash"
@@ -23,8 +23,11 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { useRef } from 'react';
 import { Bars } from 'react-loader-spinner'
 import * as XLSX from 'xlsx';
+import { useTranslation, Trans } from 'react-i18next';
 
 const ProductsWithStatusdeliveryNull = (props) => {
+    const { t, i18n } = useTranslation();
+
     let history = useHistory()
     let refCalendar = useRef(null)
     const { user } = React.useContext(UserContext);
@@ -47,6 +50,7 @@ const ProductsWithStatusdeliveryNull = (props) => {
         Ward_customer: "",
         detail_address_customer: "",
         Note_More: "",
+        createdByName: user.account.username,
         createdBy: user.account.phone,
         shippingUnitId: "",
         shipping_Cost: "",
@@ -59,7 +63,14 @@ const ProductsWithStatusdeliveryNull = (props) => {
         Ward_of_receipt: "",
         Detail_Place_of_receipt: "",
         flag: 0,
-        done_status: 0
+        done_status: 0,
+        unit: "",
+        unit_money: "",
+        name_account: "",
+        Mode_of_payment: "",
+        Bank_name: "",
+        Main_Account: ""
+
     }
 
 
@@ -94,7 +105,14 @@ const ProductsWithStatusdeliveryNull = (props) => {
         salesChannel: true,
         StatusPaymentId: true,
         flag: true,
-        done_status: true
+        done_status: true,
+        unit: true,
+        unit_money: true,
+        name_account: true,
+        Mode_of_payment: true,
+        Bank_name: true,
+        Main_Account: true
+
 
 
     }
@@ -116,8 +134,9 @@ const ProductsWithStatusdeliveryNull = (props) => {
     const [listProjectbyUser, setListProjectbyUser] = useState([])
     const [totalPage, setTotalPage] = useState(0)
 
-    const [order, setOrder] = useState(uuidv4())
+    let orderNumber = Math.floor(Math.random() * 1000000)
 
+    const [order, setOrder] = useState(`${orderNumber}`)
     const [showModalCreatNewProject, setShowModalCreatNewProject] = useState(false);
 
     const [showNotificationCreateSuccess, setShowNotificationCreateSuccess] = useState(false);
@@ -131,6 +150,7 @@ const ProductsWithStatusdeliveryNull = (props) => {
     const [sortDataSearch, setSortDataSearch] = useState(false)
     const [sortDataSearchWithTime, setSortDataSearchWithTime] = useState(false)
     const [isLoading, SetIsLoading] = useState(false)
+    const [projectId, setProjectId] = useState("")
 
     const [listDataSearch, setListDataSearch] = useState([])
     const [numberProduct, setNumberProduct] = useState("")
@@ -387,19 +407,25 @@ const ProductsWithStatusdeliveryNull = (props) => {
 
     const checkValueDate = () => {
         setValidInput(ValidInputsDefault)
-        let arr = ["name_Product", "number", "salesChannel", "money", "price_drop", "StatusPaymentId", "paid", "totalMoney",
+        let arr = ["name_Product", "number", "unit", "salesChannel", "money", "price_drop", "StatusPaymentId", "paid", "totalMoney", "unit_money",
             "customer_name", "customer_name_phone", "age",
             "Province_customer", "District_customer", "Ward_customer", "detail_address_customer",
             "Province_of_receipt", "District_of_receipt", "Ward_of_receipt", "Detail_Place_of_receipt",
             "shippingUnitId", "From_address",
-            "To_address", "shipping_Cost"]
+            "To_address", "shipping_Cost", "Mode_of_payment"
+        ]
         let check = true
         const re = /^[0-9\b]+$/;
         const regxPhone = /^\+?1?\s*?\(?\d{3}(?:\)|[-|\s])?\s*?\d{3}[-|\s]?\d{4}$/;
 
-        // if (e.target.value === '' || re.test(e.target.value)) {
-        //     this.setState({ value: e.target.value })
-        // }
+
+        if (userdata[arr[0]] === "sản phẩm") {
+            let _validInput = _.cloneDeep(ValidInputsDefault);
+            _validInput[arr[0]] = false
+            setValidInput(_validInput)
+            toast.error(`Empty input ${arr[0]}`)
+            return;
+        }
         if (userdata[arr[1]] && !re.test(userdata[arr[1]])) {
             let _validInput = _.cloneDeep(ValidInputsDefault);
             _validInput[arr[1]] = false
@@ -407,13 +433,20 @@ const ProductsWithStatusdeliveryNull = (props) => {
             toast.error("number only or number greater than 0")
             return;
         }
+
+        if (+userdata[arr[1]] > +numberProduct) {
+            let _validInput = _.cloneDeep(ValidInputsDefault);
+            _validInput[arr[1]] = false
+            setValidInput(_validInput)
+            toast.error("numberProduct selected  greater than numberProduct in warehouse")
+            return
+        }
         if (userdata[arr[3]] && !re.test(userdata[arr[3]])) {
             let _validInput = _.cloneDeep(ValidInputsDefault);
             _validInput[arr[3]] = false
             setValidInput(_validInput)
             toast.error("money is number only or money greater than 0")
             return;
-
         }
         if (userdata[arr[4]] && !re.test(userdata[arr[4]])) {
             let _validInput = _.cloneDeep(ValidInputsDefault);
@@ -441,26 +474,26 @@ const ProductsWithStatusdeliveryNull = (props) => {
 
         }
 
-        if (userdata[arr[9]] && !regxPhone.test(userdata[arr[9]])) {
+        if (userdata[arr[11]] && !regxPhone.test(userdata[arr[11]])) {
             let _validInput = _.cloneDeep(ValidInputsDefault);
-            _validInput[arr[9]] = false
+            _validInput[arr[11]] = false
             setValidInput(_validInput)
             toast.error("please enter a valid Phone Number")
             return;
 
         }
 
-        if (userdata[arr[9]] && !re.test(userdata[arr[9]])) {
+        if (userdata[arr[12]] && !re.test(userdata[arr[12]])) {
             let _validInput = _.cloneDeep(ValidInputsDefault);
-            _validInput[arr[9]] = false
+            _validInput[arr[12]] = false
             setValidInput(_validInput)
             toast.error("age is number only")
             return;
 
         }
-        if (userdata[arr[11]] && userdata[arr[11]] === "Tỉnh/thành phố") {
+        if (userdata[arr[10]] && userdata[arr[10]] === "Tỉnh/thành phố") {
             let _validInput = _.cloneDeep(ValidInputsDefault);
-            _validInput[arr[11]] = false
+            _validInput[arr[10]] = false
             setValidInput(_validInput)
             toast.error("Empty Province customer")
             return;
@@ -507,6 +540,35 @@ const ProductsWithStatusdeliveryNull = (props) => {
             return;
 
         }
+        if (userdata[arr[25]] === "Nhận tiền thanh toán qua tài khoản ngân hàng" && !userdata.name_account) {
+            let _validInput = _.cloneDeep(ValidInputsDefault);
+            _validInput.name_account = false
+            setValidInput(_validInput)
+            toast.error("can not empty Account name")
+            return;
+        }
+        if (userdata[arr[25]] === "Nhận tiền thanh toán qua tài khoản ngân hàng" && !userdata.Bank_name) {
+            let _validInput = _.cloneDeep(ValidInputsDefault);
+            _validInput.Bank_name = false
+            setValidInput(_validInput)
+            toast.error("can not empty Bank name")
+            return;
+        }
+        if (userdata[arr[25]] === "Nhận tiền thanh toán qua tài khoản ngân hàng" && !userdata.Main_Account) {
+            let _validInput = _.cloneDeep(ValidInputsDefault);
+            _validInput.Main_Account = false
+            setValidInput(_validInput)
+            toast.error("can not empty Main Account")
+            return;
+        }
+        if (userdata[arr[25]] === "Lựa chọn") {
+            let _validInput = _.cloneDeep(ValidInputsDefault);
+            _validInput.Main_Account = false
+            setValidInput(_validInput)
+            toast.error(" Empty Mode_of_payment !!!")
+            return;
+        }
+
         for (let i = 0; i < arr.length; i++) {
             if (!userdata[arr[i]]) {
                 let _validInput = _.cloneDeep(ValidInputsDefault);
@@ -519,17 +581,12 @@ const ProductsWithStatusdeliveryNull = (props) => {
             }
 
         }
-
-
-
-
         return check
     }
 
 
-
     const handleConfirmUser = async () => {
-        console.log("userdata", userdata)
+        console.log(userdata)
         let check = checkValueDate();
 
         if (check === true && previreImage.length === 0) {
@@ -548,37 +605,61 @@ const ProductsWithStatusdeliveryNull = (props) => {
                 await CreateProject({ ...userdata })
 
             if (res && +res.EC === 0) {
-                setProductAfterCreate(res.DT)
+                let abc = await createNotification(res.DT.id, res.DT.order, "thêm mới", "", res.DT.createdBy, 1, 0, userdata.shippingUnitId)
+                if (abc && +abc.EC === 0) {
+                    history.push("/Products")
+                    await fetchProjectUser()
+
+                    setProductAfterCreate(res.DT)
 
 
-                let projectId = res.DT.id
-                let order = res.DT.order
-                let data = await fetchImagebyOrder(order)
+                    let projectId = res.DT.id
+                    setProjectId(res.DT.id)
+                    let order = res.DT.order
 
-                if (data && +data.EC === 0) {
-                    let ImageId = data.DT;
-                    await assignDataToProjectImage(projectId, ImageId)
+                    let data = await fetchImagebyOrder(order)
 
+                    if (data && +data.EC === 0) {
+                        let ImageId = data.DT;
+                        await assignDataToProjectImage(projectId, ImageId)
+                        await fetchProjectUser()
+                        setOrder(`#-${orderNumber}`)
+
+
+                    } else {
+                        toast.error("bạn gặp vấn đề , vui lòng kiểm tra lại thông tin")
+
+                    }
+                }
+
+
+                if (userdata && userdata.number > 0) {
+
+                    let number = +numberProduct - +userdata.number
+
+
+                    let dataOne = await updateNumberProductInWarehouse(+id, +number)
+                    if (dataOne && +dataOne.EC === 0) {
+                        setSelecCheckSubtmitImage(false)
+                        setShowModalCreatNewProject(false)
+                        setUserdata(defaultUserData)
+                        setprevireImage("")
+                        setNumberProduct("")
+                        await fetchProjectUser()
+                        setShowNotificationCreateSuccess(true)
+                    }
 
 
                 } else {
                     toast.error(res.EM)
-
                 }
 
-                setSelecCheckSubtmitImage(false)
-                setShowModalCreatNewProject(false)
-                setUserdata(defaultUserData)
-                setprevireImage("")
-
-                await fetchProjectUser()
-                setShowNotificationCreateSuccess(true)
-
-
-            } else {
-                toast.error(res.EM)
             }
+
         }
+
+
+
 
     }
 
@@ -649,14 +730,16 @@ const ProductsWithStatusdeliveryNull = (props) => {
                             <div className="container">
                                 <div className='name-page'>
                                     <div className='title_name_page'>
-                                        <h4> Orders  </h4>
+                                        <h4>
+                                            {t('Product.tittleOne')}
+                                        </h4>
                                         <Link to="/dashboard_Product" style={{ textDecoration: "none", color: "#474141" }}>
                                             <button className='btn btn-primary'>
                                                 <span>
                                                     <i class="fa fa-line-chart" aria-hidden="true"></i>
                                                 </span>
                                                 <span className='mx-3'>
-                                                    Thống kê chi tiết
+                                                    {t('Product.tittleTwo')}
                                                 </span>
                                             </button>
                                         </Link>
@@ -665,11 +748,11 @@ const ProductsWithStatusdeliveryNull = (props) => {
 
                                         <button className='btn btn-warning' onClick={() => handleExportData()}>
                                             <i class="fa fa-cloud-download" aria-hidden="true"></i>
-                                            Export data
+                                            {t('Product.tittleThree')}
                                         </button>
                                         <button className='btn btn-primary' onClick={() => handleShowHideModalCreatNewProject()}>
                                             <i className="fa fa-plus-circle" aria-hidden="true"></i>
-                                            Create Orders
+                                            {t('Product.tittleFour')}
                                         </button>
                                     </div>
 
@@ -679,20 +762,28 @@ const ProductsWithStatusdeliveryNull = (props) => {
                                     <div className="container">
                                         <div className='header-table '>
                                             <span onClick={() => handlegetAllProject()} style={{ borderBottom: "6px solid white " }} >
-                                                <Link to="/Products" style={{ textDecoration: "none", color: "#474141" }}>Tất cả đơn hàng</Link>
+                                                <Link to="/Products" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Product.tittleTable')}
+                                                </Link>
                                             </span>
                                             <span style={{ borderBottom: "6px solid white" }}>
-                                                <Link to="/ProductsWithStatuspayment" style={{ textDecoration: "none", color: "#474141" }}>Đơn chưa thanh toán</Link>
+                                                <Link to="/ProductsWithStatuspayment" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Product.tittleTableOne')}
+                                                </Link>
                                             </span>
                                             <span style={{ borderBottom: "6px solid #61dafb" }}>
-                                                Đơn chưa giao
+                                                {t('Product.tittleTableTwo')}
                                             </span>
                                             <span style={{ borderBottom: "6px solid white" }}>
-                                                <Link to="/ProductsWithStatusdeliveryOne" style={{ textDecoration: "none", color: "#474141" }}>Đơn đang giao</Link>
+                                                <Link to="/ProductsWithStatusdeliveryOne" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Product.tittleTableThree')}
+                                                </Link>
 
                                             </span>
                                             <span style={{ borderBottom: "6px solid white" }}>
-                                                <Link to="/ProductsWithStatusdeliveryTwo" style={{ textDecoration: "none", color: "#474141" }}>  Đơn đã giao </Link>
+                                                <Link to="/ProductsWithStatusdeliveryTwo" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Product.tittleTableFoure')}
+                                                </Link>
 
                                             </span>
 
@@ -703,7 +794,7 @@ const ProductsWithStatusdeliveryNull = (props) => {
                                             <div className='container '>
                                                 <div className='row '>
                                                     <div className='col-3' style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                                        Lọc đơn hàng theo thời gian :
+                                                        {t('Product.TimeTittle')}
 
                                                     </div>
                                                     <div className='col-2'>
@@ -729,7 +820,7 @@ const ProductsWithStatusdeliveryNull = (props) => {
                                                         title='Lọc đơn hàng theo thời gian'
                                                     >
                                                         <button className='btn btn-primary'>
-                                                            Chọn thời gian
+                                                            {t('Product.tittleTimeSelectButton')}
                                                         </button>
 
                                                     </div>
@@ -740,7 +831,7 @@ const ProductsWithStatusdeliveryNull = (props) => {
                                                     >
 
                                                         <button className='btn btn-light'>
-                                                            Xóa
+                                                            {t('Product.tittleTimeDeleteButton')}
                                                         </button>
                                                     </div>
                                                     <div></div>
@@ -773,7 +864,10 @@ const ProductsWithStatusdeliveryNull = (props) => {
                                                     <div className='my-2 d-flex align-item-center gap-3'>
                                                         <div className='my-2 d-flex align-item-center gap-2'>
                                                             <div style={{ backgroundColor: "red", width: "30px", height: "30px", borderRadius: "50%" }}></div>
-                                                            <div style={{ fontSize: "20px", fontWeight: "700" }}>Chưa giao hàng</div>
+                                                            <div style={{ fontSize: "20px", fontWeight: "700" }}>
+                                                                {t('Product.tittleTableTwo')}
+
+                                                            </div>
                                                         </div>
 
 
@@ -804,18 +898,26 @@ const ProductsWithStatusdeliveryNull = (props) => {
                                                         />
                                                     }
                                                 </div>
-
-                                                <table className="table table-striped table-hover ">
+                                                <table className="table  table-hover ">
                                                     <thead className='table-success'>
                                                         <tr>
                                                             <th></th>
-                                                            <th scope="col">Done</th>
-                                                            <th scope="col" >No</th>
-                                                            <th scope="col" style={{ width: "50px" }} >Mã</th>
-                                                            <th scope="col" style={{ width: "57px" }} >
+                                                            <th scope="col">
+                                                                {t('Product.tittleBodyOrdersOne')}
+
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Product.tittleBodyOrdersTwo')}
+
+                                                            </th>
+                                                            <th scope="col" style={{ width: "50px" }} >
+                                                                {t('Product.tittleBodyOrdersThree')}
+
+                                                            </th>
+                                                            <th scope="col" style={{ width: "70px" }} >
                                                                 {sortId === true ?
                                                                     <span>
-                                                                        Id
+                                                                        {t('Product.tittleBodyOrdersFour')}
                                                                         <span style={{ paddingLeft: "10px", cursor: "pointer" }}
                                                                         >
                                                                             <span onClick={() =>
@@ -828,7 +930,7 @@ const ProductsWithStatusdeliveryNull = (props) => {
                                                                     </span>
                                                                     :
                                                                     <span>
-                                                                        Id
+                                                                        {t('Product.tittleBodyOrdersFour')}
                                                                         <span style={{ paddingLeft: "10px", cursor: "pointer" }}
                                                                         >
                                                                             <span onClick={() =>
@@ -847,7 +949,7 @@ const ProductsWithStatusdeliveryNull = (props) => {
                                                             <th >
                                                                 {sorttime === true ?
                                                                     <span>
-                                                                        Ngày Tạo
+                                                                        {t('Product.tittleBodyOrdersFive')}
                                                                         <span style={{ paddingLeft: "10px", cursor: "pointer" }}
                                                                         >
                                                                             <span onClick={() =>
@@ -860,7 +962,7 @@ const ProductsWithStatusdeliveryNull = (props) => {
                                                                     </span>
                                                                     :
                                                                     <span>
-                                                                        Ngày Tạo
+                                                                        {t('Product.tittleBodyOrdersFive')}
                                                                         <span style={{ paddingLeft: "10px", cursor: "pointer" }}
                                                                         >
                                                                             <span onClick={() =>
@@ -876,13 +978,33 @@ const ProductsWithStatusdeliveryNull = (props) => {
 
 
                                                             </th>
-                                                            <th scope="col" >Khách hàng</th>
-                                                            <th scope="col" >Sản phẩm</th>
-                                                            <th scope="col" >Thanh toán</th>
-                                                            <th scope="col" >Giao hàng</th>
-                                                            <th scope="col" >Tổng Tiền</th>
-                                                            <th scope="col" >Kênh</th>
-                                                            <th scope="col" >Thao tác</th>
+                                                            <th scope="col" >
+                                                                {t('Product.tittleBodyOrdesSix')}
+
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Product.tittleBodyOrdesSeven')}
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Product.tittleBodyOrdesEight')}
+
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Product.tittleBodyOrdesNight')}
+
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Product.tittleBodyOrdesTen')}
+
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Product.tittleBodyOrdeseleven')}
+
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Product.tittleBodyOrdestwelve')}
+
+                                                            </th>
 
                                                         </tr>
                                                     </thead>
@@ -1220,6 +1342,10 @@ const ProductsWithStatusdeliveryNull = (props) => {
                         handleShowNotificationCreateSuccess={handleShowNotificationCreateSuccess}
                         order={order}
                         productAfterCreate={productAfterCreate}
+                        projectId={projectId}
+                        numberProduct={numberProduct}
+                        userdata={userdata}
+                        id={id}
 
                     />
                 </div>

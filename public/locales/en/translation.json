@@ -82,6 +82,24 @@
         "tittleTableOne": "Unpaid Orders",
         "tittleTableTwo": "Not Delivery",
         "tittleTableThree": "Delivery",
-        "tittleTableFoure": "Delivery Done"
+        "tittleTableFoure": "Delivery Done",
+        "TimeTittle": "Filter orders by time :",
+        "tittleTimeSelectButton": "Choose ",
+        "tittleTimeDeleteButton": "Delete",
+        "tittleBodyOne": "Paid in full",
+        "tittleBodyTwo": "Payment by cash on delivery.",
+        "tittleBodyThree": "Partial payment",
+        "tittleBodyOrdersOne": "Done",
+        "tittleBodyOrdersTwo": "No",
+        "tittleBodyOrdersThree": "order code",
+        "tittleBodyOrdersFour": "Id ",
+        "tittleBodyOrdersFive": "Created at",
+        "tittleBodyOrdesSix": "Customer",
+        "tittleBodyOrdesSeven": "Product",
+        "tittleBodyOrdesEight": "Mode of payment",
+        "tittleBodyOrdesNight": "Method Of Delivery",
+        "tittleBodyOrdesTen": "Total money",
+        "tittleBodyOrdeseleven": "Channel",
+        "tittleBodyOrdestwelve": "Action"
     }
 }
