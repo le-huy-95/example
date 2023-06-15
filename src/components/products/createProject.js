@@ -13,9 +13,11 @@ import {
 import { getAllShippingUnit, fetchShippingCostByShippingUnit, getPriceByAddress } from "../services/shippingService"
 import { CreateProject, getSaleChannel, getStastusPayment, getNameProduct, getNumberProductinWarehouse } from "../services/ProjectService"
 import { Link, NavLink, useHistory } from "react-router-dom"
+import { useTranslation, Trans } from 'react-i18next';
 
 const CreateNewProject = (props) => {
     let history = useHistory()
+    const { t, i18n } = useTranslation();
 
     const { showModalCreatNewProject, setShowModalCreatNewProject, handleShowHideModalCreatNewProject, listProject,
         fetchProjectUser, setShowNotificationCreateSuccess, userdata, setUserdata, validInput,
@@ -321,14 +323,18 @@ const CreateNewProject = (props) => {
 
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Tạo Đơn hàng mới</Modal.Title>
+                    <Modal.Title>
+                        {t('CreateProduct.tittleOne')}
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className='create_new_Project-container col-12'>
                         <div className='container'>
                             <div className='tittle my-3'>
                                 <h4 className='order '>
-                                    <span className='mx-2 name-order' > Mã đơn hàng :</span>
+                                    <span className='mx-2 name-order' >
+                                        {t('CreateProduct.tittleEighteen')}
+                                    </span>
                                     <span className='name-order_number'
                                     >{order ? userdata.order = order : "Đang cập nhật"}</span>
                                 </h4>
@@ -340,10 +346,13 @@ const CreateNewProject = (props) => {
                                     <div className='create-product '
 
                                     >
-                                        <h4 className='mb-3 d-flex align-item-center justify-content-center'> Thêm thông tin sản phẩm và giá cả</h4>
+                                        <h4 className='mb-3 d-flex align-item-center justify-content-center'>
+                                            {t('CreateProduct.tittleNineteen')}
+                                        </h4>
                                         <div className='row'>
                                             <div className='name-product col-5 mb-2'>
-                                                <label htmlFor='input-name-product' className='mb-2' >Tên sản phẩm (<span className='red'>*</span>)</label>
+                                                <label htmlFor='input-name-product' className='mb-2' >
+                                                    {t('CreateProduct.tittleTwo')} (<span className='red'>*</span>)</label>
 
                                                 <select
                                                     style={{ fontWeight: "700" }}
@@ -353,7 +362,7 @@ const CreateNewProject = (props) => {
                                                     value={userdata.name_Product}
                                                 >
 
-                                                    <option value="sản phẩm">Chọn sản phẩm muốn giao</option>
+                                                    <option value="sản phẩm">Chọn sản phẩm muốn bán</option>
 
                                                     {Product && Product.length > 0 &&
                                                         Product.map((item, index) => {
@@ -371,11 +380,12 @@ const CreateNewProject = (props) => {
                                                 </select >
                                                 {Product && Product.length === 0 &&
                                                     <label htmlFor='input-name-product' className='mb-2'  >
-                                                        <b>Bạn chưa có sản phẩm  trong kho hàng </b>
+                                                        <b>{t('CreateProduct.tittleTwenty')} </b>
                                                         <br />
                                                         <Link to="/Warehouse">
                                                             <i class="fa fa-wrench" aria-hidden="true"></i>
-                                                            <span className='mx-2'>vui lòng tạo ngay sản phẩm </span>
+                                                            <span className='mx-2'>
+                                                                {t('CreateProduct.tittleTwentyOne')}                                                            </span>
                                                         </Link>
 
                                                     </label>
@@ -383,7 +393,8 @@ const CreateNewProject = (props) => {
 
                                             </div>
                                             <div className='number-product col-4 mb-2'>
-                                                <label htmlFor='input-number-product' className='mb-2' >Số lượng sản phẩm (<span className='red'>*</span>)</label>
+                                                <label htmlFor='input-number-product' className='mb-2' >
+                                                    {t('CreateProduct.tittleThree')} (<span className='red'>*</span>)</label>
                                                 <input
                                                     id='input-number-product'
                                                     type="text"
@@ -395,17 +406,21 @@ const CreateNewProject = (props) => {
                                                 />
 
                                                 {numberProduct > 0 &&
-                                                    <label htmlFor='input-number-product' className='mb-2' >Số lượng Sản phẩm còn trong kho : <b>{numberProduct ? numberProduct : ""} </b></label>
+                                                    <label htmlFor='input-number-product' className='mb-2'>
+                                                        {t('CreateProduct.tittleTwentyTwo')} <b>{numberProduct ? numberProduct : ""} </b></label>
 
                                                 }
                                                 {numberProduct === 0 &&
-                                                    <label htmlFor='input-number-product' className='mb-2' >Số lượng Sản phẩm còn trong kho : <b>Hết hàng </b></label>
+                                                    <label htmlFor='input-number-product' className='mb-2' >
+                                                        {t('CreateProduct.tittleTwentyTwo')}
+                                                        <b> {t('CreateProduct.tittleTwentyThree')} </b></label>
 
                                                 }
 
                                             </div>
                                             <div className='unit col-3 mb-2'>
-                                                <label htmlFor='input-product'  >Đơn vị:</label>
+                                                <label htmlFor='input-product'>
+                                                    {t('CreateProduct.tittleFour')}                                                    </label>
                                                 <select
                                                     readOnly
                                                     className={validInput.unit ? "form-select my-2" : "form-select my-2 is-invalid"}
@@ -429,7 +444,9 @@ const CreateNewProject = (props) => {
                                                 </select >
                                             </div>
                                             <div className='number-product col-12 mb-2'>
-                                                <label htmlFor='input-number-product' className='mb-2' >Kênh mua hàng (<span className='red'>*</span>)</label>
+                                                <label htmlFor='input-number-product' className='mb-2' >
+                                                    {t('CreateProduct.tittleFive')} (<span className='red'>*</span>)
+                                                </label>
                                                 <select
                                                     className={validInput.salesChannel ? "form-select my-2" : "form-select my-2 is-invalid"}
                                                     onChange={(event) => handleOnchangeInput(event.target.value, "salesChannel")}
@@ -453,7 +470,8 @@ const CreateNewProject = (props) => {
                                             </div>
 
                                             <div className='money-product col-6'>
-                                                <label htmlFor='input-money-product' className='mb-2' >Giá 1 sản phẩm(<span className='red'>*</span>)</label>
+                                                <label htmlFor='input-money-product' className='mb-2' >
+                                                    {t('CreateProduct.tittleSix')} (<span className='red'>*</span>)</label>
                                                 <input
                                                     id='input-money-product'
                                                     type="text"
@@ -465,7 +483,9 @@ const CreateNewProject = (props) => {
                                                 />
                                             </div>
                                             <div className='total-product col-6'>
-                                                <label htmlFor='input-total-product' className='mb-2' >Khuyến mãi:</label>
+                                                <label htmlFor='input-total-product' className='mb-2' >
+                                                    {t('CreateProduct.tittleSeven')}
+                                                </label>
                                                 <input
                                                     id='input-total-product'
                                                     type="text"
@@ -477,7 +497,8 @@ const CreateNewProject = (props) => {
                                                 />
                                             </div>
                                             <div className='StatusPayment col-6 mb-1'>
-                                                <label htmlFor='input-StatusPayment' className='mb-2' >Trạng thái thanh toán (<span className='red'>*</span>)</label>
+                                                <label htmlFor='input-StatusPayment' className='mb-2' >
+                                                    {t('CreateProduct.tittleEight')} (<span className='red'>*</span>)</label>
                                                 <select
                                                     className={validInput.StatusPaymentId ? "form-select " : "form-select  is-invalid"}
                                                     onChange={(event) => handleOnchangeInput(event.target.value, "StatusPaymentId")}
@@ -501,7 +522,9 @@ const CreateNewProject = (props) => {
                                             </div>
                                             {userdata.StatusPaymentId === "3" &&
                                                 <div className='total-product col-6'>
-                                                    <label htmlFor='input-total-product' className='mb-2' >Đã thanh toán :</label>
+                                                    <label htmlFor='input-total-product' className='mb-2' >
+                                                        {t('CreateProduct.tittleTwentyFour')}
+                                                    </label>
                                                     <input
                                                         id='input-total-product'
                                                         type="text"
@@ -516,7 +539,9 @@ const CreateNewProject = (props) => {
                                             }
                                             {userdata.StatusPaymentId === "2" &&
                                                 <div className='total-product col-6'>
-                                                    <label htmlFor='input-total-product' className='mb-2' >Đã thanh toán :</label>
+                                                    <label htmlFor='input-total-product' className='mb-2' >
+                                                        {t('CreateProduct.tittleTwentyFour')}
+                                                    </label>
                                                     <input
                                                         id='input-total-product'
                                                         type="text"
@@ -531,7 +556,9 @@ const CreateNewProject = (props) => {
                                             }
                                             {userdata.StatusPaymentId === "1" &&
                                                 <div className='total-product col-6'>
-                                                    <label htmlFor='input-total-product' className='mb-2' >Đã thanh toán :</label>
+                                                    <label htmlFor='input-total-product' className='mb-2' >
+                                                        {t('CreateProduct.tittleTwentyFour')}
+                                                    </label>
                                                     <input
                                                         id='input-total-product'
                                                         type="text"
@@ -546,7 +573,8 @@ const CreateNewProject = (props) => {
                                             }
 
                                             <div className='total-product col-6'>
-                                                <label htmlFor='input-total-product' className='mb-2' >Tổng giá trị <b>{userdata.number}</b> sản phẩm (chưa có phí ship) </label>
+                                                <label htmlFor='input-total-product' className='mb-2' >
+                                                    {t('CreateProduct.tittleNight')} <b>{userdata.number}</b> {t('CreateProduct.tittleTwentyFive')} </label>
                                                 <input
                                                     id='input-total-product'
                                                     type="text"
@@ -563,7 +591,9 @@ const CreateNewProject = (props) => {
 
 
                                             <div className='unitMoney col-6 mb-2'>
-                                                <label htmlFor='input-product'>Đơn vị tiền :</label>
+                                                <label htmlFor='input-product'>
+                                                    {t('CreateProduct.tittleTen')}
+                                                </label>
                                                 <select
                                                     className={validInput.unit_money ? "form-select my-2" : "form-select my-2 is-invalid"}
                                                     onChange={(event) => handleOnchangeInput(event.target.value, "unit_money")}
@@ -582,7 +612,9 @@ const CreateNewProject = (props) => {
 
 
                                             <div className='unitMoney col-6 mb-2'>
-                                                <label htmlFor='input-product'> Hình thức nhận tiền thanh toán :</label>
+                                                <label htmlFor='input-product'>
+                                                    {t('CreateProduct.tittleTwele')}
+                                                </label>
                                                 <select
                                                     className={validInput.Mode_of_payment ? "form-select my-2" : "form-select my-2 is-invalid"}
                                                     onChange={(event) => handleOnchangeInput(event.target.value, "Mode_of_payment")}
@@ -603,7 +635,9 @@ const CreateNewProject = (props) => {
                                                 <>
 
                                                     <div className='total-product col-6'>
-                                                        <label htmlFor='input-total-product' className='mb-2' >Tên chủ tài khoản</label>
+                                                        <label htmlFor='input-total-product' className='mb-2' >
+                                                            {t('CreateProduct.tittleThirteen')}
+                                                        </label>
                                                         <input
                                                             id='input-total-product'
                                                             type="text"
@@ -616,7 +650,9 @@ const CreateNewProject = (props) => {
                                                     </div>
 
                                                     <div className='unitMoney col-6 mb-2'>
-                                                        <label htmlFor='input-product'> Tên ngân hàng :</label>
+                                                        <label htmlFor='input-product'>
+                                                            {t('CreateProduct.tittleFourteen')}
+                                                        </label>
                                                         <select
                                                             className={validInput.Bank_name ? "form-select my-2" : "form-select my-2 is-invalid"}
                                                             onChange={(event) => handleOnchangeInput(event.target.value, "Bank_name")}
@@ -638,7 +674,9 @@ const CreateNewProject = (props) => {
                                                         </select >
                                                     </div>
                                                     <div className='total-product col-6'>
-                                                        <label htmlFor='input-total-product' className='mb-2' >Số tài khoản</label>
+                                                        <label htmlFor='input-total-product' className='mb-2' >
+                                                            {t('CreateProduct.tittleFifteen')}
+                                                        </label>
                                                         <input
                                                             id='input-total-product'
                                                             type="text"
@@ -656,10 +694,16 @@ const CreateNewProject = (props) => {
 
                                     </div>
                                     <div className='create-customer my-5 '>
-                                        <h4 className='mb-4 d-flex align-item-center justify-content-center'> Thêm thông tin người nhận</h4>
+                                        <h4 className='mb-4 d-flex align-item-center justify-content-center'>
+                                            {t('CreateProduct.Customer.tittleOne')}
+
+                                        </h4>
                                         <div className='row'>
                                             <div className='name-customer col-6 mb-2'>
-                                                <label htmlFor='input-name-customer' className='mb-2' >Tên : (<span className='red'>*</span>)</label>
+                                                <label htmlFor='input-name-customer' className='mb-2' >
+                                                    {t('CreateProduct.Customer.tittleTwo')}
+
+                                                    (<span className='red'>*</span>)</label>
                                                 <input
                                                     id='input-name-customer'
                                                     type="text"
@@ -670,7 +714,8 @@ const CreateNewProject = (props) => {
                                                 />
                                             </div>
                                             <div className='phone-customer col-6 mb-2'>
-                                                <label htmlFor='input-phone-customer' className='mb-2' >số điện thoại (<span className='red'>*</span>)</label>
+                                                <label htmlFor='input-phone-customer' className='mb-2' >
+                                                    {t('CreateProduct.Customer.tittleThree')} (<span className='red'>*</span>)</label>
                                                 <input
                                                     id='input-phone-customer'
                                                     type="text"
@@ -681,7 +726,9 @@ const CreateNewProject = (props) => {
                                                 />
                                             </div>
                                             <div className='note-customer col-12 mb-2'>
-                                                <label htmlFor='input-note-customer' className='mb-2' >Ghi chú : </label>
+                                                <label htmlFor='input-note-customer' className='mb-2' >
+                                                    {t('CreateProduct.Customer.tittleFour')}
+                                                </label>
                                                 <input
                                                     id='input-note-customer'
                                                     type="text"
@@ -692,7 +739,10 @@ const CreateNewProject = (props) => {
                                                 />
                                             </div>
                                             <div className='age-customer col-6'>
-                                                <label htmlFor='input-age-customer' className='mb-2' >tuổi</label>
+                                                <label htmlFor='input-age-customer' className='mb-2' >
+                                                    {t('CreateProduct.Customer.tittleFive')}
+
+                                                </label>
                                                 <input
                                                     id='input-age-customer'
                                                     type="text"
@@ -703,7 +753,9 @@ const CreateNewProject = (props) => {
                                                 />
                                             </div>
                                             <div className='address-customer col-6'>
-                                                <label htmlFor='select-address-product' >Địa chỉ (<span className='red'>*</span>)</label>
+                                                <label htmlFor='select-address-product' >
+                                                    {t('CreateProduct.Customer.tittleSix')} (<span className='red'>*</span>)
+                                                </label>
                                                 <select
                                                     id='select-address-product'
                                                     className={validInput.Province_customer ? "form-select my-2" : "form-select my-2 is-invalid"}
@@ -777,11 +829,13 @@ const CreateNewProject = (props) => {
                                 </div>
                                 <div className='right-table col-4 '>
                                     <div className='create-note  '>
-                                        <h5 className='mb-4 d-flex align-item-center justify-content-center'> Thêm thông tin bổ xung</h5>
+                                        <h5 className='mb-4 d-flex align-item-center justify-content-center'>
+                                            {t('CreateProduct.Additional information.tittleOne')}
+                                        </h5>
                                         <div className='row'>
                                             <div className=' col-12 mb-2'>
                                                 <label htmlFor='input-name-customer' className='mb-2' >
-                                                    Ghi Chú :
+                                                    {t('CreateProduct.Additional information.tittleTwo')}
                                                 </label>
                                                 <input
                                                     id='input-name-customer'
@@ -802,11 +856,14 @@ const CreateNewProject = (props) => {
 
                                     </div>
                                     <div className='user-create mt-3 '>
-                                        <h5 className='mb-4 d-flex align-item-center justify-content-center'> Người tạo đơn :</h5>
+                                        <h5 className='mb-4 d-flex align-item-center justify-content-center'>
+                                            {t('CreateProduct.Creator.tittle')}
+                                        </h5>
                                         <div className='row'>
                                             <div className=' col-12 mb-2'>
                                                 <label htmlFor='input-name-customer' className='mb-2' >
-                                                    Họ tên :
+                                                    {t('CreateProduct.Creator.tittleOne')}
+
                                                 </label>
                                                 {user &&
 
@@ -823,7 +880,7 @@ const CreateNewProject = (props) => {
 
                                             <div className=' col-12 mb-2'>
                                                 <label htmlFor='input-name-customer' className='mb-2' >
-                                                    Số điện thoại :
+                                                    {t('CreateProduct.Creator.tittleTwo')}
                                                 </label>
                                                 {user &&
 
@@ -839,7 +896,7 @@ const CreateNewProject = (props) => {
                                             </div>
                                             <div className=' col-12 mb-2'>
                                                 <label htmlFor='delivery_From' className='mb-2' >
-                                                    Địa chỉ gủi hàng :(<span className='red'>*</span>)
+                                                    {t('CreateProduct.Creator.tittleThree')} (<span className='red'>*</span>)
                                                 </label>
                                                 <select
                                                     id='select-address-product'
@@ -926,12 +983,14 @@ const CreateNewProject = (props) => {
 
                                     </div>
                                     <div className='create-delivery my-3 '>
-                                        <h5 className='mb-4 d-flex align-item-center justify-content-center'> Thêm thông tin giao hàng</h5>
+                                        <h5 className='mb-4 d-flex align-item-center justify-content-center'>
+                                            {t('CreateProduct.Delivery information.tittleOne')}
+                                        </h5>
                                         <div className='row'>
                                             <div className=' col-12 mb-2'>
 
                                                 <label htmlFor='delivery_unit' className='mb-2' >
-                                                    lựa chọn đơn vị vận chuyển :(<span className='red'>*</span>)
+                                                    {t('CreateProduct.Delivery information.tittleTwo')} (<span className='red'>*</span>)
                                                 </label>
                                                 <select
                                                     className={validInput.shippingUnitId ? "form-select my-2" : "form-select my-2 is-invalid"}
@@ -961,7 +1020,7 @@ const CreateNewProject = (props) => {
 
                                             <div className=' col-12 mb-2'>
                                                 <label htmlFor='delivery_From' className='mb-2' >
-                                                    Nơi gửi hàng :(<span className='red'>*</span>)
+                                                    {t('CreateProduct.Delivery information.tittleThree')} (<span className='red'>*</span>)
                                                 </label>
                                                 <select
                                                     className={validInput.From_address ? "form-select my-2" : "form-select my-2 is-invalid"}
@@ -988,7 +1047,7 @@ const CreateNewProject = (props) => {
 
                                             <div className=' col-12 mb-2'>
                                                 <label htmlFor='delivery_To' className='mb-2' >
-                                                    Nơi đến :(<span className='red'>*</span>)
+                                                    {t('CreateProduct.Delivery information.tittleFour')} (<span className='red'>*</span>)
                                                 </label>
                                                 <select
                                                     className={validInput.To_address ? "form-select my-2" : "form-select my-2 is-invalid"}
@@ -1012,7 +1071,7 @@ const CreateNewProject = (props) => {
                                             </div>
                                             <div className=' col-12 mb-2'>
                                                 <label htmlFor='delivery_To' className='mb-2' >
-                                                    Giá cước:
+                                                    {t('CreateProduct.Delivery information.tittleFive')}
                                                 </label>
 
                                                 <input
@@ -1032,7 +1091,7 @@ const CreateNewProject = (props) => {
                                             </div>
                                             <div className=' col-12 mb-2'>
                                                 <label htmlFor='delivery_To' className='mb-2' >
-                                                    Tổng giá trị đơn hàng (Đã có phí ship)
+                                                    {t('CreateProduct.Delivery information.tittleSix')}
                                                 </label>
 
                                                 <input
@@ -1063,10 +1122,12 @@ const CreateNewProject = (props) => {
 
                             </div>
                             <div className='create-image '>
-                                <h4 className=' d-flex align-item-center justify-content-center '>Thêm hình ảnh</h4>
+                                <h4 className=' d-flex align-item-center justify-content-center '>
+                                    {t('CreateProduct.Upload image.tittleOne')}
+                                </h4>
                                 {selecCheckSubtmitImage === true &&
                                     <div className=' d-flex align-item-center justify-content-center '>
-                                        Đã thêm--<h5>{previreImage.length}--</h5>ảnh vào đơn hàng
+                                        {t('CreateProduct.Upload image.tittleThree')} <h5 className='mx-2'>{previreImage.length}</h5> {t('CreateProduct.Upload image.tittleFour')}
                                     </div>}
                                 <div className='image-product col-12 '>
                                     <div className='container'>
@@ -1094,7 +1155,7 @@ const CreateNewProject = (props) => {
                                                             <span>
                                                                 <i className="fa fa-upload " aria-hidden="true"></i>
                                                             </span>
-                                                            <span > Upload Image</span>
+                                                            <span > {t('CreateProduct.Upload image.tittleTwo')}</span>
 
                                                         </label>
                                                         <div className='col-6'></div>
@@ -1102,7 +1163,9 @@ const CreateNewProject = (props) => {
                                                             <button className='btn btn-success col-3'>
                                                                 <i class="fa fa-check" aria-hidden="true"></i>
 
-                                                                <span className='mx-2'>Save Image</span>
+                                                                <span className='mx-2'>
+                                                                    {t('CreateProduct.Upload image.tittleFive')}
+                                                                </span>
                                                             </button>
 
 
@@ -1161,10 +1224,10 @@ const CreateNewProject = (props) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => handleCloseModale()}>
-                        Close
+                        {t('CreateProduct.tittleSixteen')}
                     </Button>
                     <Button variant="primary" onClick={() => { handleConfirmUser() }}>
-                        Save
+                        {t('CreateProduct.tittleSeventeen')}
                     </Button>
                 </Modal.Footer>
             </Modal >

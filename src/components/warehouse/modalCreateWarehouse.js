@@ -10,8 +10,10 @@ import './Warehouse.scss'
 import _ from "lodash"
 import { Link, NavLink, useHistory } from "react-router-dom"
 import axios from "../../customizeAxios/axios"
+import { useTranslation, Trans } from 'react-i18next';
 
 const ModalCreateWarehouse = (props) => {
+    const { t, i18n } = useTranslation();
     const { showModalCreateWarehouse, handleShowhideModalCreateWarehouse, action, dataWarehouseEdit, fetchProjectUser, previreImage, setprevireImage, dataWarehouseRepeat, getAllInWarehouse } = props;
     const { user } = React.useContext(UserContext);
     let history = useHistory()
@@ -415,7 +417,9 @@ const ModalCreateWarehouse = (props) => {
                                     {action === "Repeat" ?
 
                                         <div className='product col-6'>
-                                            <label htmlFor='input-product' className='mb-2' >Sản phẩm:</label>
+                                            <label htmlFor='input-product' className='mb-2' >
+                                                {t('CreateWarehouse.tittleOne')}
+                                            </label>
                                             <input
                                                 id='input-product'
                                                 type="text"
@@ -429,7 +433,9 @@ const ModalCreateWarehouse = (props) => {
                                         </div>
                                         :
                                         <div className='product col-6'>
-                                            <label htmlFor='input-product' className='mb-2' >Sản phẩm:</label>
+                                            <label htmlFor='input-product' className='mb-2' >
+                                                {t('CreateWarehouse.tittleOne')}
+                                            </label>
                                             <input
                                                 id='input-product'
                                                 type="text"
@@ -446,7 +452,9 @@ const ModalCreateWarehouse = (props) => {
                                     {action === "Repeat" ?
 
                                         <div className='product col-4'>
-                                            <label htmlFor='input-product' className='mb-2' >Giá nhập sản phẩm:</label>
+                                            <label htmlFor='input-product' className='mb-2' >
+                                                {t('CreateWarehouse.tittleTwo')}
+                                            </label>
                                             <input
                                                 id='input-product'
                                                 type="text"
@@ -460,7 +468,9 @@ const ModalCreateWarehouse = (props) => {
                                         </div>
                                         :
                                         <div className='product col-4'>
-                                            <label htmlFor='input-product' className='mb-2' >Giá nhập sản phẩm:</label>
+                                            <label htmlFor='input-product' className='mb-2' >
+                                                {t('CreateWarehouse.tittleTwo')}
+                                            </label>
                                             <input
                                                 id='input-product'
                                                 type="text"
@@ -475,7 +485,10 @@ const ModalCreateWarehouse = (props) => {
                                     {action === "Repeat" ?
 
                                         <div className='product col-2'>
-                                            <label htmlFor='input-product' className='mb-2' >Đơn vị tiền:</label>
+                                            <label htmlFor='input-product' className='mb-2' >
+                                                {t('CreateWarehouse.tittleThree')}
+
+                                            </label>
                                             <select
                                                 readOnly
 
@@ -492,7 +505,10 @@ const ModalCreateWarehouse = (props) => {
 
                                         :
                                         <div className='product col-2'>
-                                            <label htmlFor='input-product' className='mb-2' >Đơn vị tiền:</label>
+                                            <label htmlFor='input-product' className='mb-2' >
+                                                {t('CreateWarehouse.tittleThree')}
+
+                                            </label>
                                             <select
 
                                                 className={validInput.unitMoney ? "form-control" : "form-control is-invalid"}
@@ -507,7 +523,10 @@ const ModalCreateWarehouse = (props) => {
                                         </div>
                                     }
                                     <div className='product col-4'>
-                                        <label htmlFor='input-product' className='mb-2' >Số lượng cần nhập:</label>
+                                        <label htmlFor='input-product' className='mb-2' >
+                                            {t('CreateWarehouse.tittleFour')}
+
+                                        </label>
                                         <input
                                             id='input-product'
                                             type="text"
@@ -521,7 +540,9 @@ const ModalCreateWarehouse = (props) => {
                                     {action === "Repeat" ?
 
                                         <div className='product col-2'>
-                                            <label htmlFor='input-product' className='mb-2' > Đơn vị :</label>
+                                            <label htmlFor='input-product' className='mb-2' >
+                                                {t('CreateWarehouse.tittleFive')}
+                                            </label>
 
                                             <select
                                                 readOnly
@@ -545,7 +566,10 @@ const ModalCreateWarehouse = (props) => {
                                         </div>
                                         :
                                         <div className='product col-2'>
-                                            <label htmlFor='input-product' className='mb-2' >Đơn vị:</label>
+                                            <label htmlFor='input-product' className='mb-2' >
+                                                {t('CreateWarehouse.tittleFive')}
+
+                                            </label>
                                             <select
 
                                                 className={validInput.unit ? "form-control" : "form-control is-invalid"}
@@ -567,7 +591,9 @@ const ModalCreateWarehouse = (props) => {
                                     }
                                     {action === "Repeat" ?
                                         <div className='product col-6'>
-                                            <label htmlFor='input-product' className='mb-2' >Đối tác nhập hàng :</label>
+                                            <label htmlFor='input-product' className='mb-2' >
+                                                {t('CreateWarehouse.tittleSix')}
+                                            </label>
                                             <input
                                                 id='input-product'
                                                 type="text"
@@ -581,7 +607,10 @@ const ModalCreateWarehouse = (props) => {
                                         </div>
                                         :
                                         <div className='product col-6'>
-                                            <label htmlFor='input-product' className='mb-2' >Đối tác nhập hàng :</label>
+                                            <label htmlFor='input-product' className='mb-2' >
+                                                {t('CreateWarehouse.tittleSix')}
+
+                                            </label>
                                             <input
                                                 id='input-product'
                                                 type="text"
@@ -595,7 +624,9 @@ const ModalCreateWarehouse = (props) => {
                                     }
                                     {action === "Repeat" ?
                                         <div className='product col-6'>
-                                            <label htmlFor='input-product' className='mb-2' >Địa chỉ nơi nhập:</label>
+                                            <label htmlFor='input-product' className='mb-2' >
+                                                {t('CreateWarehouse.tittleSeven')}
+                                            </label>
                                             <input
                                                 readOnly
                                                 id='input-product'
@@ -609,7 +640,9 @@ const ModalCreateWarehouse = (props) => {
                                         </div>
                                         :
                                         <div className='product col-6'>
-                                            <label htmlFor='input-product' className='mb-2' >Địa chỉ nơi nhập:</label>
+                                            <label htmlFor='input-product' className='mb-2' >
+                                                {t('CreateWarehouse.tittleSeven')}
+                                            </label>
                                             <input
                                                 id='input-product'
                                                 type="text"
@@ -623,7 +656,9 @@ const ModalCreateWarehouse = (props) => {
                                     }
                                     {action === "Repeat" ?
                                         <div className='product col-6'>
-                                            <label htmlFor='input-product' className='mb-2' >số điện thoại nhập hàng:</label>
+                                            <label htmlFor='input-product' className='mb-2' >
+                                                {t('CreateWarehouse.tittleEight')}
+                                            </label>
                                             <input
                                                 id='input-product'
                                                 type="text"
@@ -637,7 +672,9 @@ const ModalCreateWarehouse = (props) => {
                                         </div>
                                         :
                                         <div className='product col-6'>
-                                            <label htmlFor='input-product' className='mb-2' >số điện thoại nhập hàng:</label>
+                                            <label htmlFor='input-product' className='mb-2' >
+                                                {t('CreateWarehouse.tittleEight')}
+                                            </label>
                                             <input
                                                 id='input-product'
                                                 type="text"
@@ -660,7 +697,9 @@ const ModalCreateWarehouse = (props) => {
                                                     onChange={(event) => handleOnchangeImage(event.target.files)}
                                                     className="form-control"
                                                 />
-                                                <label htmlFor="previewimage" className='Update-image '>Upload Image <i className="fa fa-upload" aria-hidden="true"></i>
+                                                <label htmlFor="previewimage" className='Update-image '>
+                                                    {t('CreateWarehouse.tittleNight')}
+                                                    <i className="fa fa-upload" aria-hidden="true"></i>
                                                 </label>
 
                                             </div>
@@ -679,10 +718,10 @@ const ModalCreateWarehouse = (props) => {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={() => handleCancel()}>
-                            Close
+                            {t('CreateWarehouse.tittleTen')}
                         </Button>
                         <Button variant="primary" onClick={() => handleSubmit()}>
-                            Save Changes
+                            {t('CreateWarehouse.tittleEleven')}
                         </Button>
                     </Modal.Footer>
                 </Modal>

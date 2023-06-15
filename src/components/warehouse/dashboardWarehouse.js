@@ -1,5 +1,5 @@
 import './dashboardWarehouse.scss'
-import Sidebar from "../sidebar/sidebar staff"
+import Sidebar from "../sidebar/sidebar"
 import React, { useEffect, useState } from 'react'
 import { getWarehouseForDashboard, getAllNumberSatusProductInWarehouse, getAllNumberMoneyInWarehouse, getDataWithTimeInWarehouse } from "../services/ProjectService"
 import { UserContext } from "../../contexApi/UserContext"
@@ -10,10 +10,12 @@ import { AreaChart, Area } from 'recharts';
 import { addDays, format } from 'date-fns';
 import moment from "moment"
 import { Link, NavLink, useParams, useLocation } from "react-router-dom"
+import { useTranslation, Trans } from 'react-i18next';
 
 
 
 const DashboardWarehouse = (props) => {
+    const { t, i18n } = useTranslation();
     const { user } = React.useContext(UserContext);
     const [StartDateCalendar, setstartDateCalendar] = useState("")
     const [endDateCalendar, setendDateCalendar] = useState("")
@@ -169,11 +171,21 @@ const DashboardWarehouse = (props) => {
                 <div className='right-body my-3'>
 
                     <div class="container">
+                        <div className='location-path-dasboard-warehouse col my-3'>
+                            <Link to="/"> Home</Link>
+
+                            <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
+                            </span>
+                            <Link to="/dashboard_Warehouse">Dashboard Warehouse </Link>
+                        </div>
                         <button className='btn btn-primary btn-Back mx-3'>
                             <span>
                                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
                             </span>
-                            <Link to="/Warehouse"> Trở lại trang trước </Link>
+                            <Link to="/Warehouse">
+                                {t('DashboardWareouse.tittleOne')}
+
+                            </Link>
                         </button>
                         <div className='content'>
                             <span className='icon-charts mx-3'>
@@ -181,7 +193,7 @@ const DashboardWarehouse = (props) => {
 
                             </span>
                             <span className='name'>
-                                Warehouse Dashboard
+                                {t('DashboardWareouse.tittleTwo')}
                             </span>
                         </div>
                         <div className='container'>
@@ -192,7 +204,7 @@ const DashboardWarehouse = (props) => {
 
                                     </span>
                                     <span className='name-all'>
-                                        Thông tin chung
+                                        {t('DashboardWareouse.tittleThree')}
                                     </span>
                                 </div>
 
@@ -201,10 +213,11 @@ const DashboardWarehouse = (props) => {
                                     <div className='container'>
                                         <h5 className='mx-2'>
                                             <span className='mx-3'>
-                                                Đơn vị:
-
+                                                {t('DashboardWareouse.tittleFour')}
                                             </span>
-                                            <span style={{ color: "#7790b6" }}>sản phẩm</span>
+                                            <span style={{ color: "#7790b6" }}>
+                                                {t('DashboardWareouse.tittleFive')}
+                                            </span>
                                         </h5>
                                         <div className='row'>
                                             {allWarehouseLenght && allWarehouseLenght.length > 0
@@ -218,7 +231,9 @@ const DashboardWarehouse = (props) => {
                                                                     <i class="fa fa-battery-full" aria-hidden="true"></i>
 
                                                                 </div>
-                                                                <div className='title'>Hàng mới nhập</div>
+                                                                <div className='title'>
+                                                                    {t('DashboardWareouse.tittleSix')}
+                                                                </div>
                                                                 <div className='number' style={{ color: "green" }}>
                                                                     {item.product_statusId1 ? item.product_statusId1 : "0"}
                                                                 </div>
@@ -228,7 +243,9 @@ const DashboardWarehouse = (props) => {
                                                                     <i class="fa fa-battery-half" aria-hidden="true"></i>
 
                                                                 </div>
-                                                                <div className='title'>Hàng đang bán</div>
+                                                                <div className='title'>
+                                                                    {t('DashboardWareouse.tittleSeven')}
+                                                                </div>
                                                                 <div className='number' style={{ color: "blue" }}>
                                                                     {item.product_statusId4 ? item.product_statusId4 : "0"}
                                                                 </div>
@@ -239,7 +256,9 @@ const DashboardWarehouse = (props) => {
                                                                     <i class="fa fa-shopping-bag" aria-hidden="true"></i>
 
                                                                 </div>
-                                                                <div className='title'>Tổng mặt hàng</div>
+                                                                <div className='title'>
+                                                                    {t('DashboardWareouse.tittleEight')}
+                                                                </div>
                                                                 <div className='number'>{item.AllProduct ? item.AllProduct : "0"}</div>
 
                                                             </div>
@@ -248,7 +267,9 @@ const DashboardWarehouse = (props) => {
                                                                     <i class="fa fa-battery-empty" aria-hidden="true"></i>
 
                                                                 </div >
-                                                                <div className='title'>Hàng hết hàng</div>
+                                                                <div className='title'>
+                                                                    {t('DashboardWareouse.tittleNight')}
+                                                                </div>
                                                                 <div className='number' style={{ color: "red" }}>
                                                                     {item.product_statusId2 ? item.product_statusId2 : "0"}
                                                                 </div>
@@ -260,7 +281,9 @@ const DashboardWarehouse = (props) => {
                                                                     <i class="fa fa-trash" aria-hidden="true"></i>
 
                                                                 </div>
-                                                                <div className='title'> Hàng đã hủy</div>
+                                                                <div className='title'>
+                                                                    {t('DashboardWareouse.tittleTen')}
+                                                                </div>
                                                                 <div className='number' style={{ color: "orange" }}>{item.product_statusId3 ? item.product_statusId3 : "0"}</div>
 
                                                             </div>
@@ -296,7 +319,6 @@ const DashboardWarehouse = (props) => {
                                             <Bar dataKey="Hàng_mới_nhập" fill="green" />
                                             <Bar dataKey="Hàng_đang_bán" fill="blue" />
                                             <Bar dataKey="Hàng_đã_hết" fill="red" />
-                                            <Bar dataKey="Hàng_đã_hủy" fill="orange" />
 
                                         </BarChart>
                                     </ResponsiveContainer>
@@ -307,7 +329,9 @@ const DashboardWarehouse = (props) => {
                             <div className='container '>
                                 <div className='row d-flex justify-content-between'>
                                     <div className='max-value col-3'>
-                                        <div className='header'>Sản phẩm nhập nhiều nhất</div>
+                                        <div className='header'>
+                                            {t('DashboardWareouse.tittleTwele')}
+                                        </div>
 
 
                                         <div className='value-title'>
@@ -323,7 +347,9 @@ const DashboardWarehouse = (props) => {
 
 
                                     <div className='max-value-Suppliers col-3 '>
-                                        <div className='header'>Đối tác cung ứng nhiều nhất</div>
+                                        <div className='header'>
+                                            {t('DashboardWareouse.tittleThirteen')}
+                                        </div>
 
 
                                         <div className='value-title'>{MaxkeysOne ? MaxkeysOne : 0}</div>
@@ -332,7 +358,9 @@ const DashboardWarehouse = (props) => {
 
 
                                     <div className='max-money col-3'>
-                                        <div className='header'>Tổng số tiền nhập hàng</div>
+                                        <div className='header'>
+                                            {t('DashboardWareouse.tittleFourteen')}
+                                        </div>
                                         <div className='value-number '>
                                             <span className='one'>{totalMoney ? totalMoney : 0}</span>
                                             <span className='Two'>/vnd</span>
@@ -348,8 +376,15 @@ const DashboardWarehouse = (props) => {
                         <div className='time'>
                             <div className='container'>
                                 <div className='header-time'>
-                                    <span>Thống kê chi tiết xuất nhập hàng  theo thời gian (<span className='sub'>đơn vị : lượt</span>)</span>
-                                    <span className='sub'>Tính từ ngày {StartDateCalendar ? StartDateCalendar : 0} đến ngày {endDateCalendar ? endDateCalendar : 0}</span>
+                                    <span>
+                                        {t('DashboardWareouse.tittleFifteen')}
+                                        (<span className='sub'>
+                                            {t('DashboardWareouse.tittleFour')}
+                                            : lượt</span>)</span>
+                                    <span className='sub'>
+                                        {t('DashboardWareouse.tittleSixteen')}
+                                        <b>{StartDateCalendar ? StartDateCalendar : 0}</b>  {t('DashboardWareouse.tittleSeventeen')}
+                                        <b>{endDateCalendar ? endDateCalendar : 0}</b> </span>
                                 </div>
                                 <div className='row'>
                                     <div className='col-3'>

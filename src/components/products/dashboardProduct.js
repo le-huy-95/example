@@ -1,5 +1,5 @@
 import './dashboardProduct.scss'
-import SidebarStaff from "../sidebar/sidebar staff"
+import Sidebar from "../sidebar/sidebar"
 import React, { useEffect, useState } from 'react'
 import { getDataDashboardProduct, getDataDashboardProductWithAge, getDataDashboardProductWithTimeInWarehouse, getDataDashboardProductWithMounth, getDataDashboardProductWithUser } from "../services/ProjectService"
 import { UserContext } from "../../contexApi/UserContext"
@@ -23,6 +23,7 @@ import {
     PieChart,
     Pie,
 } from 'recharts';
+import { useTranslation, Trans } from 'react-i18next';
 
 const style = {
     top: '50%',
@@ -32,6 +33,7 @@ const style = {
 };
 const DashboardProduct = (props) => {
     const { user } = React.useContext(UserContext);
+    const { t, i18n } = useTranslation();
 
     const [collapsed, setCollapsed] = useState(false)
     const [dataOne, setDataOne] = useState([])
@@ -171,7 +173,7 @@ const DashboardProduct = (props) => {
     return (
         <div className='dashboard_Product-container'>
             <div className='left  '>
-                <SidebarStaff collapsed={collapsed} />
+                <Sidebar collapsed={collapsed} />
 
             </div>
             <div className='right  '>
@@ -187,16 +189,27 @@ const DashboardProduct = (props) => {
                 </div>
                 <div className='right-body my-3'>
                     <div className='container'>
+                        <div className='location-path-dasboard-Product col my-3'>
+                            <Link to="/"> Home</Link>
+
+                            <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
+                            </span>
+                            <Link to="/dashboard_Product">Dashboard Product </Link>
+                        </div>
                         <button className='btn btn-primary btn-Back mx-3 my-5'>
                             <span>
                                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
                             </span>
-                            <Link to="/Products"> Trở lại trang trước </Link>
-                        </button>                        <div className='first-charts'>
+                            <Link to="/Products">
+                                {t('DashboardProduct.tittleOne')}
+                            </Link>
+                        </button>
+                        <div className='first-charts'>
                             <div className='tittle'>
-                                <div className='contnet'> Thống kế số lượng đặt hàng   <span> (đơn vị :đơn)</span>
+                                <div className='contnet'>  {t('DashboardProduct.tittleTwo')}
+                                    <span> {t('DashboardProduct.tittleNightteen')}</span>
                                     <br />
-                                    <div>từ <b>{StartDateCalendar}</b>  đến <b>{endDateCalendar}</b></div>
+                                    <div>{t('DashboardProduct.tittleThree')} <b>{StartDateCalendar}</b>  {t('DashboardProduct.tittleFour')} <b>{endDateCalendar}</b></div>
 
                                 </div>
                             </div>
@@ -225,7 +238,10 @@ const DashboardProduct = (props) => {
                             </div>
                         </div>
                         <div className='second-charts my-5'>
-                            <div className='tittle'>Thống kê cả năm (đơn vị : đơn)</div>
+                            <div className='tittle'>
+                                {t('DashboardProduct.tittleFive')}
+                                {t('DashboardProduct.tittleNightteen')}
+                            </div>
                             <div style={{ width: '100%', height: 300 }}>
                                 <ResponsiveContainer width="100%" height="100%">
                                     <AreaChart
@@ -254,7 +270,9 @@ const DashboardProduct = (props) => {
                                 <div className='item col-3' >
                                     <div className='left-item my-5'>
                                         <span className='number'>{dataOne.all_product}</span>
-                                        <span className='text'>Đã bán</span>
+                                        <span className='text'>
+                                            {t('DashboardProduct.tittleSix')}
+                                        </span>
                                     </div>
                                     <div className='right-item my-5'>
                                         <span>
@@ -267,7 +285,9 @@ const DashboardProduct = (props) => {
                                 <div className='item_one col-3' >
                                     <div className='left-item my-5'>
                                         <span className='number'>{dataOne.allUser}</span>
-                                        <span className='text'>Người mua hàng</span>
+                                        <span className='text'>
+                                            {t('DashboardProduct.tittleSeven')}
+                                        </span>
                                     </div>
                                     <div className='right-item my-5'>
                                         <span>
@@ -280,7 +300,9 @@ const DashboardProduct = (props) => {
                                 <div className='item_two col-3' >
                                     <div className='left-item my-5'>
                                         <span className='number'>{dataOne.total} vnd</span>
-                                        <span className='text'> Đã thu được </span>
+                                        <span className='text'>
+                                            {t('DashboardProduct.tittleEight')}
+                                        </span>
                                     </div>
                                     <div className='right-item my-5'>
                                         <span>
@@ -298,7 +320,9 @@ const DashboardProduct = (props) => {
                                 <div className='item_three col-3' >
                                     <div className='left-item my-5'>
                                         <span className='number'>{dataOne.best_seller}</span>
-                                        <span className='text'> S/p bán chạy</span>
+                                        <span className='text'>
+                                            {t('DashboardProduct.tittleNight')}
+                                        </span>
                                     </div>
                                     <div className='right-item my-5'>
                                         <span>
@@ -311,7 +335,9 @@ const DashboardProduct = (props) => {
                                 <div className=' item_four col-3' >
                                     <div className='left-item my-5'>
                                         <span className='number'>{dataOne.done_Product}</span>
-                                        <span className='text'>Đơn thành công</span>
+                                        <span className='text'>
+                                            {t('DashboardProduct.tittleTen')}
+                                        </span>
                                     </div>
                                     <div className='right-item my-5'>
                                         <span>
@@ -324,7 +350,9 @@ const DashboardProduct = (props) => {
                                 <div className='item_five col-3' >
                                     <div className='left-item my-5'>
                                         <span className='number'>{dataOne.cancel_Status}</span>
-                                        <span className='text'>Đơn bị hủy </span>
+                                        <span className='text'>
+                                            {t('DashboardProduct.tittleTwele')}
+                                        </span>
                                     </div>
                                     <div className='right-item my-5'>
                                         <span>
@@ -344,8 +372,10 @@ const DashboardProduct = (props) => {
 
                         </div>
                         <div className='row'>
-                            <div className="Fourth-charts my-5 col-6 mx-3">
-                                <div className='name my-3'>Thống kê độ tuổi khách hàng</div>
+                            <div className="Fourth-charts my-5 col-12 mx-3">
+                                <div className='name my-3'>
+                                    {t('DashboardProduct.tittleThirteen')}
+                                </div>
                                 <div className='row'>
                                     <div className='col-7'>
                                         <div style={{ width: '100%', height: 300 }} >
@@ -358,22 +388,36 @@ const DashboardProduct = (props) => {
                                     </div>
 
                                     <div className='col-5'>
-                                        <span style={{ fontSize: "20px" }}> Dưới 18 :</span>  <b style={{ fontSize: "20px" }}>{dataAge.under_18}</b> <b>%</b>
+                                        <span style={{ fontSize: "20px" }}>
+                                            {t('DashboardProduct.tittleFourteen')}
+                                        </span>
+                                        <b style={{ fontSize: "20px" }}>{dataAge.under_18}</b> <b>%</b>
                                         <hr />
-                                        <span style={{ fontSize: "20px" }}>Từ 18 đến dưới 30:</span> <b style={{ fontSize: "20px" }}>{dataAge.From18AgeTo30Age}</b> <b>%</b>
+                                        <span style={{ fontSize: "20px" }}>
+                                            {t('DashboardProduct.tittleFifteen')}
+
+                                        </span>
+                                        <b style={{ fontSize: "20px" }}>{dataAge.From18AgeTo30Age}</b> <b>%</b>
                                         <hr />
-                                        <span style={{ fontSize: "20px" }}>Từ 30 đến dưới 50:</span> <b style={{ fontSize: "20px" }}>{dataAge.From30AgeTo50Age}</b> <b>%</b>
+                                        <span style={{ fontSize: "20px" }}>
+                                            {t('DashboardProduct.tittleSixteen')}
+                                        </span>
+                                        <b style={{ fontSize: "20px" }}>{dataAge.From30AgeTo50Age}</b> <b>%</b>
                                         <hr />
-                                        <span style={{ fontSize: "20px" }}>Trên 50:</span> <b style={{ fontSize: "20px" }}>{dataAge.over50age}</b> <b>%</b>
+                                        <span style={{ fontSize: "20px" }}>
+                                            {t('DashboardProduct.tittleSeventeen')}
+
+                                        </span>
+                                        <b style={{ fontSize: "20px" }}>{dataAge.over50age}</b> <b>%</b>
 
                                     </div>
                                 </div>
 
 
                             </div>
-                            <div className="Five-charts my-5 col-5 mx-3">
+                            <div className="Five-charts my-5 col-12 mx-3">
                                 <div className='name my-3'>
-                                    Chi tiết Số điện thoại mua hàng
+                                    {t('DashboardProduct.tittleEightteen')}
                                 </div>
                                 <div className='container'>
                                     {dataUser && dataUser.length > 0 &&

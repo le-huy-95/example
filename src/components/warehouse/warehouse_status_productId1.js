@@ -14,8 +14,10 @@ import moment from "moment"
 import _, { assign, debounce } from "lodash"
 import { Bars } from 'react-loader-spinner'
 import { toast } from 'react-toastify';
+import { useTranslation, Trans } from 'react-i18next';
 
 const Warehouse_status_productId1 = (props) => {
+    const { t, i18n } = useTranslation();
 
     let history = useHistory()
     const { user } = React.useContext(UserContext);
@@ -272,13 +274,18 @@ const Warehouse_status_productId1 = (props) => {
                                 <div className="container">
                                     <div className='name-page'>
                                         <div>
-                                            <h4> Warehouse </h4>
+                                            <h4>
+                                                {t('Warehouse.tittle')}
+                                            </h4>
                                             <Link to="/dashboard_Warehouse">
                                                 <button className='btn btn-warning' style={{ fontSize: "20px" }}>
                                                     <span >
                                                         <i class="fa fa-line-chart" aria-hidden="true"></i>
                                                     </span>
-                                                    <span className='mx-3'>Xem bảng thống kê</span>
+                                                    <span className='mx-3'>
+                                                        {t('Warehouse.tittleOne')}
+
+                                                    </span>
                                                 </button>
                                             </Link>
                                         </div>
@@ -286,16 +293,16 @@ const Warehouse_status_productId1 = (props) => {
 
                                             <button className='btn btn-success' onClick={() => handleRefesh()} >
                                                 <i class="fa fa-refresh" aria-hidden="true"></i>
-                                                Refesh
+                                                {t('Warehouse.tittleTwo')}
 
                                             </button>
                                             <button className='btn btn-warning' onClick={() => handleExportData()} >
                                                 <i class="fa fa-cloud-download" aria-hidden="true"></i>
-                                                Export file
+                                                {t('Warehouse.tittleThree')}
                                             </button>
                                             <button className='btn btn-primary' onClick={() => handleShowhideModalCreateWarehouse()}>
                                                 <i className="fa fa-plus-circle" aria-hidden="true"></i>
-                                                Create goods
+                                                {t('Warehouse.tittleFour')}
                                             </button>
                                         </div>
 
@@ -304,7 +311,7 @@ const Warehouse_status_productId1 = (props) => {
                                         <div className='container'>
                                             <div className='infomation-goods my-3'>
                                                 <div className=' name d-flex align-item-center justify-content-center my-3'>
-                                                    Thông tin chung
+                                                    {t('Warehouse.informationTittle')}
                                                 </div>
                                                 <div className='item-goods'>
                                                     <div className='container'>
@@ -316,11 +323,13 @@ const Warehouse_status_productId1 = (props) => {
                                                                         <div className="item col-2">
                                                                             <h3>{item.AllProduct ? item.AllProduct : "0"}</h3>
                                                                             <div className='content mb-3' style={{ fontWeight: "700" }}>
-                                                                                Tổng sản phẩm
+                                                                                {t('Warehouse.informationTittleOne')}
 
                                                                             </div>
                                                                             <Link to="/Warehouse" className='d-flex justify-content-center'>
-                                                                                <button className='btn btn-primary' style={{ cursor: 'pointer' }} >xem chi tiết </button>
+                                                                                <button className='btn btn-primary' style={{ cursor: 'pointer' }} >
+                                                                                    {t('Warehouse.ViewDetail')}
+                                                                                </button>
 
 
                                                                             </Link>
@@ -328,13 +337,16 @@ const Warehouse_status_productId1 = (props) => {
                                                                         <div className="item col-2">
                                                                             <h3>{item.product_statusId4 ? item.product_statusId4 : "0"}</h3>
                                                                             <div className='content mb-3' style={{ fontWeight: "700" }}>
-                                                                                Đang bán
+                                                                                {t('Warehouse.informationTittleTwo')}
 
                                                                             </div>
 
                                                                             <Link to="/Warehouse_status_productId4" className='d-flex justify-content-center'>
 
-                                                                                <button className='btn btn-primary'  >xem chi tiết</button>
+                                                                                <button className='btn btn-primary'  >
+                                                                                    {t('Warehouse.ViewDetail')}
+
+                                                                                </button>
 
 
                                                                             </Link>
@@ -346,11 +358,13 @@ const Warehouse_status_productId1 = (props) => {
                                                                         <div className="item col-2">
                                                                             <h3>{item.product_statusId3 ? item.product_statusId3 : "0"}</h3>
                                                                             <div className='content mb-3' style={{ fontWeight: "700" }}>
-                                                                                Bị hủy
+                                                                                {t('Warehouse.informationTittleThree')}
                                                                             </div>
                                                                             <Link to="/Warehouse_status_productId3" className='d-flex justify-content-center'>
 
-                                                                                <button className='btn btn-primary' >xem chi tiết   </button>
+                                                                                <button className='btn btn-primary' >
+                                                                                    {t('Warehouse.ViewDetail')}
+                                                                                </button>
 
                                                                             </Link>
 
@@ -359,11 +373,13 @@ const Warehouse_status_productId1 = (props) => {
                                                                         <div className="item col-2">
                                                                             <h3>{item.product_statusId1 ? item.product_statusId1 : "0"}</h3>
                                                                             <div className='content mb-3' style={{ fontWeight: "700" }}>
-                                                                                Mới nhập
+                                                                                {t('Warehouse.informationTittleFour')}
                                                                             </div>
                                                                             <Link to="/Warehouse_status_productId1" className='d-flex justify-content-center'>
 
-                                                                                <button className='btn btn-primary' style={{ cursor: "no-drop", opacity: "0.5" }} >xem chi tiết</button>
+                                                                                <button className='btn btn-primary' style={{ cursor: "no-drop", opacity: "0.5" }} >
+                                                                                    {t('Warehouse.ViewDetail')}
+                                                                                </button>
 
                                                                             </Link>
 
@@ -371,11 +387,13 @@ const Warehouse_status_productId1 = (props) => {
                                                                         <div className="item col-2">
                                                                             <h3>{item.product_statusId2 ? item.product_statusId2 : "0"}</h3>
                                                                             <div className='content mb-3' style={{ fontWeight: "700" }}>
-                                                                                Hết hàng
+                                                                                {t('Warehouse.informationTittleFive')}
                                                                             </div>
                                                                             <Link to="/Warehouse_status_productId2" className='d-flex justify-content-center'>
 
-                                                                                <button className='btn btn-primary' >xem chi tiết   </button>
+                                                                                <button className='btn btn-primary' >
+                                                                                    {t('Warehouse.ViewDetail')}
+                                                                                </button>
 
                                                                             </Link>
 
@@ -402,19 +420,27 @@ const Warehouse_status_productId1 = (props) => {
                                                 <div className='my-2 d-flex align-item-center gap-3'>
                                                     <div className='my-2 d-flex align-item-center gap-2'>
                                                         <div style={{ backgroundColor: "blueviolet", width: "30px", height: "30px", borderRadius: "50%" }}></div>
-                                                        <div style={{ fontSize: "20px", fontWeight: "700" }}>Mới nhập</div>
+                                                        <div style={{ fontSize: "20px", fontWeight: "700" }}>
+                                                            {t('Warehouse.tableTittleOne')}
+                                                        </div>
                                                     </div>
                                                     <div className='my-2 d-flex align-item-center gap-2'>
                                                         <div style={{ backgroundColor: "violet", width: "30px", height: "30px", borderRadius: "50%" }}></div>
-                                                        <div style={{ fontSize: "20px", fontWeight: "700" }}>Hết hàng</div>
+                                                        <div style={{ fontSize: "20px", fontWeight: "700" }}>
+                                                            {t('Warehouse.tableTittleTwo')}
+                                                        </div>
                                                     </div>
                                                     <div className='my-2 d-flex align-item-center gap-2'>
                                                         <div style={{ backgroundColor: "red", width: "30px", height: "30px", borderRadius: "50%" }}></div>
-                                                        <div style={{ fontSize: "20px", fontWeight: "700" }}>Đã hủy</div>
+                                                        <div style={{ fontSize: "20px", fontWeight: "700" }}>
+                                                            {t('Warehouse.tableTittleThree')}
+                                                        </div>
                                                     </div>
                                                     <div className='my-2 d-flex align-item-center gap-2'>
                                                         <div style={{ backgroundColor: "green", width: "30px", height: "30px", borderRadius: "50%" }}></div>
-                                                        <div style={{ fontSize: "20px", fontWeight: "700" }}>Đang bán</div>
+                                                        <div style={{ fontSize: "20px", fontWeight: "700" }}>
+                                                            {t('Warehouse.tableTittleFour')}
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -447,16 +473,28 @@ const Warehouse_status_productId1 = (props) => {
                                                 }
                                             </div>
 
-                                            <table class="table  table-hover my-3">
+                                            <table class="table table-bordered  table-hover my-3">
                                                 <thead className='table-success' >
                                                     <tr>
-                                                        <th scope="col">No</th>
-                                                        <th scope="col">Id</th>
-                                                        <th scope="col" style={{ width: "100px" }}>Image</th>
+                                                        <th scope="col">
+                                                            {t('Warehouse.tableBodyOne')}
+
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse.tableBodyTwo')}
+
+                                                        </th>
+                                                        <th scope="col" style={{ width: "100px" }}>
+                                                            {t('Warehouse.tableBodyImage')}
+
+                                                        </th>
                                                         <th style={{ width: "150px" }}>
                                                             {sortProduct === true ?
                                                                 <span>
-                                                                    <span>Product</span>
+                                                                    <span>
+                                                                        {t('Warehouse.tableBodyThree')}
+
+                                                                    </span>
                                                                     <span style={{ paddingLeft: "10px", cursor: "pointer" }}
                                                                     >
                                                                         <span onClick={() =>
@@ -469,7 +507,10 @@ const Warehouse_status_productId1 = (props) => {
                                                                 </span>
                                                                 :
                                                                 <span>
-                                                                    <span>Product</span>
+                                                                    <span>
+                                                                        {t('Warehouse.tableBodyThree')}
+
+                                                                    </span>
                                                                     <span style={{ paddingLeft: "10px", cursor: "pointer" }}
                                                                     >
                                                                         <span onClick={() =>
@@ -482,16 +523,40 @@ const Warehouse_status_productId1 = (props) => {
                                                                 </span>
                                                             }
                                                         </th>
-                                                        <th scope="col">Product status</th>
-                                                        <th scope="col">Product Prince (vnd)</th>
-                                                        <th scope="col">Number </th>
-                                                        <th scope="col">Suppliers </th>
-                                                        <th scope="col">Suppliers address</th>
-                                                        <th scope="col">Suppliers phone</th>
-                                                        <th>
+
+                                                        <th scope="col">
+                                                            {t('Warehouse.tableBodyFour')}
+
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse.tableBodyFive')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse.tableBodySix')}
+
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse.tableBodySeven')}
+
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse.tableBodyEight')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse.tableBodyNight')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse.tableBodyTen')}
+
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse.tableBodyEleven')}
+
+                                                        </th>
+                                                        <th style={{ width: "150px" }} >
                                                             {sorttime === true ?
                                                                 <span>
-                                                                    Created at
+                                                                    {t('Warehouse.tableBodyTwelve')}
                                                                     <span style={{ paddingLeft: "10px", cursor: "pointer" }}
                                                                     >
                                                                         <span onClick={() =>
@@ -504,7 +569,7 @@ const Warehouse_status_productId1 = (props) => {
                                                                 </span>
                                                                 :
                                                                 <span>
-                                                                    Created at
+                                                                    {t('Warehouse.tableBodyTwelve')}
                                                                     <span style={{ paddingLeft: "10px", cursor: "pointer" }}
                                                                     >
                                                                         <span onClick={() =>
@@ -516,7 +581,10 @@ const Warehouse_status_productId1 = (props) => {
                                                                     </span>
                                                                 </span>
                                                             }
-                                                        </th>                                                        <th scope="col"> Action</th>
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse.tableBodyThirteen')}
+                                                        </th>
 
 
                                                     </tr>
@@ -534,7 +602,7 @@ const Warehouse_status_productId1 = (props) => {
                                                                         <td scope="row">{(currentPage - 1) * currentLimit + index + 1}</td>
                                                                         <td scope="row" >{item.id}</td>
                                                                         <td scope="row" onClick={() => handleClickImage("http://localhost:3030/image/" + item.image)} style={{ cursor: "pointer", width: "70px", height: "70px" }}>
-                                                                            <img style={{ width: "100%", height: "100%" }} src={"http://localhost:3030/image/" + item.image} alt="" />
+                                                                            <img style={{ borderRadius: "50%", width: "100%", height: "100%" }} src={"http://localhost:3030/image/" + item.image} alt="" />
                                                                         </td>
                                                                         <td>{item?.product}</td>
                                                                         {item?.Product_status?.status === "mới nhập" &&
@@ -557,7 +625,7 @@ const Warehouse_status_productId1 = (props) => {
                                                                                 }
                                                                             </td>
                                                                         }
-                                                                        {item?.Product_status?.status === "Đã hủy" &&
+                                                                        {item?.Product_status?.status === "đã hủy" &&
                                                                             <td style={{ color: "red", fontWeight: "800" }}>
                                                                                 {item?.Product_status?.status
                                                                                     ?
@@ -568,7 +636,7 @@ const Warehouse_status_productId1 = (props) => {
                                                                                 }
                                                                             </td>
                                                                         }
-                                                                        {item?.Product_status?.status === "Đang bán" &&
+                                                                        {item?.Product_status?.status === "đang bán" &&
                                                                             <td style={{ color: "green", fontWeight: "800" }}>
                                                                                 {item?.Product_status?.status
                                                                                     ?
@@ -578,13 +646,28 @@ const Warehouse_status_productId1 = (props) => {
                                                                                 }
                                                                             </td>
                                                                         }
-                                                                        <td>
+                                                                        {!item?.Product_status?.status &&
+                                                                            <td >
+                                                                                {item?.Product_status?.status
+                                                                                    ?
+                                                                                    <div style={{ backgroundColor: "green", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                    :
+                                                                                    "Đang xử lý"
+                                                                                }
+                                                                            </td>
+                                                                        }
+                                                                        <td >
                                                                             <div className='d-flex'>
                                                                                 <span style={{ fontSize: "20px" }}> {item?.product_cost}</span>
                                                                                 <span style={{ color: "#7790b6", fontSize: "15px" }} className='mx-1'> /products</span>
                                                                             </div>
+
                                                                         </td>
+                                                                        <td>{item?.unitMoney}</td>
+
                                                                         <td>{item?.product_number}</td>
+                                                                        <td>{item?.unit}</td>
+
                                                                         <td>{item?.Suppliers}</td>
                                                                         <td style={{ overflowWrap: "anywhere" }}>{item?.Suppliers_address}</td>
                                                                         <td>{item?.Suppliers_phone}</td>
@@ -743,7 +826,7 @@ const Warehouse_status_productId1 = (props) => {
                                                                                 }
                                                                             </td>
                                                                         }
-                                                                        {item?.Product_status?.status === "Đã hủy" &&
+                                                                        {item?.Product_status?.status === "đã hủy" &&
                                                                             <td style={{ color: "red", fontWeight: "800" }}>
                                                                                 {item?.Product_status?.status
                                                                                     ?
@@ -754,7 +837,7 @@ const Warehouse_status_productId1 = (props) => {
                                                                                 }
                                                                             </td>
                                                                         }
-                                                                        {item?.Product_status?.status === "Đang bán" &&
+                                                                        {item?.Product_status?.status === "đang bán" &&
                                                                             <td style={{ color: "green", fontWeight: "800" }}>
                                                                                 {item?.Product_status?.status
                                                                                     ?
@@ -764,7 +847,7 @@ const Warehouse_status_productId1 = (props) => {
                                                                                 }
                                                                             </td>
                                                                         }
-                                                                        <td>
+                                                                        <td >
                                                                             <div className='d-flex'>
                                                                                 <span style={{ fontSize: "20px" }}> {item?.product_cost}</span>
                                                                                 <span style={{ color: "#7790b6", fontSize: "15px" }} className='mx-1'> /products</span>

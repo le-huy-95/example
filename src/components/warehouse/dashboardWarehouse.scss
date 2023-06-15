@@ -37,6 +37,28 @@
         }
 
         .right-body {
+            .location-path-dasboard-warehouse {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+
+                a {
+                    color: #7790b6;
+                    text-decoration: none;
+
+                    &:hover {
+                        color: #292d2e !important;
+                    }
+
+                }
+
+                span {
+                    color: #7790b6;
+                    font-size: 15px;
+
+                }
+            }
+
             .btn-Back {
                 display: flex;
                 align-items: center;
