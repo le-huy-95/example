@@ -72,7 +72,6 @@ const DetailProduct = (props) => {
             SetProduct(data)
         }
     }
-
     const getNumberProduct = async (id) => {
         if (id !== "sản phẩm") {
             let res = await getNumberProductinWarehouse(+id)
@@ -84,7 +83,6 @@ const DetailProduct = (props) => {
         }
 
     }
-
     const handleChangeStatusEditChat = (item) => {
         setChangeStatusChatProject(!changeStatusChatProject)
         setdataChatProduct(item)
@@ -94,18 +92,14 @@ const DetailProduct = (props) => {
 
         setChangeStatusChatProject(!changeStatusChatProject)
     }
-
-
     const handleShowDeleteModal = () => {
         setShowDeleteProduct(!showDeleteProduct)
     }
-
     let dataUpdateChat = {
         id: dataChatProduct.id,
         projectId: dataChatProduct.projectId,
         text: chatEditContent
     }
-
     const handlUpdateChatProject = async () => {
         if (dataUpdateChat.text.length > 0) {
             let res = await updateProjectChat(dataUpdateChat)
@@ -132,8 +126,6 @@ const DetailProduct = (props) => {
             toast.error(res.EM)
         }
     }
-
-
     const getAllSaleChannel = async () => {
         let res = await getSaleChannel()
         if (res && +res.EC === 0) {
@@ -143,7 +135,6 @@ const DetailProduct = (props) => {
             toast.error(res.EM)
         }
     }
-
     const getAllStastusPayment = async () => {
         let res = await getStastusPayment()
         if (res && +res.EC === 0) {
@@ -153,7 +144,6 @@ const DetailProduct = (props) => {
             toast.error(res.EM)
         }
     }
-
     const getProvinceCustomer = async () => {
         let res = await getAllProvinceCustomer()
         if (res && +res.EC === 0) {
@@ -172,7 +162,6 @@ const DetailProduct = (props) => {
             toast.error(res.EM)
         }
     }
-
     const getImagebyUser = async () => {
         let res = await fetchImagebyUser(user.account.email)
         if (res && +res.EC === 0) {
@@ -195,7 +184,6 @@ const DetailProduct = (props) => {
         chatContent: chatContent,
         CreatedByName: user.account.username
 
-
     }
     const createChat = async () => {
         if (dataChat && !dataChat.chatContent) {
@@ -213,8 +201,6 @@ const DetailProduct = (props) => {
         }
 
     }
-
-
     const handleSelectProvince = (value) => {
         if (value > 0) {
             setStatusProvince(true)
@@ -229,7 +215,6 @@ const DetailProduct = (props) => {
         }
 
     }
-
     const handleSelectProvinceCustomer = (value) => {
         if (value > 0) {
             setStatusProvinceCustomer(true)
@@ -246,7 +231,6 @@ const DetailProduct = (props) => {
         }
 
     }
-
     const handleSelectDistrict = (value) => {
         if (value > 0) {
             setStatusDistrict(true)
@@ -261,7 +245,6 @@ const DetailProduct = (props) => {
             setStatusWard(true)
         }
     }
-
     const handleSelectDistrictCustomer = (value) => {
         if (value > 0) {
 
@@ -284,12 +267,8 @@ const DetailProduct = (props) => {
 
         } else {
             setStatusWardCustomer(false)
-
-
         }
     }
-
-
     const handleSelectWard = (value) => {
         if (value > 0) {
             setStatusWard(true)
@@ -297,8 +276,6 @@ const DetailProduct = (props) => {
             setStatusWard(false)
         }
     }
-
-
     const handleRefeshPage = async () => {
         handleDeleteActionThree()
         handleDeleteActionFour()
@@ -318,8 +295,6 @@ const DetailProduct = (props) => {
             toast.error(res.EM)
         }
     }
-
-
     const handleOnchangeProviceCustomer = async (value) => {
         if (value) {
             let res = await fetchDistrictCustomerByProvinceCustomer(value)
@@ -339,7 +314,6 @@ const DetailProduct = (props) => {
             }
         }
     }
-
     const handleOnchangeDistrictCustomer = async (value) => {
         if (value) {
             let res = await fetchWarCustomerdByDistrictCustomer(value)
@@ -358,10 +332,6 @@ const DetailProduct = (props) => {
             }
         }
     }
-
-
-
-
     const handleOnchangeInput = async (value, name) => {
         let _projects = _.cloneDeep(projects)
         _projects[name] = value
@@ -388,8 +358,6 @@ const DetailProduct = (props) => {
         setProjects(_projects)
 
     }
-
-
     const handleUpdateImage = async () => {
         if (previewsImage.length > 0) {
             toast.error("please save image create")
@@ -423,10 +391,6 @@ const DetailProduct = (props) => {
 
         }
     }
-
-
-
-
     const handleUpdateProject = async () => {
         const re = /^[0-9\b]+$/;
         if (!projects.quantity) {
@@ -591,7 +555,6 @@ const DetailProduct = (props) => {
 
 
     }
-
     const handleDeleteImageAdd = (link) => {
 
 
@@ -611,7 +574,6 @@ const DetailProduct = (props) => {
         setPreviewsImage(result)
 
     }
-
     const handleOnchangeImage = async (value) => {
 
         setimage(value)
@@ -669,7 +631,6 @@ const DetailProduct = (props) => {
             console.log("aaa")
         }
     }
-
     const handleDeleteImage = (image) => {
 
         setStatusDeleteImage(true)
@@ -681,13 +642,11 @@ const DetailProduct = (props) => {
     const handleEditActionThree = async () => {
         setActionModalThree("3")
     }
-
     const handleEditActionFour = () => {
         setActionModalFour("4")
     }
     const handleEditActionFive = () => {
         setActionModalFive("5")
-
     }
     const handleEditActionSix = async () => {
         setActionModalSix("6")
@@ -701,7 +660,6 @@ const DetailProduct = (props) => {
         await handleOnchangeProvice(projects.Address_provinceId)
         await handleOnchangeDistrict(projects.Address_DistrictId)
     }
-
     const handleDeleteActionThree = () => {
         setActionModalThree("")
         setProjects(projectsDefaut)
@@ -731,18 +689,10 @@ const DetailProduct = (props) => {
         setStatusWard(true)
         setProjects(projectsDefaut)
     }
-
     useEffect(() => {
         getProjects()
         getImagebyUser()
     }, [ProductId])
-
-
-
-
-
-
-
     useEffect(() => {
         getAllStastusPayment()
         getnameProduct()
