@@ -1055,6 +1055,7 @@ const Products = (props) => {
                                                                         </td>
 
                                                                     }
+
                                                                     <td scope="row">{(currentPage - 1) * currentLimit + index + 1}</td>
 
                                                                     <td scope="row">{item.order}

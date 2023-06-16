@@ -9,10 +9,12 @@ import { NotificationContext } from "../contexApi/NotificationContext"
 
 import moment from "moment"
 import { toast } from 'react-toastify';
+import { useTranslation, Trans } from 'react-i18next';
 
 
 const ModalViewNotification = (props) => {
     let history = useHistory()
+    const { t, i18n } = useTranslation();
 
     const { show, handleShowNotificationModal } = props
     const { user } = React.useContext(UserContext);
@@ -173,18 +175,26 @@ const ModalViewNotification = (props) => {
 
                 <div className='notification-Container'>
                     <div className='container'>
-                        <div className='title mb-3'> Thông báo ({user?.account?.groupWithRound?.name === "Customer" ? list.length : listStaff.length})</div>
+                        <div className='title mb-3'>  {t('Notifications.Three')} ({user?.account?.groupWithRound?.name === "Customer" ? list.length : listStaff.length})</div>
                         {showStatusNoSee === false ?
                             <div className='button mb-3'>
-                                <span className='item-One' style={{ backgroundColor: "aqua" }}>Tất cả</span>
+                                <span className='item-One' style={{ backgroundColor: "aqua" }}>
+                                    {t('Notifications.One')}
+                                </span>
 
-                                <span className='item-Two' onClick={() => setShowStatusNoSee(true)}>Chưa đọc</span>
+                                <span className='item-Two' onClick={() => setShowStatusNoSee(true)}>
+                                    {t('Notifications.Two')}
+                                </span>
                             </div>
                             :
                             <div className='button mb-3'>
-                                <span className='item-One' onClick={() => setShowStatusNoSee(false)} >Tất cả</span>
+                                <span className='item-One' onClick={() => setShowStatusNoSee(false)} >
+                                    {t('Notifications.One')}
+                                </span>
 
-                                <span className='item-Two' style={{ backgroundColor: "aqua" }} >Chưa đọc</span>
+                                <span className='item-Two' style={{ backgroundColor: "aqua" }} >
+                                    {t('Notifications.Two')}
+                                </span>
                             </div>
                         }
 
@@ -204,7 +214,8 @@ const ModalViewNotification = (props) => {
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
 
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đang đi lấy đơn hàng <b>{item.Order}</b></span>
+                                                                    </span>}
+                                                                        {t('Notifications.Customer.One')} <b>{item.ChangeBy}</b> {t('Notifications.Customer.Two')} <b>{item.Order}</b></span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -219,7 +230,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'> {+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã lấy đơn hàng <b>{item.Order}</b> thành công</span>
+                                                                    </span>}{t('Notifications.Customer.One')} <b>{item.ChangeBy}</b> {t('Notifications.Customer.twentyOne')}  <b>{item.Order}</b> {t('Notifications.Customer.twentyTwo')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -235,7 +246,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Delay lấy hàng đơn hàng <b>{item.Order}</b> </span>
+                                                                    </span>}{t('Notifications.Customer.Three')} <b>{item.Order}</b> </span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -251,7 +262,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b>  đã nhập kho</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Five')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -267,7 +278,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b> có tin nhắn mới từ {item.ChangeBy}</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Six')} {item.ChangeBy}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -283,7 +294,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b>  trì hoãn nhập kho</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b>  {t('Notifications.Customer.Seven')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -299,7 +310,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b>  đã xuất kho</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b>  {t('Notifications.Customer.Eight')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -315,7 +326,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b>  đang giao hàng</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b>  {t('Notifications.Customer.Night')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -331,7 +342,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b>  trì hoãn  giao hàng</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Ten')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -347,7 +358,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b> giao xong</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Eleven')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -363,7 +374,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b> đang đối soát</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Twele')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -379,7 +390,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b> đối soát hoàn thành</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Thirteen')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -395,7 +406,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b> đối soát hoàn thành</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Thirteen')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -410,7 +421,7 @@ const ModalViewNotification = (props) => {
                                                             <>
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3' >{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> giao lại
+                                                                    </span>}{t('Notifications.Customer.Four')} </span><b>{item.Order}</b> {t('Notifications.Customer.Fourteen')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -424,7 +435,7 @@ const ModalViewNotification = (props) => {
                                                             <>
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> Giao hàng thất bại
+                                                                    </span>}{t('Notifications.Customer.Four')} </span><b>{item.Order}</b> {t('Notifications.Customer.fifteen')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -438,7 +449,7 @@ const ModalViewNotification = (props) => {
                                                             <>
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã chuyển đơn hàng</span><b>{item.Order} </b> từ trạng thái <b>gấp</b> sang <b>bình thường</b>
+                                                                    </span>}{t('Notifications.Customer.One')} <b>{item.ChangeBy}</b> {t('Notifications.Customer.sixteen')}</span><b>{item.Order} </b> {t('Notifications.Customer.seventeen')} <b>{t('Notifications.Customer.eighteen')}</b> {t('Notifications.Customer.nineteen')} <b>{t('Notifications.Customer.twenty')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -452,7 +463,7 @@ const ModalViewNotification = (props) => {
                                                             <>
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã chuyển đơn hàng</span><b>{item.Order} </b> từ trạng thái <b>bình thường</b> sang <b>gấp</b>
+                                                                    </span>}{t('Notifications.Customer.One')} <b>{item.ChangeBy}</b> {t('Notifications.Customer.sixteen')}</span><b>{item.Order} </b> {t('Notifications.Customer.seventeen')} <b>{t('Notifications.Customer.twenty')}</b> {t('Notifications.Customer.nineteen')} <b>{t('Notifications.Customer.eighteen')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -482,7 +493,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> mới được tạo
+                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Two')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -498,7 +509,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đã cập nhật địa chỉ lấy hàng bởi người tạo
+                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Three')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -514,7 +525,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> vừa có tin nhắn mới từ người tạo đơn
+                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Four')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -530,7 +541,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đang đi lấy đơn đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>}{t('Notifications.Pickup.Five')} <b>{item.ChangeBy}</b> {t('Notifications.Pickup.Six')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -546,7 +557,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã lấy đơn đơn hàng</span><b>{item.Order}</b> thành công
+                                                                    </span>}{t('Notifications.Pickup.Five')} <b>{item.ChangeBy}</b> {t('Notifications.Pickup.Seven')}</span><b>{item.Order}</b> {t('Notifications.Pickup.Eight')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -562,7 +573,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã trì hoãn lấy đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>}{t('Notifications.Pickup.Five')} <b>{item.ChangeBy}</b> {t('Notifications.Pickup.Night')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -579,7 +590,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> vừa chuyển trạng thái <b>bình thường</b>  sang <b>gấp</b>
+                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Ten')} <b>{t('Notifications.Pickup.Eleven')}</b>  {t('Notifications.Pickup.Twele')} <b>{t('Notifications.Pickup.Thirteen')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -595,7 +606,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> vừa chuyển trạng thái <b>gấp</b> sang <b>bình thường</b>
+                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Ten')} <b>{t('Notifications.Pickup.Thirteen')}</b> {t('Notifications.Pickup.Twele')} <b>{t('Notifications.Pickup.Eleven')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -627,7 +638,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đã đến kho
+                                                                    </span>} {t('Notifications.Warehouse.One')} </span><b>{item.Order}</b> {t('Notifications.Warehouse.Two')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -643,7 +654,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đã cập nhật trạng thái từ <b>bình thường </b>sang <b>gấp</b>
+                                                                    </span>} {t('Notifications.Warehouse.One')} </span><b>{item.Order}</b> {t('Notifications.Warehouse.Three')} <b>{t('Notifications.Warehouse.Four')}  </b>{t('Notifications.Warehouse.Five')} <b>{t('Notifications.Warehouse.Six')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -659,7 +670,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đã cập nhật trạng thái từ <b>gấp</b> sang <b>bình thường</b>
+                                                                    </span>}{t('Notifications.Warehouse.One')} </span><b>{item.Order}</b> {t('Notifications.Warehouse.Three')} <b>{t('Notifications.Warehouse.Six')}</b> {t('Notifications.Warehouse.Five')} <b>{t('Notifications.Warehouse.Four')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -675,7 +686,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã nhập kho đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>}{t('Notifications.Warehouse.Seven')} <b>{item.ChangeBy}</b> {t('Notifications.Warehouse.Eight')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -691,7 +702,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã trì hoãn nhập kho đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>}{t('Notifications.Warehouse.Seven')}<b>{item.ChangeBy}</b> {t('Notifications.Warehouse.Night')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -707,7 +718,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã xuât kho đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>} {t('Notifications.Warehouse.Seven')} <b>{item.ChangeBy}</b> {t('Notifications.Warehouse.Ten')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -723,7 +734,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order} đã trì hoãn việc đến kho hàng</b>
+                                                                    </span>} {t('Notifications.Warehouse.One')}</span><b>{item.Order} {t('Notifications.Warehouse.Eleven')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -756,7 +767,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đã xuất kho sẵn sàng giao hàng
+                                                                    </span>} {t('Notifications.Delivery.One')}</span><b>{item.Order}</b> {t('Notifications.Delivery.Two')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -772,7 +783,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đã cập nhật trạng thái từ <b>bình thường </b>sang <b>gấp</b>
+                                                                    </span>} {t('Notifications.Delivery.One')}</span><b>{item.Order}</b> {t('Notifications.Delivery.Three')} <b>{t('Notifications.Delivery.Four')} </b>{t('Notifications.Delivery.Five')}  <b>{t('Notifications.Delivery.Six')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -788,7 +799,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đã cập nhật trạng thái từ <b>gấp</b> sang <b>bình thường</b>
+                                                                    </span>} {t('Notifications.Delivery.One')}</span><b>{item.Order}</b> {t('Notifications.Delivery.Three')} <b>{t('Notifications.Delivery.Six')}</b> {t('Notifications.Delivery.Five')} <b>{t('Notifications.Delivery.Four')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -804,7 +815,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đang giao đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>} {t('Notifications.Delivery.Seven')} <b>{item.ChangeBy}</b> {t('Notifications.Delivery.Eight')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -820,7 +831,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã trì hoãn giao đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>} {t('Notifications.Delivery.Seven')} <b>{item.ChangeBy}</b> {t('Notifications.Delivery.Night')} </span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -836,7 +847,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã giao xong đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>}{t('Notifications.Delivery.Seven')} <b>{item.ChangeBy}</b> {t('Notifications.Delivery.Ten')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -852,7 +863,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Người nhận yêu cầu đơn hàng</span><b>{item.Order}</b> giao lại
+                                                                    </span>} {t('Notifications.Delivery.Twele')}</span><b>{item.Order}</b> {t('Notifications.Delivery.Thirteen')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -869,7 +880,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> vừa có tin nhắn mới từ người tạo đơn
+                                                                    </span>} {t('Notifications.Delivery.One')}</span><b>{item.Order}</b> {t('Notifications.Delivery.Fourteen')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -885,7 +896,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> Giao hàng thất bại
+                                                                    </span>} {t('Notifications.Delivery.One')}</span><b>{item.Order}</b> {t('Notifications.Delivery.fifteen')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -901,7 +912,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> vừa cập nhật đại chỉ giao hàng
+                                                                    </span>} {t('Notifications.Delivery.One')}</span><b>{item.Order}</b> {t('Notifications.Delivery.sixteen')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -932,7 +943,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đang chờ đối soát
+                                                                    </span>} {t('Notifications.Accountant.One')}</span><b>{item.Order}</b> {t('Notifications.Accountant.Two')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -948,7 +959,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đang đối soát đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>}{t('Notifications.Accountant.Three')} <b>{item.ChangeBy}</b> {t('Notifications.Accountant.Four')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -964,7 +975,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã đối soát xong đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>} {t('Notifications.Accountant.Three')} <b>{item.ChangeBy}</b> {t('Notifications.Accountant.Five')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -980,7 +991,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã đối soát xong đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>} {t('Notifications.Accountant.Three')} <b>{item.ChangeBy}</b> {t('Notifications.Accountant.Five')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -996,7 +1007,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order} </b> đã cập nhật thông tin đối soát
+                                                                    </span>} {t('Notifications.Accountant.One')}</span><b>{item.Order} </b> {t('Notifications.Accountant.Six')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1012,7 +1023,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> vừa có tin nhắn mới từ người tạo đơn
+                                                                    </span>}{t('Notifications.Accountant.One')}</span><b>{item.Order}</b> {t('Notifications.Accountant.Seven')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1060,7 +1071,8 @@ const ModalViewNotification = (props) => {
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
 
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đang đi lấy đơn hàng <b>{item.Order}</b></span>
+                                                                    </span>}
+                                                                        {t('Notifications.Customer.One')} <b>{item.ChangeBy}</b> {t('Notifications.Customer.Two')} <b>{item.Order}</b></span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1075,7 +1087,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'> {+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã lấy đơn hàng <b>{item.Order}</b> thành công</span>
+                                                                    </span>}{t('Notifications.Customer.One')} <b>{item.ChangeBy}</b> {t('Notifications.Customer.twentyOne')}  <b>{item.Order}</b> {t('Notifications.Customer.twentyTwo')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1091,7 +1103,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Delay lấy hàng đơn hàng <b>{item.Order}</b> </span>
+                                                                    </span>}{t('Notifications.Customer.Three')} <b>{item.Order}</b> </span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1107,7 +1119,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b>  đã nhập kho</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Five')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1123,7 +1135,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b> có tin nhắn mới từ {item.ChangeBy}</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Six')} {item.ChangeBy}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1139,7 +1151,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b>  trì hoãn nhập kho</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b>  {t('Notifications.Customer.Seven')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1155,7 +1167,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b>  đã xuất kho</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b>  {t('Notifications.Customer.Eight')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1171,7 +1183,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b>  đang giao hàng</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b>  {t('Notifications.Customer.Night')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1187,7 +1199,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b>  trì hoãn  giao hàng</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Ten')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1203,7 +1215,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b> giao xong</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Eleven')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1219,7 +1231,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b> đang đối soát</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Twele')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1235,7 +1247,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b> đối soát hoàn thành</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Thirteen')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1251,7 +1263,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng <b>{item.Order}</b> đối soát hoàn thành</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Thirteen')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1266,7 +1278,7 @@ const ModalViewNotification = (props) => {
                                                             <>
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3' >{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> giao lại
+                                                                    </span>}{t('Notifications.Customer.Four')} </span><b>{item.Order}</b> {t('Notifications.Customer.Fourteen')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1280,7 +1292,7 @@ const ModalViewNotification = (props) => {
                                                             <>
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> Giao hàng thất bại
+                                                                    </span>}{t('Notifications.Customer.Four')} </span><b>{item.Order}</b> {t('Notifications.Customer.fifteen')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1294,7 +1306,7 @@ const ModalViewNotification = (props) => {
                                                             <>
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã chuyển đơn hàng</span><b>{item.Order} </b> từ trạng thái <b>gấp</b> sang <b>bình thường</b>
+                                                                    </span>}{t('Notifications.Customer.One')} <b>{item.ChangeBy}</b> {t('Notifications.Customer.sixteen')}</span><b>{item.Order} </b> {t('Notifications.Customer.seventeen')} <b>{t('Notifications.Customer.eighteen')}</b> {t('Notifications.Customer.nineteen')} <b>{t('Notifications.Customer.twenty')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1308,7 +1320,7 @@ const ModalViewNotification = (props) => {
                                                             <>
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã chuyển đơn hàng</span><b>{item.Order} </b> từ trạng thái <b>bình thường</b> sang <b>gấp</b>
+                                                                    </span>}{t('Notifications.Customer.One')} <b>{item.ChangeBy}</b> {t('Notifications.Customer.sixteen')}</span><b>{item.Order} </b> {t('Notifications.Customer.seventeen')} <b>{t('Notifications.Customer.twenty')}</b> {t('Notifications.Customer.nineteen')} <b>{t('Notifications.Customer.eighteen')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1335,10 +1347,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "thêm mới" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Pick_up_no_status`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> mới được tạo
+                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Two')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1351,10 +1363,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "thay đổi địa chỉ người bán" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Pickup_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đã cập nhật địa chỉ lấy hàng bởi người tạo
+                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Three')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1367,10 +1379,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "người tạo vừa chat" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/order-processing`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> vừa có tin nhắn mới từ người tạo đơn
+                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Four')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1383,10 +1395,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "đơn hàng đang lấy hàng" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Pick_up_status_one`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đang đi lấy đơn đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>}{t('Notifications.Pickup.Five')} <b>{item.ChangeBy}</b> {t('Notifications.Pickup.Six')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1399,10 +1411,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "đơn hàng đã lấy thành công" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Pick_up_status_two`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã lấy đơn đơn hàng</span><b>{item.Order}</b> thành công
+                                                                    </span>}{t('Notifications.Pickup.Five')} <b>{item.ChangeBy}</b> {t('Notifications.Pickup.Seven')}</span><b>{item.Order}</b> {t('Notifications.Pickup.Eight')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1415,10 +1427,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "đơn hàng trì hoãn" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Pick_up_no_status`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã trì hoãn lấy đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>}{t('Notifications.Pickup.Five')} <b>{item.ChangeBy}</b> {t('Notifications.Pickup.Night')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1432,10 +1444,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "đơn gấp" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Pickup_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> vừa chuyển trạng thái <b>bình thường</b>  sang <b>gấp</b>
+                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Ten')} <b>{t('Notifications.Pickup.Eleven')}</b>  {t('Notifications.Pickup.Twele')} <b>{t('Notifications.Pickup.Thirteen')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1448,10 +1460,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "huỷ đơn gấp" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Pickup_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> vừa chuyển trạng thái <b>gấp</b> sang <b>bình thường</b>
+                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Ten')} <b>{t('Notifications.Pickup.Thirteen')}</b> {t('Notifications.Pickup.Twele')} <b>{t('Notifications.Pickup.Eleven')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1470,9 +1482,9 @@ const ModalViewNotification = (props) => {
                                         })
 
                                     }
-                                    {user.account.Position === "Nhân viên kho hàng" && ListFillterNosee && ListFillterNosee.length > 0
+                                    {user.account.Position === "Nhân viên kho hàng" && listStaffFillterNosee && listStaffFillterNosee.length > 0
                                         &&
-                                        listStaff.map((item, index) => {
+                                        listStaffFillterNosee.map((item, index) => {
                                             return (
 
                                                 <div>
@@ -1480,10 +1492,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn hàng đã lấy thành công" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Warehouse_no_status`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đã đến kho
+                                                                    </span>} {t('Notifications.Warehouse.One')} </span><b>{item.Order}</b> {t('Notifications.Warehouse.Two')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1496,10 +1508,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn gấp" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Warehouse_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đã cập nhật trạng thái từ <b>bình thường </b>sang <b>gấp</b>
+                                                                    </span>} {t('Notifications.Warehouse.One')} </span><b>{item.Order}</b> {t('Notifications.Warehouse.Three')} <b>{t('Notifications.Warehouse.Four')}  </b>{t('Notifications.Warehouse.Five')} <b>{t('Notifications.Warehouse.Six')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1512,10 +1524,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kho hàng" && item.Change_content === "huỷ đơn gấp" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Warehouse_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đã cập nhật trạng thái từ <b>gấp</b> sang <b>bình thường</b>
+                                                                    </span>}{t('Notifications.Warehouse.One')} </span><b>{item.Order}</b> {t('Notifications.Warehouse.Three')} <b>{t('Notifications.Warehouse.Six')}</b> {t('Notifications.Warehouse.Five')} <b>{t('Notifications.Warehouse.Four')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1528,10 +1540,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn hàng đã nhập kho" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Warehouse_status_one`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã nhập kho đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>}{t('Notifications.Warehouse.Seven')} <b>{item.ChangeBy}</b> {t('Notifications.Warehouse.Eight')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1544,10 +1556,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn hàng trì hoãn nhập kho" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Warehouse_no_status`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã trì hoãn nhập kho đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>}{t('Notifications.Warehouse.Seven')}<b>{item.ChangeBy}</b> {t('Notifications.Warehouse.Night')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1560,10 +1572,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn hàng đã xuất kho" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Warehouse_status_two`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã xuât kho đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>} {t('Notifications.Warehouse.Seven')} <b>{item.ChangeBy}</b> {t('Notifications.Warehouse.Ten')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1576,10 +1588,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kho hàng" && item.Change_content === "đơn hàng trì hoãn" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Warehouse_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order} đã trì hoãn việc đến kho hàng</b>
+                                                                    </span>} {t('Notifications.Warehouse.One')}</span><b>{item.Order} {t('Notifications.Warehouse.Eleven')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1599,9 +1611,9 @@ const ModalViewNotification = (props) => {
                                         })
 
                                     }
-                                    {user.account.Position === "Nhân viên giao hàng" && ListFillterNosee && ListFillterNosee.length > 0
+                                    {user.account.Position === "Nhân viên giao hàng" && listStaffFillterNosee && listStaffFillterNosee.length > 0
                                         &&
-                                        listStaff.map((item, index) => {
+                                        listStaffFillterNosee.map((item, index) => {
                                             return (
 
                                                 <div>
@@ -1609,10 +1621,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng đã xuất kho" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_no_status`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đã xuất kho sẵn sàng giao hàng
+                                                                    </span>} {t('Notifications.Delivery.One')}</span><b>{item.Order}</b> {t('Notifications.Delivery.Two')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1625,10 +1637,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn gấp" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đã cập nhật trạng thái từ <b>bình thường </b>sang <b>gấp</b>
+                                                                    </span>} {t('Notifications.Delivery.One')}</span><b>{item.Order}</b> {t('Notifications.Delivery.Three')} <b>{t('Notifications.Delivery.Four')} </b>{t('Notifications.Delivery.Five')}  <b>{t('Notifications.Delivery.Six')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1641,10 +1653,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "huỷ đơn gấp" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đã cập nhật trạng thái từ <b>gấp</b> sang <b>bình thường</b>
+                                                                    </span>} {t('Notifications.Delivery.One')}</span><b>{item.Order}</b> {t('Notifications.Delivery.Three')} <b>{t('Notifications.Delivery.Six')}</b> {t('Notifications.Delivery.Five')} <b>{t('Notifications.Delivery.Four')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1657,10 +1669,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng đang giao" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_status_one`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đang giao đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>} {t('Notifications.Delivery.Seven')} <b>{item.ChangeBy}</b> {t('Notifications.Delivery.Eight')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1673,10 +1685,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng trì hoãn giao" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_no_status`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã trì hoãn giao đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>} {t('Notifications.Delivery.Seven')} <b>{item.ChangeBy}</b> {t('Notifications.Delivery.Night')} </span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1689,10 +1701,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng giao xong" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_status_two`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã giao xong đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>}{t('Notifications.Delivery.Seven')} <b>{item.ChangeBy}</b> {t('Notifications.Delivery.Ten')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1705,10 +1717,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng giao lại" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_status_four`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Người nhận yêu cầu đơn hàng</span><b>{item.Order}</b> giao lại
+                                                                    </span>} {t('Notifications.Delivery.Twele')}</span><b>{item.Order}</b> {t('Notifications.Delivery.Thirteen')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1722,10 +1734,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "người tạo vừa chat" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/order-processing`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> vừa có tin nhắn mới từ người tạo đơn
+                                                                    </span>} {t('Notifications.Delivery.One')}</span><b>{item.Order}</b> {t('Notifications.Delivery.Fourteen')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1738,10 +1750,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "đơn hàng hủy giao" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_status_three`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> Giao hàng thất bại
+                                                                    </span>} {t('Notifications.Delivery.One')}</span><b>{item.Order}</b> {t('Notifications.Delivery.fifteen')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1754,10 +1766,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên giao hàng" && item.Change_content === "thay đổi địa chỉ người nhận" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Delivery_staff`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> vừa cập nhật đại chỉ giao hàng
+                                                                    </span>} {t('Notifications.Delivery.One')}</span><b>{item.Order}</b> {t('Notifications.Delivery.sixteen')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1775,9 +1787,9 @@ const ModalViewNotification = (props) => {
                                         })
 
                                     }
-                                    {user.account.Position === "Nhân viên kế toán" && ListFillterNosee && ListFillterNosee.length > 0
+                                    {user.account.Position === "Nhân viên kế toán" && listStaffFillterNosee && listStaffFillterNosee.length > 0
                                         &&
-                                        listStaff.map((item, index) => {
+                                        listStaffFillterNosee.map((item, index) => {
                                             return (
 
                                                 <div>
@@ -1785,10 +1797,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kế toán" && item.Change_content === "đơn hàng giao xong" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Overview_no_status`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> đang chờ đối soát
+                                                                    </span>} {t('Notifications.Accountant.One')}</span><b>{item.Order}</b> {t('Notifications.Accountant.Two')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1801,10 +1813,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kế toán" && item.Change_content === "đơn hàng đang đối soát" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Overview_status-one`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đang đối soát đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>}{t('Notifications.Accountant.Three')} <b>{item.ChangeBy}</b> {t('Notifications.Accountant.Four')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1817,10 +1829,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kế toán" && item.Change_content === "đơn hàng đối soát xong bằng chuyển khoản" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Overview_status-two`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã đối soát xong đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>} {t('Notifications.Accountant.Three')} <b>{item.ChangeBy}</b> {t('Notifications.Accountant.Five')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1833,10 +1845,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kế toán" && item.Change_content === "đơn hàng đối soát xong bằng tiền mặt" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/Overview_status-three`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Nhân viên <b>{item.ChangeBy}</b> đã đối soát xong đơn hàng</span><b>{item.Order}</b>
+                                                                    </span>} {t('Notifications.Accountant.Three')} <b>{item.ChangeBy}</b> {t('Notifications.Accountant.Five')}</span><b>{item.Order}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1849,10 +1861,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kế toán" && item.Change_content === "thay đổi thông tin đơn hàng" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/order-processing`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order} </b> đã cập nhật thông tin đối soát
+                                                                    </span>} {t('Notifications.Accountant.One')}</span><b>{item.Order} </b> {t('Notifications.Accountant.Six')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1865,10 +1877,10 @@ const ModalViewNotification = (props) => {
                                                         {user.account.Position === "Nhân viên kế toán" && item.Change_content === "người tạo vừa chat" &&
                                                             <>
                                                                 <div onClick={() => {
-                                                                    history.push(`/order-processing`); handleShowNotificationModal(); UpdateStatusProduct(item)
+                                                                    handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} Đơn hàng</span><b>{item.Order}</b> vừa có tin nhắn mới từ người tạo đơn
+                                                                    </span>}{t('Notifications.Accountant.One')}</span><b>{item.Order}</b> {t('Notifications.Accountant.Seven')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1889,7 +1901,7 @@ const ModalViewNotification = (props) => {
                                         <div className='Not-Found'> Bạn không có thông báo nào chưa đọc </div >
 
                                     }
-                                    {user && user?.account?.groupWithRound?.name === "Staff" && ListFillterNosee.length === 0 &&
+                                    {user && user?.account?.groupWithRound?.name === "Staff" && listStaffFillterNosee.length === 0 &&
                                         <div className='Not-Found'> Bạn không có thông báo nào chưa đọc </div >
 
                                     }

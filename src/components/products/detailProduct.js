@@ -22,8 +22,11 @@ import {
 } from "../services/addressService"
 import DeleteProduct from "./deleteModal"
 import getBase64 from "../commondUtils/commondUtils"
+import { useTranslation, Trans } from 'react-i18next';
 
 const DetailProduct = (props) => {
+    const { t, i18n } = useTranslation();
+
     const param = useParams()
     const { user } = React.useContext(UserContext);
     const ProductId = param.id
@@ -307,6 +310,7 @@ const DetailProduct = (props) => {
     const getProjects = async () => {
         let res = await fetchProjectByid(ProductId)
         if (res && +res.EC === 0) {
+            console.log("res.DT[0]", res.DT[0])
             setProjects(res.DT[0])
             setprojectsDefaut(res.DT[0])
         }
@@ -790,18 +794,23 @@ const DetailProduct = (props) => {
                             <span>
                                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
                             </span>
-                            <Link to="/Products"> Trở lại trang trước </Link>
+                            <Link to="/Products">
+                                {t('detail.tittle')}
+                            </Link>
                         </button>
                         <div className='body'>
                             <div className="container">
                                 <div className='container'>
 
                                     <div className='name-page my-3'>
-                                        <h4 className=''> Detail Product
+                                        <h4 className=''>
+                                            {t('detail.tittleOne')}
                                             {projects?.flag == 1 &&
                                                 <span className='mx-3' style={{ color: "red" }}>
                                                     <i class="fa fa-flag" aria-hidden="true"></i>
-                                                    <span style={{ fontSize: "15px" }}>  Đơn hàng giao gấp</span>
+                                                    <span className='mx-2' style={{ fontSize: "15px" }}>
+                                                        {t('detail.tittleTwo')}
+                                                    </span>
                                                 </span>
                                             }
 
@@ -810,11 +819,11 @@ const DetailProduct = (props) => {
                                         <div className='more'>
                                             <button className='btn btn-success' onClick={() => handleRefeshPage()}>
                                                 <i class="fa fa-refresh" aria-hidden="true"></i>
-                                                Refesh đơn hàng
+                                                {t('detail.tittleFour')}
                                             </button>
                                             <button className='btn btn-danger' onClick={() => handleShowDeleteModal()}>
                                                 <i className="fa fa-trash" aria-hidden="true"></i>
-                                                Xóa đơn hàng
+                                                {t('detail.tittleFive')}
                                             </button>
                                         </div>
                                     </div>
@@ -822,14 +831,18 @@ const DetailProduct = (props) => {
 
                                 <div className='container'>
                                     <div className='order-product my-3 d-flex align-items-start gap-3'>
-                                        <span className='order-product-name'> Đơn hàng </span>
+                                        <span className='order-product-name'>
+                                            {t('detail.tittleThree')}
+                                        </span>
                                         <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
                                         </span>
                                         <span className='order-product-value'>{projects?.order ? projects?.order : ""}</span>
                                     </div>
                                     <div className='d-flex align-items-center' style={{ fontSize: "20px", fontWeight: "600", color: "red" }}>{projects?.Sub_money}</div>
                                     {projects?.done_status > 0 &&
-                                        <div className='d-flex align-items-start mb-3' style={{ fontSize: "20px", fontWeight: "600", color: "green" }}>Đơn hàng đã hoàn thành</div>
+                                        <div className='d-flex align-items-start mb-3' style={{ fontSize: "20px", fontWeight: "600", color: "green" }}>
+                                            {t('detail.tittleSix')}
+                                        </div>
 
                                     }
 
@@ -837,7 +850,9 @@ const DetailProduct = (props) => {
                                         <div className='container'>
                                             <div className='row'>
                                                 <div className=" col-10" style={{ color: "#637381" }}>
-                                                    <h2 className='d-flex align-items-center justify-content-center'>  Trạng thái đơn hàng</h2>
+                                                    <h2 className='d-flex align-items-center justify-content-center'>
+                                                        {t('detail.Status-Orders.One')}
+                                                    </h2>
 
                                                 </div>
 
@@ -849,14 +864,16 @@ const DetailProduct = (props) => {
                                         <div className='container'>
                                             <div className='row'>
                                                 <div className="order col-6">
-                                                    <div className='name pb-3'> Mã Đơn</div>
+                                                    <div className='name pb-3'>
+                                                        {t('detail.Status-Orders.Two')}
+                                                    </div>
                                                     <div className='status-order mx-3'>{projects.order ? projects.order : ""}</div>
 
                                                 </div>
 
                                                 <div className="order col-3 ">
                                                     <div className='name pb-3'>
-                                                        Kênh bán hàng
+                                                        {t('detail.Status-Orders.Three')}
 
                                                     </div>
 
@@ -869,7 +886,7 @@ const DetailProduct = (props) => {
                                                 </div>
                                                 <div className="order col-3 ">
                                                     <div className='name pb-3'>
-                                                        Trạng thái Thanh toán
+                                                        {t('detail.Status-Orders.Four')}
                                                     </div>
 
 
@@ -889,7 +906,7 @@ const DetailProduct = (props) => {
                                             <div className='row'>
                                                 <div className="order col-3 ">
                                                     <div className='name pb-3'>
-                                                        Trạng thái lấy hàng
+                                                        {t('detail.Status-Orders.Five')}
                                                     </div>
                                                     <div className='status-SaleChannel'>
                                                         {projects?.Status_Pickup && projects?.Status_Pickup?.status ? projects?.Status_Pickup?.status : "Đang xử lý"}
@@ -897,7 +914,7 @@ const DetailProduct = (props) => {
                                                 </div>
                                                 <div className="order col-3 ">
                                                     <div className='name pb-3'>
-                                                        Trạng thái lưu kho
+                                                        {t('detail.Status-Orders.Six')}
                                                     </div>
                                                     <div className='status-delivery'>
                                                         {projects?.Status_Warehouse && projects?.Status_Warehouse?.status ? projects?.Status_Warehouse?.status : "Đang xử lý"}
@@ -906,7 +923,7 @@ const DetailProduct = (props) => {
                                                 </div>
                                                 <div className="order col-3 ">
                                                     <div className='name pb-3'>
-                                                        Trạng thái giao hàng
+                                                        {t('detail.Status-Orders.Seven')}
                                                     </div>
                                                     <div className='status-payment'>
                                                         {projects?.Status_Delivery
@@ -915,7 +932,7 @@ const DetailProduct = (props) => {
                                                 </div>
                                                 <div className="order col-3 ">
                                                     <div className='name pb-3'>
-                                                        Trạng thái đối soát
+                                                        {t('detail.Status-Orders.Eight')}
                                                     </div>
                                                     <div className='status-SaleChannel'>
                                                         {
@@ -938,7 +955,9 @@ const DetailProduct = (props) => {
                                                         <div className='container'>
                                                             <div className=' title d-flex align-items-center justify-content-between mb-3'>
                                                                 <div className='title-left '>
-                                                                    <h4 style={{ color: "#637381" }}>Thông Tin Thanh Toán</h4>
+                                                                    <h4 style={{ color: "#637381" }}>
+                                                                        {t('detail.Status-payment.One')}
+                                                                    </h4>
                                                                 </div>
                                                                 <div className='title-right '>
                                                                     {actionModalThree === "3" ?
@@ -977,7 +996,9 @@ const DetailProduct = (props) => {
                                                                     <div className='container'>
                                                                         <div className='row'>
                                                                             <div className='left-item col-6 d-flex flex-column'>
-                                                                                <h5 className='mb-2'>Ghi chú khách hàng:</h5>
+                                                                                <h5 className='mb-2'>
+                                                                                    {t('detail.Status-payment.Two')}
+                                                                                </h5>
                                                                                 <div className='text-note mb-5'>
                                                                                     <i className="fa fa-commenting blue" aria-hidden="true"></i> :
 
@@ -1000,7 +1021,7 @@ const DetailProduct = (props) => {
                                                                                     <div className='container'>
                                                                                         <div className='row'>
                                                                                             <div className='item-info_name  '>
-                                                                                                T/T thanh toán :
+                                                                                                {t('detail.Status-payment.Three')}
                                                                                             </div>
                                                                                             <select
                                                                                                 className="form-select mt-2"
@@ -1032,7 +1053,7 @@ const DetailProduct = (props) => {
                                                                                         <div className='container'>
                                                                                             <div className='row'>
                                                                                                 <div className='item-info_name  '>
-                                                                                                    Kênh bán hàng                                                                                                </div>
+                                                                                                    {t('detail.Status-payment.Four')}                                                                                               </div>
                                                                                                 <select
                                                                                                     className="form-select mt-2"
                                                                                                     onChange={(event) => handleOnchangeInput(event.target.value, "salesChannelId")}
@@ -1091,7 +1112,7 @@ const DetailProduct = (props) => {
                                                                                     <div className='container'>
                                                                                         <div className='row'>
                                                                                             <div className='item-info_name col-12   '>
-                                                                                                Tên sản phẩm :
+                                                                                                {t('detail.Status-payment.Five')}
                                                                                             </div>
 
                                                                                             <input
@@ -1115,7 +1136,7 @@ const DetailProduct = (props) => {
                                                                                     <div className='container'>
                                                                                         <div className='row'>
                                                                                             <div className='item-info_name col-12   '>
-                                                                                                Số lượng sản phẩm :
+                                                                                                {t('detail.Status-payment.Six')}
                                                                                             </div>
 
                                                                                             <input
@@ -1138,7 +1159,7 @@ const DetailProduct = (props) => {
                                                                                     <div className='container'>
                                                                                         <div className='row'>
                                                                                             <div className='item-info_name col-12   '>
-                                                                                                Đơn vị  :
+                                                                                                {t('detail.Status-payment.Seven')}
                                                                                             </div>
 
                                                                                             <input
@@ -1160,8 +1181,7 @@ const DetailProduct = (props) => {
                                                                                     <div className='container'>
                                                                                         <div className='row'>
                                                                                             <div className='item-info_name col-12   '>
-                                                                                                Đơn vị vận chuyển  :
-                                                                                            </div>
+                                                                                                {t('detail.Status-payment.Night')}                                                                                            </div>
 
                                                                                             <input
                                                                                                 id='input-number-product col-12'
@@ -1181,7 +1201,7 @@ const DetailProduct = (props) => {
                                                                                     <div className='container'>
                                                                                         <div className='row'>
                                                                                             <div className='item-info_name col-12   '>
-                                                                                                Tiền sử dụng  :
+                                                                                                {t('detail.Status-payment.Eightteen')}
                                                                                             </div>
 
                                                                                             <select
@@ -1204,7 +1224,7 @@ const DetailProduct = (props) => {
                                                                                     <div className='container'>
                                                                                         <div className='row'>
                                                                                             <div className='item-info_name  col-12 '>
-                                                                                                Giá Sản Phẩm:
+                                                                                                {t('detail.Status-payment.Eight')}
                                                                                             </div>
                                                                                             <input
                                                                                                 id='input-money-product'
@@ -1223,7 +1243,7 @@ const DetailProduct = (props) => {
                                                                                     <div className='container'>
                                                                                         <div className='row'>
                                                                                             <div className='item-info_name  col-12'>
-                                                                                                Khuyến mãi:
+                                                                                                {t('detail.Status-payment.Nightteen')}
                                                                                             </div>
 
                                                                                             <input
@@ -1243,7 +1263,7 @@ const DetailProduct = (props) => {
                                                                                     <div className='container'>
                                                                                         <div className='row'>
                                                                                             <div className='item-info_name col-8 '>
-                                                                                                Vận chuyển :
+                                                                                                {t('detail.Status-payment.Eleven')}
                                                                                             </div>
                                                                                             <div className='item-info_value col-4'>
                                                                                                 {
@@ -1264,7 +1284,7 @@ const DetailProduct = (props) => {
                                                                                         <div className='container'>
                                                                                             <div className='row'>
                                                                                                 <div className='item-info_name col-12 '>
-                                                                                                    Đã thanh toán :
+                                                                                                    {t('detail.Status-payment.Twele')}
                                                                                                 </div>
                                                                                                 <input
                                                                                                     id='input-total-product'
@@ -1286,7 +1306,7 @@ const DetailProduct = (props) => {
                                                                                         <div className='container'>
                                                                                             <div className='row'>
                                                                                                 <div className='item-info_name col-12 '>
-                                                                                                    Đã thanh toán :
+                                                                                                    {t('detail.Status-payment.Twele')}
                                                                                                 </div>
                                                                                                 <input
                                                                                                     id='input-total-product'
@@ -1312,7 +1332,7 @@ const DetailProduct = (props) => {
                                                                                         <div className='container'>
                                                                                             <div className='row'>
                                                                                                 <div className='item-info_name col-12 '>
-                                                                                                    Đã thanh toán :
+                                                                                                    {t('detail.Status-payment.Twele')}
                                                                                                 </div>
 
 
@@ -1335,9 +1355,9 @@ const DetailProduct = (props) => {
                                                                                         <div className='row'>
 
                                                                                             <div className='item-info_name  col-12'>
-                                                                                                <b>Tổng giá trị đơn hàng :</b>
+                                                                                                <b>{t('detail.Status-payment.Thirteen')}</b>
                                                                                                 <br />
-                                                                                                <span> Chưa có phí ship</span>
+                                                                                                <span>{t('detail.Status-payment.Fourteen')}</span>
 
                                                                                             </div>
                                                                                             <input
@@ -1361,9 +1381,9 @@ const DetailProduct = (props) => {
                                                                                     <div className='container'>
                                                                                         <div className='row'>
                                                                                             <div className='item-info_name  '>
-                                                                                                <b>Tổng giá trị đơn :</b>
+                                                                                                <b>{t('detail.Status-payment.fifteen')}</b>
                                                                                                 <br />
-                                                                                                <span> Đã có phí ship</span>
+                                                                                                <span>{t('detail.Status-payment.sixteen')}</span>
 
                                                                                             </div>
 
@@ -1389,7 +1409,8 @@ const DetailProduct = (props) => {
                                                                     <div className='container'>
                                                                         <div className='row'>
                                                                             <div className='left-item col-6 d-flex flex-column'>
-                                                                                <h5 className='mb-2'>Ghi chú khách hàng </h5>
+                                                                                <h5 className='mb-2'>
+                                                                                    {t('detail.Status-payment.Two')}                                                                                </h5>
                                                                                 <div className='text-note mb-5'>
 
                                                                                     <div className='container'>
@@ -1409,7 +1430,7 @@ const DetailProduct = (props) => {
                                                                             <div className='right-item col-6 d-flex flex-column'>
                                                                                 <div className='item-info py-1 d-flex align-items-center justify-content-between'>
                                                                                     <div className='item-info_name  '>
-                                                                                        T/T thanh toán :
+                                                                                        {t('detail.Status-payment.Three')}
 
                                                                                     </div>
                                                                                     <b className='item-info_value '>
@@ -1421,7 +1442,7 @@ const DetailProduct = (props) => {
                                                                                 </div>
                                                                                 <div className='item-info py-1 d-flex align-items-center justify-content-between'>
                                                                                     <div className='item-info_name  '>
-                                                                                        Kênh bán hàng :
+                                                                                        {t('detail.Status-payment.Four')}
 
                                                                                     </div>
                                                                                     <b className='item-info_value '>
@@ -1430,7 +1451,7 @@ const DetailProduct = (props) => {
                                                                                 </div>
                                                                                 <div className='item-info py-1 d-flex align-items-center justify-content-between'>
                                                                                     <div className='item-info_name  '>
-                                                                                        Tên sản phẩm :
+                                                                                        {t('detail.Status-payment.Five')}
                                                                                     </div>
                                                                                     <b className='item-info_value'>
                                                                                         {
@@ -1442,7 +1463,7 @@ const DetailProduct = (props) => {
                                                                                 </div>
                                                                                 <div className='item-info py-1 d-flex align-items-center justify-content-between'>
                                                                                     <div className='item-info_name  '>
-                                                                                        Số lượng sản phẩm :
+                                                                                        {t('detail.Status-payment.Six')}
                                                                                     </div>
                                                                                     <b className='item-info_value'>
                                                                                         {
@@ -1455,7 +1476,7 @@ const DetailProduct = (props) => {
                                                                                 </div>
                                                                                 <div className='item-info py-1 d-flex align-items-center justify-content-between'>
                                                                                     <div className='item-info_name  '>
-                                                                                        Đơn vị  :
+                                                                                        {t('detail.Status-payment.Seven')}
                                                                                     </div>
                                                                                     <b className='item-info_value'>
                                                                                         {
@@ -1468,7 +1489,7 @@ const DetailProduct = (props) => {
                                                                                 </div>
                                                                                 <div className='item-info py-1 d-flex align-items-center justify-content-between'>
                                                                                     <div className='item-info_name  '>
-                                                                                        Giá Sản Phẩm:
+                                                                                        {t('detail.Status-payment.Eight')}
                                                                                     </div>
                                                                                     <b className='item-info_value'>
                                                                                         {
@@ -1480,7 +1501,7 @@ const DetailProduct = (props) => {
                                                                                 </div>
                                                                                 <div className='item-info py-1 d-flex align-items-center justify-content-between'>
                                                                                     <div className='item-info_name  '>
-                                                                                        Đơn vị vận chuyển
+                                                                                        {t('detail.Status-payment.Night')}
                                                                                     </div>
                                                                                     <b className='item-info_value'>
                                                                                         {
@@ -1493,7 +1514,7 @@ const DetailProduct = (props) => {
                                                                                 </div>
                                                                                 <div className='item-info py-1 d-flex align-items-center justify-content-between'>
                                                                                     <div className='item-info_name  '>
-                                                                                        Giảm giá :
+                                                                                        {t('detail.Status-payment.Ten')}
                                                                                     </div>
                                                                                     <b className='item-info_value'>
                                                                                         {
@@ -1507,7 +1528,7 @@ const DetailProduct = (props) => {
                                                                                 </div>
                                                                                 <div className='item-info py-1 d-flex align-items-center justify-content-between'>
                                                                                     <div className='item-info_name  '>
-                                                                                        Vận chuyển :
+                                                                                        {t('detail.Status-payment.Eleven')}
                                                                                     </div>
                                                                                     <b className='item-info_value'>
                                                                                         {
@@ -1523,7 +1544,7 @@ const DetailProduct = (props) => {
                                                                                 </div>
                                                                                 <div className='item-info py-1 d-flex align-items-center justify-content-between'>
                                                                                     <div className='item-info_name  '>
-                                                                                        Đã thanh toán :
+                                                                                        {t('detail.Status-payment.Twele')}
                                                                                     </div>
                                                                                     <b className='item-info_value'>
                                                                                         {projects.paid
@@ -1533,9 +1554,9 @@ const DetailProduct = (props) => {
                                                                                 </div>
                                                                                 <div className='item-info py-3 d-flex align-items-center justify-content-between'>
                                                                                     <div className='item-info_name  '>
-                                                                                        <b>Tổng giá trị đơn hàng :</b>
+                                                                                        <b>{t('detail.Status-payment.Thirteen')}</b>
                                                                                         <br />
-                                                                                        <span> Chưa có phí ship</span>
+                                                                                        <span> {t('detail.Status-payment.Fourteen')}</span>
                                                                                     </div>
                                                                                     <div className='item-info_value'>
                                                                                         <b>
@@ -1547,9 +1568,9 @@ const DetailProduct = (props) => {
                                                                                 </div>
                                                                                 <div className='item-info py-1 d-flex align-items-center justify-content-between '>
                                                                                     <div className='item-info_name  '>
-                                                                                        <b>Tổng giá trị đơn :</b>
+                                                                                        <b>{t('detail.Status-payment.fifteen')}</b>
                                                                                         <br />
-                                                                                        <span> Đã có phí ship</span>
+                                                                                        <span>{t('detail.Status-payment.sixteen')}</span>
 
                                                                                     </div>
 
@@ -1576,7 +1597,9 @@ const DetailProduct = (props) => {
 
                                                                 {actionModalFour === "4" ?
                                                                     <>
-                                                                        <h4 className='my-3 title col-10' style={{ color: "#637381" }}>  Ảnh đơn hàng</h4>
+                                                                        <h4 className='my-3 title col-10' style={{ color: "#637381" }}>
+                                                                            {t('detail.Image.One')}
+                                                                        </h4>
 
 
                                                                         <div className=' item col-1'>
@@ -1605,7 +1628,9 @@ const DetailProduct = (props) => {
                                                                     </>
                                                                     :
                                                                     <>
-                                                                        <h4 className='my-3 title col-10' style={{ color: "#637381" }}>  Ảnh đơn hàng</h4>
+                                                                        <h4 className='my-3 title col-10' style={{ color: "#637381" }}>
+                                                                            {t('detail.Image.One')}
+                                                                        </h4>
 
                                                                         <div className='col-1'></div>
 
@@ -1640,7 +1665,7 @@ const DetailProduct = (props) => {
 
                                                                             <fieldset className='border rounded-3 p-3' style={{ width: "50%" }}>
                                                                                 <legend className='float-none w-auto px-3'>
-                                                                                    Ảnh sản phẩm
+                                                                                    {t('detail.Image.One')}
 
 
                                                                                 </legend>
@@ -1676,7 +1701,7 @@ const DetailProduct = (props) => {
                                                                                             )
                                                                                         })
                                                                                         :
-                                                                                        <div> đơn hàng chưa có ảnh</div>
+                                                                                        <div> {t('detail.Image.Three')}</div>
 
 
 
@@ -1690,7 +1715,9 @@ const DetailProduct = (props) => {
                                                                             <fieldset className='border rounded-3 p-3' style={{ width: "43%" }}>
                                                                                 <legend className='float-none w-auto px-3'>
                                                                                     <div className='d-flex align-items-center '>
-                                                                                        <div >Ảnh thêm mới</div>
+                                                                                        <div>
+                                                                                            {t('detail.Image.Two')}
+                                                                                        </div>
                                                                                         <div className=' btn btn-primary Update-image mx-3' title='Add new image'
 
                                                                                         >
@@ -1742,13 +1769,17 @@ const DetailProduct = (props) => {
                                                                                             )
                                                                                         })
                                                                                         :
-                                                                                        <div> bổ xung thêm ảnh vào đơn hàng</div>
+                                                                                        <div>
+                                                                                            {t('detail.Image.Four')}
+                                                                                        </div>
                                                                                     }
                                                                                 </div>
                                                                                 {previewsImage.length > 0 &&
                                                                                     <div className='container' onClick={handleSubmitImage}>
                                                                                         <div className='row'>
-                                                                                            <button className='btn btn-success' > Save</button>
+                                                                                            <button className='btn btn-success' >
+                                                                                                {t('detail.Image.Six')}
+                                                                                            </button>
 
                                                                                         </div>
 
@@ -1812,7 +1843,9 @@ const DetailProduct = (props) => {
 
 
                                                     <div className=' chat mt-3'>
-                                                        <h5 className='mb-3' style={{ color: "#637381" }}> Nhắn tin với nhân viên</h5>
+                                                        <h5 className='mb-3' style={{ color: "#637381" }}>
+                                                            {t('detail.Chat.One')}
+                                                        </h5>
                                                         <div className="chat-all mb-2 ">
                                                             <div className='container'>
                                                                 {projects && projects.Chats &&
@@ -1858,7 +1891,7 @@ const DetailProduct = (props) => {
 
                                                                                                         </div>
                                                                                                         <div className='create-by-user d-flex justify-content-end'>
-                                                                                                            Send by:  {item.CreatedByName}
+                                                                                                            {t('detail.Chat.Two')}  {item.CreatedByName}
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div className='col-2 d-flex align-items-center' style={{ paddingBottom: "61px" }}>
@@ -1884,7 +1917,7 @@ const DetailProduct = (props) => {
 
                                                                                                         </div>
                                                                                                         <div className='create-by-user d-flex justify-content-end'>
-                                                                                                            Send by:  {item.CreatedByName}
+                                                                                                            {t('detail.Chat.Two')}  {item.CreatedByName}
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div className='col-2 d-flex align-items-center' style={{ paddingBottom: "61px" }}>
@@ -1933,7 +1966,9 @@ const DetailProduct = (props) => {
                                                                                 <div className='icon col-1'>
 
                                                                                     <span className='send' >
-                                                                                        <button className='btn btn-primary' onClick={() => createChat()}> Send</button>
+                                                                                        <button className='btn btn-primary' onClick={() => createChat()}>
+                                                                                            {t('detail.Chat.Three')}
+                                                                                        </button>
                                                                                     </span>
                                                                                 </div>
                                                                             </>
@@ -1952,7 +1987,10 @@ const DetailProduct = (props) => {
                                                                                 <div className='icon col-1'>
 
                                                                                     <span className='send' >
-                                                                                        <button className='btn btn-primary' onClick={() => createChat()}> Send</button>
+                                                                                        <button className='btn btn-primary' onClick={() => createChat()}>
+                                                                                            {t('detail.Chat.Three')}
+
+                                                                                        </button>
                                                                                     </span>
                                                                                 </div>
                                                                             </>
@@ -1967,7 +2005,9 @@ const DetailProduct = (props) => {
                                                     </div>
 
                                                     <div class="container history py-5">
-                                                        <h5 style={{ color: "#637381" }}>Lịch sử đơn hàng</h5>
+                                                        <h5 style={{ color: "#637381" }}>
+                                                            {t('detail.history.One')}
+                                                        </h5>
 
                                                         <div class="row">
                                                             <div class="col-md-12">
@@ -1975,20 +2015,24 @@ const DetailProduct = (props) => {
 
                                                                     <ul class="timeline-1 text-black" >
                                                                         <li class="event" data-date={moment(`${projects.createdAt}`).format(" DD/MM/YYYY  HH:mm:ss ")}>
-                                                                            <h4 class="mb-3" >Tạo đơn</h4>
+                                                                            <h4 class="mb-3" >
+                                                                                {t('detail.history.Two')}
+                                                                            </h4>
 
                                                                         </li>
                                                                         {!projects.statuspickupId &&
                                                                             <li class="event" style={{ opacity: "0.7" }}>
-                                                                                <h4 class="mb-3 pt-3">chưa Lấy hàng</h4>
+                                                                                <h4 class="mb-3 pt-3">
+                                                                                    chưa Lấy hàng
+                                                                                </h4>
                                                                             </li>
                                                                         }
                                                                         {projects.statuspickupId === 1 &&
                                                                             <li class="event" data-date={moment(`${projects?.pickup_time}`).format(" DD/MM/YYYY  HH:mm:ss ")}>
                                                                                 <h4 class="mb-3">{projects?.Status_Pickup?.status}</h4>
-                                                                                <span> Nhân viên lấy hàng : <b>{projects?.User_PickUp}</b>  </span>
+                                                                                <span> {t('detail.history.Three')} <b>{projects?.User_PickUp}</b>  </span>
                                                                                 <br />
-                                                                                <span> Số điện thoại : <b>{projects?.Number_PickUp}</b>  </span>
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_PickUp}</b>  </span>
 
                                                                             </li>
 
@@ -1996,9 +2040,9 @@ const DetailProduct = (props) => {
                                                                         {projects.statuspickupId === 2 &&
                                                                             <li class="event" data-date={moment(`${projects?.pickupDone_time}`).format(" DD/MM/YYYY  HH:mm:ss ")}>
                                                                                 <h4 class="mb-3">{projects?.Status_Pickup?.status}</h4>
-                                                                                <span> Nhân viên lấy hàng : <b>{projects?.User_PickUp}</b>  </span>
+                                                                                <span> {t('detail.history.Three')} <b>{projects?.User_PickUp}</b>  </span>
                                                                                 <br />
-                                                                                <span> Số điện thoại : <b>{projects?.Number_PickUp}</b>  </span>
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_PickUp}</b>  </span>
 
                                                                             </li>
 
@@ -2011,9 +2055,9 @@ const DetailProduct = (props) => {
                                                                         {projects?.statuswarehouseId === 1 &&
                                                                             <li class="event" data-date={moment(`${projects?.warehouse_time}`).format("DD/MM/YYYY  HH:mm:ss ")}>
                                                                                 <h4 class="mb-3">{projects?.Status_Warehouse?.status}</h4>
-                                                                                <span> Nhân viên kho hàng : <b>{projects?.User_Warehouse}</b>  </span>
+                                                                                <span> {t('detail.history.Five')} <b>{projects?.User_Warehouse}</b>  </span>
                                                                                 <br />
-                                                                                <span> Số điện thoại : <b>{projects?.Number_Warehouse}</b>  </span>
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Warehouse}</b>  </span>
 
                                                                             </li>
 
@@ -2021,9 +2065,9 @@ const DetailProduct = (props) => {
                                                                         {projects?.statuswarehouseId === 2 &&
                                                                             <li class="event" data-date={moment(`${projects?.warehouseDone_time}`).format("DD/MM/YYYY  HH:mm:ss ")}>
                                                                                 <h4 class="mb-3">{projects?.Status_Warehouse?.status}</h4>
-                                                                                <span> Nhân viên kho hàng : <b>{projects?.User_Warehouse}</b>  </span>
+                                                                                <span> {t('detail.history.Five')} <b>{projects?.User_Warehouse}</b>  </span>
                                                                                 <br />
-                                                                                <span> Số điện thoại : <b>{projects?.Number_Warehouse}</b>  </span>
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Warehouse}</b>  </span>
 
                                                                             </li>
 
@@ -2036,9 +2080,9 @@ const DetailProduct = (props) => {
                                                                         {projects?.statusDeliveryId === 1 && !projects?.Notice_Delivery &&
                                                                             <li class="event" data-date={moment(`${projects?.Delivery_time}`).format("DD/MM/YYYY  HH:mm:ss ")}>
                                                                                 <h4 class="mb-3">{projects?.Status_Delivery?.status}</h4>
-                                                                                <span> Nhân viên giao hàng : <b>{projects?.User_Delivery}</b>  </span>
+                                                                                <span> {t('detail.history.Six')} <b>{projects?.User_Delivery}</b>  </span>
                                                                                 <br />
-                                                                                <span> Số điện thoại : <b>{projects?.Number_Delivery}</b>  </span>
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Delivery}</b>  </span>
 
                                                                             </li>
 
@@ -2046,9 +2090,9 @@ const DetailProduct = (props) => {
                                                                         {projects?.statusDeliveryId === 2 &&
                                                                             <li class="event" data-date={moment(`${projects?.DeliveryDone_time}`).format("DD/MM/YYYY  HH:mm:ss ")}>
                                                                                 <h4 class="mb-3">{projects?.Status_Delivery?.status}</h4>
-                                                                                <span> Nhân viên giao hàng : <b>{projects?.User_Delivery}</b>  </span>
+                                                                                <span> {t('detail.history.Six')} <b>{projects?.User_Delivery}</b>  </span>
                                                                                 <br />
-                                                                                <span> Số điện thoại : <b>{projects?.Number_Delivery}</b>  </span>
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Delivery}</b>  </span>
 
                                                                             </li>
 
@@ -2056,31 +2100,36 @@ const DetailProduct = (props) => {
                                                                         {projects?.statusDeliveryId === 3 &&
                                                                             <li class="event" data-date={moment(`${projects?.DeliveryDone_time}`).format("DD/MM/YYYY  HH:mm:ss ")}>
                                                                                 <h4 class="mb-3">{projects?.Status_Delivery?.status}</h4>
-                                                                                <span> Nhân viên giao hàng : <b>{projects?.User_Delivery}</b>  </span>
+                                                                                <span> {t('detail.history.Six')} <b>{projects?.User_Delivery}</b>  </span>
                                                                                 <br />
-                                                                                <span> Số điện thoại : <b>{projects?.Number_Delivery}</b>  </span>
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Delivery}</b>  </span>
                                                                                 <br />
-                                                                                <span> lí do huỷ hàng : <b>{projects?.Cancel_reason}</b>  </span>
+                                                                                <span> {t('detail.history.Seven')} <b>{projects?.Cancel_reason}</b>  </span>
                                                                             </li>
 
                                                                         }
                                                                         {projects?.statusDeliveryId === 1 && projects?.Notice_Delivery &&
                                                                             <li class="event" data-date={moment(`${projects?.Delivery_time}`).format("DD/MM/YYYY  HH:mm:ss ")}>
                                                                                 <h4 class="mb-3">Giao lại</h4>
-                                                                                <span> Nhân viên giao hàng : <b>{projects?.User_Delivery}</b>  </span>
+                                                                                <span> {t('detail.history.Six')} <b>{projects?.User_Delivery}</b>  </span>
                                                                                 <br />
-                                                                                <span> Số điện thoại : <b>{projects?.Number_Delivery}</b>  </span>
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Delivery}</b>  </span>
                                                                                 <br />
-                                                                                <span> lí do huỷ hàng : <b>{projects?.Cancel_reason}</b>  </span>
+                                                                                <span> {t('detail.history.Eight')} <b>{projects?.Cancel_reason}</b>  </span>
                                                                             </li>
 
+                                                                        }
+                                                                        {!projects.receiveMoneyId &&
+                                                                            <li class="event" style={{ opacity: "0.7" }} >
+                                                                                <h4 class="mb-3 pt-3">Chưa đối soát</h4>
+                                                                            </li>
                                                                         }
                                                                         {projects?.receiveMoneyId === 1 &&
                                                                             <li class="event" data-date={moment(`${projects?.Overview_time}`).format("DD/MM/YYYY  HH:mm:ss ")}>
                                                                                 <h4 class="mb-3">{projects?.Status_Received_money?.status}</h4>
-                                                                                <span> Nhân viên xử lý : <b>{projects?.User_Overview}</b>  </span>
+                                                                                <span> {t('detail.history.Night')} <b>{projects?.User_Overview}</b>  </span>
                                                                                 <br />
-                                                                                <span> Số điện thoại : <b>{projects?.Number_Overview}</b>  </span>
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Overview}</b>  </span>
 
                                                                             </li>
 
@@ -2088,9 +2137,9 @@ const DetailProduct = (props) => {
                                                                         {projects?.receiveMoneyId === 2 || projects?.receiveMoneyId === 3 &&
                                                                             <li class="event" data-date={moment(`${projects?.OverviewDone_time}`).format("DD/MM/YYYY  HH:mm:ss ")}>
                                                                                 <h4 class="mb-3">{projects?.Status_Received_money?.status}</h4>
-                                                                                <span> Nhân viên xử lý : <b>{projects?.User_Overview}</b>  </span>
+                                                                                <span> {t('detail.history.Night')} <b>{projects?.User_Overview}</b>  </span>
                                                                                 <br />
-                                                                                <span> Số điện thoại : <b>{projects?.Number_Overview}</b>  </span>
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Overview}</b>  </span>
 
                                                                             </li>
 
@@ -2106,18 +2155,25 @@ const DetailProduct = (props) => {
                                             </div>
                                             <div className='right-body col-3'>
                                                 <div className='Created-Date d-flex flex-column my-3'>
-                                                    <b className='title  d-flex justify-content-center mt-3' style={{ color: "#637381" }}> Thời Gian Tạo Đơn </b>
+                                                    <b className='title  d-flex justify-content-center mt-3' style={{ color: "#637381" }}>
+                                                        {t('detail.Create-time.Three')}
+                                                    </b>
 
                                                     <hr />
                                                     <div className='container'>
                                                         <div className='value-day d-flex justify-content-around align-items-center'>
-                                                            <span>Ngày:</span>
+                                                            <span>
+                                                                {t('detail.Create-time.One')}
+
+                                                            </span>
                                                             <b className='mx-1'>
                                                                 {moment(`${projects
                                                                     .createdAt}`).format("HH:mm:ss ")}
                                                             </b>                                                    </div>
                                                         <div className='value-time d-flex justify-content-around align-items-center'>
-                                                            <span >Giờ:</span>
+                                                            <span >
+                                                                {t('detail.Create-time.Two')}
+                                                            </span>
                                                             <b >
                                                                 {moment(`${projects
                                                                     .createdAt}`).format("DD/MM/YYYY ")}
@@ -2136,13 +2192,13 @@ const DetailProduct = (props) => {
                                                                     <>
 
                                                                         <b className='customer-name col-8 ' style={{ color: "#637381" }}>
-                                                                            Thêm ghi chú đơn hàng
+                                                                            {t('detail.Extral-note.One')}
                                                                         </b>
                                                                         <div className='col-4 mx-1'>
 
                                                                             <div className='d-flex '>
                                                                                 <div className="order mx-2" onClick={() => handleUpdateProject()}>
-                                                                                    <button className=' btn btn-success' title='Save' style={{ borderRadius: "50%" }} >
+                                                                                    <button className='btn btn-success' title='Save' style={{ borderRadius: "50%" }} >
                                                                                         <i class="fa fa-floppy-o" aria-hidden="true"></i>
                                                                                     </button>
 
@@ -2164,7 +2220,7 @@ const DetailProduct = (props) => {
                                                                     :
                                                                     <>
                                                                         <b className='customer-name col-10 ' style={{ color: "#637381" }}>
-                                                                            Thêm ghi chú đơn hàng
+                                                                            {t('detail.Extral-note.Two')}
                                                                         </b>
 
                                                                         <button className='btn btn-warning' style={{ borderRadius: "50%" }} onClick={() => handleEditActionFive()}>
@@ -2203,7 +2259,7 @@ const DetailProduct = (props) => {
                                                             <div className='container'>
                                                                 <div className='my-3 '>
                                                                     <i class="fa fa-flag blue mr-2" aria-hidden="true"></i> :
-                                                                    <b style={{ overflowWrap: "anywhere" }}> {projects.Notemore ? projects.Notemore : " Thêm ghi chú cho đơn hàng"}</b>
+                                                                    <b style={{ overflowWrap: "anywhere" }}> {projects.Notemore ? projects.Notemore : `${t('detail.Extral-note.Two')}`}</b>
 
                                                                 </div>
 
@@ -2220,7 +2276,8 @@ const DetailProduct = (props) => {
                                                                 {actionModalSix === "6" ?
                                                                     <>
                                                                         <b className='customer-name col-8 ' style={{ color: "#637381" }}>
-                                                                            Thông tin người mua
+                                                                            {t('detail.Customer-infomation.One')}
+
                                                                         </b>
                                                                         <div className='col-4 mx-1'>
 
@@ -2241,7 +2298,7 @@ const DetailProduct = (props) => {
                                                                     :
                                                                     <>
                                                                         <b className='customer-name col-10 ' style={{ color: "#637381" }}>
-                                                                            Thông tin người mua
+                                                                            {t('detail.Customer-infomation.One')}
                                                                         </b>
 
                                                                         <button className='btn btn-warning' style={{ borderRadius: "50%" }} onClick={() => handleEditActionSix()}>
@@ -2261,7 +2318,9 @@ const DetailProduct = (props) => {
                                                                 <div className='my-2'>
                                                                     <span>
                                                                         <i class="fa fa-user" aria-hidden="true"></i>
-                                                                        <span className='mx-1'>  Tên :</span>
+                                                                        <span className='mx-1'>
+                                                                            {t('detail.Customer-infomation.Two')}
+                                                                        </span>
                                                                     </span>
                                                                     <input
                                                                         id='input-name-customer'
@@ -2276,7 +2335,9 @@ const DetailProduct = (props) => {
                                                                 <div className='my-2'>
                                                                     <span>
                                                                         <i class="fa fa-phone-square" aria-hidden="true"></i>
-                                                                        <span className='mx-1'> Số đt: </span>
+                                                                        <span className='mx-1'>
+                                                                            {t('detail.Customer-infomation.Three')}
+                                                                        </span>
                                                                     </span>
                                                                     <input
                                                                         id='input-name-customer'
@@ -2290,7 +2351,9 @@ const DetailProduct = (props) => {
                                                                 <div className='my-2'>
                                                                     <span>
                                                                         <i class="fa fa-child" aria-hidden="true"></i>
-                                                                        <span className='mx-1'> Tuổi : </span></span>
+                                                                        <span className='mx-1'>
+                                                                            {t('detail.Customer-infomation.Four')}
+                                                                        </span></span>
                                                                     <input
                                                                         id='input-name-customer'
                                                                         type="text"
@@ -2304,11 +2367,13 @@ const DetailProduct = (props) => {
                                                                 <div className='my-2'>
                                                                     <div>
                                                                         <i class="fa fa-map" aria-hidden="true"></i>
-                                                                        <span className='mx-1'> <b>Địa chỉ khách hàng :</b></span></div>
+                                                                        <span className='mx-1'> <b>
+                                                                            {t('detail.Customer-infomation.Six')}
+                                                                        </b></span></div>
                                                                     <div>
                                                                         <span className='mt-3'>
                                                                             <i class="fa fa-home" aria-hidden="true"></i>
-                                                                            -Tỉnh/Thành Phố :</span>
+                                                                            -{t('detail.Customer-infomation.Seven')}</span>
                                                                         <br />
 
                                                                         <select
@@ -2346,7 +2411,7 @@ const DetailProduct = (props) => {
                                                                     <div>
                                                                         <span >
                                                                             <i class="fa fa-home" aria-hidden="true"></i>
-                                                                            -Quận/Huyện :</span>
+                                                                            -{t('detail.Customer-infomation.Eight')}</span>
                                                                         <br />
 
                                                                         <select
@@ -2381,7 +2446,7 @@ const DetailProduct = (props) => {
                                                                     <div>
                                                                         <span >
                                                                             <i class="fa fa-home" aria-hidden="true"></i>
-                                                                            -Phường/xã :</span>
+                                                                            -{t('detail.Customer-infomation.Night')}</span>
                                                                         <br />
 
                                                                         <select
@@ -2414,7 +2479,7 @@ const DetailProduct = (props) => {
                                                                     <div>
                                                                         <span  >
                                                                             <i class="fa fa-home" aria-hidden="true"></i>
-                                                                            -Địa chỉ chi tiết :</span>
+                                                                            -{t('detail.Customer-infomation.Ten')}</span>
                                                                         <br />
                                                                         <input
                                                                             id='input-total-product'
@@ -2439,7 +2504,9 @@ const DetailProduct = (props) => {
                                                                     <div className='my-2'>
                                                                         <span>
                                                                             <i class="fa fa-user" aria-hidden="true"></i>
-                                                                            <span className='mx-1'>  Tên :</span>
+                                                                            <span className='mx-1'>
+                                                                                {t('detail.Customer-infomation.Two')}
+                                                                            </span>
                                                                         </span>
                                                                         <br />
 
@@ -2450,7 +2517,9 @@ const DetailProduct = (props) => {
                                                                     <div className='my-2'>
                                                                         <span>
                                                                             <i class="fa fa-phone-square" aria-hidden="true"></i>
-                                                                            <span className='mx-1'> Số đt: </span>
+                                                                            <span className='mx-1'>
+                                                                                {t('detail.Customer-infomation.Three')}
+                                                                            </span>
                                                                         </span>
                                                                         <br />
 
@@ -2460,7 +2529,9 @@ const DetailProduct = (props) => {
                                                                     <div className='my-2'>
                                                                         <span>
                                                                             <i class="fa fa-child" aria-hidden="true"></i>
-                                                                            <span className='mx-1'> Tuổi : </span>
+                                                                            <span className='mx-1'>
+                                                                                {t('detail.Customer-infomation.Four')}
+                                                                            </span>
                                                                         </span>
                                                                         <br />
 
@@ -2472,14 +2543,15 @@ const DetailProduct = (props) => {
                                                                             <i class="fa fa-map" aria-hidden="true"></i>
                                                                             <span className='mx-1'>
                                                                                 <b>
-                                                                                    Địa chỉ khách hàng :
+                                                                                    {t('detail.Customer-infomation.Six')}
                                                                                 </b>
                                                                             </span>
                                                                         </div>
                                                                         <div>
                                                                             <span >
                                                                                 <i class="fa fa-home" aria-hidden="true"></i>/
-                                                                                Tỉnh/Thành Phố :</span>
+                                                                                {t('detail.Customer-infomation.Seven')}
+                                                                            </span>
                                                                             <br />
                                                                             <b>{projects?.Province_customer?.name
 
@@ -2492,7 +2564,8 @@ const DetailProduct = (props) => {
                                                                         <div>
                                                                             <span >
                                                                                 <i class="fa fa-home" aria-hidden="true"></i>/
-                                                                                Quận/Huyện :</span>
+                                                                                {t('detail.Customer-infomation.Eight')}
+                                                                            </span>
                                                                             <br />
                                                                             <b>{projects?.District_customer && projects?.District_customer?.name ? projects?.District_customer?.name : "Đang cập nhật"}</b>
 
@@ -2501,7 +2574,8 @@ const DetailProduct = (props) => {
                                                                         <div>
                                                                             <span >
                                                                                 <i class="fa fa-home" aria-hidden="true"></i>/
-                                                                                Phường/xã :</span>
+                                                                                {t('detail.Customer-infomation.Night')}
+                                                                            </span>
                                                                             <br />
                                                                             <b>{projects?.Ward_customer && projects?.Ward_customer?.name ? projects?.Ward_customer?.name : "Đang cập nhật"}</b>
 
@@ -2510,7 +2584,8 @@ const DetailProduct = (props) => {
                                                                         <div>
                                                                             <span  >
                                                                                 <i class="fa fa-home" aria-hidden="true"></i>/
-                                                                                Địa chỉ chi tiết :</span>
+                                                                                {t('detail.Customer-infomation.Ten')}
+                                                                            </span>
                                                                             <br />
                                                                             <b>{projects?.addressDetail && projects?.addressDetail ? projects?.addressDetail : "Đang cập nhật"}</b>
 
@@ -2533,7 +2608,7 @@ const DetailProduct = (props) => {
                                                                 {actionModalSeven === "7" ?
                                                                     <>
                                                                         <b className='customer-name col-8 ' style={{ color: "#637381" }}>
-                                                                            Thông tin người bán
+                                                                            {t('detail.Seller-infomation.One')}
                                                                         </b>
                                                                         <div className='col-4 mx-1'>
 
@@ -2554,7 +2629,7 @@ const DetailProduct = (props) => {
                                                                     :
                                                                     <>
                                                                         <b className='customer-name col-10 ' style={{ color: "#637381" }}>
-                                                                            Thông tin người bán
+                                                                            {t('detail.Seller-infomation.One')}
                                                                         </b>
 
                                                                         <button className='btn btn-warning' style={{ borderRadius: "50%" }} onClick={() => handleEditActionSeven()}>
@@ -2574,32 +2649,35 @@ const DetailProduct = (props) => {
                                                             <div className='container'>
                                                                 <div className='my-3'>
                                                                     <i class="fa fa-user" aria-hidden="true"></i>
-                                                                    <span className='mx-2'>Người tạo :
+                                                                    <span className='mx-2'>
+                                                                        {t('detail.Seller-infomation.Two')}
                                                                     </span>
                                                                     <br />
-                                                                    <b> {projects.createdBy ? projects.createdBy : "Đang cập nhật"}</b>
+                                                                    <b> {projects.createdByName ? projects.createdByName : "Đang cập nhật"}</b>
 
                                                                 </div>
                                                                 <div className='my-3'>
                                                                     <i class="fa fa-phone-square" aria-hidden="true"></i>
-                                                                    <span className='mx-2'>Số điện thoại:
+                                                                    <span className='mx-2'>
+                                                                        {t('detail.Seller-infomation.Three')}
                                                                     </span>
                                                                     <br />
                                                                     <b>
-                                                                        {user.account.phone}
-                                                                    </b>
+                                                                        {projects.createdBy ? projects.createdBy : "Đang cập nhật"}                                                                    </b>
 
                                                                 </div>
                                                                 <div className='my-2'>
                                                                     <div>
                                                                         <i class="fa fa-map" aria-hidden="true"></i>
-                                                                        <span className='mx-1'> <b>Địa chỉ kho hàng :</b>
+                                                                        <span className='mx-1'> <b>
+                                                                            {t('detail.Seller-infomation.Six')}
+                                                                        </b>
                                                                         </span>
                                                                     </div>
                                                                     <div>
                                                                         <span className='mt-3'>
                                                                             <i class="fa fa-home" aria-hidden="true"></i>
-                                                                            -Tỉnh/Thành Phố :</span>
+                                                                            -{t('detail.Seller-infomation.Seven')}</span>
                                                                         <br />
 
                                                                         <select
@@ -2638,7 +2716,7 @@ const DetailProduct = (props) => {
                                                                     <div>
                                                                         <span >
                                                                             <i class="fa fa-home" aria-hidden="true"></i>
-                                                                            -Quận/Huyện :</span>
+                                                                            -{t('detail.Seller-infomation.Eight')}</span>
                                                                         <br />
 
                                                                         <select
@@ -2676,7 +2754,7 @@ const DetailProduct = (props) => {
                                                                     <div>
                                                                         <span >
                                                                             <i class="fa fa-home" aria-hidden="true"></i>
-                                                                            -Phường/xã :</span>
+                                                                            -{t('detail.Seller-infomation.Night')}</span>
                                                                         <br />
 
                                                                         <select
@@ -2715,7 +2793,7 @@ const DetailProduct = (props) => {
                                                                     <div>
                                                                         <span  >
                                                                             <i class="fa fa-home" aria-hidden="true"></i>
-                                                                            -Địa chỉ chi tiết :</span>
+                                                                            -{t('detail.Seller-infomation.Ten')}</span>
                                                                         <br />
                                                                         <input
                                                                             id='input-total-product'
@@ -2736,19 +2814,23 @@ const DetailProduct = (props) => {
                                                             <div className='container'>
                                                                 <div className='my-3'>
                                                                     <i class="fa fa-user" aria-hidden="true"></i>
-                                                                    <span className='mx-2'>Người tạo :
+                                                                    <span className='mx-2'>
+                                                                        {t('detail.Seller-infomation.Two')}
+
                                                                     </span>
                                                                     <br />
-                                                                    <b> {projects.createdBy ? projects.createdBy : "Đang cập nhật"}</b>
+                                                                    <b> {projects.createdByName ? projects.createdByName : "Đang cập nhật"}</b>
 
                                                                 </div>
                                                                 <div className='my-3'>
                                                                     <i class="fa fa-phone-square" aria-hidden="true"></i>
-                                                                    <span className='mx-2'>Số điện thoại:
+                                                                    <span className='mx-2'>
+                                                                        {t('detail.Seller-infomation.Three')}
+
                                                                     </span>
                                                                     <br />
                                                                     <b>
-                                                                        {user.account.phone}
+                                                                        <b> {projects.createdBy ? projects.createdBy : "Đang cập nhật"}</b>
                                                                     </b>
 
                                                                 </div>
@@ -2756,14 +2838,17 @@ const DetailProduct = (props) => {
                                                                     <div>
                                                                         <i class="fa fa-map" aria-hidden="true"></i>
                                                                         <span className='mx-1'>
-                                                                            <b>Địa chỉ kho hàng :</b>
+                                                                            <b>
+                                                                                {t('detail.Seller-infomation.Six')}
+                                                                            </b>
                                                                         </span>
                                                                     </div>
                                                                     <div>
                                                                         <span >
                                                                             <i class="fa fa-home" aria-hidden="true"></i>/
 
-                                                                            Tỉnh/Thành Phố :</span>
+                                                                            {t('detail.Seller-infomation.Seven')}
+                                                                        </span>
                                                                         <br />
                                                                         <b>{projects?.Address_Province?.name
 
@@ -2777,7 +2862,8 @@ const DetailProduct = (props) => {
                                                                         <span >
                                                                             <i class="fa fa-home" aria-hidden="true"></i>/
 
-                                                                            Quận/Huyện :</span>
+                                                                            {t('detail.Seller-infomation.Eight')}
+                                                                        </span>
                                                                         <br />
                                                                         <b>{projects?.Address_District?.name && projects?.Address_District?.name ? projects?.Address_District?.name : "Đang cập nhật"}</b>
 
@@ -2787,7 +2873,8 @@ const DetailProduct = (props) => {
                                                                         <span >
                                                                             <i class="fa fa-home" aria-hidden="true"></i>/
 
-                                                                            Phường/xã :</span>
+                                                                            {t('detail.Seller-infomation.Night')}
+                                                                        </span>
                                                                         <br />
                                                                         <b>{projects?.Address_Ward
                                                                             && projects?.Address_Ward
@@ -2800,7 +2887,8 @@ const DetailProduct = (props) => {
                                                                         <span >
                                                                             <i class="fa fa-home" aria-hidden="true"></i>/
 
-                                                                            Địa chỉ chi tiết :</span>
+                                                                            {t('detail.Seller-infomation.Ten')}
+                                                                        </span>
                                                                         <br />
                                                                         <b>{projects?.Detail_Place_of_receipt && projects?.Detail_Place_of_receipt ? projects?.Detail_Place_of_receipt : "Đang cập nhật"}</b>
 

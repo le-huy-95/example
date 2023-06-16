@@ -15,7 +15,11 @@ import ModalViewNotification from "../modalviewNotification"
 import { NotificationContext } from "../../contexApi/NotificationContext"
 import ModalChangePass from "../modalChangePass"
 import Language from "../navigation/language"
+import { useTranslation, Trans } from 'react-i18next';
+
 const NavHeader = (props) => {
+    const { t, i18n } = useTranslation();
+
     const location = useLocation()
     const history = useHistory()
     const { user, logout } = React.useContext(UserContext);
@@ -73,36 +77,64 @@ const NavHeader = (props) => {
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                             <Navbar.Collapse id="basic-navbar-nav">
                                 <Nav className="me-auto">
-                                    <NavLink className="nav-link" to="/" exact>Home</NavLink>
-                                    <NavDropdown title="Admin" id="basic-nav-dropdown" className='dropdown'>
-                                        <NavDropdown.Item href='/listuser'  >List user</NavDropdown.Item>
-                                        <NavDropdown.Item href='/role' >Role</NavDropdown.Item>
-                                        <NavDropdown.Item href='/grouprole'>Group-role</NavDropdown.Item>
+                                    <NavLink className="nav-link" to="/" exact>
+                                        {t('navigation.one')}
+                                    </NavLink>
+                                    <NavDropdown title={`${t('navigation.Two')}`}
+                                        id="basic-nav-dropdown" className='dropdown'>
+                                        <NavDropdown.Item href='/listuser'  >
+                                            {t('navigation.three')}
+
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item href='/role' >
+                                            {t('navigation.Four')}
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item href='/grouprole'>
+                                            {t('navigation.Five')}
+                                        </NavDropdown.Item>
                                     </NavDropdown>
                                     {!user.account.Position &&
-                                        <NavDropdown title="Customer" id="basic-nav-dropdown" className='dropdown'>
-                                            <NavDropdown.Item href='/dashboard_Product'>Dashboard Product</NavDropdown.Item>
-                                            <NavDropdown.Item href='/dashboard_Warehouse'>Dashboard Warehouse</NavDropdown.Item>
-                                            <NavDropdown.Item href='/Products' >Product</NavDropdown.Item>
-                                            <NavDropdown.Item href='/Warehouse' >Warehouse</NavDropdown.Item>
+                                        <NavDropdown title={`${t('navigation.Six')}`} id="basic-nav-dropdown" className='dropdown'>
+                                            <NavDropdown.Item href='/dashboard_Product'>
+                                                {t('navigation.Seven')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/dashboard_Warehouse'>
+                                                {t('navigation.Eight')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/Products' >
+                                                {t('navigation.Night')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/Warehouse' >
+                                                {t('navigation.Ten')}
+                                            </NavDropdown.Item>
                                         </NavDropdown>
                                     }
                                     {user?.account?.groupWithRound?.name === "Staff" &&
-                                        <NavDropdown title="employer" id="basic-nav-dropdown" className='dropdown'>
-                                            <NavDropdown.Item href='/order-processing'>Manage</NavDropdown.Item>
+                                        <NavDropdown title={`${t('navigation.Eleven')}`} id="basic-nav-dropdown" className='dropdown'>
+                                            <NavDropdown.Item href='/order-processing'>
+                                                {t('navigation.Twele')}
+                                            </NavDropdown.Item>
                                             {user?.account?.groupWithRound?.name === "Staff" && user?.account?.Position === "Nhân viên lấy hàng" &&
-                                                <NavDropdown.Item href='/Pickup_staff'>Pick up</NavDropdown.Item>
+                                                <NavDropdown.Item href='/Pickup_staff'>
+                                                    {t('navigation.Thirteen')}
+                                                </NavDropdown.Item>
                                             }
                                             {user?.account?.groupWithRound?.name === "Staff" && user?.account?.Position === "Nhân viên kho hàng" &&
-                                                <NavDropdown.Item href='/Warehouse_staff'>Warehouse</NavDropdown.Item>
+                                                <NavDropdown.Item href='/Warehouse_staff'>
+                                                    {t('navigation.Fourteen')}                                                </NavDropdown.Item>
 
                                             }
                                             {user?.account?.groupWithRound?.name === "Staff" && user?.account?.Position === "Nhân viên giao hàng" &&
-                                                <NavDropdown.Item href='/Delivery_staff'>Delivery</NavDropdown.Item>
+                                                <NavDropdown.Item href='/Delivery_staff'>
+                                                    {t('navigation.fifteen')}
+                                                </NavDropdown.Item>
 
                                             }
                                             {user?.account?.groupWithRound?.name === "Staff" && user?.account?.Position === "Nhân viên kế toán" &&
-                                                <NavDropdown.Item href='/Overview'>Overview</NavDropdown.Item>
+                                                <NavDropdown.Item href='/Overview'>
+                                                    {t('navigation.Sixteen')}
+
+                                                </NavDropdown.Item>
 
                                             }
 
@@ -119,19 +151,24 @@ const NavHeader = (props) => {
                                     {user && user.isAuthenticated === true ?
                                         <>
                                             <Nav.Item className='nav-link' >
-                                                Welcome <b> {user.account.username.toLocaleUpperCase()}</b> !
+                                                {t('navigation.Seventeen')}
+                                                <b> {user.account.username.toLocaleUpperCase()}</b> !
                                             </Nav.Item>
-                                            <NavDropdown title="Settings" id="basic-nav-dropdown">
-                                                <NavDropdown.Item onClick={() => handleShowChanePassModal()} >Change Password</NavDropdown.Item>
+                                            <NavDropdown title={`${t('navigation.Eightteen')}`} id="basic-nav-dropdown">
+                                                <NavDropdown.Item onClick={() => handleShowChanePassModal()} >
+                                                    {t('navigation.Nightteen')}
+                                                </NavDropdown.Item>
                                                 <NavDropdown.Item >
-                                                    <span onClick={() => handleLogOut()}> Log out</span>
+                                                    <span onClick={() => handleLogOut()}>
+                                                        {t('navigation.twenty')}
+                                                    </span>
                                                 </NavDropdown.Item>
 
                                             </NavDropdown>
                                         </>
                                         :
                                         <Link className='nav-link' to="/login" >
-                                            Login
+                                            {t('navigation.twentyOne')}
                                         </Link>
 
 
