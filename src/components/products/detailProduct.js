@@ -1973,8 +1973,7 @@ const DetailProduct = (props) => {
                                                                         {!projects.statuspickupId &&
                                                                             <li class="event" style={{ opacity: "0.7" }}>
                                                                                 <h4 class="mb-3 pt-3">
-                                                                                    chưa Lấy hàng
-                                                                                </h4>
+                                                                                    {t('detail.history.Ten')}                                                                                </h4>
                                                                             </li>
                                                                         }
                                                                         {projects.statuspickupId === 1 &&
@@ -1999,7 +1998,9 @@ const DetailProduct = (props) => {
                                                                         }
                                                                         {!projects.statuswarehouseId &&
                                                                             <li class="event" style={{ opacity: "0.7" }} >
-                                                                                <h4 class="mb-3 pt-3">chưa Nhập kho</h4>
+                                                                                <h4 class="mb-3 pt-3">
+                                                                                    {t('detail.history.Eleven')}
+                                                                                </h4>
                                                                             </li>
                                                                         }
                                                                         {projects?.statuswarehouseId === 1 &&
@@ -2024,7 +2025,9 @@ const DetailProduct = (props) => {
                                                                         }
                                                                         {!projects.statusDeliveryId &&
                                                                             <li class="event" style={{ opacity: "0.7" }} >
-                                                                                <h4 class="mb-3 pt-3">chưa giao hàng</h4>
+                                                                                <h4 class="mb-3 pt-3">
+                                                                                    {t('detail.history.Twele')}
+                                                                                </h4>
                                                                             </li>
                                                                         }
                                                                         {projects?.statusDeliveryId === 1 && !projects?.Notice_Delivery &&
@@ -2071,7 +2074,9 @@ const DetailProduct = (props) => {
                                                                         }
                                                                         {!projects.receiveMoneyId &&
                                                                             <li class="event" style={{ opacity: "0.7" }} >
-                                                                                <h4 class="mb-3 pt-3">Chưa đối soát</h4>
+                                                                                <h4 class="mb-3 pt-3">
+                                                                                    {t('detail.history.Thirteen')}
+                                                                                </h4>
                                                                             </li>
                                                                         }
                                                                         {projects?.receiveMoneyId === 1 &&

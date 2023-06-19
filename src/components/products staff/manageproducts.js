@@ -13,7 +13,11 @@ import ModalChatWithCutomer from "./modalChatWithCutomer"
 import moment from "moment"
 import { toast } from 'react-toastify'
 import _, { debounce } from "lodash"
+import { useTranslation, Trans } from 'react-i18next';
+
 const Manageproducts = (props) => {
+    const { t, i18n } = useTranslation();
+
     let history = useHistory()
     const { user } = React.useContext(UserContext);
     const [collapsed, setCollapsed] = useState(false)
@@ -219,7 +223,9 @@ const Manageproducts = (props) => {
                         <div className='body-employer'>
                             <div className="container">
                                 <div className='name-page-employer'>
-                                    <h4> Order processing </h4>
+                                    <h4>
+                                        {t('Manage-employer.One')}
+                                    </h4>
                                     <div className='more-employer'>
                                         <b>{user?.account?.nameUnit?.NameUnit}</b>
                                     </div>
@@ -227,43 +233,54 @@ const Manageproducts = (props) => {
                                 <div className='sort my-3'>
                                     <div className='container my-3'>
                                         <div className='row mx-3'>
-                                            <div className='col-4 my-2 content ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>Tất cả đơn hàng ({dataNumber.allNum}) </div>
+                                            <div className='col-4 my-2 content ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
+                                                {t('Manage-employer.Three')} ({dataNumber.allNum}) </div>
                                             <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Manageproducts_No_Pickup" style={{ textDecoration: "none", color: "#474141" }}>Đơn chưa lấy hàng ({dataNumber.no_pick_up})</Link>
+                                                <Link to="/Manageproducts_No_Pickup" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Manage-employer.Four')} ({dataNumber.no_pick_up})</Link>
                                             </div>
                                             <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Manageproducts_Picking" style={{ textDecoration: "none", color: "#474141" }}> Đơn đang lấy hàng ({dataNumber.picking_up})</Link>
+                                                <Link to="/Manageproducts_Picking" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Manage-employer.Five')} ({dataNumber.picking_up})</Link>
                                             </div>
                                             <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Manageproducts_pick_ok" style={{ textDecoration: "none", color: "#474141" }}>Đơn đã lấy hàng ({dataNumber.pickupOk})</Link>
+                                                <Link to="/Manageproducts_pick_ok" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Manage-employer.Six')} ({dataNumber.pickupOk})</Link>
                                             </div>
                                             <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Manageproducts_No_Warehouse" style={{ textDecoration: "none", color: "#474141" }}>Đơn chưa nhập kho ({dataNumber.no_warehouse}) </Link>
+                                                <Link to="/Manageproducts_No_Warehouse" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Manage-employer.Seven')} ({dataNumber.no_warehouse}) </Link>
 
 
                                             </div>
                                             <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Manageproducts_Warehouse_status_one" style={{ textDecoration: "none", color: "#474141" }}>Đơn đã nhập kho ({dataNumber.warehouseStatusOne})</Link>
+                                                <Link to="/Manageproducts_Warehouse_status_one" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Manage-employer.Eight')} ({dataNumber.warehouseStatusOne})</Link>
 
                                             </div>
                                             <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Manageproducts_Warehouse_status_two" style={{ textDecoration: "none", color: "#474141" }}>Đơn đã xuất kho ({dataNumber.warehouseStatusTwo})</Link>
+                                                <Link to="/Manageproducts_Warehouse_status_two" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Manage-employer.thirteen')} ({dataNumber.warehouseStatusTwo})</Link>
 
                                             </div>
                                             <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Manageproducts_No_delivery" style={{ textDecoration: "none", color: "#474141" }}> Đơn chưa giao hàng ({dataNumber.No_delivery})</Link>
+                                                <Link to="/Manageproducts_No_delivery" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Manage-employer.Night')} ({dataNumber.No_delivery})</Link>
 
                                             </div>
                                             <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Manageproducts_delivery_One" style={{ textDecoration: "none", color: "#474141" }}>Đơn đang giao hàng ({dataNumber.deliveryStatusOne})</Link>
+                                                <Link to="/Manageproducts_delivery_One" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Manage-employer.Ten')} ({dataNumber.deliveryStatusOne})</Link>
 
                                             </div>
                                             <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Manageproducts_delivery_Two" style={{ textDecoration: "none", color: "#474141" }}>Đơn giao thành công ({dataNumber.delivery_ok})</Link>
+                                                <Link to="/Manageproducts_delivery_Two" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Manage-employer.Eleven')} ({dataNumber.delivery_ok})</Link>
 
                                             </div>
                                             <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Manageproducts_delivery_Three" style={{ textDecoration: "none", color: "#474141" }}>Đơn huỷ giao hàng ({dataNumber.delivery_cancel})</Link>
+                                                <Link to="/Manageproducts_delivery_Three" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Manage-employer.Twele')} ({dataNumber.delivery_cancel})</Link>
 
                                             </div>
 
@@ -280,13 +297,15 @@ const Manageproducts = (props) => {
 
                                         <div className='table-wrapper-employer-one'>
                                             <div className='container'>
-                                                <div className='title-employer-one my-3'>Tất cả đơn hàng ({listProjectbyUnitLenght})</div>
+                                                <div className='title-employer-one my-3'>
+                                                    {t('Manage-employer.Body.Tittle')} ({listProjectbyUnitLenght})</div>
                                                 <hr />
                                                 <div className='sub-tittle'>
                                                     <div className='sub-left '>
                                                         <div className=' mx-3' style={{ color: "red" }}><i class="fa fa-flag" aria-hidden="true"></i>
                                                         </div>
-                                                        <div className='NameColor'> Đơn gấp</div>
+                                                        <div className='NameColor'>
+                                                            {t('Manage-employer.Body.Tittle-One')}                                                        </div>
 
                                                     </div>
                                                     <div className='sub-right'>
@@ -319,20 +338,45 @@ const Manageproducts = (props) => {
                                                     <thead>
                                                         <tr className='table-secondary'>
                                                             <th></th>
-                                                            <th scope="col">No</th>
-                                                            <th scope="col">id</th>
-
-                                                            <th scope="col">Mã đơn</th>
-                                                            <th scope="col">Mặt hàng</th>
-                                                            <th scope="col">Số lượng</th>
-                                                            <th scope="col">Thời gian tạo</th>
-                                                            <th scope="col">Người nhận</th>
-                                                            <th scope="col">T/T lấy hàng</th>
-                                                            <th scope="col">T/T Nhập kho</th>
-                                                            <th scope="col">T/T Giao hàng</th>
-                                                            <th scope="col">T/T Thanh toán</th>
-                                                            <th scope="col">SĐT người tạo đơn</th>
-                                                            <th scope="col">Thao tác</th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Two')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Three')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Four')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Five')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Six')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Seven')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Eight')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Night')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Ten')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Eleven')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Twele')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-thirteen')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-fourteen')}
+                                                            </th>
 
 
                                                         </tr>
@@ -369,7 +413,8 @@ const Manageproducts = (props) => {
                                                                             </span>
                                                                             <br />
                                                                             {item.User_PickUp && item.Number_PickUp &&
-                                                                                <span>Nhân viên :
+                                                                                <span>
+                                                                                    {t('Manage-employer.Body.Tittle-fifteen')}
                                                                                     <br />
 
                                                                                     <b>{item.User_PickUp}-{item.Number_PickUp} </b>
@@ -388,7 +433,8 @@ const Manageproducts = (props) => {
                                                                             <br />
                                                                             {item.User_Warehouse && item.Number_Warehouse
                                                                                 &&
-                                                                                <span>Nhân viên :
+                                                                                <span>
+                                                                                    {t('Manage-employer.Body.Tittle-fifteen')}
                                                                                     <br />
 
                                                                                     <b>{item.User_Warehouse}-{item.Number_Warehouse} </b>
@@ -408,7 +454,8 @@ const Manageproducts = (props) => {
                                                                             }
                                                                             <br />
                                                                             {item.User_Delivery && item.Number_Delivery &&
-                                                                                <span>Nhân viên :
+                                                                                <span>
+                                                                                    {t('Manage-employer.Body.Tittle-fifteen')}
                                                                                     <br />
 
                                                                                     <b>{item.User_Delivery}-{item.Number_Delivery}</b>
@@ -424,13 +471,18 @@ const Manageproducts = (props) => {
                                                                             </span>
                                                                             <br />
                                                                             {item.User_Overview && item.Number_Overview &&
-                                                                                <span>Nhân viên :
+                                                                                <span>
+                                                                                    {t('Manage-employer.Body.Tittle-fifteen')}
                                                                                     <br />
                                                                                     <b>{item.User_Overview}-{item.Number_Overview} </b>
                                                                                 </span>
                                                                             }
                                                                         </td>
-                                                                        <td>{item.createdBy}</td>
+                                                                        <td>
+                                                                            {item?.createdByName}
+                                                                            <br />
+                                                                            {item?.createdBy}
+                                                                        </td>
 
                                                                         <td>
                                                                             <span className='mx-2' style={{ color: "blue", cursor: "pointer" }} title='chuyển trang thái đơn hàng gấp' onClick={() => updateFlag(item)}>
@@ -452,7 +504,9 @@ const Manageproducts = (props) => {
                                                             <td colSpan={14}>
                                                                 <div className='d-flex align-item-center justify-content-center'>
 
-                                                                    <h5> Đơn hàng ở trạng thái bình thường đã được xử lý hết và chưa phát sinh đơn hàng mới</h5>
+                                                                    <h5>
+                                                                        {t('Manage-employer.Body.Tittle-sixteen')}
+                                                                    </h5>
 
                                                                 </div>
 
@@ -477,24 +531,48 @@ const Manageproducts = (props) => {
                                     <div className='table-wrapper-employer my-5'>
 
                                         <div className='container'>
-                                            <div className='title-employer my-3'>Kết quả tìm kiếm ({listProjectSearch.length})</div>
+                                            <div className='title-employer my-3'>
+                                                {t('Manage-employer.Body.Tittle-seventeen')} ({listProjectSearch.length})</div>
                                             <hr />
                                             <table class="table table-bordered table-body-employer">
                                                 <thead>
                                                     <tr className='table-secondary'>
-                                                        <th scope="col">id</th>
-
-                                                        <th scope="col">Mã đơn</th>
-                                                        <th scope="col">Mặt hàng</th>
-                                                        <th scope="col">Số lượng</th>
-                                                        <th scope="col">Thời gian tạo</th>
-                                                        <th scope="col">Người nhận</th>
-                                                        <th scope="col" style={{ width: "150px" }}>T/T lấy hàng</th>
-                                                        <th scope="col" style={{ width: "150px" }}>T/T Nhập kho</th>
-                                                        <th scope="col" style={{ width: "150px" }}>T/T Giao hàng</th>
-                                                        <th scope="col" style={{ width: "150px" }}>T/T Thanh toán </th>
-                                                        <th scope="col">Người tạo đơn</th>
-                                                        <th scope="col">Thao tác</th>
+                                                        <th scope="col">
+                                                            {t('Manage-employer.Body.Tittle-Three')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Manage-employer.Body.Tittle-Four')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Manage-employer.Body.Tittle-Five')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Manage-employer.Body.Tittle-Six')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Manage-employer.Body.Tittle-Seven')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Manage-employer.Body.Tittle-Eight')}
+                                                        </th>
+                                                        <th scope="col" style={{ width: "150px" }}>
+                                                            {t('Manage-employer.Body.Tittle-Night')}
+                                                        </th>
+                                                        <th scope="col" style={{ width: "150px" }}>
+                                                            {t('Manage-employer.Body.Tittle-Ten')}
+                                                        </th>
+                                                        <th scope="col" style={{ width: "150px" }}>
+                                                            {t('Manage-employer.Body.Tittle-Eleven')}
+                                                        </th>
+                                                        <th scope="col" style={{ width: "150px" }}>
+                                                            {t('Manage-employer.Body.Tittle-Twele')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Manage-employer.Body.Tittle-thirteen')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Manage-employer.Body.Tittle-fourteen')}
+                                                        </th>
 
                                                     </tr>
                                                 </thead>
@@ -518,7 +596,8 @@ const Manageproducts = (props) => {
                                                                         </span>
                                                                         <br />
                                                                         {item.User_PickUp && item.Number_PickUp &&
-                                                                            <span>Nhân viên :
+                                                                            <span>
+                                                                                {t('Manage-employer.Body.Tittle-fifteen')}
                                                                                 <br />
 
                                                                                 <b>{item.User_PickUp}-{item.Number_PickUp} </b>
@@ -537,7 +616,8 @@ const Manageproducts = (props) => {
                                                                         <br />
                                                                         {item.User_Warehouse && item.Number_Warehouse
                                                                             &&
-                                                                            <span>Nhân viên :
+                                                                            <span>
+                                                                                {t('Manage-employer.Body.Tittle-fifteen')}
                                                                                 <br />
 
                                                                                 <b>{item.User_Warehouse}-{item.Number_Warehouse} </b>
@@ -552,14 +632,20 @@ const Manageproducts = (props) => {
                                                                             {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
                                                                         </span>
                                                                         <br />
+                                                                        {item?.Cancel_reason &&
+                                                                            (<span style={{ fontWeight: "800", color: "black" }}>{item?.Cancel_reason}</span>)
+                                                                        }
+                                                                        <br />
                                                                         {item.User_Delivery && item.Number_Delivery &&
-                                                                            <span>Nhân viên :
+                                                                            <span>
+                                                                                {t('Manage-employer.Body.Tittle-fifteen')}
                                                                                 <br />
 
                                                                                 <b>{item.User_Delivery}-{item.Number_Delivery}</b>
                                                                             </span>
 
                                                                         }
+
 
                                                                     </td>
                                                                     <td>
@@ -568,18 +654,22 @@ const Manageproducts = (props) => {
                                                                         </span>
                                                                         <br />
                                                                         {item.User_Overview && item.Number_Overview &&
-                                                                            <span>Nhân viên :
+                                                                            <span>
+                                                                                {t('Manage-employer.Body.Tittle-fifteen')}
                                                                                 <br />
                                                                                 <b>{item.User_Overview}-{item.Number_Overview} </b>
                                                                             </span>
                                                                         }
                                                                     </td>
-                                                                    <td>{item.createdBy}</td>
                                                                     <td>
-                                                                        {/* <span className='mx-2' style={{ color: "red", cursor: "pointer" }} title='chuyển trang thái đơn hàng bình thường' onClick={() => updateFlag(item)}>
-                                                                                <i class="fa fa-toggle-on" aria-hidden="true"></i>
+                                                                        {item.createdByName}
+                                                                        <br />
+                                                                        {item.createdBy}
+                                                                    </td>                                                                          <td>
+                                                                        <span className='mx-2' style={{ color: "red", cursor: "pointer" }} title='chuyển trang thái đơn hàng bình thường' onClick={() => updateFlag(item)}>
+                                                                            <i class="fa fa-toggle-on" aria-hidden="true"></i>
 
-                                                                            </span> */}
+                                                                        </span>
 
 
                                                                         <br />
@@ -601,7 +691,9 @@ const Manageproducts = (props) => {
                                                         <td colSpan={14}>
                                                             <div className='d-flex align-item-center justify-content-center'>
 
-                                                                <h5> Không tìm thấy</h5>
+                                                                <h5>
+                                                                    {t('Manage-employer.Body.Tittle-eighteen')}
+                                                                </h5>
 
                                                             </div>
 

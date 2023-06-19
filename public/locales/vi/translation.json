@@ -383,16 +383,14 @@
             "Fourteen": "Chưa có phí ship",
             "fifteen": "Tổng giá trị đơn hàng :",
             "sixteen": "Đã có phí ship",
-            "seventeen": "Đã có phí ship",
-            "Eightteen": "Đã có phí ship",
-            "Nightteen": "Khuyến mãi"
+            "Nightteen": "Khuyến mãi",
+            "Eightteen": "Đơn vị tiền :"
         },
         "Image": {
             "One": "Ảnh sản phẩm",
             "Two": "Ảnh thêm mới",
             "Three": "Đơn hàng chưa có ảnh",
             "Four": "Thêm ảnh vào đơn hàng",
-            "Five": "Ảnh đơn hàng",
             "Six": "Lưu"
         },
         "Chat": {
@@ -401,7 +399,7 @@
             "Three": "Gửi"
         },
         "history": {
-            "One": "Lịch sử đơn hàng",
+            "One": "Order history",
             "Two": "Tạo đơn",
             "Three": "Nhân viên lấy hàng :",
             "Four": "Số điện thoại :",
@@ -409,7 +407,11 @@
             "Six": "Nhân viên giao hàng",
             "Seven": "Lí do huỷ hàng :",
             "Eight": "Lí do giao lại :",
-            "Night": "Nhân viên Kế toán :"
+            "Night": "Nhân viên Kế toán :",
+            "Ten": " Chưa Lấy hàng",
+            "Eleven": "Chưa Nhập kho",
+            "Twele": "Chưa giao hàng",
+            "Thirteen": "Chưa đối soát"
         },
         "Create-time": {
             "One": "Giờ :",
@@ -440,6 +442,52 @@
             "Eight": "Quận/Huyện :",
             "Night": "Phường/xã :",
             "Ten": "Địa chỉ chi tiết :"
+        }
+    },
+    "Manage-employer": {
+        "One": "Quản lý đơn hàng",
+        "Two": "Giao hàng tiết kiệm",
+        "Three": "Tất cả đơn hàng",
+        "Four": "Đơn chưa lấy hàng",
+        "Five": "Đơn đang lấy hàng",
+        "Six": "Đơn đã lấy hàng",
+        "Seven": "Đơn chưa nhập kho",
+        "Eight": "Đơn đã nhập kho",
+        "Night": "Đơn chưa giao hàng",
+        "Ten": "Đơn đang giao hàng",
+        "Eleven": "Đơn giao thành công",
+        "Twele": "Đơn giao hàng thất bại",
+        "thirteen": "Đơn đã xuất kho",
+        "Body": {
+            "Tittle": "Tất cả đơn hàng",
+            "Tittle-One": "Đơn gấp",
+            "Tittle-Two": "No",
+            "Tittle-Three": "Id",
+            "Tittle-Four": "Mã đơn",
+            "Tittle-Five": "Mặt hàng",
+            "Tittle-Six": "Số lượng",
+            "Tittle-Seven": "Thời gian tạo ",
+            "Tittle-Eight": "Người nhận",
+            "Tittle-Night": "lấy hàng",
+            "Tittle-Ten": "Nhập kho",
+            "Tittle-Eleven": "Giao hàng",
+            "Tittle-Twele": "Thanh toán",
+            "Tittle-thirteen": "Người tạo",
+            "Tittle-fourteen": "Thao tác",
+            "Tittle-fifteen": "Nhân viên :",
+            "Tittle-sixteen": "Đơn hàng ở trạng thái bình thường đã được xử lý hết và chưa phát sinh đơn hàng mới",
+            "Tittle-seventeen": "Kết quả tìm kiếm",
+            "Tittle-eighteen": "Không tìm thấy",
+            "Tittle-nineteen": "Đơn hàng chưa lấy",
+            "Tittle-twenty": "Đơn hàng chưa giao",
+            "Tittle-twentyOne": " Đơn hàng chưa nhập kho",
+            "Tittle-twentyTwo": " Đơn hàng đã lấy ",
+            "Tittle-twentyThree": " Đơn hàng đang lấy ",
+            "Tittle-twentyFour": " Đơn hàng đang giao ",
+            "Tittle-twentyFive": "Đơn hàng chưa nhập kho ",
+            "Tittle-twentySix": "Đơn giao hàng thất bại ",
+            "Tittle-twentySeven": "Đơn giao hàng thành công ",
+            "Tittle-twentyEight": "Đơn đã xuất kho "
         }
     }
 }
