@@ -112,7 +112,7 @@ const NavHeader = (props) => {
                                     {user?.account?.groupWithRound?.name === "Staff" &&
                                         <NavDropdown title={`${t('navigation.Eleven')}`} id="basic-nav-dropdown" className='dropdown'>
                                             <NavDropdown.Item href='/order-processing'>
-                                                {t('navigation.Twele')}
+                                                {t('navigation.Twelve')}
                                             </NavDropdown.Item>
                                             {user?.account?.groupWithRound?.name === "Staff" && user?.account?.Position === "Nhân viên lấy hàng" &&
                                                 <NavDropdown.Item href='/Pickup_staff'>

@@ -613,7 +613,7 @@ const CreateNewProject = (props) => {
 
                                             <div className='unitMoney col-6 mb-2'>
                                                 <label htmlFor='input-product'>
-                                                    {t('CreateProduct.tittleTwele')}
+                                                    {t('CreateProduct.tittleTwelve')}
                                                 </label>
                                                 <select
                                                     className={validInput.Mode_of_payment ? "form-select my-2" : "form-select my-2 is-invalid"}

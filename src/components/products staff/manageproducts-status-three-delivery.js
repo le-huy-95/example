@@ -257,7 +257,7 @@ const ManageproductsDeliveryStatusThree = (props) => {
 
                                             </div>
                                             <div className='col-4 content' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
-                                                {t('Manage-employer.Twele')} ({dataNumber.delivery_cancel})
+                                                {t('Manage-employer.Twelve')} ({dataNumber.delivery_cancel})
 
                                             </div>
 
@@ -344,7 +344,7 @@ const ManageproductsDeliveryStatusThree = (props) => {
                                                             {t('Manage-employer.Body.Tittle-Eleven')}
                                                         </th>
                                                         <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Twele')}
+                                                            {t('Manage-employer.Body.Tittle-Twelve')}
                                                         </th>
                                                         <th scope="col">
                                                             {t('Manage-employer.Body.Tittle-thirteen')}
@@ -381,7 +381,9 @@ const ManageproductsDeliveryStatusThree = (props) => {
 
                                                                     <td>{item.order}</td>
                                                                     <td> {item?.Warehouse?.product}</td>
-                                                                    <td>{item.quantity}</td>
+                                                                    <td>
+                                                                        {item.quantity}/{item.unit}
+                                                                    </td>
                                                                     <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
                                                                     <td> {item?.name_customer}</td>
                                                                     <td>
@@ -532,7 +534,7 @@ const ManageproductsDeliveryStatusThree = (props) => {
                                                             {t('Manage-employer.Body.Tittle-Eleven')}
                                                         </th>
                                                         <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Twele')}
+                                                            {t('Manage-employer.Body.Tittle-Twelve')}
                                                         </th>
                                                         <th scope="col">
                                                             {t('Manage-employer.Body.Tittle-thirteen')}
@@ -566,7 +568,9 @@ const ManageproductsDeliveryStatusThree = (props) => {
 
                                                                     <td>{item.order}</td>
                                                                     <td> {item?.Warehouse?.product}</td>
-                                                                    <td>{item.quantity}</td>
+                                                                    <td>
+                                                                        {item.quantity}/{item.unit}
+                                                                    </td>
                                                                     <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
                                                                     <td> {item?.name_customer}</td>
                                                                     <td>

@@ -254,7 +254,7 @@ const ManageproductsNoPickup = (props) => {
                                             </div>
                                             <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Manageproducts_delivery_Three" style={{ textDecoration: "none", color: "#474141" }}>
-                                                    {t('Manage-employer.Twele')} ({dataNumber.delivery_cancel})</Link>
+                                                    {t('Manage-employer.Twelve')} ({dataNumber.delivery_cancel})</Link>
 
                                             </div>
 
@@ -339,7 +339,7 @@ const ManageproductsNoPickup = (props) => {
                                                             {t('Manage-employer.Body.Tittle-Eleven')}
                                                         </th>
                                                         <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Twele')}
+                                                            {t('Manage-employer.Body.Tittle-Twelve')}
                                                         </th>
                                                         <th scope="col">
                                                             {t('Manage-employer.Body.Tittle-thirteen')}
@@ -374,7 +374,9 @@ const ManageproductsNoPickup = (props) => {
 
                                                                     <td>{item.order}</td>
                                                                     <td> {item?.Warehouse?.product}</td>
-                                                                    <td>{item.quantity}</td>
+                                                                    <td>
+                                                                        {item.quantity}/{item.unit}
+                                                                    </td>
                                                                     <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
                                                                     <td> {item?.name_customer}</td>
                                                                     <td>
@@ -519,7 +521,7 @@ const ManageproductsNoPickup = (props) => {
                                                             {t('Manage-employer.Body.Tittle-Eleven')}
                                                         </th>
                                                         <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Twele')}
+                                                            {t('Manage-employer.Body.Tittle-Twelve')}
                                                         </th>
                                                         <th scope="col">
                                                             {t('Manage-employer.Body.Tittle-thirteen')}
@@ -552,7 +554,9 @@ const ManageproductsNoPickup = (props) => {
 
                                                                     <td>{item.order}</td>
                                                                     <td> {item?.Warehouse?.product}</td>
-                                                                    <td>{item.quantity}</td>
+                                                                    <td>
+                                                                        {item.quantity}/{item.unit}
+                                                                    </td>
                                                                     <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
                                                                     <td> {item?.name_customer}</td>
                                                                     <td>

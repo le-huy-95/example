@@ -351,7 +351,7 @@ const DashboardProduct = (props) => {
                                     <div className='left-item my-5'>
                                         <span className='number'>{dataOne.cancel_Status}</span>
                                         <span className='text'>
-                                            {t('DashboardProduct.tittleTwele')}
+                                            {t('DashboardProduct.tittleTwelve')}
                                         </span>
                                     </div>
                                     <div className='right-item my-5'>

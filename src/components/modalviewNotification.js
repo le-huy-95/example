@@ -374,7 +374,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Twele')}</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Twelve')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -590,7 +590,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Ten')} <b>{t('Notifications.Pickup.Eleven')}</b>  {t('Notifications.Pickup.Twele')} <b>{t('Notifications.Pickup.Thirteen')}</b>
+                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Ten')} <b>{t('Notifications.Pickup.Eleven')}</b>  {t('Notifications.Pickup.Twelve')} <b>{t('Notifications.Pickup.Thirteen')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -606,7 +606,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Ten')} <b>{t('Notifications.Pickup.Thirteen')}</b> {t('Notifications.Pickup.Twele')} <b>{t('Notifications.Pickup.Eleven')}</b>
+                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Ten')} <b>{t('Notifications.Pickup.Thirteen')}</b> {t('Notifications.Pickup.Twelve')} <b>{t('Notifications.Pickup.Eleven')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -863,7 +863,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} {t('Notifications.Delivery.Twele')}</span><b>{item.Order}</b> {t('Notifications.Delivery.Thirteen')}
+                                                                    </span>} {t('Notifications.Delivery.Twelve')}</span><b>{item.Order}</b> {t('Notifications.Delivery.Thirteen')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1231,7 +1231,7 @@ const ModalViewNotification = (props) => {
 
                                                                 <div onClick={() => { handleViewProduct(item); UpdateStatusProduct(item) }}>
                                                                     <span className='mx-3'>{+item.ViewByuser === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Twele')}</span>
+                                                                    </span>}{t('Notifications.Customer.Four')} <b>{item.Order}</b> {t('Notifications.Customer.Twelve')}</span>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1447,7 +1447,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Ten')} <b>{t('Notifications.Pickup.Eleven')}</b>  {t('Notifications.Pickup.Twele')} <b>{t('Notifications.Pickup.Thirteen')}</b>
+                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Ten')} <b>{t('Notifications.Pickup.Eleven')}</b>  {t('Notifications.Pickup.Twelve')} <b>{t('Notifications.Pickup.Thirteen')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1463,7 +1463,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Ten')} <b>{t('Notifications.Pickup.Thirteen')}</b> {t('Notifications.Pickup.Twele')} <b>{t('Notifications.Pickup.Eleven')}</b>
+                                                                    </span>}{t('Notifications.Pickup.One')} </span><b>{item.Order}</b> {t('Notifications.Pickup.Ten')} <b>{t('Notifications.Pickup.Thirteen')}</b> {t('Notifications.Pickup.Twelve')} <b>{t('Notifications.Pickup.Eleven')}</b>
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1720,7 +1720,7 @@ const ModalViewNotification = (props) => {
                                                                     handleViewProductStaff(item); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                                 }}>
                                                                     <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                    </span>} {t('Notifications.Delivery.Twele')}</span><b>{item.Order}</b> {t('Notifications.Delivery.Thirteen')}
+                                                                    </span>} {t('Notifications.Delivery.Twelve')}</span><b>{item.Order}</b> {t('Notifications.Delivery.Thirteen')}
                                                                     <br />
                                                                     <span className='time'>
                                                                         {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}

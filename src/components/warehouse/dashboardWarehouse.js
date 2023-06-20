@@ -330,7 +330,7 @@ const DashboardWarehouse = (props) => {
                                 <div className='row d-flex justify-content-between'>
                                     <div className='max-value col-3'>
                                         <div className='header'>
-                                            {t('DashboardWareouse.tittleTwele')}
+                                            {t('DashboardWareouse.tittleTwelve')}
                                         </div>
 
 

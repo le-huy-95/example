@@ -10,9 +10,12 @@ import ModalChatWithCutomer from "./modalChatWithCutomer"
 import moment from "moment"
 import { toast } from 'react-toastify'
 import _, { debounce } from "lodash"
+import { useTranslation, Trans } from 'react-i18next';
 
 const PickUpStatusTwo = (props) => {
     let history = useHistory()
+    const { t, i18n } = useTranslation();
+
     const { user } = React.useContext(UserContext);
     const [collapsed, setCollapsed] = useState(false)
     const [listProjectbyStaffPickup, setListProjectbyStaffPickup] = useState([])
@@ -112,7 +115,9 @@ const PickUpStatusTwo = (props) => {
                         <div className='body-employer-pickup'>
                             <div className="container">
                                 <div className='name-page-employer-pickup'>
-                                    <h4> List Pick-up </h4>
+                                    <h4>
+                                        {t('Pick-up.One')}
+                                    </h4>
                                     <div className='more-employer-pickup'>
                                         <b>{user?.account?.nameUnit?.NameUnit}</b>
 
@@ -124,16 +129,24 @@ const PickUpStatusTwo = (props) => {
                                     <div className='container my-3'>
                                         <div className='row mx-3'>
                                             <div className='col-3 content-pickup' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Pickup_staff" style={{ textDecoration: "none", color: "#474141" }}>Tất cả đơn </Link>
+                                                <Link to="/Pickup_staff" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Pick-up.Two')}
+                                                </Link>
                                             </div>
                                             <div className='col-3 my-2 content-pickup ' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Pick_up_no_status" style={{ textDecoration: "none", color: "#474141" }}>Đơn chưa lấy hàng </Link>
+                                                <Link to="/Pick_up_no_status" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Pick-up.Three')}
+                                                </Link>
 
                                             </div>
                                             <div className='col-3 content-pickup' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Pick_up_status_one" style={{ textDecoration: "none", color: "#474141" }}> Đơn đang lấy hàng </Link>
+                                                <Link to="/Pick_up_status_one" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Pick-up.Four')}
+                                                </Link>
                                             </div>
-                                            <div className='col-3 my-2 content-pickup ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}> Đơn đã lấy hàng  </div>
+                                            <div className='col-3 my-2 content-pickup ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
+                                                {t('Pick-up.Five')}
+                                            </div>
 
 
                                         </div>
@@ -143,13 +156,16 @@ const PickUpStatusTwo = (props) => {
                                     <>
                                         <div className='table-wrapper-employer-pickup my-5'>
                                             <div className='container'>
-                                                <div className='title-employer-pickup my-3'>Tất cả đơn hàng ({listProjectbyStaffPickup.length})</div>
+                                                <div className='title-employer-pickup my-3'>
+                                                    {t('Pick-up.Six')} ({listProjectbyStaffPickup.length})</div>
                                                 <hr />
                                                 <div className='sub-title-employer-pickup'>
                                                     <div className='sub-left '>
                                                         <div className=' mx-3' style={{ color: "red" }}><i class="fa fa-flag" aria-hidden="true"></i>
                                                         </div>
-                                                        <div className='NameColor'> Đơn gấp</div>
+                                                        <div className='NameColor'>
+                                                            {t('Pick-up.Seven')}
+                                                        </div>
 
                                                     </div>
 
@@ -158,22 +174,41 @@ const PickUpStatusTwo = (props) => {
                                                     <thead>
                                                         <tr className='table-secondary'>
                                                             <th scope="col"></th>
+                                                            <th scope="col">
+                                                                {t('Pick-up.Body.Two')}
+                                                            </th>
 
-                                                            <th scope="col">Id</th>
+                                                            <th scope="col">
+                                                                {t('Pick-up.Body.Three')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Pick-up.Body.Four')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Pick-up.Body.Five')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Pick-up.Body.Six')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Pick-up.Body.Seven')}
+                                                            </th>
 
-                                                            <th scope="col">Mã đơn</th>
-                                                            <th scope="col">Mặt hàng</th>
-                                                            <th scope="col">Số lượng </th>
-                                                            <th scope="col">Thời gian tạo</th>
-                                                            <th scope="col">Trạng thái đơn hàng</th>
-
-                                                            <th scope="col" style={{ width: "200px" }}>Địa chỉ lấy hàng</th>
-                                                            <th scope="col" >Thời gian nhận đơn</th>
-                                                            <th scope="col" >Thời gian Hoàn thành</th>
-                                                            <th scope="col">Người nhận đơn</th>
-
-
-                                                            <th scope="col">Thao tác</th>
+                                                            <th scope="col" style={{ width: "200px" }}>
+                                                                {t('Pick-up.Body.Eight')}
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Pick-up.Body.Night')}
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Pick-up.Body.Ten')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Pick-up.Body.Eleven')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Pick-up.Body.Twelve')}
+                                                            </th>
 
 
                                                         </tr>
@@ -203,8 +238,9 @@ const PickUpStatusTwo = (props) => {
 
                                                                         <td>
                                                                             {item?.Warehouse?.product}</td>
-                                                                        <td>{item.quantity}</td>
-                                                                        <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
+                                                                        <td>
+                                                                            {item.quantity}/{item.unit}
+                                                                        </td>                                                                          <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
                                                                         <td>
                                                                             <span style={{ color: "red", fontWeight: "700" }}>
                                                                                 {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
@@ -226,7 +262,9 @@ const PickUpStatusTwo = (props) => {
                                                                         <td>
                                                                             {item?.statuspickupId === 2 &&
 
-                                                                                <button className='btn btn-success' > lấy hàng thành công</button>
+                                                                                <button className='btn btn-success' >
+                                                                                    {t('Pick-up.Body.Nineteen')}
+                                                                                </button>
 
                                                                             }
 
@@ -242,7 +280,10 @@ const PickUpStatusTwo = (props) => {
                                                             <td colSpan={14}>
                                                                 <div className='d-flex align-item-center justify-content-center'>
 
-                                                                    <h5> Đơn hàng đã được xử lý toàn bộ</h5>
+                                                                    <h5>
+                                                                        {t('Pick-up.Body.Sixteen')}
+
+                                                                    </h5>
 
                                                                 </div>
 
@@ -265,26 +306,49 @@ const PickUpStatusTwo = (props) => {
                                     <div className='table-wrapper-employer-search my-5'>
 
                                         <div className='container'>
-                                            <div className='title-employer-search my-3'>Kết quả tìm kiếm ({listProjectSearch.length})</div>
+                                            <div className='title-employer-search my-3'>
+                                                {t('Pick-up.Body.TwentyTwo')} ({listProjectSearch.length})
+                                            </div>
                                             <hr />
                                             <table class="table table-bordered table-body-employer-search">
                                                 <thead>
                                                     <tr className='table-secondary'>
-                                                        <th scope="col">Id</th>
+                                                        <th scope="col"></th>
+                                                        <th scope="col">
+                                                            {t('Pick-up.Body.Two')}
+                                                        </th>
 
-                                                        <th scope="col">Mã đơn</th>
-                                                        <th scope="col">Mặt hàng</th>
-                                                        <th scope="col">Số lượng </th>
-                                                        <th scope="col">Thời gian tạo</th>
-                                                        <th scope="col">Trạng thái đơn hàng</th>
+                                                        <th scope="col">
+                                                            {t('Pick-up.Body.Three')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Pick-up.Body.Four')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Pick-up.Body.Five')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Pick-up.Body.Six')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Pick-up.Body.Seven')}
+                                                        </th>
 
-                                                        <th scope="col" style={{ width: "200px" }}>Địa chỉ lấy hàng</th>
-                                                        <th scope="col" >Thời gian nhận đơn</th>
-                                                        <th scope="col" >Thời gian Hoàn thành</th>
-
-                                                        <th scope="col">Người nhận đơn</th>
-
-                                                        <th scope="col">Thao tác</th>
+                                                        <th scope="col" style={{ width: "200px" }}>
+                                                            {t('Pick-up.Body.Eight')}
+                                                        </th>
+                                                        <th scope="col" >
+                                                            {t('Pick-up.Body.Night')}
+                                                        </th>
+                                                        <th scope="col" >
+                                                            {t('Pick-up.Body.Ten')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Pick-up.Body.Eleven')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Pick-up.Body.Twelve')}
+                                                        </th>
 
                                                     </tr>
                                                 </thead>
@@ -296,12 +360,22 @@ const PickUpStatusTwo = (props) => {
                                                             <tbody key={`item-${index}`}>
 
                                                                 <tr class="table-primary">
+                                                                    {item?.flag === true ?
+                                                                        <td>
+                                                                            <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                            </span>
+                                                                        </td>
+                                                                        :
+                                                                        <td></td>
 
+                                                                    }
                                                                     <td>{item.id}</td>
                                                                     <td>{item.order}</td>
                                                                     <td> {item?.Warehouse?.product}</td>
-                                                                    <td>{item.quantity}</td>
-                                                                    <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
+                                                                    <td>
+                                                                        {item.quantity}/{item.unit}
+                                                                    </td>                                                                      <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
                                                                     <td>
                                                                         {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
                                                                     </td>
@@ -313,7 +387,9 @@ const PickUpStatusTwo = (props) => {
                                                                     <td>
                                                                         {item?.statuspickupId === 2 &&
 
-                                                                            <button className='btn btn-success' > lấy hàng thành công</button>
+                                                                            <button className='btn btn-success' >
+                                                                                {t('Pick-up.Body.Nineteen')}
+                                                                            </button>
 
                                                                         }
 
@@ -332,7 +408,9 @@ const PickUpStatusTwo = (props) => {
                                                         <td colSpan={14}>
                                                             <div className='d-flex align-item-center justify-content-center'>
 
-                                                                <h5> Không tìm thấy</h5>
+                                                                <h5>
+                                                                    {t('Pick-up.Body.TwentyThree')}
+                                                                </h5>
 
                                                             </div>
 

@@ -1234,7 +1234,7 @@ const DetailProduct = (props) => {
                                                                                         <div className='container'>
                                                                                             <div className='row'>
                                                                                                 <div className='item-info_name col-12 '>
-                                                                                                    {t('detail.Status-payment.Twele')}
+                                                                                                    {t('detail.Status-payment.Twelve')}
                                                                                                 </div>
                                                                                                 <input
                                                                                                     id='input-total-product'
@@ -1256,7 +1256,7 @@ const DetailProduct = (props) => {
                                                                                         <div className='container'>
                                                                                             <div className='row'>
                                                                                                 <div className='item-info_name col-12 '>
-                                                                                                    {t('detail.Status-payment.Twele')}
+                                                                                                    {t('detail.Status-payment.Twelve')}
                                                                                                 </div>
                                                                                                 <input
                                                                                                     id='input-total-product'
@@ -1282,7 +1282,7 @@ const DetailProduct = (props) => {
                                                                                         <div className='container'>
                                                                                             <div className='row'>
                                                                                                 <div className='item-info_name col-12 '>
-                                                                                                    {t('detail.Status-payment.Twele')}
+                                                                                                    {t('detail.Status-payment.Twelve')}
                                                                                                 </div>
 
 
@@ -1494,7 +1494,7 @@ const DetailProduct = (props) => {
                                                                                 </div>
                                                                                 <div className='item-info py-1 d-flex align-items-center justify-content-between'>
                                                                                     <div className='item-info_name  '>
-                                                                                        {t('detail.Status-payment.Twele')}
+                                                                                        {t('detail.Status-payment.Twelve')}
                                                                                     </div>
                                                                                     <b className='item-info_value'>
                                                                                         {projects.paid
@@ -2026,7 +2026,7 @@ const DetailProduct = (props) => {
                                                                         {!projects.statusDeliveryId &&
                                                                             <li class="event" style={{ opacity: "0.7" }} >
                                                                                 <h4 class="mb-3 pt-3">
-                                                                                    {t('detail.history.Twele')}
+                                                                                    {t('detail.history.Twelve')}
                                                                                 </h4>
                                                                             </li>
                                                                         }
