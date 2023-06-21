@@ -25,6 +25,8 @@ const NavHeader = (props) => {
     const { user, logout } = React.useContext(UserContext);
     const { list, listStaff } = React.useContext(NotificationContext);
 
+    const [ListUnread, setListUnread] = useState([])
+    const [listStaffUnread, setlistStaffUnread] = useState([])
 
     const [show, setShow] = useState(false)
     const [showModalChangePass, setShowModalChangePass] = useState(false)
@@ -33,6 +35,17 @@ const NavHeader = (props) => {
         setShowModalChangePass(!showModalChangePass)
     }
 
+    useEffect(() => {
+        if (list && list.length > 0) {
+            let data = list.filter(item => item.ViewByuser === "0")
+            setListUnread(data)
+        }
+        if (listStaff && listStaff.length > 0) {
+            let data = listStaff.filter(item => item.ViewByStaff === "0")
+            setlistStaffUnread(data)
+        }
+
+    }, [list, listStaff])
 
     const handleShowNotificationModal = () => {
         setShow(!show)
@@ -178,10 +191,9 @@ const NavHeader = (props) => {
                                 </Nav>
                                 <Nav.Item className='nav-link' >
                                     <button className=" btn btn-primary position-relative" onClick={() => handleShowNotificationModal()}>
-
                                         <i className="fa fa-bell" aria-hidden="true"></i>
                                         <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                            {!user.account.Position ? list.length : listStaff.length}
+                                            {!user.account.Position ? ListUnread.length : listStaffUnread.length}
 
 
                                             <span className="visually-hidden">unread messages</span>

@@ -211,8 +211,8 @@ const PickUpStatusOne = (props) => {
                                                             <th scope="col">
                                                                 {t('Pick-up.Body.Five')}
                                                             </th>
-                                                            <th scope="col">
-                                                                {t('Pick-up.Body.Six')}
+                                                            <th scope="col" style={{ width: "120px" }}>
+                                                                {t('Pick-up.Body.TwentyFive')}
                                                             </th>
                                                             <th scope="col">
                                                                 {t('Pick-up.Body.Seven')}
@@ -229,6 +229,9 @@ const PickUpStatusOne = (props) => {
                                                             </th>
                                                             <th scope="col">
                                                                 {t('Pick-up.Body.Eleven')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Pick-up.Body.TwentyFour')}
                                                             </th>
                                                             <th scope="col">
                                                                 {t('Pick-up.Body.Twelve')}
@@ -264,7 +267,18 @@ const PickUpStatusOne = (props) => {
                                                                             {item?.Warehouse?.product}</td>
                                                                         <td>
                                                                             {item.quantity}/{item.unit}
-                                                                        </td>                                                                          <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
+                                                                        </td>
+                                                                        <td>
+
+                                                                            {item?.createdByName}
+                                                                            <br />
+                                                                            {item?.createdBy}
+                                                                            <br />
+                                                                            <b>{t('Pick-up.Body.Six')}</b>
+                                                                            <br />
+                                                                            {moment(`${item.createdAt}`).format("DD/MM/YYYY")}
+
+                                                                        </td>
                                                                         <td>
                                                                             <span style={{ color: "red", fontWeight: "700" }}>
                                                                                 {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
@@ -281,6 +295,12 @@ const PickUpStatusOne = (props) => {
                                                                             {item?.User_PickUp ? item?.User_PickUp : "chưa ai nhận đơn"}
                                                                             -
                                                                             {item?.Number_PickUp ? item?.Number_PickUp : ""}
+
+                                                                        </td>
+                                                                        <td>
+                                                                            {item?.Note ? item?.Note : ""}
+                                                                            <br />
+                                                                            {item?.Notemore ? item?.Notemore : ""}
 
                                                                         </td>
                                                                         <td>
@@ -351,8 +371,8 @@ const PickUpStatusOne = (props) => {
                                                         <th scope="col">
                                                             {t('Pick-up.Body.Five')}
                                                         </th>
-                                                        <th scope="col">
-                                                            {t('Pick-up.Body.Six')}
+                                                        <th scope="col" style={{ width: "120px" }}>
+                                                            {t('Pick-up.Body.TwentyFive')}
                                                         </th>
                                                         <th scope="col">
                                                             {t('Pick-up.Body.Seven')}
@@ -369,6 +389,9 @@ const PickUpStatusOne = (props) => {
                                                         </th>
                                                         <th scope="col">
                                                             {t('Pick-up.Body.Eleven')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Pick-up.Body.TwentyFour')}
                                                         </th>
                                                         <th scope="col">
                                                             {t('Pick-up.Body.Twelve')}
@@ -398,7 +421,18 @@ const PickUpStatusOne = (props) => {
                                                                     <td> {item?.Warehouse?.product}</td>
                                                                     <td>
                                                                         {item.quantity}/{item.unit}
-                                                                    </td>                                                                      <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
+                                                                    </td>
+                                                                    <td>
+
+                                                                        {item?.createdByName}
+                                                                        <br />
+                                                                        {item?.createdBy}
+                                                                        <br />
+                                                                        <b>{t('Pick-up.Body.Six')}</b>
+                                                                        <br />
+                                                                        {moment(`${item.createdAt}`).format("DD/MM/YYYY")}
+
+                                                                    </td>
                                                                     <td>
                                                                         {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
                                                                     </td>
@@ -407,7 +441,12 @@ const PickUpStatusOne = (props) => {
                                                                     <td>{item?.pickupDone_time ? moment(`${item?.pickupDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
 
                                                                     <td> {item?.User_PickUp ? item?.User_PickUp : "chưa ai nhận đơn"}- {item?.Number_PickUp ? item?.Number_PickUp : "0"}</td>
+                                                                    <td>
+                                                                        {item?.Note ? item?.Note : ""}
+                                                                        <br />
+                                                                        {item?.Notemore ? item?.Notemore : ""}
 
+                                                                    </td>
                                                                     <td>
                                                                         {item?.User_PickUp &&
 

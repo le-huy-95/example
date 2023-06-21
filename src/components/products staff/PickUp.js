@@ -14,7 +14,6 @@ import { useTranslation, Trans } from 'react-i18next';
 
 const Pickup = (props) => {
     const { t, i18n } = useTranslation();
-
     let history = useHistory()
     const { user } = React.useContext(UserContext);
     const [collapsed, setCollapsed] = useState(false)

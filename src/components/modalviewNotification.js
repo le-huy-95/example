@@ -25,7 +25,6 @@ const ModalViewNotification = (props) => {
 
     const handleViewProductStaff = async (item) => {
         let res = await checkExist(item)
-        console.log("res", item)
         if (res && +res.EC === 0) {
             if (user.account.Position === "Nhân viên lấy hàng" && item.Change_content === "thêm mới") {
                 history.push(`/Pick_up_no_status`)

@@ -10,8 +10,10 @@ import ModalChatWithCutomer from "./modalChatWithCutomer"
 import { toast } from 'react-toastify'
 import moment from "moment"
 import _, { debounce } from "lodash"
+import { useTranslation, Trans } from 'react-i18next';
 
 const Warehouse_staff = (props) => {
+    const { t, i18n } = useTranslation();
     let history = useHistory()
     const { user } = React.useContext(UserContext);
     const [collapsed, setCollapsed] = useState(false)
@@ -187,7 +189,9 @@ const Warehouse_staff = (props) => {
                         <div className='body-employer-warehouse'>
                             <div className="container">
                                 <div className='name-page-employer-warehouse'>
-                                    <h4> List Warehouse </h4>
+                                    <h4>
+                                        {t('Warehouse-employer.One')}
+                                    </h4>
                                     <div className='more-employer-pickup'>
                                         <b>{user?.account?.nameUnit?.NameUnit}</b>
 
@@ -199,15 +203,23 @@ const Warehouse_staff = (props) => {
                                 <div className='sort_warehouse my-3'>
                                     <div className='container my-3'>
                                         <div className='row mx-3'>
-                                            <div className='col-3 my-2 content-warehouse ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}> Tất cả đơn  </div>
-                                            <div className='col-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Warehouse_no_status" style={{ textDecoration: "none", color: "#474141" }}>Đơn chưa Nhập kho </Link>
+                                            <div className='col-3 my-2 content-warehouse ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
+                                                {t('Warehouse-employer.Two')}
                                             </div>
                                             <div className='col-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Warehouse_status_one" style={{ textDecoration: "none", color: "#474141" }}> Đơn đã nhập kho </Link>
+                                                <Link to="/Warehouse_no_status" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Warehouse-employer.Three')}
+                                                </Link>
                                             </div>
                                             <div className='col-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Warehouse_status_two" style={{ textDecoration: "none", color: "#474141" }}> Đơn đã xuất kho </Link>
+                                                <Link to="/Warehouse_status_one" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Warehouse-employer.Four')}
+                                                </Link>
+                                            </div>
+                                            <div className='col-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                                <Link to="/Warehouse_status_two" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Warehouse-employer.Five')}
+                                                </Link>
                                             </div>
 
                                         </div>
@@ -217,7 +229,9 @@ const Warehouse_staff = (props) => {
                                     <>
                                         <div className='table-wrapper-employer-warehouse my-5'>
                                             <div className='container'>
-                                                <div className='title-employer-warehouse my-3'>Tất cả đơn hàng ({ListProjectbyStaffWarehouse.length})</div>
+                                                <div className='title-employer-warehouse my-3'>
+                                                    {t('Warehouse-employer.Six')} ({ListProjectbyStaffWarehouse.length})
+                                                </div>
                                                 <hr />
 
                                                 <div className='sub-title-employer-warehouse'>
@@ -225,7 +239,9 @@ const Warehouse_staff = (props) => {
                                                     <div className='sub-left '>
                                                         <div className=' mx-3' style={{ color: "red" }}><i class="fa fa-flag" aria-hidden="true"></i>
                                                         </div>
-                                                        <div className='NameColor'> Đơn gấp</div>
+                                                        <div className='NameColor'>
+                                                            {t('Warehouse-employer.Seven')}
+                                                        </div>
 
                                                     </div>
 
@@ -260,24 +276,44 @@ const Warehouse_staff = (props) => {
                                                     <thead>
                                                         <tr className='table-secondary'>
                                                             <th></th>
-                                                            <th scope="col">No</th>
-                                                            <th scope="col">Id</th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.One')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Two')}
+                                                            </th>
 
-                                                            <th scope="col">Mã đơn</th>
-                                                            <th scope="col">Mặt hàng</th>
-                                                            <th scope="col">Số lượng </th>
-                                                            <th scope="col"> Trạng thái đơn hàng</th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Three')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Four')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Five')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Seven')}
+                                                            </th>
 
-                                                            <th scope="col"> Nhân viên xử lý</th>
-                                                            <th scope="col" >Thời gian nhận đơn</th>
-                                                            <th scope="col" >Thời gian Hoàn thành</th>
-                                                            <th scope="col">Thao tác</th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Eight')}
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Warehouse-employer.Body.Night')}
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Warehouse-employer.Body.Ten')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Eleven')}
+                                                            </th>
 
 
                                                         </tr>
                                                     </thead>
                                                     {ListProjectbyStaffWarehouse && ListProjectbyStaffWarehouse.length > 0
-                                                        &&
+                                                        ?
 
                                                         ListProjectbyStaffWarehouse.map((item, index) => {
                                                             return (
@@ -299,7 +335,9 @@ const Warehouse_staff = (props) => {
                                                                         <td>{item.id}</td>
                                                                         <td>{item.order}</td>
                                                                         <td> {item?.Warehouse?.product}</td>
-                                                                        <td>{item.quantity}</td>
+                                                                        <td>
+                                                                            {item.quantity}/{item.unit}
+                                                                        </td>
                                                                         <td>
                                                                             <span style={{ color: "red", fontWeight: "500" }}>  {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa nhập kho"}</span>
                                                                         </td>
@@ -314,18 +352,24 @@ const Warehouse_staff = (props) => {
                                                                         <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                         {!item?.User_Warehouse && !item?.Number_Warehouse &&
                                                                             < td >
-                                                                                <button className='btn btn-danger' onClick={() => updateWArehouse(item)}> Nhận đơn</button>
+                                                                                <button className='btn btn-danger' onClick={() => updateWArehouse(item)}>
+                                                                                    {t('Warehouse-employer.Body.Twelve')}
+                                                                                </button>
                                                                             </td>
                                                                         }
 
                                                                         {+item?.statuswarehouseId === 1 &&
                                                                             <td>
-                                                                                <button className='btn btn-info' > Đã nhập kho</button>
+                                                                                <button className='btn btn-info' >
+                                                                                    {t('Warehouse-employer.Four')}
+                                                                                </button>
                                                                             </td>
                                                                         }
                                                                         {+item?.statuswarehouseId === 2 &&
                                                                             <td>
-                                                                                <button className='btn btn-success' > Đã xuất kho</button>
+                                                                                <button className='btn btn-success' >
+                                                                                    {t('Warehouse-employer.Five')}
+                                                                                </button>
                                                                             </td>
                                                                         }
 
@@ -333,7 +377,23 @@ const Warehouse_staff = (props) => {
                                                                     </tr>
                                                                 </tbody>
                                                             )
-                                                        })}
+                                                        })
+                                                        :
+
+                                                        <tr class="table-info">
+                                                            <td colSpan={14}>
+                                                                <div className='d-flex align-item-center justify-content-center'>
+
+                                                                    <h5>
+                                                                        {t('Warehouse-employer.Body.Sixteen')}
+                                                                    </h5>
+
+                                                                </div>
+
+                                                            </td>
+
+                                                        </tr>
+                                                    }
 
 
                                                 </table>
@@ -343,22 +403,45 @@ const Warehouse_staff = (props) => {
                                         </div>
                                         <div className='table-wrapper-employer-warehouse-One my-5'>
                                             <div className='container'>
-                                                <div className='title-employer-warehouse-One my-3'>Đơn bạn đã nhận ({listProjectbyUsernameStaffWarehouse.length})</div>
+                                                <div className='title-employer-warehouse-One my-3'>
+                                                    {t('Warehouse-employer.Body.Fifteen')} ({listProjectbyUsernameStaffWarehouse.length})
+                                                </div>
                                                 <hr />
                                                 <table class="table table-bordered table-body-employer-warehouse-One">
                                                     <thead>
                                                         <tr className='table-secondary'>
                                                             <th></th>
-                                                            <th scope="col">Id</th>
-                                                            <th scope="col">Mã đơn</th>
-                                                            <th scope="col">Mặt hàng</th>
-                                                            <th scope="col">Số lượng </th>
-                                                            <th scope="col">Trạng thái đơn hàng </th>
 
-                                                            <th scope="col"> Nhân viên xử lý</th>
-                                                            <th scope="col" >Thời gian nhập kho</th>
-                                                            <th scope="col" >Thời gian xuất kho</th>
-                                                            <th scope="col">Thao tác</th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Two')}
+                                                            </th>
+
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Three')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Four')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Five')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Seven')}
+                                                            </th>
+
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Eight')}
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Warehouse-employer.Body.Night')}
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Warehouse-employer.Body.Ten')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Eleven')}
+                                                            </th>
+
 
 
                                                         </tr>
@@ -383,7 +466,9 @@ const Warehouse_staff = (props) => {
                                                                         <td>{item.id}</td>
                                                                         <td>{item.order}</td>
                                                                         <td> {item?.Warehouse?.product}</td>
-                                                                        <td>{item.quantity}</td>
+                                                                        <td>
+                                                                            {item.quantity}/{item.unit}
+                                                                        </td>
                                                                         <td>
                                                                             <span style={{ color: "red", fontWeight: "500" }}>  {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa nhập kho"}</span>
                                                                         </td>
@@ -403,9 +488,13 @@ const Warehouse_staff = (props) => {
 
                                                                             :
                                                                             <td>
-                                                                                <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)}> Hoàn thành</button>
+                                                                                <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)}>
+                                                                                    {t('Warehouse-employer.Body.Thirteen')}
+                                                                                </button>
                                                                                 <br />
-                                                                                <button className='btn btn-warning mx-3 my-1' onClick={() => updateWArehouse(item)}>Hủy nhận đơn</button>
+                                                                                <button className='btn btn-warning mx-3 my-1' onClick={() => updateWArehouse(item)}>
+                                                                                    {t('Warehouse-employer.Body.Fourteen')}
+                                                                                </button>
 
                                                                             </td>
                                                                         }
@@ -421,7 +510,9 @@ const Warehouse_staff = (props) => {
                                                             <td colSpan={14}>
                                                                 <div className='d-flex align-item-center justify-content-center'>
 
-                                                                    <h5> Đơn hàng đã được xử lý toàn bộ</h5>
+                                                                    <h5>
+                                                                        {t('Warehouse-employer.Body.Seventeen')}
+                                                                    </h5>
 
                                                                 </div>
 
@@ -442,22 +533,46 @@ const Warehouse_staff = (props) => {
                                 {isSearch === true &&
                                     <div className='table-wrapper-employer-warehouse-One my-5'>
                                         <div className='container'>
-                                            <div className='title-employer-warehouse-One my-3'>Kết quả tìm kiếm ({listProjectSearch.length})</div>
+                                            <div className='title-employer-warehouse-One my-3'>
+                                                {t('Warehouse-employer.Body.Nineteen')} ({listProjectSearch.length})
+                                            </div>
                                             <hr />
                                             <table class="table table-bordered table-body-employer-warehouse-One">
                                                 <thead>
                                                     <tr className='table-secondary' >
                                                         <th></th>
-                                                        <th scope="col">Id</th>
-                                                        <th scope="col">Mã đơn</th>
-                                                        <th scope="col">Mặt hàng</th>
-                                                        <th scope="col">Số lượng </th>
-                                                        <th scope="col">Trạng thái đơn hàng </th>
 
-                                                        <th scope="col"> Nhân viên xử lý</th>
-                                                        <th scope="col" >Thời gian nhập kho</th>
-                                                        <th scope="col" >Thời gian xuất kho</th>
-                                                        <th scope="col">Thao tác</th>
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Two')}
+                                                        </th>
+
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Three')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Four')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Five')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Seven')}
+                                                        </th>
+
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Eight')}
+                                                        </th>
+                                                        <th scope="col" >
+                                                            {t('Warehouse-employer.Body.Night')}
+                                                        </th>
+                                                        <th scope="col" >
+                                                            {t('Warehouse-employer.Body.Ten')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Eleven')}
+                                                        </th>
+
+
 
 
                                                     </tr>
@@ -482,7 +597,9 @@ const Warehouse_staff = (props) => {
                                                                     <td>{item.id}</td>
                                                                     <td>{item.order}</td>
                                                                     <td> {item?.Warehouse?.product}</td>
-                                                                    <td>{item.quantity}</td>
+                                                                    <td>
+                                                                        {item.quantity}/{item.unit}
+                                                                    </td>
                                                                     <td>
                                                                         <span style={{ color: "red", fontWeight: "500" }}>  {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa nhập kho"}</span>
                                                                     </td>
@@ -497,22 +614,30 @@ const Warehouse_staff = (props) => {
                                                                     <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                     {item.statuswarehouseId === 0 &&
                                                                         <td>
-                                                                            <button className='btn btn-danger mx-3 my-1' onClick={() => updateWArehouse(item)} > Nhận đơn</button>
+                                                                            <button className='btn btn-danger mx-3 my-1' onClick={() => updateWArehouse(item)} >
+                                                                                {t('Warehouse-employer.Body.Twelve')}
+                                                                            </button>
                                                                         </td>
                                                                     }
 
                                                                     {item.statuswarehouseId === 1
                                                                         &&
                                                                         <td>
-                                                                            <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)}> Hoàn thành</button>
+                                                                            <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)}>
+                                                                                {t('Warehouse-employer.Body.Thirteen')}
+                                                                            </button>
                                                                             <br />
-                                                                            <button className='btn btn-warning mx-3 my-1' onClick={() => updateWArehouse(item)}>Hủy nhận đơn</button>
+                                                                            <button className='btn btn-warning mx-3 my-1' onClick={() => updateWArehouse(item)}>
+                                                                                {t('Warehouse-employer.Body.Fourteen')}
+                                                                            </button>
 
                                                                         </td>
                                                                     }
                                                                     {item.statuswarehouseId === 2 &&
                                                                         <td>
-                                                                            <button className='btn btn-info mx-3 my-1' > Đã xong</button>
+                                                                            <button className='btn btn-info mx-3 my-1' >
+                                                                                {t('Warehouse-employer.Five')}
+                                                                            </button>
                                                                         </td>
 
 
@@ -529,7 +654,9 @@ const Warehouse_staff = (props) => {
                                                         <td colSpan={14}>
                                                             <div className='d-flex align-item-center justify-content-center'>
 
-                                                                <h5> Không tìm thấy</h5>
+                                                                <h5>
+                                                                    {t('Warehouse-employer.Body.Eighteen')}
+                                                                </h5>
 
                                                             </div>
 

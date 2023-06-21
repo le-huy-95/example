@@ -10,8 +10,10 @@ import ModalCancelReason from "./modal_cancel_reason"
 import { toast } from 'react-toastify'
 import _, { debounce } from "lodash"
 import moment from "moment"
+import { useTranslation, Trans } from 'react-i18next';
 
 const Delivery_staff = (props) => {
+    const { t, i18n } = useTranslation();
     let history = useHistory()
     const { user } = React.useContext(UserContext);
     const [collapsed, setCollapsed] = useState(false)
@@ -193,7 +195,9 @@ const Delivery_staff = (props) => {
                         <div className='body-employer-Delivery'>
                             <div className="container">
                                 <div className='name-page-employer-Delivery'>
-                                    <h4> List Delivery </h4>
+                                    <h4>
+                                        {t('Delivery-employer.One')}
+                                    </h4>
                                     <div className='more-employer-pickup'>
                                         <b>{user?.account?.nameUnit?.NameUnit}</b>
 
@@ -205,21 +209,33 @@ const Delivery_staff = (props) => {
                                 <div className='sort_Delivery my-3'>
                                     <div className='container my-3'>
                                         <div className='row mx-3'>
-                                            <div className='col-3 my-2 content-Delivery ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}> Tất cả đơn  </div>
-                                            <div className='col-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Delivery_no_status" style={{ textDecoration: "none", color: "#474141" }}>Đơn chưa giao hàng </Link>
+                                            <div className='col-3 my-2 content-Delivery ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
+                                                {t('Delivery-employer.Two')}
                                             </div>
                                             <div className='col-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Delivery_status_one" style={{ textDecoration: "none", color: "#474141" }}> Đơn đang giao hàng </Link>
+                                                <Link to="/Delivery_no_status" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Delivery-employer.Three')}
+                                                </Link>
                                             </div>
                                             <div className='col-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Delivery_status_one" style={{ textDecoration: "none", color: "#474141" }}> Đơn đã giao hàng </Link>
+                                                <Link to="/Delivery_status_one" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Delivery-employer.Four')}
+                                                </Link>
                                             </div>
                                             <div className='col-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Delivery_status_four" style={{ textDecoration: "none", color: "#474141" }}> Đơn giao lại </Link>
+                                                <Link to="/Delivery_status_one" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Delivery-employer.Five')}
+                                                </Link>
                                             </div>
                                             <div className='col-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Delivery_status_three" style={{ textDecoration: "none", color: "#474141" }}> Đơn hủy giao hàng </Link>
+                                                <Link to="/Delivery_status_four" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Delivery-employer.Six')}
+                                                </Link>
+                                            </div>
+                                            <div className='col-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                                <Link to="/Delivery_status_three" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Delivery-employer.Seven')}
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
@@ -228,13 +244,19 @@ const Delivery_staff = (props) => {
                                     <>
                                         <div className='table-wrapper-employer-Delivery my-5'>
                                             <div className='container'>
-                                                <div className='title-employer-Delivery my-3'>Tất cả đơn hàng ({listProjectbyStaffDelivery.length})</div>
+                                                <div className='title-employer-Delivery my-3'>
+                                                    {t('Delivery-employer.Eight')} ({listProjectbyStaffDelivery.length})
+                                                </div>
                                                 <hr />
+
                                                 <div className='sub-title-employer-Delivery'>
                                                     <div className='sub-left '>
                                                         <div className=' mx-3' style={{ color: "red" }}><i class="fa fa-flag" aria-hidden="true"></i>
                                                         </div>
-                                                        <div className='NameColor'> Đơn gấp</div>
+
+                                                        <div className='NameColor'>
+                                                            {t('Delivery-employer.Night')}
+                                                        </div>
 
                                                     </div>
                                                     <div className='sub-title-employer-pickup-right ' >
@@ -267,21 +289,50 @@ const Delivery_staff = (props) => {
                                                     <thead>
                                                         <tr className='table-secondary' >
                                                             <th></th>
-                                                            <th scope="col">No</th>
-                                                            <th scope="col">Id</th>
-                                                            <th scope="col">Mã đơn</th>
-                                                            <th scope="col">Mặt hàng</th>
-                                                            <th scope="col">Người nhận </th>
-                                                            <th scope="col"> Trạng thái đơn hàng </th>
-                                                            <th scope="col">Địa chỉ giao hàng </th>
-                                                            <th scope="col"> Nhân viên giao hàng</th>
-                                                            <th scope="col"> Số tiền phải thu</th>
-                                                            <th scope="col"> Lý do huỷ hàng</th>
-                                                            <th scope="col"> Lý do giao lại</th>
-                                                            <th scope="col"> Phụ phí  </th>
-                                                            <th scope="col"> Thời gian nhận đơn</th>
-                                                            <th scope="col"> Thời gian hoàn thành</th>
-                                                            <th scope="col">Thao tác</th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.One')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Two')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Three')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Four')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Five')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Seven')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Eight')}
+                                                            </th>
+
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Ten')}
+                                                            </th>
+                                                            <th scope="col" style={{ width: "120px" }}>
+                                                                {t('Delivery-employer.Body.Eleven')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Twelve')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Thirteen')}
+                                                            </th>
+
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Fifteen')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Sixteen')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Seventeen')}
+                                                            </th>
 
 
                                                         </tr>
@@ -311,37 +362,55 @@ const Delivery_staff = (props) => {
                                                                         <td>
                                                                             {item?.name_customer}
                                                                             <br />
-                                                                            {item?.phoneNumber_customer}</td>
+                                                                            {item?.phoneNumber_customer}
+                                                                            <hr />
+                                                                            <b> {t('Delivery-employer.Body.Six')}  </b>
+                                                                            <br />
+                                                                            {item.addressDetail},{item?.Ward_customer?.name},{item?.District_customer?.name},{item?.Province_customer?.name}
+                                                                        </td>
+
                                                                         <td>
                                                                             <span style={{ color: "red", fontWeight: "700" }}>
                                                                                 {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
 
                                                                             </span>
                                                                         </td>
+                                                                        <td>
+                                                                            {item?.Note ? item?.Note : ""}
+                                                                            <br />
+                                                                            {item?.Notemore ? item?.Notemore : ""}
 
-                                                                        <td>{item.addressDetail},{item?.Ward_customer?.name},{item?.District_customer?.name},{item?.Province_customer?.name}  </td>
+                                                                        </td>
                                                                         <td>
                                                                             {item?.User_Delivery ? item?.User_Delivery : "chưa ai nhận đơn"}
                                                                             <br />
                                                                             {item?.Number_Delivery ? item?.Number_Delivery : ""}
 
                                                                         </td>
-                                                                        <td>{item.totalWithShippingCost} VNĐ</td>
+                                                                        <td>
+                                                                            {item.totalWithShippingCost} {item.unit_money}
+                                                                            <br />
+                                                                            <hr />
+                                                                            <b>{t('Delivery-employer.Body.Fourteen')}</b>
+                                                                            {item.Sub_money ?
+                                                                                <td style={{ color: "red", fontWeight: "500" }}>{item.Sub_money}</td>
+                                                                                :
+                                                                                <td> </td>
+
+                                                                            }
+                                                                        </td>
                                                                         <td style={{ color: "red", fontWeight: "700" }}>{item?.Cancel_reason ? item?.Cancel_reason : ""}</td>
                                                                         <td style={{ color: "red", fontWeight: "700" }}>{item?.Notice_Delivery ? item?.Notice_Delivery : ""}</td>
 
-                                                                        {item.Sub_money ?
-                                                                            <td style={{ color: "red", fontWeight: "500" }}>{item.Sub_money}</td>
-                                                                            :
-                                                                            <td></td>
 
-                                                                        }
                                                                         <td>{item?.Delivery_time ? moment(`${item?.Delivery_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                         <td>{item?.DeliveryDone_time ? moment(`${item?.DeliveryDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                         {!item.statusDeliveryId
                                                                             &&
                                                                             <td>
-                                                                                <button className='btn btn-warning' onClick={() => updateDelivery(item)}> Nhận đơn</button>
+                                                                                <button className='btn btn-warning' onClick={() => updateDelivery(item)}>
+                                                                                    {t('Delivery-employer.Body.TwentyThree')}
+                                                                                </button>
                                                                                 <br />
 
 
@@ -350,7 +419,9 @@ const Delivery_staff = (props) => {
                                                                         {item.statusDeliveryId === 3
                                                                             &&
                                                                             <td>
-                                                                                <button className='btn btn-danger' > Đơn hủy</button>
+                                                                                <span style={{ color: "red", fontWeight: "700" }} >
+                                                                                    {t('Delivery-employer.Body.TwentyFour')}
+                                                                                </span>
                                                                                 <br />
 
 
@@ -359,7 +430,9 @@ const Delivery_staff = (props) => {
                                                                         {item.statusDeliveryId === 4
                                                                             &&
                                                                             <td>
-                                                                                <button className='btn btn-primary' > Giao lại</button>
+                                                                                <span style={{ color: "blue", fontWeight: "700" }} >
+                                                                                    {t('Delivery-employer.Body.TwentyFive')}
+                                                                                </span>
                                                                                 <br />
 
 
@@ -368,7 +441,9 @@ const Delivery_staff = (props) => {
                                                                         {item.statusDeliveryId === 1
                                                                             &&
                                                                             <td>
-                                                                                <button className='btn btn-secondary' > Đang giao</button>
+                                                                                <span style={{ color: "blue", fontWeight: "700" }} >
+                                                                                    {t('Delivery-employer.Body.TwentyFive')}
+                                                                                </span>
                                                                                 <br />
 
 
@@ -377,7 +452,9 @@ const Delivery_staff = (props) => {
                                                                         {item.statusDeliveryId === 2
                                                                             &&
                                                                             <td>
-                                                                                <button className='btn btn-success' > giao xong</button>
+                                                                                <span style={{ color: "Green", fontWeight: "700" }} >
+                                                                                    {t('Delivery-employer.Body.TwentySix')}
+                                                                                </span>
                                                                                 <br />
 
 
@@ -389,11 +466,11 @@ const Delivery_staff = (props) => {
                                                             )
                                                         })
                                                         :
-                                                        <tr class="table-danger">
+                                                        <tr class="table-primary">
                                                             <td colSpan={17}>
                                                                 <div className='d-flex align-item-center justify-content-center'>
 
-                                                                    <h5> Đơn hàng  đã được xử lý hết và chưa phát sinh đơn hàng mới</h5>
+                                                                    {t('Delivery-employer.Body.Eighteen')}
 
                                                                 </div>
 
@@ -410,26 +487,56 @@ const Delivery_staff = (props) => {
                                         </div>
                                         <div className='table-wrapper-employer-Delivery-One my-5'>
                                             <div className='container'>
-                                                <div className='title-employer-Delivery-One my-3'>Đơn bạn đã nhận ({listProjectbyuserStaff.length})</div>
+                                                <div className='title-employer-Delivery-One my-3'>
+                                                    {t('Delivery-employer.Body.TwentyTwo')} ({listProjectbyuserStaff.length})
+                                                </div>
                                                 <hr />
                                                 <table class="table table-bordered table-body-employer-Delivery-One">
                                                     <thead>
                                                         <tr className='table-secondary' >
                                                             <th></th>
-                                                            <th scope="col">Id</th>
-                                                            <th scope="col">Mã đơn</th>
-                                                            <th scope="col">Mặt hàng</th>
-                                                            <th scope="col">Người nhận </th>
-                                                            <th scope="col"> Số ĐT người nhận </th>
-                                                            <th scope="col"> Trạng thái đơn hàng </th>
-                                                            <th scope="col">Địa chỉ giao hàng </th>
-                                                            <th scope="col"> Nhân viên giao hàng</th>
-                                                            <th scope="col"> Số tiền phải thu</th>
-                                                            <th scope="col"> Lý do huỷ hàng</th>
-                                                            <th scope="col"> Lý do giao lại</th>
-                                                            <th scope="col"> Thời gian nhận đơn</th>
-                                                            <th scope="col"> Thời gian hoàn thành</th>
-                                                            <th scope="col">Thao tác</th>
+
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Two')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Three')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Four')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Five')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Seven')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Eight')}
+                                                            </th>
+
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Ten')}
+                                                            </th>
+                                                            <th scope="col" style={{ width: "120px" }}>
+                                                                {t('Delivery-employer.Body.Eleven')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Twelve')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Thirteen')}
+                                                            </th>
+
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Fifteen')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Sixteen')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Delivery-employer.Body.Seventeen')}
+                                                            </th>
 
 
                                                         </tr>
@@ -455,59 +562,67 @@ const Delivery_staff = (props) => {
                                                                         <td>{item.id}</td>
                                                                         <td>{item.order}</td>
                                                                         <td> {item?.Warehouse?.product}</td>
-                                                                        <td> {item?.name_customer}</td>
-                                                                        <td> {item?.phoneNumber_customer}</td>
+                                                                        <td>
+                                                                            {item?.name_customer}
+                                                                            <br />
+                                                                            {item?.phoneNumber_customer}
+                                                                            <hr />
+                                                                            <b> {t('Delivery-employer.Body.Six')}  </b>
+                                                                            <br />
+                                                                            {item.addressDetail},{item?.Ward_customer?.name},{item?.District_customer?.name},{item?.Province_customer?.name}
+                                                                        </td>
+
                                                                         <td>
                                                                             <span style={{ color: "red", fontWeight: "700" }}>
                                                                                 {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
 
                                                                             </span>
                                                                         </td>
-                                                                        <td>{item.addressDetail},{item?.Ward_customer?.name},{item?.District_customer?.name},{item?.Province_customer?.name}  </td>
+                                                                        <td>
+                                                                            {item?.Note ? item?.Note : ""}
+                                                                            <br />
+                                                                            {item?.Notemore ? item?.Notemore : ""}
+
+                                                                        </td>
                                                                         <td>
                                                                             {item?.User_Delivery ? item?.User_Delivery : "chưa ai nhận đơn"}
                                                                             <br />
                                                                             {item?.Number_Delivery ? item?.Number_Delivery : ""}
 
                                                                         </td>
-                                                                        <td>{item?.totalWithShippingCost ? item?.totalWithShippingCost : ""} VNĐ</td>
-                                                                        <td>{item?.Cancel_reason ? item?.Cancel_reason : ""}</td>
-                                                                        {item.Notice_Delivery ?
-                                                                            <td style={{ color: "red", fontWeight: "500" }}>{item.Notice_Delivery}</td>
-                                                                            :
-                                                                            <td></td>
+                                                                        <td>
+                                                                            {item.totalWithShippingCost} {item.unit_money}
+                                                                            <br />
 
-                                                                        }
+                                                                        </td>
+                                                                        <td style={{ color: "red", fontWeight: "700" }}>{item?.Cancel_reason ? item?.Cancel_reason : ""}</td>
+                                                                        <td style={{ color: "red", fontWeight: "700" }}>{item?.Notice_Delivery ? item?.Notice_Delivery : ""}</td>
+
+
                                                                         <td>{item?.Delivery_time ? moment(`${item?.Delivery_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                         <td>{item?.DeliveryDone_time ? moment(`${item?.DeliveryDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
 
-                                                                        {/* {!item.statusDeliveryId
-                                                                            &&
-                                                                            <td>
-                                                                                <button className='btn btn-warning' onClick={() => updateDelivery(item)}> Nhận đơn</button>
-                                                                                <br />
 
-
-                                                                            </td>
-                                                                        } */}
                                                                         {item.statusDeliveryId == 4 &&
 
                                                                             <td>
 
                                                                                 <div className='d-flex align-item-center justify-content-center flex-column'>
                                                                                     <button className='btn btn-success  ' onClick={() => completePickup(item)} >
-                                                                                        thành công
+                                                                                        {t('Delivery-employer.Body.TwentySeven')}
                                                                                     </button>
                                                                                     <br />
                                                                                     <button className='btn btn-danger  my-1' onClick={() => handleShowModal(item)}>
-                                                                                        thất bại
+                                                                                        {t('Delivery-employer.Body.TwentyFour')}
                                                                                     </button>
                                                                                     <br />
                                                                                     <button className='btn btn-primary my-1' onClick={() => handleShowModalAgain(item)}>
-                                                                                        giao lại
+                                                                                        {t('Delivery-employer.Six')}
                                                                                     </button>
                                                                                     <br />
-                                                                                    <button className='btn btn-warning ' onClick={() => updateDelivery(item)} >Hủy </button>
+                                                                                    <button className='btn btn-warning ' onClick={() => updateDelivery(item)} >
+                                                                                        {t('Delivery-employer.Body.TwentyEight')}
+                                                                                    </button>
 
                                                                                 </div>
                                                                             </td>
@@ -520,38 +635,48 @@ const Delivery_staff = (props) => {
 
                                                                                 <div className='d-flex align-item-center justify-content-center flex-column'>
                                                                                     <button className='btn btn-success  ' onClick={() => completePickup(item)} >
-                                                                                        thành công
+                                                                                        {t('Delivery-employer.Body.TwentySeven')}
                                                                                     </button>
                                                                                     <br />
                                                                                     <button className='btn btn-danger  my-1' onClick={() => handleShowModal(item)}>
-                                                                                        thất bại
+                                                                                        {t('Delivery-employer.Body.TwentyFour')}
                                                                                     </button>
                                                                                     <br />
                                                                                     <button className='btn btn-primary my-1' onClick={() => handleShowModalAgain(item)}>
-                                                                                        giao lại
+                                                                                        {t('Delivery-employer.Six')}
                                                                                     </button>
                                                                                     <br />
-                                                                                    <button className='btn btn-warning ' onClick={() => updateDelivery(item)} >Hủy </button>
+                                                                                    <button className='btn btn-warning ' onClick={() => updateDelivery(item)} >
+                                                                                        {t('Delivery-employer.Body.TwentyEight')}
+                                                                                    </button>
 
                                                                                 </div>
                                                                             </td>
                                                                         }
 
 
-                                                                        {item.statusDeliveryId === 2 &&
+                                                                        {item.statusDeliveryId === 2
+                                                                            &&
                                                                             <td>
-                                                                                <button className='btn btn-info mx-3 '  >Thành công </button>
+                                                                                <span style={{ color: "Green", fontWeight: "700" }} >
+                                                                                    {t('Delivery-employer.Body.TwentySix')}
+                                                                                </span>
+                                                                                <br />
+
 
                                                                             </td>
-
                                                                         }
 
-                                                                        {item.statusDeliveryId === 3 &&
+                                                                        {item.statusDeliveryId === 3
+                                                                            &&
                                                                             <td>
-                                                                                <button className='btn btn-danger mx-3 ' >Thất bại </button>
+                                                                                <span style={{ color: "red", fontWeight: "700" }} >
+                                                                                    {t('Delivery-employer.Body.TwentyFour')}
+                                                                                </span>
+                                                                                <br />
+
 
                                                                             </td>
-
                                                                         }
                                                                     </tr>
                                                                 </tbody>
@@ -562,7 +687,7 @@ const Delivery_staff = (props) => {
                                                             <td colSpan={17}>
                                                                 <div className='d-flex align-item-center justify-content-center'>
 
-                                                                    <h5> Bạn chưa nhận đơn hàng nào </h5>
+                                                                    <h5> {t('Delivery-employer.Body.Nineteen')} </h5>
 
                                                                 </div>
 
@@ -584,29 +709,56 @@ const Delivery_staff = (props) => {
                                     <div className='table-wrapper-employer-search my-5'>
 
                                         <div className='container'>
-                                            <div className='title-employer-search my-3'>Kết quả tìm kiếm ({listProjectSearch.length})</div>
+                                            <div className='title-employer-search my-3'>
+                                                {t('Delivery-employer.Body.Twenty')} ({listProjectSearch.length})
+                                            </div>
                                             <hr />
                                             <table class="table table-bordered table-body-employer-search">
                                                 <thead>
                                                     <tr className='table-secondary'>
-                                                        <th scope="col">Id</th>
-                                                        <th scope="col">Mã đơn</th>
-                                                        <th scope="col">Mặt hàng</th>
-                                                        <th scope="col">Người nhận </th>
-                                                        <th scope="col"> Số ĐT người nhận </th>
-                                                        <th scope="col"> Trạng thái đơn hàng </th>
+                                                        <th></th>
 
-                                                        <th scope="col">Địa chỉ giao hàng </th>
-                                                        <th scope="col"> Nhân viên giao hàng</th>
-                                                        <th scope="col"> Số tiền phải thu</th>
+                                                        <th scope="col">
+                                                            {t('Delivery-employer.Body.Two')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Delivery-employer.Body.Three')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Delivery-employer.Body.Four')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Delivery-employer.Body.Five')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Delivery-employer.Body.Seven')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Delivery-employer.Body.Eight')}
+                                                        </th>
 
-                                                        <th scope="col"> Lý do huỷ hàng</th>
-                                                        <th scope="col"> Lý do giao lại</th>
-                                                        <th scope="col"> Phụ phí</th>
+                                                        <th scope="col">
+                                                            {t('Delivery-employer.Body.Ten')}
+                                                        </th>
+                                                        <th scope="col" style={{ width: "120px" }}>
+                                                            {t('Delivery-employer.Body.Eleven')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Delivery-employer.Body.Twelve')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Delivery-employer.Body.Thirteen')}
+                                                        </th>
 
-                                                        <th scope="col"> Thời gian nhận đơn</th>
-                                                        <th scope="col"> Thời gian hoàn thành</th>
-                                                        <th scope="col">Thao tác</th>
+                                                        <th scope="col">
+                                                            {t('Delivery-employer.Body.Fifteen')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Delivery-employer.Body.Sixteen')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Delivery-employer.Body.Seventeen')}
+                                                        </th>
 
                                                     </tr>
                                                 </thead>
@@ -618,45 +770,65 @@ const Delivery_staff = (props) => {
                                                             <tbody key={`item-${index}`}>
 
                                                                 <tr class="table-primary">
+                                                                    {item.flag === 1 ?
+                                                                        <td>
+                                                                            <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                            </span>
+                                                                        </td>
+                                                                        :
+                                                                        <td></td>
 
+                                                                    }
                                                                     <td>{item.id}</td>
                                                                     <td>{item.order}</td>
                                                                     <td> {item?.Warehouse?.product}</td>
-                                                                    <td> {item?.name_customer}</td>
-                                                                    <td> {item?.phoneNumber_customer}</td>
+                                                                    <td>
+                                                                        {item?.name_customer}
+                                                                        <br />
+                                                                        {item?.phoneNumber_customer}
+                                                                        <hr />
+                                                                        <b> {t('Delivery-employer.Body.Six')}  </b>
+                                                                        <br />
+                                                                        {item.addressDetail},{item?.Ward_customer?.name},{item?.District_customer?.name},{item?.Province_customer?.name}
+                                                                    </td>
+
                                                                     <td>
                                                                         <span style={{ color: "red", fontWeight: "700" }}>
                                                                             {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
 
                                                                         </span>
                                                                     </td>
-                                                                    <td>{item.addressDetail},{item?.Ward_customer?.name},{item?.District_customer?.name},{item?.Province_customer?.name}  </td>
+                                                                    <td>
+                                                                        {item?.Note ? item?.Note : ""}
+                                                                        <br />
+                                                                        {item?.Notemore ? item?.Notemore : ""}
+
+                                                                    </td>
                                                                     <td>
                                                                         {item?.User_Delivery ? item?.User_Delivery : "chưa ai nhận đơn"}
                                                                         <br />
                                                                         {item?.Number_Delivery ? item?.Number_Delivery : ""}
 
                                                                     </td>
-                                                                    <td>{item.totalWithShippingCost} VNĐ</td>
-                                                                    <td>{item.Cancel_reason}</td>
-                                                                    <td>{item?.Notice_Delivery ? item?.Notice_Delivery : ""}</td>
-                                                                    <td>{item?.Sub_money ? item?.Sub_money : ""}</td>
+                                                                    <td>
+                                                                        {item.totalWithShippingCost} {item.unit_money}
+                                                                        <br />
+                                                                        <hr />
+                                                                        <b>{t('Delivery-employer.Body.Fourteen')}</b>
+                                                                        {item.Sub_money ?
+                                                                            <td style={{ color: "red", fontWeight: "500" }}>{item.Sub_money}</td>
+                                                                            :
+                                                                            <td> </td>
 
-                                                                    {item.statusDeliveryId == 4 &&
-                                                                        <td style={{ backgroundColor: "red" }}>{item.Notice_Delivery}</td>
+                                                                        }
+                                                                    </td>
+                                                                    <td style={{ color: "red", fontWeight: "700" }}>{item?.Cancel_reason ? item?.Cancel_reason : ""}</td>
+                                                                    <td style={{ color: "red", fontWeight: "700" }}>{item?.Notice_Delivery ? item?.Notice_Delivery : ""}</td>
 
-                                                                    }
+
                                                                     <td>{item?.Delivery_time ? moment(`${item?.Delivery_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                     <td>{item?.DeliveryDone_time ? moment(`${item?.DeliveryDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                    {!item.statusDeliveryId
-                                                                        &&
-                                                                        <td>
-                                                                            <button className='btn btn-warning' onClick={() => updateDelivery(item)}> Nhận đơn</button>
-                                                                            <br />
-
-
-                                                                        </td>
-                                                                    }
 
                                                                     {item.statusDeliveryId == 4 &&
 
@@ -664,18 +836,20 @@ const Delivery_staff = (props) => {
 
                                                                             <div className='d-flex align-item-center justify-content-center flex-column'>
                                                                                 <button className='btn btn-success  ' onClick={() => completePickup(item)} >
-                                                                                    thành công
+                                                                                    {t('Delivery-employer.Body.TwentySeven')}
                                                                                 </button>
                                                                                 <br />
                                                                                 <button className='btn btn-danger  my-1' onClick={() => handleShowModal(item)}>
-                                                                                    thất bại
+                                                                                    {t('Delivery-employer.Body.TwentyFour')}
                                                                                 </button>
                                                                                 <br />
                                                                                 <button className='btn btn-primary my-1' onClick={() => handleShowModalAgain(item)}>
-                                                                                    giao lại
+                                                                                    {t('Delivery-employer.Six')}
                                                                                 </button>
                                                                                 <br />
-                                                                                <button className='btn btn-warning ' onClick={() => updateDelivery(item)} >Hủy </button>
+                                                                                <button className='btn btn-warning ' onClick={() => updateDelivery(item)} >
+                                                                                    {t('Delivery-employer.Body.TwentyEight')}
+                                                                                </button>
 
                                                                             </div>
                                                                         </td>
@@ -688,40 +862,49 @@ const Delivery_staff = (props) => {
 
                                                                             <div className='d-flex align-item-center justify-content-center flex-column'>
                                                                                 <button className='btn btn-success  ' onClick={() => completePickup(item)} >
-                                                                                    thành công
+                                                                                    {t('Delivery-employer.Body.TwentySeven')}
                                                                                 </button>
                                                                                 <br />
                                                                                 <button className='btn btn-danger  my-1' onClick={() => handleShowModal(item)}>
-                                                                                    thất bại
+                                                                                    {t('Delivery-employer.Body.TwentyFour')}
                                                                                 </button>
                                                                                 <br />
                                                                                 <button className='btn btn-primary my-1' onClick={() => handleShowModalAgain(item)}>
-                                                                                    giao lại
+                                                                                    {t('Delivery-employer.Six')}
                                                                                 </button>
                                                                                 <br />
-                                                                                <button className='btn btn-warning ' onClick={() => updateDelivery(item)} >Hủy </button>
+                                                                                <button className='btn btn-warning ' onClick={() => updateDelivery(item)} >
+                                                                                    {t('Delivery-employer.Body.TwentyEight')}
+                                                                                </button>
 
                                                                             </div>
                                                                         </td>
                                                                     }
 
 
-                                                                    {item.statusDeliveryId === 2 &&
+                                                                    {item.statusDeliveryId === 2
+                                                                        &&
                                                                         <td>
-                                                                            <button className='btn btn-info mx-3 '  >Thành công </button>
+                                                                            <span style={{ color: "Green", fontWeight: "700" }} >
+                                                                                {t('Delivery-employer.Body.TwentySix')}
+                                                                            </span>
+                                                                            <br />
+
 
                                                                         </td>
-
                                                                     }
 
-                                                                    {item.statusDeliveryId === 3 &&
+                                                                    {item.statusDeliveryId === 3
+                                                                        &&
                                                                         <td>
-                                                                            <button className='btn btn-danger mx-3 ' >Thất bại </button>
+                                                                            <span style={{ color: "red", fontWeight: "700" }} >
+                                                                                {t('Delivery-employer.Body.TwentyFour')}
+                                                                            </span>
+                                                                            <br />
+
 
                                                                         </td>
-
                                                                     }
-
                                                                 </tr>
                                                             </tbody>
                                                         )
@@ -731,11 +914,11 @@ const Delivery_staff = (props) => {
 
                                                     )
                                                     :
-                                                    <tr class="table-danger">
+                                                    <tr class="table-primary">
                                                         <td colSpan={15}>
                                                             <div className='d-flex align-item-center justify-content-center'>
 
-                                                                <h5> Không tìm thấy</h5>
+                                                                <h5>{t('Delivery-employer.Body.TwentyOne')}</h5>
 
                                                             </div>
 

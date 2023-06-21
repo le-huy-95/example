@@ -10,8 +10,11 @@ import ModalChatWithCutomer from "./modalChatWithCutomer"
 import { toast } from 'react-toastify'
 import moment from "moment"
 import _, { debounce } from "lodash"
+import { useTranslation, Trans } from 'react-i18next';
 
 const WarehouseStatusTwo = (props) => {
+    const { t, i18n } = useTranslation();
+
     let history = useHistory()
     const { user } = React.useContext(UserContext);
     const [collapsed, setCollapsed] = useState(false)
@@ -114,7 +117,9 @@ const WarehouseStatusTwo = (props) => {
                         <div className='body-employer-warehouse'>
                             <div className="container">
                                 <div className='name-page-employer-warehouse'>
-                                    <h4> List Warehouse </h4>
+                                    <h4>
+                                        {t('Warehouse-employer.One')}
+                                    </h4>
                                     <div className='more-employer-pickup'>
                                         <b>{user?.account?.nameUnit?.NameUnit}</b>
 
@@ -127,16 +132,22 @@ const WarehouseStatusTwo = (props) => {
                                     <div className='container my-3'>
                                         <div className='row mx-3'>
                                             <div className='col-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Warehouse_staff" style={{ textDecoration: "none", color: "#474141" }}>Tất cả đơn hàng </Link>
+                                                <Link to="/Warehouse_staff" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Warehouse-employer.Two')}
+                                                </Link>
                                             </div>
                                             <div className='col-3 my-2 content-warehouse ' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Warehouse_no_status" style={{ textDecoration: "none", color: "#474141" }}>Đơn chưa Nhập kho </Link>
+                                                <Link to="/Warehouse_no_status" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Warehouse-employer.Three')}
+                                                </Link>
                                             </div>
                                             <div className='col-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Warehouse_status_one" style={{ textDecoration: "none", color: "#474141" }}> Đơn đã nhập kho </Link>
+                                                <Link to="/Warehouse_status_one" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Warehouse-employer.Four')}
+                                                </Link>
                                             </div>
                                             <div className='col-3 my-2 content-warehouse ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
-                                                Đơn đã xuất kho
+                                                {t('Warehouse-employer.Five')}
                                             </div>
                                         </div>
                                     </div>
@@ -144,22 +155,44 @@ const WarehouseStatusTwo = (props) => {
                                 {isSearch === false &&
                                     <div className='table-wrapper-employer-warehouse-One my-5'>
                                         <div className='container'>
-                                            <div className='title-employer-warehouse-One my-3'>Tất cả đơn hàng ({ListProjectbyStaffWarehouse.length})</div>
+                                            <div className='title-employer-warehouse-One my-3'>
+                                                {t('Warehouse-employer.Six')} ({ListProjectbyStaffWarehouse.length})
+                                            </div>
                                             <hr />
                                             <table class="table table-bordered table-body-employer-warehouse-One">
                                                 <thead>
                                                     <tr className='table-secondary'>
                                                         <th></th>
-                                                        <th scope="col">Id</th>
-                                                        <th scope="col">Mã đơn</th>
-                                                        <th scope="col">Mặt hàng</th>
-                                                        <th scope="col">Số lượng </th>
-                                                        <th scope="col">Trạng thái đơn hàng </th>
 
-                                                        <th scope="col"> Nhân viên xử lý</th>
-                                                        <th scope="col" >Thời gian nhận đơn</th>
-                                                        <th scope="col" >Thời gian Hoàn thành</th>
-                                                        <th scope="col">Thao tác</th>
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Two')}
+                                                        </th>
+
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Three')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Four')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Five')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Seven')}
+                                                        </th>
+
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Eight')}
+                                                        </th>
+                                                        <th scope="col" >
+                                                            {t('Warehouse-employer.Body.Night')}
+                                                        </th>
+                                                        <th scope="col" >
+                                                            {t('Warehouse-employer.Body.Ten')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Eleven')}
+                                                        </th>
 
 
                                                     </tr>
@@ -171,7 +204,7 @@ const WarehouseStatusTwo = (props) => {
                                                             <tbody key={`item-${index}`}>
 
                                                                 <tr>
-                                                                    {item?.flag === 1 ?
+                                                                    {item?.flag === true ?
                                                                         <td>
                                                                             <span style={{ fontSize: "20px", color: "red" }}>
                                                                                 <i class="fa fa-flag" aria-hidden="true"></i>
@@ -184,8 +217,9 @@ const WarehouseStatusTwo = (props) => {
                                                                     <td>{item.id}</td>
                                                                     <td>{item.order}</td>
                                                                     <td> {item?.Warehouse?.product}</td>
-                                                                    <td>{item.quantity}</td>
                                                                     <td>
+                                                                        {item.quantity}/{item.unit}
+                                                                    </td>                                                                    <td>
                                                                         <span style={{ color: "red", fontWeight: "500" }}>  {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa nhập kho"}</span>
                                                                     </td>
 
@@ -199,7 +233,9 @@ const WarehouseStatusTwo = (props) => {
                                                                     <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                     {item.statuswarehouseId === 2 &&
                                                                         <td>
-                                                                            <button className='btn btn-success mx-3 my-1' >Đã hoàn thành</button>
+                                                                            <button className='btn btn-success mx-3 my-1' >
+                                                                                {t('Warehouse-employer.Five')}
+                                                                            </button>
                                                                         </td>
 
 
@@ -215,8 +251,9 @@ const WarehouseStatusTwo = (props) => {
                                                         <td colSpan={14}>
                                                             <div className='d-flex align-item-center justify-content-center'>
 
-                                                                <h5> Đơn hàng đã được xử lý toàn bộ</h5>
-
+                                                                <h5>
+                                                                    {t('Warehouse-employer.Body.Sixteen')}
+                                                                </h5>
                                                             </div>
 
                                                         </td>
@@ -234,22 +271,43 @@ const WarehouseStatusTwo = (props) => {
                                 {isSearch === true &&
                                     <div className='table-wrapper-employer-warehouse-One my-5'>
                                         <div className='container'>
-                                            <div className='title-employer-warehouse-One my-3'> Kết quả tìm kiếm ({listProjectSearch.length})</div>
+                                            <div className='title-employer-warehouse-One my-3'>
+                                                {t('Warehouse-employer.Body.Nineteen')} ({listProjectSearch.length})</div>
                                             <hr />
                                             <table class="table table-bordered table-body-employer-warehouse-One">
                                                 <thead>
                                                     <tr className='table-secondary'>
                                                         <th></th>
-                                                        <th scope="col">Id</th>
-                                                        <th scope="col">Mã đơn</th>
-                                                        <th scope="col">Mặt hàng</th>
-                                                        <th scope="col">Số lượng </th>
-                                                        <th scope="col">Trạng thái đơn hàng </th>
 
-                                                        <th scope="col"> Nhân viên xử lý</th>
-                                                        <th scope="col" >Thời gian nhận đơn</th>
-                                                        <th scope="col" >Thời gian Hoàn thành</th>
-                                                        <th scope="col">Thao tác</th>
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Two')}
+                                                        </th>
+
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Three')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Four')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Five')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Seven')}
+                                                        </th>
+
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Eight')}
+                                                        </th>
+                                                        <th scope="col" >
+                                                            {t('Warehouse-employer.Body.Night')}
+                                                        </th>
+                                                        <th scope="col" >
+                                                            {t('Warehouse-employer.Body.Ten')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Warehouse-employer.Body.Eleven')}
+                                                        </th>
 
 
                                                     </tr>
@@ -261,7 +319,7 @@ const WarehouseStatusTwo = (props) => {
                                                             <tbody key={`item-${index}`}>
 
                                                                 <tr>
-                                                                    {item?.flag === 1 ?
+                                                                    {item?.flag === true ?
                                                                         <td>
                                                                             <span style={{ fontSize: "20px", color: "red" }}>
                                                                                 <i class="fa fa-flag" aria-hidden="true"></i>
@@ -274,7 +332,9 @@ const WarehouseStatusTwo = (props) => {
                                                                     <td>{item.id}</td>
                                                                     <td>{item.order}</td>
                                                                     <td> {item?.Warehouse?.product}</td>
-                                                                    <td>{item.quantity}</td>
+                                                                    <td>
+                                                                        {item.quantity}/{item.unit}
+                                                                    </td>
                                                                     <td>
                                                                         <span style={{ color: "red", fontWeight: "500" }}>  {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa nhập kho"}</span>
                                                                     </td>
@@ -306,8 +366,9 @@ const WarehouseStatusTwo = (props) => {
                                                         <td colSpan={14}>
                                                             <div className='d-flex align-item-center justify-content-center'>
 
-                                                                <h5> Không tìm thấy</h5>
-
+                                                                <h5>
+                                                                    {t('Warehouse-employer.Body.Seventeen')}
+                                                                </h5>
                                                             </div>
 
                                                         </td>
