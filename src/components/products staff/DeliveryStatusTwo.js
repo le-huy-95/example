@@ -449,14 +449,10 @@ const DeliveryStatusTwo = (props) => {
                                                                     {item.statusDeliveryId === 2
                                                                         &&
                                                                         <td>
+                                                                            <span style={{ color: "green", fontWeight: "700" }} >
+                                                                                {t('Delivery-employer.Body.TwentySix')}
+                                                                            </span>
 
-                                                                            <div className='d-flex align-item-center justify-content-center flex-column'>
-                                                                                <button className='btn btn-success '  >
-                                                                                    thành công
-                                                                                </button>
-
-
-                                                                            </div>
                                                                         </td>
 
                                                                     }
@@ -473,11 +469,11 @@ const DeliveryStatusTwo = (props) => {
 
                                                     )
                                                     :
-                                                    <tr class="table-danger">
+                                                    <tr class="table-primary">
                                                         <td colSpan={14}>
                                                             <div className='d-flex align-item-center justify-content-center'>
 
-                                                                <h5> Không tìm thấy</h5>
+                                                                <h5>{t('Delivery-employer.Body.TwentyOne')}</h5>
 
                                                             </div>
 
