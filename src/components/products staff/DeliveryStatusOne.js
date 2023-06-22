@@ -349,7 +349,7 @@ const DeliveryStatusOne = (props) => {
 
                                                                     <td>{item?.Delivery_time ? moment(`${item?.Delivery_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                     <td>{item?.DeliveryDone_time ? moment(`${item?.DeliveryDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                    {item.statusDeliveryId === 1 && item.User_Delivery === user.account.username && item.Number_Delivery === user.account.phone
+                                                                    {item.statusDeliveryId === 1 && item.Number_Delivery === user.account.phone
                                                                         &&
                                                                         <td>
 
@@ -373,6 +373,16 @@ const DeliveryStatusOne = (props) => {
                                                                             </div>
                                                                         </td>
 
+                                                                    }
+                                                                    {item.statusDeliveryId === 1 && user?.account?.phone !== item.Number_Delivery
+                                                                        &&
+                                                                        <td  >
+                                                                            <span style={{ color: "blue", fontWeight: "700" }}>
+                                                                                {t('Delivery-employer.Four')}
+                                                                            </span>
+
+
+                                                                        </td>
                                                                     }
 
                                                                 </tr>
@@ -524,7 +534,7 @@ const DeliveryStatusOne = (props) => {
 
                                                                     <td>{item?.Delivery_time ? moment(`${item?.Delivery_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                     <td>{item?.DeliveryDone_time ? moment(`${item?.DeliveryDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                    {item.statusDeliveryId === 1 && item.User_Delivery === user.account.username && item.Number_Delivery === user.account.phone
+                                                                    {item.statusDeliveryId === 1 && item.Number_Delivery === user.account.phone
                                                                         &&
                                                                         <td>
 
@@ -548,6 +558,16 @@ const DeliveryStatusOne = (props) => {
                                                                             </div>
                                                                         </td>
 
+                                                                    }
+                                                                    {item.statusDeliveryId === 1 && user?.account?.phone !== item.Number_Delivery
+                                                                        &&
+                                                                        <td  >
+                                                                            <span style={{ color: "blue", fontWeight: "700" }}>
+                                                                                {t('Delivery-employer.Four')}
+                                                                            </span>
+
+
+                                                                        </td>
                                                                     }
 
 

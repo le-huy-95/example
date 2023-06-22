@@ -282,9 +282,9 @@ const PickUpStatusTwo = (props) => {
                                                                         <td>
                                                                             {item?.statuspickupId === 2 &&
 
-                                                                                <button className='btn btn-success' >
+                                                                                <span style={{ color: "green", fontWeight: "700" }} >
                                                                                     {t('Pick-up.Body.Nineteen')}
-                                                                                </button>
+                                                                                </span>
 
                                                                             }
 
@@ -427,9 +427,9 @@ const PickUpStatusTwo = (props) => {
                                                                     <td>
                                                                         {item?.statuspickupId === 2 &&
 
-                                                                            <button className='btn btn-success' >
+                                                                            <span style={{ color: "green", fontWeight: "700" }} >
                                                                                 {t('Pick-up.Body.Nineteen')}
-                                                                            </button>
+                                                                            </span>
 
                                                                         }
 

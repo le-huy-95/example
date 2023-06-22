@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react"
 import { DeleteRole } from "../services/RoleService"
 import { toast } from 'react-toastify';
+import { useTranslation, Trans } from 'react-i18next';
 
 const TableRole = (props) => {
     const { fetchUserRole, currentPage, currentLimit, setCurrentPage, listRole, totalPage } = props
+    const { t, i18n } = useTranslation();
 
 
 
@@ -26,11 +28,21 @@ const TableRole = (props) => {
             <table className="table  table-hover table-bordered  table-striped container">
                 <thead>
                     <tr>
-                        <th scope="col" className='table-success'>No</th>
-                        <th scope="col" className='table-success'>Id</th>
-                        <th scope="col" className='table-success'>Url</th>
-                        <th scope="col" className='table-success'>Description</th>
-                        <th scope="col" className='table-success'>Action</th>
+                        <th scope="col" className='table-success'>
+                            {t('Table.One')}
+                        </th>
+                        <th scope="col" className='table-success'>
+                            {t('Table.Two')}
+                        </th>
+                        <th scope="col" className='table-success'>
+                            {t('Table.Three')}
+                        </th>
+                        <th scope="col" className='table-success'>
+                            {t('Table.Four')}
+                        </th>
+                        <th scope="col" className='table-success'>
+                            {t('Table.Five')}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,7 +72,7 @@ const TableRole = (props) => {
 
                         </> :
                         <tr>
-                            <td colSpan={5}>   404 Not Found
+                            <td colSpan={5}>   {t('Table.Six')}
                             </td>
                         </tr>
 

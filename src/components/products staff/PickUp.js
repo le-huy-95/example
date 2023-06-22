@@ -401,17 +401,17 @@ const Pickup = (props) => {
                                                                             </td>
                                                                         }
                                                                         {+item?.statuspickupId === 1 &&
-                                                                            <td>
-                                                                                <button className='btn btn-info' >
+                                                                            <td >
+                                                                                <span style={{ color: "blue", fontWeight: "700" }} >
                                                                                     {t('Pick-up.Body.Fourteen')}
-                                                                                </button>
+                                                                                </span>
                                                                             </td>
                                                                         }
                                                                         {+item?.statuspickupId === 2 &&
-                                                                            <td>
-                                                                                <button className='btn btn-success' >
+                                                                            <td >
+                                                                                <span style={{ color: "green", fontWeight: "700" }} >
                                                                                     {t('Pick-up.Body.Nineteen')}
-                                                                                </button>
+                                                                                </span>
                                                                             </td>
                                                                         }
                                                                     </tr>
@@ -669,7 +669,7 @@ const Pickup = (props) => {
                                                                             </button>
                                                                         </td>
                                                                     }
-                                                                    {item?.statuspickupId === 1 &&
+                                                                    {item?.statuspickupId === 1 && user?.account?.phone == item.Number_PickUp &&
 
                                                                         <td>
                                                                             <button className='btn btn-info mx-3 my-1' onClick={() => completePickup(item)}>
@@ -683,8 +683,19 @@ const Pickup = (props) => {
                                                                         </td>
 
                                                                     }
+                                                                    {item?.statuspickupId === 1 && user?.account?.phone !== item.Number_PickUp &&
+
+                                                                        <td >
+                                                                            <span style={{ color: "blue", fontWeight: "700" }}>
+                                                                                {t('Pick-up.Body.Fourteen')}
+                                                                            </span>
+
+
+                                                                        </td>
+
+                                                                    }
                                                                     {+item?.statuspickupId === 2 &&
-                                                                        <td>
+                                                                        <td >
                                                                             <button className='btn btn-success' >
                                                                                 {t('Pick-up.Body.Nineteen')}
                                                                             </button>

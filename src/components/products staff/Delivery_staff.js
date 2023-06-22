@@ -629,7 +629,8 @@ const Delivery_staff = (props) => {
                                                                         }
 
 
-                                                                        {item.statusDeliveryId === 1 &&
+                                                                        {item.statusDeliveryId === 1 && user?.account?.phone === item.Number_Delivery
+                                                                            &&
 
                                                                             <td>
 
@@ -651,6 +652,16 @@ const Delivery_staff = (props) => {
                                                                                     </button>
 
                                                                                 </div>
+                                                                            </td>
+                                                                        }
+                                                                        {item.statusDeliveryId === 1 && user?.account?.phone !== item.Number_Delivery
+                                                                            &&
+                                                                            <td >
+                                                                                <span style={{ color: "blue", fontWeight: "700" }}>
+                                                                                    {t('Delivery-employer.Four')}
+                                                                                </span>
+
+
                                                                             </td>
                                                                         }
 
@@ -856,8 +867,8 @@ const Delivery_staff = (props) => {
                                                                     }
 
 
-                                                                    {item.statusDeliveryId === 1 &&
-
+                                                                    {item.statusDeliveryId === 1 && user?.account?.phone === item.Number_Delivery
+                                                                        &&
                                                                         <td>
 
                                                                             <div className='d-flex align-item-center justify-content-center flex-column'>
@@ -880,7 +891,16 @@ const Delivery_staff = (props) => {
                                                                             </div>
                                                                         </td>
                                                                     }
+                                                                    {item.statusDeliveryId === 1 && user?.account?.phone !== item.Number_Delivery
+                                                                        &&
+                                                                        <td >
+                                                                            <span style={{ color: "blue", fontWeight: "700" }}>
+                                                                                {t('Delivery-employer.Four')}
+                                                                            </span>
 
+
+                                                                        </td>
+                                                                    }
 
                                                                     {item.statusDeliveryId === 2
                                                                         &&

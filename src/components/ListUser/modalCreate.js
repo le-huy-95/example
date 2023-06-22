@@ -16,9 +16,11 @@ import {
 } from "../services/addressService"
 import { getAllShippingUnit, fetchShippingCostByShippingUnit, getPriceByAddress } from "../services/shippingService"
 import { useHistory } from "react-router-dom"
+import { useTranslation, Trans } from 'react-i18next';
 
 const ModalCreate = (props) => {
     let history = useHistory()
+    const { t, i18n } = useTranslation();
 
     const { show, handleCloseCreateModal, handleCloseModalCreateone, action, dataModal, imageConvert, listUser1 } = props
     const [userGroup, setUserGroup] = useState([])
@@ -369,12 +371,14 @@ const ModalCreate = (props) => {
             <Modal show={show} onHide={() => handleCloseModale()} size="lg" className='modal-user' backdrop="static"
             >
                 <Modal.Header closeButton>
-                    <Modal.Title> {action === "Create" ? "Create New User " : " Edit User"}</Modal.Title>
+                    <Modal.Title> {action === "Create" ? `${t('Created-user.One')}` : `${t('Created-user.Two')}`}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className='content-body row'>
                         <div className='col-12 col-sm-6 form-group'>
-                            <label >Email adress (<span className='red'>*</span>)</label>
+                            <label >
+                                {t('Created-user.Three')}
+                                (<span className='red'>*</span>)</label>
                             <input
                                 disabled={action === 'Create' ? false : true}
                                 type="email"
@@ -385,7 +389,8 @@ const ModalCreate = (props) => {
                         </div>
 
                         <div className='col-12 col-sm-6 form-group'>
-                            <label >UserName
+                            <label >
+                                {t('Created-user.Four')}
                                 {/* (<span className='red'>*</span> */}
                             </label>
                             <input
@@ -396,7 +401,9 @@ const ModalCreate = (props) => {
                             />
                         </div>
                         <div className='col-12 col-sm-6 form-group'>
-                            <label >Phone Number (<span className='red'>*</span>)</label>
+                            <label >
+                                {t('Created-user.Five')}
+                                (<span className='red'>*</span>)</label>
                             <input
                                 disabled={action === 'Create' ? false : true}
                                 type="text"
@@ -410,7 +417,9 @@ const ModalCreate = (props) => {
                             {action === 'Create' &&
                                 <>
 
-                                    <label >Password (<span className='red'>*</span>)</label>
+                                    <label >
+                                        {t('Created-user.Six')}
+                                        (<span className='red'>*</span>)</label>
                                     <input
                                         type="password"
                                         className={validInput.password ? "form-control" : "form-control is-invalid"}
@@ -425,18 +434,10 @@ const ModalCreate = (props) => {
                         {userdata.group == 2 || userdata.group == 3 ?
                             <></>
                             :
-                            // <div className='col-12 col-sm-6 form-group'>
-                            //     <label >Position (<span className='red'>*</span>)</label>
-                            //     <input
-
-                            //         type="text"
-                            //         className={validInput.Position ? "form-control" : "form-control is-invalid"}
-                            //         value={userdata.Position}
-                            //         onChange={(event) => handleOnchangeInput(event.target.value, "Position")}
-                            //     />
-                            // </div>
                             <div className='col-12 col-sm-6 form-group'>
-                                <label >Position (<span className='red'>*</span>)</label>
+                                <label >
+                                    {t('Created-user.Seven')}
+                                    (<span className='red'>*</span>)</label>
                                 <select
                                     className={validInput.Position ? "form-control" : "form-control is-invalid"}
                                     onChange={(event) => handleOnchangeInput(event.target.value, "Position")}
@@ -462,7 +463,9 @@ const ModalCreate = (props) => {
                             <></>
                             :
                             <div className='col-12 col-sm-6 form-group'>
-                                <label >Unit</label>
+                                <label >
+                                    {t('Created-user.Eight')}
+                                </label>
                                 <select
                                     className={validInput.shippingUnit_Id ? "form-control" : "form-control is-invalid"}
                                     onChange={(event) => handleOnchangeInput(event.target.value, "shippingUnit_Id")}
@@ -490,7 +493,9 @@ const ModalCreate = (props) => {
 
                         <div className='col-12 col-sm-12 form-group'>
 
-                            <label className='col-4'>Address province user :</label>
+                            <label className='col-4'>
+                                {t('Created-user.Night')}
+                            </label>
 
                             <select
                                 className={StatusProvinceCustomer === true ? "form-select my-2" : "form-select my-2 is-invalid"}
@@ -520,7 +525,9 @@ const ModalCreate = (props) => {
 
                         </div>
                         <div className='col-12 col-sm-12 form-group'>
-                            <label className='col-4'>Address district user :</label>
+                            <label className='col-4'>
+                                {t('Created-user.Ten')}
+                            </label>
 
                             <select
                                 className={StatusDistrictCustomer === true ? "form-select my-2" : "form-select my-2 is-invalid"}
@@ -546,7 +553,9 @@ const ModalCreate = (props) => {
                             </select >
                         </div>
                         <div className='col-12 col-sm-12 form-group'>
-                            <label className='col-4'>Address ward user :</label>
+                            <label className='col-4'>
+                                {t('Created-user.Eleven')}
+                            </label>
 
                             <select
                                 className={StatusWardCustomer === true ? "form-select my-2" : "form-select my-2 is-invalid"}
@@ -572,7 +581,9 @@ const ModalCreate = (props) => {
                             </select >
                         </div>
                         <div className='col-12 col-sm-12 '>
-                            <label className='col-4'>Address Detail :</label>
+                            <label className='col-4'>
+                                {t('Created-user.Twelve')}
+                            </label>
 
                             <input
 
@@ -586,7 +597,9 @@ const ModalCreate = (props) => {
                             />
                         </div>
                         <div className='col-12 col-sm-6 form-group'>
-                            <label >Gender</label>
+                            <label >
+                                {t('Created-user.Thirteen')}
+                            </label>
                             <select className='form-select'
                                 onChange={(event) => handleOnchangeInput(event.target.value, "sex")}
                                 value={userdata.sex}
@@ -603,7 +616,9 @@ const ModalCreate = (props) => {
                             </select >
                         </div>
                         <div className='col-12 col-sm-6 form-group'>
-                            <label >Group (<span className='red'>*</span>)</label>
+                            <label >
+                                {t('Created-user.Fourteen')}
+                                (<span className='red'>*</span>)</label>
                             <select
                                 className={validInput.group ? "form-select" : "form-select is-invalid"}
                                 onChange={(event) => handleOnchangeInput(event.target.value, "group")}
@@ -625,8 +640,6 @@ const ModalCreate = (props) => {
                             </select >
                         </div>
                         <div className='col-12 col-sm-12 form-group py-3 image'>
-                            <label >Image User :</label>
-
                             <div className='image-icon'>
                                 <input type="file" id='previewimage' hidden
                                     onChange={(event) => handleOnchangeInput(event.target.files, "image")}
@@ -644,15 +657,16 @@ const ModalCreate = (props) => {
                         </div>
 
 
-                    </div>
+                    </div >
 
 
-                </Modal.Body>
+                </Modal.Body >
                 <Modal.Footer>
                     <Button variant="primary" onClick={() => handleConfirmUser()} >
-                        {action === 'Create' ? "Save" : "Update"}                    </Button>
+                        {action === 'Create' ? `${t('Created-user.sixteen')}` : `${t('Created-user.seventeen')}`}
+                    </Button>
                     <Button variant="secondary" onClick={() => handleCloseModale()}>
-                        Close
+                        {t('Created-user.eighteen')}
                     </Button>
 
                 </Modal.Footer>

@@ -5,11 +5,14 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { getRole, fetchRoleByGroup, SaveChangleRole } from "../services/RoleService"
 import _ from "lodash"
+import { useTranslation, Trans } from 'react-i18next';
+
 const GroupRole = (props) => {
     const [userGroup, setUserGroup] = useState([])
     const [selectGroup, setSelectGroup] = useState('')
     const [listRole, setListRole] = useState([])
     const [assignRoleByGroup, setassignRoleByGroup] = useState([])
+    const { t, i18n } = useTranslation();
 
 
     // all group
@@ -120,12 +123,14 @@ const GroupRole = (props) => {
     return (
         <div className=" GroupRole-container">
             <div className='container'>
-                <h3> Group_role :</h3>
+                <h3>  {t('Group-role.One')}</h3>
 
                 <div className='container '>
                     <div className='row'>
                         <div className='assign-group-role col-sm-6 mb-3'>
-                            <b className='my-3'>Select Group (chọn group được gán quyền):</b>
+                            <b className='my-3'>
+                                {t('Group-role.Two')}
+                            </b>
                             <div className='col-12 col-sm-8 form-group'>
                                 <select className="form-select" onChange={(event) => handleOnchangeGroup(event.target.value)} >
 
@@ -146,7 +151,9 @@ const GroupRole = (props) => {
 
                         </div>
                         <div className='view-all-role col-sm-6'>
-                            <h3>Assign Role for group ( gán quyền cho group)</h3>
+                            <h3>
+                                {t('Group-role.Three')}
+                            </h3>
                             <hr />
                             {selectGroup &&
                                 <div className='roles col-sm-6 mx-3 my-3'>
@@ -171,7 +178,9 @@ const GroupRole = (props) => {
                                         })
                                     }
                                     <div className='mt-3'>
-                                        <button className='btn btn-warning' onClick={() => handleSaveRoleChange()}> Save</button>
+                                        <button className='btn btn-warning' onClick={() => handleSaveRoleChange()}>
+                                            {t('Group-role.Four')}
+                                        </button>
                                     </div>
                                 </div>}
 

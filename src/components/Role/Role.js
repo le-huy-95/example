@@ -7,8 +7,10 @@ import { CreateRole } from "../services/RoleService"
 import TableRole from "./tableRole"
 import { getRoleWithPagination } from "../services/RoleService"
 import ReactPaginate from 'react-paginate'
+import { useTranslation, Trans } from 'react-i18next';
 
 const Role = (props) => {
+    const { t, i18n } = useTranslation();
     const [currentPage, setCurrentPage] = useState(1)
     const [currentLimit, setCurrentLimit] = useState(4)
     const [listRole, setListRole] = useState([])
@@ -126,20 +128,24 @@ const Role = (props) => {
             <div className='container '>
                 <div className=' mt-3 add-role container'>
                     <div className='row-title mt-3  '>
-                        <h3> Add Url to Role (thêm đường link url vào phần quyền hạn) </h3>
+                        <h3> {t('Role.One')} </h3>
                     </div>
                     <div className='dad-role row'>
                         {Object.entries(listchilds).map(([key, item], index) => {
                             return (
                                 <div className="child-role row" key={`child-${key}`}>
                                     <div className='col-5 form-group'>
-                                        <label>Url :</label>
+                                        <label>
+                                            {t('Role.Two')}
+                                        </label>
                                         <input type="text" className={item.isValidUrl ? "form-control" : 'form-control is-invalid'}
                                             value={item.url}
                                             onChange={(event) => handleOnchangleInput("url", event.target.value, key)} />
                                     </div>
                                     <div className='col-5 form-group'>
-                                        <label>Description : </label>
+                                        <label>
+                                            {t('Role.Three')}
+                                        </label>
                                         <input type="text" className='form-control'
                                             value={item.description}
                                             onChange={(event) => handleOnchangleInput("description", event.target.value, key)} />
@@ -175,7 +181,7 @@ const Role = (props) => {
                 </div>
 
                 <div className='mt-3  List-role container'>
-                    <h3> List All Role (hiển thị toàn bộ các url trông phần role)</h3>
+                    <h3> {t('Role.Four')}</h3>
                     <TableRole currentPage={currentPage} currentLimit={currentLimit} setCurrentPage={setCurrentPage} fetchUserRole={fetchUserRole} listRole={listRole} totalPage={totalPage} />
                     {totalPage > 0 &&
                         <div className='user-footer'>

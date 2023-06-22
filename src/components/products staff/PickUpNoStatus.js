@@ -478,7 +478,7 @@ const PickUpNoStatus = (props) => {
 
                                                     )
                                                     :
-                                                    <tr class="table-danger">
+                                                    <tr class="table-info">
                                                         <td colSpan={14}>
                                                             <div className='d-flex align-item-center justify-content-center'>
 

@@ -360,16 +360,16 @@ const Warehouse_staff = (props) => {
 
                                                                         {+item?.statuswarehouseId === 1 &&
                                                                             <td>
-                                                                                <button className='btn btn-info' >
+                                                                                <span style={{ color: "blue", fontWeight: "700" }}>
                                                                                     {t('Warehouse-employer.Four')}
-                                                                                </button>
+                                                                                </span>
                                                                             </td>
                                                                         }
                                                                         {+item?.statuswarehouseId === 2 &&
                                                                             <td>
-                                                                                <button className='btn btn-success' >
+                                                                                <span style={{ color: "green", fontWeight: "700" }} >
                                                                                     {t('Warehouse-employer.Five')}
-                                                                                </button>
+                                                                                </span>
                                                                             </td>
                                                                         }
 
@@ -483,7 +483,9 @@ const Warehouse_staff = (props) => {
                                                                         <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                         {item.statuswarehouseId === 2 ?
                                                                             <td>
-                                                                                <button className='btn btn-info mx-3 my-1' > Đã xong</button>
+                                                                                <span style={{ color: "green", fontWeight: "700" }}>
+                                                                                    {t('Warehouse-employer.Five')}
+                                                                                </span>
                                                                             </td>
 
                                                                             :
@@ -620,7 +622,9 @@ const Warehouse_staff = (props) => {
                                                                         </td>
                                                                     }
 
-                                                                    {item.statuswarehouseId === 1
+                                                                    {item.statuswarehouseId == 1
+                                                                        &&
+                                                                        user?.account?.phone === item.Number_Warehouse
                                                                         &&
                                                                         <td>
                                                                             <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)}>
@@ -633,11 +637,26 @@ const Warehouse_staff = (props) => {
 
                                                                         </td>
                                                                     }
+                                                                    {item.statuswarehouseId === 1
+
+                                                                        &&
+                                                                        user?.account?.phone !== item.Number_Warehouse
+
+                                                                        &&
+
+                                                                        <td>
+                                                                            <span style={{ color: "blue", fontWeight: "700" }} >
+                                                                                {t('Warehouse-employer.Four')}
+                                                                            </span>
+
+
+                                                                        </td>
+                                                                    }
                                                                     {item.statuswarehouseId === 2 &&
                                                                         <td>
-                                                                            <button className='btn btn-info mx-3 my-1' >
+                                                                            <span style={{ color: "green", fontWeight: "700" }} >
                                                                                 {t('Warehouse-employer.Five')}
-                                                                            </button>
+                                                                            </span>
                                                                         </td>
 
 

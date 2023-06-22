@@ -13,8 +13,11 @@ import _, { debounce } from "lodash"
 import { Link, NavLink, useHistory } from "react-router-dom"
 import * as XLSX from 'xlsx';
 import { Bars } from 'react-loader-spinner'
+import { useTranslation, Trans } from 'react-i18next';
+
 const UserGroupBoss = (props) => {
     let history = useHistory()
+    const { t, i18n } = useTranslation();
 
     const [listUser4, setListUser4] = useState([])
     const [listUserSearch, setListUserSearch] = useState([])
@@ -254,7 +257,7 @@ const UserGroupBoss = (props) => {
             let res = await getDataUserSearch(data)
             if (res && +res.EC === 0) {
                 let result = res.DT
-                let data = result.filter(item => item.groupId === 4)
+                let data = result.filter(item => item.groupId === 3)
                 setListUserSearch(data)
             }
 
@@ -278,7 +281,9 @@ const UserGroupBoss = (props) => {
             <div className='listUser-container'>
                 <div className='user-header'>
                     <div className='title mt-3 '>
-                        <h2>Manage User</h2>
+                        <h2>
+                            {t('List-user.One')}
+                        </h2>
                     </div>
                     <div className='more '>
                         <div className='col search'>
@@ -300,18 +305,18 @@ const UserGroupBoss = (props) => {
                                 }}>
                                 <i className="fa fa-user-plus" ></i>
 
-                                Add new user
+                                {t('List-user.Two')}
                             </button>
                             <button className='btn btn-success refresh' onClick={() => handleRefesh()}>
                                 <i className="fa fa-refresh"
                                 ></i>
 
-                                Refesh
+                                {t('List-user.Three')}
                             </button>
                             <button className="btn btn-primary" onClick={() => handleExportData()}>
                                 <i class="fa fa-cloud-download" aria-hidden="true"></i>
 
-                                Export listuser
+                                {t('List-user.Four')}
                             </button>
                         </div>
                     </div>
@@ -321,19 +326,29 @@ const UserGroupBoss = (props) => {
                     <div className='container my-3'>
                         <div className='row mx-3'>
                             <div className='col-3 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                <Link to="/listuser" style={{ textDecoration: "none", color: "#474141" }}>All user </Link>
+                                <Link to="/listuser" style={{ textDecoration: "none", color: "#474141" }}>
+                                    {t('List-user.Five')}
+                                </Link>
                             </div>
-                            <div className='col-2 my-2 content boder-bottom' style={{ borderBottom: "5px solid #61dafb", cursor: "pointer" }}>Customer ({listUserlenght}) </div>
+                            <div className='col-2 my-2 content boder-bottom' style={{ borderBottom: "5px solid #61dafb", cursor: "pointer" }}>
+                                {t('List-user.Six')} ({listUserlenght})
+                            </div>
 
                             <div className='col-2 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                <Link to="/listuserbygroupBoss" style={{ textDecoration: "none", color: "#474141" }}>Boss</Link>
+                                <Link to="/listuserbygroupBoss" style={{ textDecoration: "none", color: "#474141" }}>
+                                    {t('List-user.Seven')}
+                                </Link>
                             </div>
                             <div className='col-2 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                <Link to="/listuserbygroupDev" style={{ textDecoration: "none", color: "#474141" }}>Dev </Link>
+                                <Link to="/listuserbygroupDev" style={{ textDecoration: "none", color: "#474141" }}>
+                                    {t('List-user.Eight')}
+                                </Link>
 
                             </div>
                             <div className='col-2 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                <Link to="/listuserbygroupStaff" style={{ textDecoration: "none", color: "#474141" }}>Staff </Link>
+                                <Link to="/listuserbygroupStaff" style={{ textDecoration: "none", color: "#474141" }}>
+                                    {t('List-user.Night')}
+                                </Link>
 
                             </div>
 
@@ -368,7 +383,7 @@ const UserGroupBoss = (props) => {
                 }
                 {isloading === true ?
                     <div className='user-body  '>
-                        <table className="table   table-striped table-hover">
+                        <table className="table table-bordered  table-striped table-hover">
                             <thead >
                                 <tr>
                                     <th scope="col" className='table-success'>No</th>
@@ -604,7 +619,7 @@ const UserGroupBoss = (props) => {
                                     wrapperStyle=""
                                     visible={true}
                                 />
-                                <div> ... is loading</div>
+                                <div> {t('List-user.Body.Fourteen')}</div>
                             </div>
                         </td>
 

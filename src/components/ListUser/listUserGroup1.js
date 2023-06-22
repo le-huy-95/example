@@ -13,8 +13,11 @@ import _, { debounce } from "lodash"
 import { Link, NavLink, useHistory } from "react-router-dom"
 import * as XLSX from 'xlsx';
 import { Bars } from 'react-loader-spinner'
+import { useTranslation, Trans } from 'react-i18next';
+
 const UserGroupBoss = (props) => {
     let history = useHistory()
+    const { t, i18n } = useTranslation();
 
     const [listUser1, setListUser1] = useState([])
     const [listUserSearch, setListUserSearch] = useState([])
@@ -254,7 +257,9 @@ const UserGroupBoss = (props) => {
             <div className='listUser-container'>
                 <div className='user-header'>
                     <div className='title mt-3 '>
-                        <h2>Manage User</h2>
+                        <h2>
+                            {t('List-user.One')}
+                        </h2>
                     </div>
                     <div className='more '>
                         <div className='col search'>
@@ -276,18 +281,18 @@ const UserGroupBoss = (props) => {
                                 }}>
                                 <i className="fa fa-user-plus" ></i>
 
-                                Add new user
+                                {t('List-user.Two')}
                             </button>
                             <button className='btn btn-success refresh' onClick={() => handleRefesh()}>
                                 <i className="fa fa-refresh"
                                 ></i>
 
-                                Refesh
+                                {t('List-user.Three')}
                             </button>
                             <button className="btn btn-primary" onClick={() => handleExportData()}>
                                 <i class="fa fa-cloud-download" aria-hidden="true"></i>
 
-                                Export listuser
+                                {t('List-user.Four')}
                             </button>
                         </div>
                     </div>
@@ -297,18 +302,27 @@ const UserGroupBoss = (props) => {
                     <div className='container my-3'>
                         <div className='row mx-3'>
                             <div className='col-3 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                <Link to="/listuser" style={{ textDecoration: "none", color: "#474141" }}>All user </Link>
+                                <Link to="/listuser" style={{ textDecoration: "none", color: "#474141" }}>
+                                    {t('List-user.Five')}
+                                </Link>
                             </div>
                             <div className='col-2 my-2 content boder-bottom' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                <Link to="/listuserbygroupCustomer" style={{ textDecoration: "none", color: "#474141" }}>Customer </Link>
+                                <Link to="/listuserbygroupCustomer" style={{ textDecoration: "none", color: "#474141" }}>
+                                    {t('List-user.Six')}
+                                </Link>
                             </div>
-                            <div className='col-2 my-2 content boder-bottom' style={{ borderBottom: "5px solid #61dafb", cursor: "pointer" }}>Boss ({listUserlenght > 0 ? listUserlenght : "0"})</div>
+                            <div className='col-2 my-2 content boder-bottom' style={{ borderBottom: "5px solid #61dafb", cursor: "pointer" }}>
+                                {t('List-user.Seven')} ({listUserlenght > 0 ? listUserlenght : "0"})</div>
                             <div className='col-2 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                <Link to="/listuserbygroupDev" style={{ textDecoration: "none", color: "#474141" }}>Dev </Link>
+                                <Link to="/listuserbygroupDev" style={{ textDecoration: "none", color: "#474141" }}>
+                                    {t('List-user.Eight')}
+                                </Link>
 
                             </div>
                             <div className='col-2 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                <Link to="/listuserbygroupStaff" style={{ textDecoration: "none", color: "#474141" }}>Staff </Link>
+                                <Link to="/listuserbygroupStaff" style={{ textDecoration: "none", color: "#474141" }}>
+                                    {t('List-user.Night')}
+                                </Link>
 
                             </div>
 
@@ -344,62 +358,92 @@ const UserGroupBoss = (props) => {
                 {isloading === true
                     ?
                     <div className='user-body  '>
-                        <table className="table   table-striped table-hover">
+                        <table className="table table-bordered  table-striped table-hover">
                             <thead >
                                 <tr>
-                                    <th scope="col" className='table-success'>No</th>
-                                    <th scope="col" className='table-success'>Id</th>
-                                    <th scope="col" className='table-success' >Image</th>
+                                    <th scope="col" className='table-success'>
+                                        {t('List-user.Body.One')}
+                                    </th>
+                                    <th scope="col" className='table-success'>
+                                        {t('List-user.Body.Two')}
+                                    </th>
+                                    <th scope="col" className='table-success' style={{ width: "100px" }} >
+                                        {t('List-user.Body.Three')}
+                                    </th>
 
-                                    <th scope="col" className='table-success' style={{ width: "220px" }}>
+                                    <th scope="col" className='table-success' style={{ width: "200px" }}>
                                         {sortName === true
                                             ?
-                                            <>
-                                                <span>username </span>
+                                            <div className='d-flex'>
+                                                <span>
+                                                    {t('List-user.Body.Four')}
+                                                </span>
                                                 <span className='mx-2' onClick={() => handleChangsortItem("asc", "username")} style={{ cursor: "pointer" }}>
                                                     <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
                                                 </span>
-                                            </>
+                                            </div>
                                             :
-                                            <>
-                                                <span>username </span>
+                                            <div className='d-flex'>
+                                                <span>
+                                                    {t('List-user.Body.Four')}
+                                                </span>
                                                 <span className='mx-2' onClick={() => handleChangsortItem("desc", "username")} style={{ cursor: "pointer" }}>
                                                     <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
                                                 </span>
-                                            </>
+                                            </div>
                                         }
 
                                     </th>
-                                    <th scope="col" className='table-success' >email</th>
+                                    <th scope="col" className='table-success' >
+                                        {t('List-user.Body.Five')}
+                                    </th>
 
-                                    <th scope="col" className='table-success' style={{ width: "200px" }}>Address user</th>
-                                    <th scope="col" className='table-success' style={{ width: "160px" }}>unit</th>
+                                    <th scope="col" className='table-success' style={{ width: "200px" }}>
+                                        {t('List-user.Body.Six')}
+                                    </th>
+                                    <th scope="col" className='table-success' style={{ width: "160px" }}>
+                                        {t('List-user.Body.Seven')}
+                                    </th>
 
-                                    <th scope="col" className='table-success' style={{ width: "130px" }}>Position</th>
+                                    <th scope="col" className='table-success' style={{ width: "130px" }}>
+                                        {t('List-user.Body.Eight')}
+                                    </th>
 
-                                    <th scope="col" className='table-success' style={{ width: "100px" }}>phone</th>
-                                    <th scope="col" className='table-success'>sex</th>
-                                    <th scope="col" className='table-success' >Group</th>
-                                    <th scope="col" className='table-success' style={{ width: "210px" }}>
+                                    <th scope="col" className='table-success' style={{ width: "100px" }}>
+                                        {t('List-user.Body.Night')}
+                                    </th>
+                                    <th scope="col" className='table-success'>
+                                        {t('List-user.Body.Ten')}
+                                    </th>
+                                    <th scope="col" className='table-success'>
+                                        {t('List-user.Body.Eleven')}
+                                    </th>
+                                    <th scope="col" className='table-success' style={{ width: "200px" }}>
                                         {sortTime === true
                                             ?
-                                            <>
-                                                <span>createdAt </span>
+                                            <div className='d-flex'>
+                                                <span>
+                                                    {t('List-user.Body.Twele')}
+                                                </span>
                                                 <span className='mx-2' onClick={() => handleChangsortItem("desc", "createdAt")} style={{ cursor: "pointer" }}>
                                                     <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
                                                 </span>
-                                            </>
+                                            </div>
                                             :
-                                            <>
-                                                <span>createdAt </span>
+                                            <div className='d-flex'>
+                                                <span>
+                                                    {t('List-user.Body.Twele')}
+                                                </span>
                                                 <span className='mx-2' onClick={() => handleChangsortItem("asc", "createdAt")} style={{ cursor: "pointer" }}>
                                                     <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
                                                 </span>
-                                            </>
+                                            </div>
                                         }
                                     </th>
 
-                                    <th scope="col" className='table-success'>Action</th>
+                                    <th scope="col" className='table-success'>
+                                        {t('List-user.Body.Thirteen')}
+                                    </th>
 
                                 </tr>
                             </thead>
@@ -588,7 +632,7 @@ const UserGroupBoss = (props) => {
                                     wrapperStyle=""
                                     visible={true}
                                 />
-                                <div> ... is loading</div>
+                                <div> {t('List-user.Body.Fourteen')}</div>
                             </div>
                         </td>
 

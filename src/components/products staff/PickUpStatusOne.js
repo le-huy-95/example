@@ -34,7 +34,43 @@ const PickUpStatusOne = (props) => {
         setShowModal(!showModal)
     }
 
+    const updatePickup = async (item) => {
+        if (!item.User_PickUp && !item.Number_PickUp) {
+            let res = await updatePickupInProject(+user.account.shippingUnit_Id, item.id, user.account.username, user.account.phone, 1, new Date(), "")
+            if (res && +res.EC === 0) {
+                let abc = await createNotification(item.id, item.order, "đơn hàng đang lấy hàng", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 1, item.shippingUnit_Id)
+                if (abc && +abc.EC === 0) {
+                    await fetchProjectUser()
+                    await HandleSearchData(valueSearch)
+                } else {
+                    await fetchProjectUser()
+                    await HandleSearchData(valueSearch)
+                }
 
+
+
+            } else {
+                toast.error(res.EM)
+            }
+        }
+        if (item.User_PickUp && item.Number_PickUp) {
+            let res = await updatePickupInProject(+user.account.shippingUnit_Id, item.id, null, null, 0, "", "")
+            if (res && +res.EC === 0) {
+                let abc = await createNotification(item.id, item.order, "đơn hàng trì hoãn", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 1, item.shippingUnit_Id)
+                if (abc && +abc.EC === 0) {
+                    await fetchProjectUser()
+                    await HandleSearchData(valueSearch)
+                } else {
+                    await fetchProjectUser()
+                    await HandleSearchData(valueSearch)
+                }
+
+            } else {
+                toast.error(res.EM)
+            }
+        }
+
+    }
 
     const HandleSearchData = debounce(async (value) => {
         let data = value
@@ -304,11 +340,29 @@ const PickUpStatusOne = (props) => {
 
                                                                         </td>
                                                                         <td>
-                                                                            {item?.User_PickUp &&
+                                                                            {item?.statuspickupId === 1 && user?.account?.username == item.User_PickUp && user?.account?.phone == item.Number_PickUp &&
 
-                                                                                <button className='btn btn-info' onClick={() => completePickup(item)}>
-                                                                                    {t('Pick-up.Body.Seventeen')}
-                                                                                </button>
+                                                                                <td>
+                                                                                    <button className='btn btn-info mx-3 my-1' onClick={() => completePickup(item)}>
+                                                                                        {t('Pick-up.Body.Seventeen')}
+                                                                                    </button>
+                                                                                    <br />
+                                                                                    <button className='btn btn-warning mx-3 my-1' onClick={() => updatePickup(item)}>
+                                                                                        {t('Pick-up.Body.Eighteen')}
+                                                                                    </button>
+
+                                                                                </td>
+
+                                                                            }
+                                                                            {item?.statuspickupId === 1 && user?.account?.username !== item.User_PickUp && user?.account?.phone !== item.Number_PickUp &&
+
+                                                                                <td className='d-flex justify-content-center'>
+                                                                                    <span style={{ color: "blue", fontWeight: "700" }}>
+                                                                                        {t('Pick-up.Body.Fourteen')}
+                                                                                    </span>
+
+
+                                                                                </td>
 
                                                                             }
 
@@ -448,11 +502,29 @@ const PickUpStatusOne = (props) => {
 
                                                                     </td>
                                                                     <td>
-                                                                        {item?.User_PickUp &&
+                                                                        {item?.statuspickupId === 1 && user?.account?.username == item.User_PickUp && user?.account?.phone == item.Number_PickUp &&
 
-                                                                            <button className='btn btn-info' onClick={() => completePickup(item)}>
-                                                                                {t('Pick-up.Body.Seventeen')}
-                                                                            </button>
+                                                                            <td>
+                                                                                <button className='btn btn-info mx-3 my-1' onClick={() => completePickup(item)}>
+                                                                                    {t('Pick-up.Body.Seventeen')}
+                                                                                </button>
+                                                                                <br />
+                                                                                <button className='btn btn-warning mx-3 my-1' onClick={() => updatePickup(item)}>
+                                                                                    {t('Pick-up.Body.Eighteen')}
+                                                                                </button>
+
+                                                                            </td>
+
+                                                                        }
+                                                                        {item?.statuspickupId === 1 && user?.account?.username !== item.User_PickUp && user?.account?.phone !== item.Number_PickUp &&
+
+                                                                            <td className='d-flex justify-content-center'>
+                                                                                <span style={{ color: "blue", fontWeight: "700" }}>
+                                                                                    {t('Pick-up.Body.Fourteen')}
+                                                                                </span>
+
+
+                                                                            </td>
 
                                                                         }
 
@@ -468,7 +540,7 @@ const PickUpStatusOne = (props) => {
 
                                                     )
                                                     :
-                                                    <tr class="table-danger">
+                                                    <tr class="table-info">
                                                         <td colSpan={14}>
                                                             <div className='d-flex align-item-center justify-content-center'>
 

@@ -8,8 +8,11 @@ import { updateOverviewInProject, getDataSortByOverview, getDataSearchByEmplyer,
 import moment from "moment"
 import { toast } from 'react-toastify'
 import _, { debounce } from "lodash"
+import { useTranslation, Trans } from 'react-i18next';
 
 const OverviewStatusOne = (props) => {
+    const { t, i18n } = useTranslation();
+
     let history = useHistory()
     const { user } = React.useContext(UserContext);
     const [collapsed, setCollapsed] = useState(false)
@@ -21,7 +24,35 @@ const OverviewStatusOne = (props) => {
     const [valueSearch, setvalueSearch] = useState("")
 
 
+    const update = async (item) => {
+        if (!item.User_Overview && !item.Number_Overview) {
+            let res = await updateOverviewInProject(item.id, +user.account.shippingUnit_Id, user.account.username, user.account.phone, 1, new Date(), "", "")
+            if (res && +res.EC === 0) {
+                let abc = await createNotification(item.id, item.order, "đơn hàng đang đối soát", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 1, item.shippingUnit_Id)
+                if (abc && +abc.EC === 0) {
+                    await fetchProjectUser()
+                    await HandleSearchData(valueSearch)
+                }
 
+            } else {
+                toast.error(res.EM)
+            }
+        }
+        if (item.User_Overview && item.Number_Overview) {
+            let res = await updateOverviewInProject(item.id, +user.account.shippingUnit_Id, "", "", 0, "", "", "")
+            if (res && +res.EC === 0) {
+                let abc = await createNotification(item.id, item.order, "đơn hàng trì hoãn đối soát", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 1, item.shippingUnit_Id)
+                if (abc && +abc.EC === 0) {
+                    await fetchProjectUser()
+                    await HandleSearchData(valueSearch)
+                }
+
+            } else {
+                toast.error(res.EM)
+            }
+        }
+
+    }
 
 
     const HandleSearchData = debounce(async (value) => {
@@ -134,33 +165,51 @@ const OverviewStatusOne = (props) => {
                         <div className='body-overview'>
                             <div className="container">
                                 <div className='name-page-overview'>
-                                    <h4> OverView </h4>
+                                    <h4>
+                                        {t('Accountant-employer.One')}
+                                    </h4>
                                     <div className='more-overview'>
-                                        <b>Giao hàng tiết kiệm</b>
+                                        <b>
+                                            {user?.account?.nameUnit?.NameUnit}
+                                        </b>
 
 
                                     </div>
-                                    <span> nhân viên kế toán</span>
+                                    <span>
+                                        {user?.account?.Position}
 
+                                    </span>
                                 </div>
+
+
                                 <div className='sort_Overview my-3'>
                                     <div className='container my-3'>
                                         <div className='row mx-3'>
                                             <div className='col-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Overview" style={{ textDecoration: "none", color: "#474141" }}>Tất cả đơn </Link>
+                                                <Link to="/Overview" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Accountant-employer.Two')}
+                                                </Link>
                                             </div>
 
                                             <div className='col-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Overview_no_status" style={{ textDecoration: "none", color: "#474141" }}> Đơn chưa đối soát </Link>
+                                                <Link to="/Overview_no_status" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Accountant-employer.Three')}
+                                                </Link>
                                             </div>
-                                            <div className='col-4 my-2 content-Overview ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}> Đơn đang đối soát  </div>
+                                            <div className='col-4 my-2 content-Overview ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
+                                                {t('Accountant-employer.Four')}
+                                            </div>
 
 
                                             <div className='col-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Overview_status-two" style={{ textDecoration: "none", color: "#474141" }}> Đơn thanh toán chuyển khoản </Link>
+                                                <Link to="/Overview_status-two" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Accountant-employer.Five')}
+                                                </Link>
                                             </div>
                                             <div className='col-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
-                                                <Link to="/Overview_status-three" style={{ textDecoration: "none", color: "#474141" }}>Đơn thanh toán trực tiếp  </Link>
+                                                <Link to="/Overview_status-three" style={{ textDecoration: "none", color: "#474141" }}>
+                                                    {t('Accountant-employer.Six')}
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
@@ -170,25 +219,48 @@ const OverviewStatusOne = (props) => {
 
                                         <div className='table table-bordered table-wrapper-overview-One my-5'>
                                             <div className='container'>
-                                                <div className='title-overview-One my-3'>đơn hàng đã xử lý ({listProjectbyStaffOverview.length})</div>
+                                                <div className='title-overview-One my-3'>
+                                                    {t('Accountant-employer.Eight')}({listProjectbyStaffOverview.length})
+                                                </div>
                                                 <hr />
 
                                                 <table className="table table-bordered table-body-overview">
                                                     <thead>
                                                         <tr className='table-secondary'>
-                                                            <th scope="col">Id</th>
-                                                            <th scope="col">Mã đơn</th>
-                                                            <th scope="col">Thông tin người tạo </th>
-                                                            <th scope="col">T/T thanh toán</th>
-                                                            <th scope="col">Hình tức thanh toán </th>
-                                                            <th scope="col">Tổng tiền cần thanh toán </th>
-                                                            <th scope="col">Loại tiền</th>
-                                                            <th scope="col">Thời gian nhận đơn</th>
-                                                            <th scope="col">Thời gian hòan thành</th>
+                                                            <th scope="col">
+                                                                {t('Accountant-employer.Body.Two')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Accountant-employer.Body.Three')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Accountant-employer.Body.Four')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Accountant-employer.Body.Five')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Accountant-employer.Body.Six')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Accountant-employer.Body.Seven')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Accountant-employer.Body.Eight')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Accountant-employer.Body.Ten')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Accountant-employer.Body.Eleven')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Accountant-employer.Body.Twelve')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Accountant-employer.Body.Thirteen')}
+                                                            </th>
 
-
-                                                            <th scope="col">Người nhận đơn</th>
-                                                            <th scope="col">Thao tác</th>
 
                                                         </tr>
                                                     </thead>
@@ -218,28 +290,28 @@ const OverviewStatusOne = (props) => {
                                                                         {item.Mode_of_payment === "Nhận tiền thanh toán qua tài khoản ngân hàng" &&
                                                                             <td>
                                                                                 <span>
-                                                                                    <b>hình thức:</b>   <span style={{ color: "red", fontWeight: "600" }}>{item?.Mode_of_payment ? item?.Mode_of_payment : ""}</span>
+                                                                                    <b>{t('Accountant-employer.Body.Six')}:</b>   <span style={{ color: "red", fontWeight: "600" }}>{item?.Mode_of_payment ? item?.Mode_of_payment : ""}</span>
                                                                                 </span>
                                                                                 <br />
 
                                                                                 <span>
-                                                                                    <b>Tên ngân hàng :</b> {item?.Bank_name ? item?.Bank_name : ""}
+                                                                                    <b>{t('Accountant-employer.Body.TwentyThree')}</b> {item?.Bank_name ? item?.Bank_name : ""}
                                                                                 </span>
                                                                                 <br />
                                                                                 <span>
-                                                                                    <b>Chủ tại khoản:</b>   {item?.name_account ? item?.name_account : ""}
+                                                                                    <b>{t('Accountant-employer.Body.TwentyFour')}</b>   {item?.name_account ? item?.name_account : ""}
                                                                                 </span>
                                                                                 <br />
 
                                                                                 <span>
-                                                                                    <b>Stk:</b>   {item?.Main_Account ? item?.Main_Account : ""}
+                                                                                    <b>{t('Accountant-employer.Body.TwentyFive')}</b>   {item?.Main_Account ? item?.Main_Account : ""}
                                                                                 </span>
                                                                             </td>
                                                                         }
                                                                         {item.Mode_of_payment === "Nhận tiền thanh toán ở trung tâm" &&
                                                                             <td>
                                                                                 <span>
-                                                                                    <b>hình thức:</b> <span style={{ color: "red", fontWeight: "600" }}>{item?.Mode_of_payment ? item?.Mode_of_payment : ""}</span>
+                                                                                    <b>{t('Accountant-employer.Body.Six')}:</b> <span style={{ color: "red", fontWeight: "600" }}>{item?.Mode_of_payment ? item?.Mode_of_payment : ""}</span>
                                                                                 </span>
 
                                                                             </td>
@@ -258,10 +330,21 @@ const OverviewStatusOne = (props) => {
                                                                         </td>
 
 
-                                                                        {item.receiveMoneyId === 1 &&
+                                                                        {item.receiveMoneyId === 1 && user?.account?.phone == item.Number_Overview &&
+                                                                            < td >
+                                                                                <button className='btn btn-success mb-3' onClick={() => complete(item)}>
+                                                                                    {t('Accountant-employer.Body.Seventeen')}
+                                                                                </button>
+                                                                                <br />
+                                                                                <button className='btn btn-danger mb-3' onClick={() => update(item)} >
+                                                                                    {t('Accountant-employer.Body.TwentySix')}
+                                                                                </button>
+                                                                            </td>
+                                                                        }
+                                                                        {item.receiveMoneyId === 1 && user?.account?.phone !== item.Number_Overview &&
                                                                             < td >
 
-                                                                                <button className='btn btn-danger mb-3' onClick={() => complete(item)} > Hoàn thành</button>
+                                                                                <span style={{ color: "green", fontWeight: "700" }}>{t('Accountant-employer.Body.Fifteen')}</span>
 
                                                                             </td>
                                                                         }
@@ -276,7 +359,7 @@ const OverviewStatusOne = (props) => {
                                                             <td colSpan={14}>
                                                                 <div className='d-flex align-item-center justify-content-center'>
 
-                                                                    <h5> Bạn chưa nhận đơn hàng nào</h5>
+                                                                    <h5> {t('Accountant-employer.Body.TwentyTwo')}</h5>
 
                                                                 </div>
 
@@ -299,25 +382,47 @@ const OverviewStatusOne = (props) => {
                                 {isSearch === true &&
                                     <div className='table-wrapper-overview-One my-5'>
                                         <div className='container'>
-                                            <div className='title-overview-One my-3'>Kết quả tìm kiếm ({listProjectSearch.length})</div>
+                                            <div className='title-overview-One my-3'>
+                                                {t('Accountant-employer.Body.Eighteen')} ({listProjectSearch.length})
+                                            </div>
                                             <hr />
 
                                             <table className="table table-bordered table-body-overview">
                                                 <thead>
                                                     <tr className='table-secondary'>
-                                                        <th scope="col">Id</th>
-                                                        <th scope="col">Mã đơn</th>
-                                                        <th scope="col">Thông tin người tạo </th>
-                                                        <th scope="col">T/T thanh toán</th>
-                                                        <th scope="col">Hình tức thanh toán </th>
-                                                        <th scope="col">Tổng tiền cần thanh toán </th>
-                                                        <th scope="col">Loại tiền</th>
-                                                        <th scope="col">Thời gian nhận đơn</th>
-                                                        <th scope="col">Thời gian hòan thành</th>
-
-
-                                                        <th scope="col">Người nhận đơn</th>
-                                                        <th scope="col">Thao tác</th>
+                                                        <th scope="col">
+                                                            {t('Accountant-employer.Body.Two')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Accountant-employer.Body.Three')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Accountant-employer.Body.Four')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Accountant-employer.Body.Five')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Accountant-employer.Body.Six')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Accountant-employer.Body.Seven')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Accountant-employer.Body.Eight')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Accountant-employer.Body.Ten')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Accountant-employer.Body.Eleven')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Accountant-employer.Body.Twelve')}
+                                                        </th>
+                                                        <th scope="col">
+                                                            {t('Accountant-employer.Body.Thirteen')}
+                                                        </th>
 
 
                                                     </tr>
@@ -349,28 +454,28 @@ const OverviewStatusOne = (props) => {
                                                                     {item.Mode_of_payment === "Nhận tiền thanh toán qua tài khoản ngân hàng" &&
                                                                         <td>
                                                                             <span>
-                                                                                <b>hình thức:</b>   <span style={{ color: "red", fontWeight: "600" }}>{item?.Mode_of_payment ? item?.Mode_of_payment : ""}</span>
+                                                                                <b>{t('Accountant-employer.Body.Six')}:</b>   <span style={{ color: "red", fontWeight: "600" }}>{item?.Mode_of_payment ? item?.Mode_of_payment : ""}</span>
                                                                             </span>
                                                                             <br />
 
                                                                             <span>
-                                                                                <b>Tên ngân hàng :</b> {item?.Bank_name ? item?.Bank_name : ""}
+                                                                                <b>{t('Accountant-employer.Body.TwentyThree')}</b> {item?.Bank_name ? item?.Bank_name : ""}
                                                                             </span>
                                                                             <br />
                                                                             <span>
-                                                                                <b>Chủ tại khoản:</b>   {item?.name_account ? item?.name_account : ""}
+                                                                                <b>{t('Accountant-employer.Body.TwentyFour')}</b>   {item?.name_account ? item?.name_account : ""}
                                                                             </span>
                                                                             <br />
 
                                                                             <span>
-                                                                                <b>Stk:</b>   {item?.Main_Account ? item?.Main_Account : ""}
+                                                                                <b>{t('Accountant-employer.Body.TwentyFive')}</b>   {item?.Main_Account ? item?.Main_Account : ""}
                                                                             </span>
                                                                         </td>
                                                                     }
                                                                     {item.Mode_of_payment === "Nhận tiền thanh toán ở trung tâm" &&
                                                                         <td>
                                                                             <span>
-                                                                                <b>hình thức:</b> <span style={{ color: "red", fontWeight: "600" }}>{item?.Mode_of_payment ? item?.Mode_of_payment : ""}</span>
+                                                                                <b>{t('Accountant-employer.Body.Six')}:</b> <span style={{ color: "red", fontWeight: "600" }}>{item?.Mode_of_payment ? item?.Mode_of_payment : ""}</span>
                                                                             </span>
 
                                                                         </td>
@@ -389,10 +494,25 @@ const OverviewStatusOne = (props) => {
                                                                     </td>
 
 
-                                                                    {item.receiveMoneyId === 1 &&
+                                                                    {item.receiveMoneyId === 1 && user?.account?.phone == item.Number_Overview &&
                                                                         < td >
 
-                                                                            <button className='btn btn-danger mb-3' onClick={() => complete(item)} > Hoàn thành</button>
+                                                                            < td >
+                                                                                <button className='btn btn-success mb-3' onClick={() => complete(item)}>
+                                                                                    {t('Accountant-employer.Body.Seventeen')}
+                                                                                </button>
+                                                                                <br />
+                                                                                <button className='btn btn-danger mb-3' onClick={() => update(item)} >
+                                                                                    {t('Accountant-employer.Body.TwentySix')}
+                                                                                </button>
+                                                                            </td>
+
+                                                                        </td>
+                                                                    }
+                                                                    {item.receiveMoneyId === 1 && user?.account?.phone !== item.Number_Overview &&
+                                                                        < td >
+
+                                                                            <span style={{ color: "green", fontWeight: "700" }}>{t('Accountant-employer.Body.Fifteen')}</span>
 
                                                                         </td>
                                                                     }
@@ -408,7 +528,7 @@ const OverviewStatusOne = (props) => {
                                                         <td colSpan={14}>
                                                             <div className='d-flex align-item-center justify-content-center'>
 
-                                                                <h5> Không tìm thấy</h5>
+                                                                <h5> {t('Accountant-employer.Body.TwentySeven')}</h5>
 
                                                             </div>
 

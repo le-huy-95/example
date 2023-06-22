@@ -192,12 +192,25 @@ const NavHeader = (props) => {
                                 <Nav.Item className='nav-link' >
                                     <button className=" btn btn-primary position-relative" onClick={() => handleShowNotificationModal()}>
                                         <i className="fa fa-bell" aria-hidden="true"></i>
-                                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                            {!user.account.Position ? ListUnread.length : listStaffUnread.length}
+                                        {!user.account.Position && ListUnread.length > 0
+                                            &&
+                                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                {ListUnread.length}
 
 
-                                            <span className="visually-hidden">unread messages</span>
-                                        </span>
+                                                <span className="visually-hidden">unread messages</span>
+                                            </span>
+                                        }
+                                        {user.account.Position && listStaffUnread.length > 0
+                                            &&
+                                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                {listStaffUnread.length}
+
+
+                                                <span className="visually-hidden">unread messages</span>
+                                            </span>
+                                        }
+
                                     </button>
 
                                 </Nav.Item>

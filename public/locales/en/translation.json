@@ -514,7 +514,7 @@
             "Eleven": "Employer",
             "Twelve": "Action",
             "Thirteen": "Receive ",
-            "Fourteen": "Picking up ",
+            "Fourteen": "Picking up",
             "Fifteen": "Taken goods ",
             "Sixteen": "Orders have been processed and there are no new orders ",
             "Seventeen": "Complete ",
@@ -596,5 +596,114 @@
             "TwentySeven": "Complete",
             "TwentyEight": "Cancel"
         }
+    },
+    "Accountant-employer": {
+        "One": "List Accountant",
+        "Two": "All",
+        "Three": "Not Check money",
+        "Four": "Checking money",
+        "Five": "Payment by bank transfer",
+        "Six": "Payment by cash ",
+        "Eight": "All",
+        "Body": {
+            "One": "No",
+            "Two": "Id",
+            "Three": "Orders",
+            "Four": "Creator",
+            "Five": "Status payment",
+            "Six": "Payment method ",
+            "Seven": "Money",
+            "Eight": "Type of currency",
+            "Ten": "Time to receive",
+            "Eleven": "Completion time",
+            "Twelve": "Employer",
+            "Thirteen": "Action",
+            "Fourteen": "Receive",
+            "Fifteen": "Checking",
+            "Sixteen": "Finished checking",
+            "Seventeen": "Complete",
+            "Eighteen": "Search Results  ",
+            "Nineteen": "Done ",
+            "Twenty": "You have not orders",
+            "TwentyOne": "My order",
+            "TwentyTwo": "Orders have been processed and there are no new orders ",
+            "TwentyThree": "Bank name :",
+            "TwentyFour": "Main account :",
+            "TwentyFive": "Account number :",
+            "TwentySix": "Cancel",
+            "TwentySeven": "Not found"
+        }
+    },
+    "List-user": {
+        "One": "Manage User",
+        "Two": " Add new user",
+        "Three": "Refesh",
+        "Four": "Export listuser",
+        "Five": "All user",
+        "Six": " Customer",
+        "Seven": "Boss",
+        "Eight": "Dev",
+        "Night": "Staff",
+        "Body": {
+            "One": " No",
+            "Two": " Id",
+            "Three": "Image",
+            "Four": "Username",
+            "Five": "Email",
+            "Six": "Address",
+            "Seven": "Unit",
+            "Eight": "Position",
+            "Night": "Phone",
+            "Ten": "Sex",
+            "Eleven": "Group",
+            "Twele": "CreatedAt",
+            "Thirteen": "Action",
+            "Fourteen": "... is loading"
+        }
+    },
+    "Created-user": {
+        "One": "Create New User",
+        "Two": "Edit User",
+        "Three": "Email ",
+        "Four": "Username",
+        "Five": "Phone ",
+        "Six": "Password",
+        "Seven": "Position",
+        "Eight": "Unit",
+        "Night": "Address province user ",
+        "Ten": "Address district user ",
+        "Eleven": "Address ward user ",
+        "Twelve": "Address Detail ",
+        "Thirteen": "Gender ",
+        "Fourteen": "Group ",
+        "sixteen": "Save",
+        "seventeen": "Update",
+        "eighteen": "Close"
+    },
+    "Delete-user": {
+        "One": "Confirm Delete User",
+        "Two": "Are you sure to delete this user :",
+        "Three": "Close",
+        "Four": "Save"
+    },
+    "Group-role": {
+        "One": "Group-role :",
+        "Two": "Select Group :",
+        "Three": "Assign Role for group ",
+        "Four": "Save"
+    },
+    "Role": {
+        "One": "Add Url to Role",
+        "Two": "Url :",
+        "Three": "Description : ",
+        "Four": "List All Role"
+    },
+    "Table": {
+        "One": "No",
+        "Two": "Id",
+        "Three": "Url",
+        "Four": "Description",
+        "Five": "Action",
+        "Six": "404 Not Found"
     }
 }
