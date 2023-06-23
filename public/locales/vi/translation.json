@@ -701,5 +701,11 @@
         "Four": "Mô tả",
         "Five": "Thao tác",
         "Six": "404 Không có nội dung"
+    },
+    "Login": {
+        "One": "Đăng nhập",
+        "Two": "Quên mật khẩu",
+        "Three": "Thêm tài khoản",
+        "Four": "Quay lại trang chủ"
     }
 }

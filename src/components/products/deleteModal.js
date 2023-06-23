@@ -5,10 +5,15 @@ import { deleteProject } from "../services/ProjectService"
 import { toast } from 'react-toastify';
 import { useHistory } from "react-router-dom"
 import { getNumberProductinWarehouse, updateNumberProductInWarehouse } from "../services/ProjectService"
+import { NotificationContext } from "../../contexApi/NotificationContext"
+import { useEffect } from 'react';
+import { UserContext } from "../../contexApi/UserContext"
 
 const DeleteProduct = (props) => {
     let history = useHistory()
     const [numberProduct, setNumberProduct] = useState("")
+    const { list, getALlListNotification, listStaff } = React.useContext(NotificationContext);
+    const { user } = React.useContext(UserContext);
 
     const { showDeleteProduct, handleShowDeleteModal, ProductId, order, projects } = props
 
@@ -25,6 +30,7 @@ const DeleteProduct = (props) => {
                 if (resTwo && +resTwo.EC === 0) {
                     history.push("/Products")
                     toast.success(resTwo.EM)
+                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
                 } else {
                     toast.error(resTwo.EM)
                 }
@@ -32,7 +38,10 @@ const DeleteProduct = (props) => {
         }
 
     }
+    useEffect(() => {
+        getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
+    }, [])
 
     return (
         <>

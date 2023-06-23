@@ -274,7 +274,7 @@
         "Customer": {
             "One": "Employee",
             "Two": "Taking Orders",
-            "Three": "Taking orders",
+            "Three": "Delay taking orders",
             "Four": "Order",
             "Five": "arrived at the warehouse",
             "Six": "Got a new message from",
@@ -705,5 +705,11 @@
         "Four": "Description",
         "Five": "Action",
         "Six": "404 Not Found"
+    },
+    "Login": {
+        "One": " Login",
+        "Two": "Forgot you password",
+        "Three": "Create new account",
+        "Four": "Return to Homepage"
     }
 }

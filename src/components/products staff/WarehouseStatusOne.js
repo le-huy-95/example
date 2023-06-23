@@ -32,7 +32,37 @@ const WarehouseStatusOne = (props) => {
         setShowModal(!showModal)
     }
 
+    const updateWArehouse = async (item) => {
+        if (!item.User_Warehouse && !item.Number_Warehouse && !item.Status_product) {
+            let res = await updateWarehouseInProject(item.id, +user.account.shippingUnit_Id, "", user.account.username, user.account.phone, 1, new Date(), "")
+            if (res && +res.EC === 0) {
+                let abc = await createNotification(item.id, item.order, "đơn hàng đã nhập kho", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 1, item.shippingUnit_Id)
+                if (abc && +abc.EC === 0) {
+                    await fetchProjectUser()
+                    await HandleSearchData(valueSearch)
+                }
 
+            } else {
+                toast.error(res.EM)
+            }
+        }
+        if (item.User_Warehouse && item.Number_Warehouse) {
+            let res = await updateWarehouseInProject(item.id, +user.account.shippingUnit_Id, null, null, null, 0, "", "")
+            if (res && +res.EC === 0) {
+                let abc = await createNotification(item.id, item.order, "đơn hàng trì hoãn nhập kho", `${user.account.username}-${user.account.phone}`, item.createdBy, 0, 1, item.shippingUnit_Id)
+                if (abc && +abc.EC === 0) {
+                    await fetchProjectUser()
+                    await HandleSearchData(valueSearch)
+
+                }
+
+
+
+            } else {
+                toast.error(res.EM)
+            }
+        }
+    }
 
     const HandleSearchData = debounce(async (value) => {
         let data = value
@@ -244,14 +274,35 @@ const WarehouseStatusOne = (props) => {
                                                                     </td>
                                                                     <td>{item?.warehouse_time ? moment(`${item?.warehouse_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                     <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                    {item.statuswarehouseId === 1 &&
+                                                                    {item.statuswarehouseId == 1
+                                                                        &&
+                                                                        user?.account?.phone === item.Number_Warehouse
+                                                                        &&
                                                                         <td>
-                                                                            <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)} >
+                                                                            <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)}>
                                                                                 {t('Warehouse-employer.Body.Thirteen')}
                                                                             </button>
+                                                                            <br />
+                                                                            <button className='btn btn-warning mx-3 my-1' onClick={() => updateWArehouse(item)}>
+                                                                                {t('Warehouse-employer.Body.Fourteen')}
+                                                                            </button>
+
                                                                         </td>
+                                                                    }
+                                                                    {item.statuswarehouseId === 1
+
+                                                                        &&
+                                                                        user?.account?.phone !== item.Number_Warehouse
+
+                                                                        &&
+
+                                                                        <td>
+                                                                            <span style={{ color: "blue", fontWeight: "700" }} >
+                                                                                {t('Warehouse-employer.Four')}
+                                                                            </span>
 
 
+                                                                        </td>
                                                                     }
 
                                                                 </tr>
@@ -359,14 +410,35 @@ const WarehouseStatusOne = (props) => {
                                                                     </td>
                                                                     <td>{item?.warehouse_time ? moment(`${item?.warehouse_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                     <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                    {item.statuswarehouseId === 1 &&
+                                                                    {item.statuswarehouseId == 1
+                                                                        &&
+                                                                        user?.account?.phone === item.Number_Warehouse
+                                                                        &&
                                                                         <td>
-                                                                            <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)} >
+                                                                            <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)}>
                                                                                 {t('Warehouse-employer.Body.Thirteen')}
                                                                             </button>
+                                                                            <br />
+                                                                            <button className='btn btn-warning mx-3 my-1' onClick={() => updateWArehouse(item)}>
+                                                                                {t('Warehouse-employer.Body.Fourteen')}
+                                                                            </button>
+
                                                                         </td>
+                                                                    }
+                                                                    {item.statuswarehouseId === 1
+
+                                                                        &&
+                                                                        user?.account?.phone !== item.Number_Warehouse
+
+                                                                        &&
+
+                                                                        <td>
+                                                                            <span style={{ color: "blue", fontWeight: "700" }} >
+                                                                                {t('Warehouse-employer.Four')}
+                                                                            </span>
 
 
+                                                                        </td>
                                                                     }
 
 

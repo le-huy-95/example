@@ -21,6 +21,7 @@ const Pickup = (props) => {
     const [listProjectbyuserStaff, setListProjectbyuserStaff] = useState([])
     const [listProjectSearch, setListProjectSearch] = useState([])
     const [isSearch, SetIsSearch] = useState(false)
+    const [lengthProject, setLengthProject] = useState("")
 
     const [currentPage, setCurrentPage] = useState(1)
     const [currentLimit, setCurrentLimit] = useState(5)
@@ -138,6 +139,8 @@ const Pickup = (props) => {
             }
             if (res.DT.totalPage > 0 && res.DT.dataProject.length > 0) {
                 let data = res.DT.dataProject
+                setLengthProject(res.DT.totalProject)
+                console.log("res.DT.totalPage", res.DT.totalProject)
 
                 if (data) {
                     setListProjectbyStaffPickup(data)
@@ -145,6 +148,8 @@ const Pickup = (props) => {
             }
             if (res.DT.totalPage === 0 && res.DT.dataProject.length === 0) {
                 let data = res.DT.dataProject
+                setLengthProject(res.DT.totalProject)
+
                 setListProjectbyStaffPickup(data)
 
             }
@@ -241,7 +246,7 @@ const Pickup = (props) => {
                                         <div className='table-wrapper-employer-pickup my-5'>
                                             <div className='container'>
                                                 <div className='title-employer-pickup my-3'>
-                                                    {t('Pick-up.Six')} ({listProjectbyStaffPickup.length})
+                                                    {t('Pick-up.Six')} ({lengthProject})
                                                 </div>
                                                 <hr />
                                                 <div className='sub-title-employer-pickup'>
@@ -446,7 +451,7 @@ const Pickup = (props) => {
                                             <div className='container'>
                                                 <div className='title-employer-pickup-One my-3'>
 
-                                                    {t('Pick-up.Body.TwentyTwo')} ({listProjectbyuserStaff.length})
+                                                    {t('Pick-up.Body.TwentyOne')} ({listProjectbyuserStaff.length})
                                                 </div>
                                                 <hr />
                                                 <table class="table table-bordered table-body-employer-pickup-One">
@@ -710,7 +715,7 @@ const Pickup = (props) => {
 
                                                     )
                                                     :
-                                                    <tr class="table-danger">
+                                                    <tr class="table-primary">
                                                         <td colSpan={14}>
                                                             <div className='d-flex align-item-center justify-content-center'>
 

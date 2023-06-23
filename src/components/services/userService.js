@@ -1,9 +1,9 @@
 import axios from "../../customizeAxios/axios"
 
 
-const registerNewUser = (email, password, Phone, username) => {
+const registerNewUser = (email, password, Phone, username, Province, District, Ward, DetailAddress, Sex) => {
     return axios.post('/api/v1/register', {
-        email, password, Phone, username
+        email, password, Phone, username, Province, District, Ward, DetailAddress, Sex
     })
 }
 

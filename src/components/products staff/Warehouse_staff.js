@@ -19,6 +19,7 @@ const Warehouse_staff = (props) => {
     const [collapsed, setCollapsed] = useState(false)
     const [ListProjectbyStaffWarehouse, setListProjectbyStaffWarehouse] = useState([])
     const [listProjectbyUsernameStaffWarehouse, setlistProjectbyUsernameStaffWarehouse] = useState([])
+    const [length, setLength] = useState("")
 
     const [currentPage, setCurrentPage] = useState(1)
     const [currentLimit, setCurrentLimit] = useState(7)
@@ -39,7 +40,9 @@ const Warehouse_staff = (props) => {
             SetIsSearch(true)
             let res = await getDataSearchByEmplyer(data, user.account.Position, +user.account.shippingUnit_Id)
             if (res && +res.EC === 0) {
-                setListProjectSearch(res.DT)
+                let data = res.DT.filter(item => item.statuspickupId === 2)
+
+                setListProjectSearch(data)
             }
 
         } else {
@@ -126,13 +129,15 @@ const Warehouse_staff = (props) => {
             }
             if (res.DT.totalPage > 0 && res.DT.dataProject.length > 0) {
                 let data = res.DT.dataProject
-                console.log("res.DT", res.DT)
+                setLength(res.DT.totalProject)
                 if (data) {
                     setListProjectbyStaffWarehouse(data)
                 }
             }
             if (res.DT.totalPage === 0 && res.DT.dataProject.length === 0) {
                 let data = res.DT.dataProject
+                setLength(res.DT.totalProject)
+
                 setListProjectbyStaffWarehouse(data)
 
             }
@@ -230,7 +235,7 @@ const Warehouse_staff = (props) => {
                                         <div className='table-wrapper-employer-warehouse my-5'>
                                             <div className='container'>
                                                 <div className='title-employer-warehouse my-3'>
-                                                    {t('Warehouse-employer.Six')} ({ListProjectbyStaffWarehouse.length})
+                                                    {t('Warehouse-employer.Six')} ({length})
                                                 </div>
                                                 <hr />
 

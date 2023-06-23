@@ -6,12 +6,15 @@ import { toast } from 'react-toastify'
 import { LoginUser } from "../services/userService"
 import { UserContext } from "../../contexApi/UserContext"
 import ModalSendEmailResetPass from "../ModalSendEmail"
+import { useTranslation, Trans } from 'react-i18next';
+
 const Login = (props) => {
     const { user, login } = React.useContext(UserContext);
     let history = useHistory()
     const [password, setPassword] = useState()
     const [valueLogin, setValuelogin] = useState()
     const [showModalSendemail, setShowModalSendemail] = useState(false)
+    const { t, i18n } = useTranslation();
 
 
     const handleShowhideEmail = () => {
@@ -117,7 +120,8 @@ const Login = (props) => {
                     <div className='container-left  d-none d-sm-block col-sm-7'>
                         <div className='brand   ' >
                             <Link to="/" > <span title='Return to Homepage'>huy le app</span></Link> </div>
-                        <div className='detail'> Meta Platforms, Inc., doing business as Meta and formerly named Facebook, Inc., and TheFacebook,</div>
+                        <div className='detail'> Omnichannel selling management solutions for every business ,
+                            With experience in implementing for more than 50,000 small and medium-sized sellers</div>
                     </div>
                     <div className=' py-3 container-right col-12 col-sm-5 d-flex flex-column gap-3 ' >
                         <div className='brand  d-sm-none  ' title='Return to Homepage' > huy le app</div>
@@ -136,21 +140,26 @@ const Login = (props) => {
                             onChange={(event) => setPassword(event.target.value)}
                             onKeyDown={(event) => handlePressEnter(event)}
                         />
-                        <button className='btn btn-primary' onClick={() => handleLogin()}> Login</button>
+                        <button className='btn btn-primary' onClick={() => handleLogin()}>
+                            {t('Login.One')}
+                        </button>
 
                         <span className='text-center'>
-                            <a className='forgot-password' onClick={() => handleShowhideEmail()}> Forgot you password</a>
+                            <a className='forgot-password' onClick={() => handleShowhideEmail()}>
+                                {t('Login.Two')}
+                            </a>
                         </span>
                         <hr />
                         <div className='text-center' >
                             <button className='btn btn-success' onClick={() => handleCreatNewAccount()}>
-                                Create new account
-
+                                {t('Login.Three')}
                             </button>
                             <div className='mt-3 return'>
                                 <Link to="/">
                                     <i className='fa fa-arrow-circle-left mx-1'></i>
-                                    <span title='Return to Homepage'>Return to Homepage</span>
+                                    <span title='Return to Homepage'>
+                                        {t('Login.Four')}
+                                    </span>
                                 </Link>
                             </div>
                         </div>

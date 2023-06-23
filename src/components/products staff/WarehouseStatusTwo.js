@@ -159,6 +159,7 @@ const WarehouseStatusTwo = (props) => {
                                                 {t('Warehouse-employer.Six')} ({ListProjectbyStaffWarehouse.length})
                                             </div>
                                             <hr />
+
                                             <table class="table table-bordered table-body-employer-warehouse-One">
                                                 <thead>
                                                     <tr className='table-secondary'>
@@ -233,9 +234,9 @@ const WarehouseStatusTwo = (props) => {
                                                                     <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                     {item.statuswarehouseId === 2 &&
                                                                         <td>
-                                                                            <button className='btn btn-success mx-3 my-1' >
+                                                                            <span style={{ color: "green", fontWeight: "700" }} >
                                                                                 {t('Warehouse-employer.Five')}
-                                                                            </button>
+                                                                            </span>
                                                                         </td>
 
 
@@ -349,7 +350,9 @@ const WarehouseStatusTwo = (props) => {
                                                                     <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                     {item.statuswarehouseId === 2 &&
                                                                         <td>
-                                                                            <button className='btn btn-success mx-3 my-1'  > Hoàn thành</button>
+                                                                            <span style={{ color: "green", fontWeight: "700" }} >
+                                                                                {t('Warehouse-employer.Five')}
+                                                                            </span>
                                                                         </td>
 
 

@@ -24,6 +24,7 @@ const ModalCancelReason = (props) => {
                     await fetchProjectUserWithUsername()
                     await fetchProjectUser()
                     handleShowModal()
+                    setInput("")
                 }
             } else {
                 toast.error(res.EM)
@@ -37,6 +38,8 @@ const ModalCancelReason = (props) => {
                     await fetchProjectUserWithUsername()
                     await fetchProjectUser()
                     handleShowModal()
+                    setInput("")
+
                 }
 
             } else {

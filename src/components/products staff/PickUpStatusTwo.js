@@ -444,7 +444,7 @@ const PickUpStatusTwo = (props) => {
 
                                                     )
                                                     :
-                                                    <tr class="table-danger">
+                                                    <tr class="table-primary">
                                                         <td colSpan={14}>
                                                             <div className='d-flex align-item-center justify-content-center'>
 

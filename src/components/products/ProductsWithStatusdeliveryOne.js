@@ -23,12 +23,14 @@ import { Bars } from 'react-loader-spinner'
 import * as XLSX from 'xlsx';
 import { createNotification, updateProject, updateNumberProductInWarehouse } from "../services/ProjectService"
 import { useTranslation, Trans } from 'react-i18next';
+import { NotificationContext } from "../../contexApi/NotificationContext"
 
 const ProductsWithStatusdeliveryOne = (props) => {
     let history = useHistory()
     let refCalendar = useRef(null)
     const { user } = React.useContext(UserContext);
     const { t, i18n } = useTranslation();
+    const { list, getALlListNotification, listStaff } = React.useContext(NotificationContext);
 
     const defaultUserData = {
         order: "",
@@ -322,6 +324,7 @@ const ProductsWithStatusdeliveryOne = (props) => {
 
 
     useEffect(() => {
+        getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         fetchProjectUser();
         let currentUrlParams = new URLSearchParams(window.location.search);

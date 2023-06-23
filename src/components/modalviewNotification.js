@@ -125,8 +125,6 @@ const ModalViewNotification = (props) => {
         }
 
     }
-
-
     const handleViewProduct = async (item) => {
         let res = await checkExist(item)
         if (res && +res.EC === 0) {
@@ -149,7 +147,6 @@ const ModalViewNotification = (props) => {
         }
 
     }
-
     const RenderNoSeeCutomer = () => {
         let data = list.filter(item => item.ViewByuser === "0")
         setListFillterNosee(data)

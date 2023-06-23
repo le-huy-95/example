@@ -23,9 +23,11 @@ import {
 import DeleteProduct from "./deleteModal"
 import getBase64 from "../commondUtils/commondUtils"
 import { useTranslation, Trans } from 'react-i18next';
+import { NotificationContext } from "../../contexApi/NotificationContext"
 
 const DetailProduct = (props) => {
     const { t, i18n } = useTranslation();
+    const { list, getALlListNotification, listStaff } = React.useContext(NotificationContext);
 
     const param = useParams()
     const { user } = React.useContext(UserContext);
@@ -106,6 +108,7 @@ const DetailProduct = (props) => {
             if (res && +res.EC === 0) {
                 await getProjects()
                 setChangeStatusChatProject(false)
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
             } else {
                 toast.error(res.EM)
@@ -121,45 +124,60 @@ const DetailProduct = (props) => {
         let res = await deleteChatProject(id)
         if (res && +res.EC === 0) {
             await getProjects()
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         } else {
             toast.error(res.EM)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         }
     }
     const getAllSaleChannel = async () => {
         let res = await getSaleChannel()
         if (res && +res.EC === 0) {
             setSaleChannel(res.DT)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         } else {
             toast.error(res.EM)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         }
     }
     const getAllStastusPayment = async () => {
         let res = await getStastusPayment()
         if (res && +res.EC === 0) {
             setStatusPayment(res.DT)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         } else {
             toast.error(res.EM)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         }
     }
     const getProvinceCustomer = async () => {
         let res = await getAllProvinceCustomer()
         if (res && +res.EC === 0) {
             setAllProvinceCustomer(res.DT)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         } else {
             toast.error(res.EM)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         }
     }
     const getProvince = async () => {
         let res = await getAllProvince()
         if (res && +res.EC === 0) {
             setAllProvince(res.DT)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         } else {
             toast.error(res.EM)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         }
     }
     const getImagebyUser = async () => {
@@ -168,8 +186,11 @@ const DetailProduct = (props) => {
             if (res.DT[0].image) {
                 let imagebase64 = new Buffer(res.DT[0].image, 'base64').toString("binary")
                 setImageUser(imagebase64)
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
             } else {
                 setImageUser("")
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
             }
 
@@ -182,7 +203,8 @@ const DetailProduct = (props) => {
         ProductId: ProductId,
         image: imageUser,
         chatContent: chatContent,
-        CreatedByName: user.account.username
+        CreatedByName: user.account.username,
+        CreatedByPhone: user.account.phone
 
     }
     const createChat = async () => {
@@ -193,6 +215,7 @@ const DetailProduct = (props) => {
             let res = await createChatProject(dataChat)
             if (res && +res.EC === 0) {
                 await createNotification(projects.id, projects.order, "người tạo vừa chat", "", projects.createdBy, 1, 0, projects.shippingUnit_Id)
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
                 await getProjects()
                 setchatContent("")
@@ -283,6 +306,8 @@ const DetailProduct = (props) => {
         handleDeleteActionSix()
         handleDeleteActionSeven()
         await getProjects()
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
     }
     const getProjects = async () => {
         let res = await fetchProjectByid(ProductId)
@@ -375,6 +400,7 @@ const DetailProduct = (props) => {
                     if (dataUpdateImageIdandProjectId && +dataUpdateImageIdandProjectId.EC === 0) {
 
                         await getProjects()
+                        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
                         setActionModalFour("")
                         setStatusDeleteImage(false)
@@ -385,6 +411,7 @@ const DetailProduct = (props) => {
             }
         } else {
             handleDeleteActionFour()
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
             await getProjects()
             setStatusDeleteImage(false)
@@ -485,6 +512,7 @@ const DetailProduct = (props) => {
                     handleDeleteActionSix()
                     handleDeleteActionSeven()
                     await getProjects()
+                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
                 }
             } else if (diff.age_customer || diff.name_customer || diff.phoneNumber_customer) {
@@ -498,6 +526,7 @@ const DetailProduct = (props) => {
                     handleDeleteActionSix()
                     handleDeleteActionSeven()
                     await getProjects()
+                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
                 }
             } else if (projects.Province_customerId !== 0 && projects.Province_customerId !== projectsDefaut.Province_customerId || projects.District_customerId !== 0 && projects.District_customerId !== projectsDefaut.District_customerId || projects.Ward_customerId !== 0 && projects.Ward_customerId !== projectsDefaut.Ward_customerId || diff && diff.addressDetail) {
@@ -511,6 +540,7 @@ const DetailProduct = (props) => {
                     handleDeleteActionSix()
                     handleDeleteActionSeven()
                     await getProjects()
+                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
                 }
             }
@@ -525,6 +555,7 @@ const DetailProduct = (props) => {
                     handleDeleteActionSix()
                     handleDeleteActionSeven()
                     await getProjects()
+                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
                 }
             }
@@ -537,6 +568,8 @@ const DetailProduct = (props) => {
                 handleDeleteActionSix()
                 handleDeleteActionSeven()
                 await getProjects()
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
             }
 
         }
@@ -621,6 +654,7 @@ const DetailProduct = (props) => {
                     // handleDeleteActionFour()
                     setPreviewsImage("")
                     await getProjects()
+                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
                 }
             } else {
@@ -641,68 +675,76 @@ const DetailProduct = (props) => {
     }
     const handleEditActionThree = async () => {
         setActionModalThree("3")
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
     }
-    const handleEditActionFour = () => {
+    const handleEditActionFour = async () => {
         setActionModalFour("4")
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
     }
-    const handleEditActionFive = () => {
+    const handleEditActionFive = async () => {
         setActionModalFive("5")
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
     }
     const handleEditActionSix = async () => {
         setActionModalSix("6")
-
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
         await handleOnchangeProviceCustomer(projects.Province_customerId)
         await handleOnchangeDistrictCustomer(projects.District_customerId)
     }
     const handleEditActionSeven = async () => {
         setActionModalSeven("7")
-
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
         await handleOnchangeProvice(projects.Address_provinceId)
         await handleOnchangeDistrict(projects.Address_DistrictId)
     }
-    const handleDeleteActionThree = () => {
+    const handleDeleteActionThree = async () => {
         setActionModalThree("")
         setProjects(projectsDefaut)
         setNumberProduct("")
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
     }
     const handleDeleteActionFour = async () => {
         setProjects(projectsDefaut)
         setActionModalFour("")
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
     }
-    const handleDeleteActionFive = () => {
+    const handleDeleteActionFive = async () => {
         setActionModalFive("")
         setProjects(projectsDefaut)
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
     }
-    const handleDeleteActionSix = () => {
+    const handleDeleteActionSix = async () => {
         setActionModalSix("")
         setStatusProvinceCustomer(true)
         setStatusDistrictCustomer(true)
         setStatusWardCustomer(true)
         setProjects(projectsDefaut)
-
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
     }
-    const handleDeleteActionSeven = () => {
+    const handleDeleteActionSeven = async () => {
         setActionModalSeven("")
         setStatusProvince(true)
         setStatusDistrict(true)
         setStatusWard(true)
         setProjects(projectsDefaut)
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
     }
     useEffect(() => {
         getProjects()
         getImagebyUser()
+        getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
     }, [ProductId])
     useEffect(() => {
         getAllStastusPayment()
         getnameProduct()
         getAllSaleChannel()
-
     }, [])
     useEffect(() => {
         getProvinceCustomer()
         getProvince()
-        console.log(projects)
+        getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
     }, [])
 

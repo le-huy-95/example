@@ -24,9 +24,11 @@ import { useRef } from 'react';
 import { Bars } from 'react-loader-spinner'
 import * as XLSX from 'xlsx';
 import { useTranslation, Trans } from 'react-i18next';
+import { NotificationContext } from "../../contexApi/NotificationContext"
 
 const ProductsWithStatusdeliveryNull = (props) => {
     const { t, i18n } = useTranslation();
+    const { list, getALlListNotification, listStaff } = React.useContext(NotificationContext);
 
     let history = useHistory()
     let refCalendar = useRef(null)
@@ -72,8 +74,6 @@ const ProductsWithStatusdeliveryNull = (props) => {
         Main_Account: ""
 
     }
-
-
     const ValidInputsDefault = {
         order: true,
         name_Product: true,
@@ -327,7 +327,7 @@ const ProductsWithStatusdeliveryNull = (props) => {
 
 
     useEffect(() => {
-
+        getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
         fetchProjectUser();
         let currentUrlParams = new URLSearchParams(window.location.search);
         currentUrlParams.set('page', currentPage);

@@ -14,10 +14,14 @@ import { Link, NavLink, useHistory } from "react-router-dom"
 import * as XLSX from 'xlsx';
 import { Bars } from 'react-loader-spinner'
 import { useTranslation, Trans } from 'react-i18next';
+import { NotificationContext } from "../../contexApi/NotificationContext"
+import { UserContext } from "../../contexApi/UserContext"
 
 const Users = (props) => {
     let history = useHistory()
     const { t, i18n } = useTranslation();
+    const { list, getALlListNotification, listStaff } = React.useContext(NotificationContext);
+    const { user } = React.useContext(UserContext);
 
     const [listUser, setListUser] = useState([])
     const [listUserlenght, setListUserlenght] = useState([])
@@ -59,6 +63,7 @@ const Users = (props) => {
             if (res.DT.totalPage > 0 && res.DT.dataUser.length === 0) {
                 setCurrentPage(+res.DT.totalPage)
                 await showList(+res.DT.totalPage, currentLimit)
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
             }
             if (res.DT.totalPage > 0 && res.DT.dataUser.length > 0) {
                 setIsloading(true)
@@ -94,6 +99,8 @@ const Users = (props) => {
     }
 
     useEffect(() => {
+        getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         fetchUser();
         let currentUrlParams = new URLSearchParams(window.location.search);
         currentUrlParams.set('page', currentPage);
@@ -128,10 +135,13 @@ const Users = (props) => {
             if (res.DT.totalPage > 0 && res.DT.dataUser.length === 0) {
                 setCurrentPage(+res.DT.totalPage)
                 await showList(+res.DT.totalPage, currentLimit)
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
             }
             if (res.DT.totalPage > 0 && res.DT.dataUser.length > 0) {
                 setListUser(res.DT.dataUser)
                 setIsloading(true)
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
             }
 
@@ -140,11 +150,14 @@ const Users = (props) => {
     }
 
     useEffect(() => {
+        getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         window.history.pushState('', '', `?page=${localStorage.getItem("infomation Page alluser")}&limit=${currentLimit}`);
 
         fetchUserAfterRefesh()
     }, [window.location.reload,])
-    const handleOpenModalDelete = (user) => {
+    const handleOpenModalDelete = async (user) => {
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         setDataModelDelete(user)
         setShowDeleteModal(true)
@@ -154,11 +167,13 @@ const Users = (props) => {
         setshowCreateUserModal(!showCreateUserModal)
         setActionModal("")
         await fetchUser();
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
     }
 
-    const handleCloseModalDelete = () => {
+    const handleCloseModalDelete = async () => {
         setDataModelDelete({})
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         setShowDeleteModal(false)
     }
@@ -168,6 +183,7 @@ const Users = (props) => {
         if (res && +res.EC === 0) {
             toast.success(res.EM)
             setShowDeleteModal(false)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
             await fetchUser();
 
@@ -177,7 +193,7 @@ const Users = (props) => {
     }
 
 
-    const handleOpenModalEdit = (item) => {
+    const handleOpenModalEdit = async (item) => {
         setActionModal("Update")
         let imagebase64 = ""
         if (item.image) {
@@ -186,16 +202,19 @@ const Users = (props) => {
         setDataModel({ ...item, image: imagebase64 })
         setImageConvert(imagebase64)
         setshowCreateUserModal(!showCreateUserModal)
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
     }
 
 
 
     const handleRefesh = async () => {
         await fetchUser();
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
     }
 
-    const handleChangsortItem = (sortBy, fieldSort) => {
+    const handleChangsortItem = async (sortBy, fieldSort) => {
         setSortBy(sortBy);
         setFieldSort(fieldSort)
         if (fieldSort && fieldSort === "username") {
@@ -203,6 +222,8 @@ const Users = (props) => {
             let _listUser = _.cloneDeep(listUser)
             _listUser = _.orderBy(_listUser, [fieldSort], [sortBy])
             setListUser(_listUser)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
 
         }
         if (fieldSort === "createdAt") {
@@ -210,6 +231,7 @@ const Users = (props) => {
             let _listUser = _.cloneDeep(listUser)
             _listUser = _.orderBy(_listUser, [fieldSort], [sortBy])
             setListUser(_listUser)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
 
         }
@@ -220,6 +242,8 @@ const Users = (props) => {
         if (data) {
             setSortDataSearch(true)
             let res = await getDataUserSearch(data)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
             if (res && +res.EC === 0) {
                 let result = res.DT
                 if (result) {
@@ -232,6 +256,7 @@ const Users = (props) => {
         else {
             setSortDataSearch(false)
             await fetchUser()
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         }
     }, 300)
@@ -455,6 +480,7 @@ const Users = (props) => {
 
 
                                                 return (
+
                                                     <tr key={`row-${index}`}
                                                     >
                                                         <td className='table-light'>{(currentPage - 1) * currentLimit + index + 1}</td>

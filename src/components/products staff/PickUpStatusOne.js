@@ -340,7 +340,7 @@ const PickUpStatusOne = (props) => {
 
                                                                         </td>
                                                                         <td>
-                                                                            {item?.statuspickupId === 1 && user?.account?.username == item.User_PickUp && user?.account?.phone == item.Number_PickUp &&
+                                                                            {item?.statuspickupId === 1 && user?.account?.phone == item.Number_PickUp &&
 
                                                                                 <td>
                                                                                     <button className='btn btn-info mx-3 my-1' onClick={() => completePickup(item)}>
@@ -354,7 +354,7 @@ const PickUpStatusOne = (props) => {
                                                                                 </td>
 
                                                                             }
-                                                                            {item?.statuspickupId === 1 && user?.account?.username !== item.User_PickUp && user?.account?.phone !== item.Number_PickUp &&
+                                                                            {item?.statuspickupId === 1 && user?.account?.phone !== item.Number_PickUp &&
 
                                                                                 <td className='d-flex justify-content-center'>
                                                                                     <span style={{ color: "blue", fontWeight: "700" }}>
@@ -502,7 +502,7 @@ const PickUpStatusOne = (props) => {
 
                                                                     </td>
                                                                     <td>
-                                                                        {item?.statuspickupId === 1 && user?.account?.username == item.User_PickUp && user?.account?.phone == item.Number_PickUp &&
+                                                                        {item?.statuspickupId === 1 && user?.account?.phone == item.Number_PickUp &&
 
                                                                             <td>
                                                                                 <button className='btn btn-info mx-3 my-1' onClick={() => completePickup(item)}>
@@ -516,7 +516,7 @@ const PickUpStatusOne = (props) => {
                                                                             </td>
 
                                                                         }
-                                                                        {item?.statuspickupId === 1 && user?.account?.username !== item.User_PickUp && user?.account?.phone !== item.Number_PickUp &&
+                                                                        {item?.statuspickupId === 1 && user?.account?.phone !== item.Number_PickUp &&
 
                                                                             <td className='d-flex justify-content-center'>
                                                                                 <span style={{ color: "blue", fontWeight: "700" }}>

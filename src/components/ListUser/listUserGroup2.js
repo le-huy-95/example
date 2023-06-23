@@ -14,11 +14,14 @@ import { Link, NavLink, useHistory } from "react-router-dom"
 import * as XLSX from 'xlsx';
 import { Bars } from 'react-loader-spinner'
 import { useTranslation, Trans } from 'react-i18next';
+import { UserContext } from "../../contexApi/UserContext"
+import { NotificationContext } from "../../contexApi/NotificationContext"
 
 const UserGroupBoss = (props) => {
     let history = useHistory()
     const { t, i18n } = useTranslation();
-
+    const { list, getALlListNotification, listStaff } = React.useContext(NotificationContext);
+    const { user } = React.useContext(UserContext);
     const [listUser2, setListUser2] = useState([])
     const [listUserSearch, setListUserSearch] = useState([])
     const [listUserlenght, setListUserlenght] = useState([])
@@ -58,9 +61,12 @@ const UserGroupBoss = (props) => {
             if (res.DT.totalPage > 0 && res.DT.dataUser.length === 0) {
                 setCurrentPage(+res.DT.totalPage)
                 await showListbyGroup(+res.DT.totalPage, currentLimit, +GroupId)
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
             }
             if (res.DT.totalPage > 0 && res.DT.dataUser.length > 0) {
                 setIsloading(true)
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
                 setListUser2(res.DT.dataUser)
                 setListUserlenght(res.DT.totalUser)
@@ -81,6 +87,7 @@ const UserGroupBoss = (props) => {
                 });
                 if (dataExxport.length > 0) {
                     setListUserExport(dataExxport)
+                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
                 }
 
@@ -89,6 +96,7 @@ const UserGroupBoss = (props) => {
                 setListUser2(res.DT.dataUser)
                 setListUserlenght(res.DT.totalUser)
                 setIsloading(true)
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
 
             }
@@ -98,6 +106,8 @@ const UserGroupBoss = (props) => {
     }
 
     useEffect(() => {
+        getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         fetchUser();
         let currentUrlParams = new URLSearchParams(window.location.search);
         currentUrlParams.set('page', currentPage);
@@ -109,6 +119,7 @@ const UserGroupBoss = (props) => {
 
     useEffect(() => {
         localStorage.setItem("infomation Page userBoss", 1)
+        getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
     }, [])
 
@@ -139,10 +150,13 @@ const UserGroupBoss = (props) => {
             if (res.DT.totalPage > 0 && res.DT.dataUser.length === 0) {
                 setCurrentPage(+res.DT.totalPage)
                 await showListbyGroup(+res.DT.totalPage, currentLimit, GroupId)
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
             }
             if (res.DT.totalPage > 0 && res.DT.dataUser.length > 0) {
                 setListUser2(res.DT.dataUser)
                 setIsloading(true)
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
             }
 
@@ -152,10 +166,12 @@ const UserGroupBoss = (props) => {
 
     useEffect(() => {
         window.history.pushState('', '', `?page=${localStorage.getItem("infomation Page userBoss")}&limit=${currentLimit}&GroupId=2`);
+        getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         fetchUserAfterRefesh()
     }, [window.location.reload])
-    const handleOpenModalDelete = (user) => {
+    const handleOpenModalDelete = async (user) => {
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         setDataModelDelete(user)
         setShowDeleteModal(true)
@@ -165,10 +181,13 @@ const UserGroupBoss = (props) => {
         setshowCreateUserModal(!showCreateUserModal)
         setActionModal("")
         await fetchUser();
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
     }
 
-    const handleCloseModalDelete = () => {
+    const handleCloseModalDelete = async () => {
         setDataModelDelete({})
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         setShowDeleteModal(false)
     }
@@ -178,16 +197,19 @@ const UserGroupBoss = (props) => {
         if (res && +res.EC === 0) {
             toast.success(res.EM)
             setShowDeleteModal(false)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
             await fetchUser();
 
         } else {
             toast.error(res.EC)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         }
     }
 
 
-    const handleOpenModalEdit = (item) => {
+    const handleOpenModalEdit = async (item) => {
         setActionModal("Update")
         let imagebase64 = ""
         if (item.image) {
@@ -196,16 +218,19 @@ const UserGroupBoss = (props) => {
         setDataModel({ ...item, image: imagebase64 })
         setImageConvert(imagebase64)
         setshowCreateUserModal(!showCreateUserModal)
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
     }
 
 
 
     const handleRefesh = async () => {
         await fetchUser();
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
     }
 
-    const handleChangsortItem = (sortBy, fieldSort) => {
+    const handleChangsortItem = async (sortBy, fieldSort) => {
         setSortBy(sortBy);
         setFieldSort(fieldSort)
         if (fieldSort && fieldSort === "username") {
@@ -213,6 +238,7 @@ const UserGroupBoss = (props) => {
             let _listUser = _.cloneDeep(listUser2)
             _listUser = _.orderBy(_listUser, [fieldSort], [sortBy])
             setListUser2(_listUser)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         }
         if (fieldSort === "createdAt") {
@@ -220,6 +246,7 @@ const UserGroupBoss = (props) => {
             let _listUser = _.cloneDeep(listUser2)
             _listUser = _.orderBy(_listUser, [fieldSort], [sortBy])
             setListUser2(_listUser)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
 
         }
@@ -235,6 +262,7 @@ const UserGroupBoss = (props) => {
                 let data = result.filter(item => item.groupId === 2)
                 if (data) {
                     setListUserSearch(data)
+                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
                 }
             }
@@ -243,6 +271,7 @@ const UserGroupBoss = (props) => {
         else {
             setSortDataSearch(false)
             await fetchUser()
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         }
     }, 300)

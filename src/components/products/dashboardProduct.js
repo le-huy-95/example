@@ -24,6 +24,7 @@ import {
     Pie,
 } from 'recharts';
 import { useTranslation, Trans } from 'react-i18next';
+import { NotificationContext } from "../../contexApi/NotificationContext"
 
 const style = {
     top: '50%',
@@ -34,6 +35,7 @@ const style = {
 const DashboardProduct = (props) => {
     const { user } = React.useContext(UserContext);
     const { t, i18n } = useTranslation();
+    const { list, getALlListNotification, listStaff } = React.useContext(NotificationContext);
 
     const [collapsed, setCollapsed] = useState(false)
     const [dataOne, setDataOne] = useState([])
@@ -105,6 +107,7 @@ const DashboardProduct = (props) => {
         setendDateCalendar(moment().endOf('month').format("DD-MM-YYYY"))
         getAllDataInDashboardWithMounth()
         getAllDataInDashboardWithUser()
+        getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
     }, [])
 

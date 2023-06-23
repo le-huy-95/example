@@ -208,6 +208,9 @@ const UpdateNewPassword = (data) => {
 const checkExist = (data) => {
     return axios.put("/api/v4/check/Living/notification", { ...data })
 }
+const UpdateImageChat = (data) => {
+    return axios.put("/api/v4/update/image/chat", { ...data })
+}
 export {
     getProjectWithPagination, fetchProjectByid, CreateProject, getSaleChannel, getStastusPayment,
     updateProject, deleteProject, createChatProject, updateProjectChat, deleteChatProject, getDataSearch,
@@ -225,5 +228,5 @@ export {
     getProjectWithPaginationWithALlStatusDelivery, getAllStatusProductWithEmployer, getDataSearchByEmplyer, getDataSortByPickup,
     getDataSortByWarehouse, getDataSortByDelivery, getDataSortByOverview, getProjectWithPaginationWithEmployerOverview,
     getProjectWithPaginationWithEmployerOverview_user, updateOverviewInProject, createNotification, getAllNotificaltion,
-    UpdateStatusNotification, ChangePassWord, validateInfomationChangePass, UpdateNewPassword, checkExist
+    UpdateStatusNotification, ChangePassWord, validateInfomationChangePass, UpdateNewPassword, checkExist, UpdateImageChat
 }

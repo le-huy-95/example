@@ -5,7 +5,8 @@ import './listUser.scss'
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
 import { GetGroup, CreateNewUser, UpdateUser } from "../services/userService"
-import { updateProject } from "../services/ProjectService"
+import { UpdateImageChat } from "../services/ProjectService"
+import { UserContext } from "../../contexApi/UserContext"
 
 import { toast } from 'react-toastify';
 import _ from "lodash"
@@ -17,10 +18,13 @@ import {
 import { getAllShippingUnit, fetchShippingCostByShippingUnit, getPriceByAddress } from "../services/shippingService"
 import { useHistory } from "react-router-dom"
 import { useTranslation, Trans } from 'react-i18next';
+import { NotificationContext } from "../../contexApi/NotificationContext"
 
 const ModalCreate = (props) => {
     let history = useHistory()
     const { t, i18n } = useTranslation();
+    const { list, getALlListNotification, listStaff } = React.useContext(NotificationContext);
+    const { user } = React.useContext(UserContext);
 
     const { show, handleCloseCreateModal, handleCloseModalCreateone, action, dataModal, imageConvert, listUser1 } = props
     const [userGroup, setUserGroup] = useState([])
@@ -314,6 +318,12 @@ const ModalCreate = (props) => {
                     :
                     await UpdateUser({ ...userdata, groupId: userdata['group'] })
             if (res && +res.EC === 0) {
+                await UpdateImageChat({
+                    name: userdata.username,
+                    phone: userdata.phone,
+                    image: userdata.image
+
+                })
                 toast.success("create success")
                 setUserdata({
                     ...defaultUserData,
@@ -321,6 +331,7 @@ const ModalCreate = (props) => {
                 })
 
                 handleCloseModale()
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
 
 
@@ -331,12 +342,15 @@ const ModalCreate = (props) => {
                 let _validInput = _.cloneDeep(ValidInputsDefault);
                 _validInput[res.DT] = false
                 setValidInput(_validInput)
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
             }
         }
     }
 
 
-    const handleCloseModale = () => {
+    const handleCloseModale = async () => {
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
 
         handleCloseCreateModal()

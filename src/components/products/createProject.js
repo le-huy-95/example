@@ -14,10 +14,12 @@ import { getAllShippingUnit, fetchShippingCostByShippingUnit, getPriceByAddress 
 import { CreateProject, getSaleChannel, getStastusPayment, getNameProduct, getNumberProductinWarehouse } from "../services/ProjectService"
 import { Link, NavLink, useHistory } from "react-router-dom"
 import { useTranslation, Trans } from 'react-i18next';
+import { NotificationContext } from "../../contexApi/NotificationContext"
 
 const CreateNewProject = (props) => {
     let history = useHistory()
     const { t, i18n } = useTranslation();
+    const { list, getALlListNotification, listStaff } = React.useContext(NotificationContext);
 
     const { showModalCreatNewProject, setShowModalCreatNewProject, handleShowHideModalCreatNewProject, listProject,
         fetchProjectUser, setShowNotificationCreateSuccess, userdata, setUserdata, validInput,
@@ -51,6 +53,7 @@ const CreateNewProject = (props) => {
         let res = await getNameProduct()
         if (res && +res.EC === 0) {
             let data = res.DT.filter(item => item.product_statusId !== 3 && item.product_statusId !== 2 && item.createdBy === user.account.phone)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
             SetProduct(data)
         }
@@ -62,6 +65,8 @@ const CreateNewProject = (props) => {
             let res = await getNumberProductinWarehouse(id)
             if (res && +res.EC === 0) {
                 setNumberProduct(res.DT?.product_number)
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
             }
         } else {
             setNumberProduct("")
@@ -84,10 +89,11 @@ const CreateNewProject = (props) => {
         if (value) {
             let res = await fetchDistrictByProvince(value)
 
-            console.log(res)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
             if (res && +res.EC === 0) {
                 setassignDistrictByProvinceOfReceipt(res?.DT?.Address_Districts
+
                 )
             }
 
@@ -100,6 +106,7 @@ const CreateNewProject = (props) => {
         // setSelectProvince(value)
         if (value) {
             let res = await fetchDistrictCustomerByProvinceCustomer(value)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
 
             if (res && +res.EC === 0) {
@@ -113,7 +120,7 @@ const CreateNewProject = (props) => {
     const handleOnchangeDistrictOfReceipt = async (value) => {
         if (value) {
             let res = await fetchWardByDistrict(value)
-            console.log("res", res)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
             if (res && +res.EC === 0) {
                 setassignWardtByDistricOfReceipt(res?.DT?.Address_Wards
                 )
@@ -127,9 +134,9 @@ const CreateNewProject = (props) => {
 
         if (value) {
             let res = await fetchWarCustomerdByDistrictCustomer(value)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
             if (res && +res.EC === 0) {
-                console.log("211", res)
 
                 setassignWardtByDistric(res?.DT?.Ward_customers
                 )
@@ -142,6 +149,7 @@ const CreateNewProject = (props) => {
         setSelectShippingCost(value)
         if (value) {
             let res = await fetchShippingCostByShippingUnit(value)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
             if (res && +res.EC === 0) {
                 setassignShippingCostByShippingunit(res?.DT?.Shipping_Costs
@@ -161,7 +169,7 @@ const CreateNewProject = (props) => {
 
             let res = await getPriceByAddress(From, to, +shippingUnit_Id)
             if (res && +res.EC === 0) {
-                console.log("res", res)
+                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
                 setshippingCost(res?.DT?.Cost)
             }
 
@@ -172,9 +180,12 @@ const CreateNewProject = (props) => {
         let res = await getSaleChannel()
         if (res && +res.EC === 0) {
             setSaleChannel(res.DT)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         } else {
             toast.error(res.EM)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         }
     }
 
@@ -182,9 +193,12 @@ const CreateNewProject = (props) => {
         let res = await getStastusPayment()
         if (res && +res.EC === 0) {
             setStatusPayment(res.DT)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         } else {
             toast.error(res.EM)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         }
     }
 
@@ -193,45 +207,60 @@ const CreateNewProject = (props) => {
         let res = await getAllProvinceCustomer()
         if (res && +res.EC === 0) {
             setAllProvinceCustomer(res.DT)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         } else {
             toast.error(res.EM)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         }
     }
     const getProvince = async () => {
         let res = await getAllProvince()
         if (res && +res.EC === 0) {
             setAllProvince(res.DT)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         } else {
             toast.error(res.EM)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         }
     }
     const getAddressFrom = async () => {
         let res = await getAddress_from()
         if (res && +res.EC === 0) {
             setAllAddressFrom(res.DT)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         } else {
             toast.error(res.EM)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         }
     }
     const getAddressTo = async () => {
         let res = await getAddress_to()
         if (res && +res.EC === 0) {
             setAllAddressTo(res.DT)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         } else {
             toast.error(res.EM)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         }
     }
     const getShippingUnit = async () => {
         let res = await getAllShippingUnit()
         if (res && +res.EC === 0) {
             setShippingUnit(res.DT)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
         } else {
             toast.error(res.EM)
+            await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+
         }
     }
 
@@ -241,7 +270,6 @@ const CreateNewProject = (props) => {
         e.preventDefault();
         const formData = new FormData();
 
-        console.log("image", image)
         for (let i = 0; i < image.length; i++) {
 
             formData.append('multiple_image', image[i]);
@@ -258,6 +286,7 @@ const CreateNewProject = (props) => {
         }).then((res) => res.status === 500 ? toast.error(" địnhg dạng ảnh không đúng hoặc dung lượng ảnh quá lớn") : toast.success(`Đã thêm ${previreImage.length} ảnh thành công vào đơn hàng`));
 
         setSelecCheckSubtmitImage(true)
+        await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
     }
 
@@ -295,6 +324,7 @@ const CreateNewProject = (props) => {
         getAllStastusPayment()
         getnameProduct()
         handleRenderCost()
+        getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
     }, [showModalCreatNewProject])
 
@@ -308,6 +338,7 @@ const CreateNewProject = (props) => {
         setprevireImage("")
         setUserdata(defaultUserData)
         setValidInput(ValidInputsDefault)
+        getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
 
 
     }
