@@ -219,33 +219,45 @@ const Register = (props) => {
                     <div className=' py-3 container-right col-12 col-sm-5 d-flex flex-column gap-3 ' >
                         <div className='brand  d-sm-none  ' > huy le app</div>
 
-                        <h2 className='text-center ' > SigUp</h2>
+                        <h2 className='text-center ' >
+                            {t('Register.Eleven')}
+                        </h2>
                         <div className='form-group'>
-                            <label htmlFor="" className='mb-1'>Email:</label>
+                            <label htmlFor="" className='mb-1'>
+                                {t('Register.One')}
+                            </label>
                             <input type="email" className={objCheckInput.isValidEmail ? "form-control " : "form-control is-invalid"} placeholder='Email address ' value={email} onChange={(event) => setEmail(event.target.value)} />
 
 
                         </div>
                         <div className='form-group'>
-                            <label htmlFor="" className='mb-1'>PhoneNumber:</label>
+                            <label htmlFor="" className='mb-1'>
+                                {t('Register.Two')}
+                            </label>
                             <input type="text" className={objCheckInput.isValidPhone ? "form-control " : "form-control is-invalid"} placeholder='Phone number ' value={Phone} onChange={(event) => setPhone(event.target.value)} />
 
 
                         </div>
                         <div className='form-group'>
-                            <label htmlFor="" className='mb-1'>UserName:</label>
+                            <label htmlFor="" className='mb-1'>
+                                {t('Register.Three')}
+                            </label>
                             <input type="text" className='form-control' placeholder='User Name ' value={username} onChange={(event) => setUsername(event.target.value)} />
 
 
                         </div>
                         <div className='form-group'>
-                            <label htmlFor="" className='mb-1'>Password:</label>
+                            <label htmlFor="" className='mb-1'>
+                                {t('Register.Four')}
+                            </label>
                             <input type="password" className={objCheckInput.isValidPassword ? "form-control " : "form-control is-invalid"} placeholder='Password ' value={password} onChange={(event) => setPassword(event.target.value)} />
 
 
                         </div>
                         <div className='form-group'>
-                            <label htmlFor="" className='mb-1'>re-enter Password:</label>
+                            <label htmlFor="" className='mb-1'>
+                                {t('Register.Five')}
+                            </label>
                             <input type="password" className={objCheckInput.isValidConfirmPass ? "form-control " : "form-control is-invalid"} placeholder='Re-enter Password ' value={confirmPass} onChange={(event) => setConfirmPass(event.target.value)} />
 
 
@@ -253,7 +265,7 @@ const Register = (props) => {
                         <div className='col-12 col-sm-12 form-group'>
 
                             <label className='col-4'>
-                                {t('Created-user.Night')}
+                                {t('Register.Six')}
                             </label>
 
                             <select
@@ -287,7 +299,7 @@ const Register = (props) => {
                         <div className='col-12 col-sm-12 form-group'>
 
                             <label className='col-4'>
-                                {t('Created-user.Ten')}
+                                {t('Register.Seven')}
                             </label>
 
                             <select
@@ -322,7 +334,7 @@ const Register = (props) => {
                         <div className='col-12 col-sm-12 form-group'>
 
                             <label className='col-4'>
-                                {t('Created-user.Eleven')}
+                                {t('Register.Eight')}
                             </label>
 
                             <select
@@ -353,7 +365,9 @@ const Register = (props) => {
 
 
                         <div className='form-group'>
-                            <label htmlFor="" className='mb-1'>Detail address :</label>
+                            <label htmlFor="" className='mb-1'>
+                                {t('Register.Night')}
+                            </label>
                             <input
                                 type="text"
                                 className={objCheckInput.isValidDetailAddress ? "form-control " : "form-control is-invalid"}
@@ -367,7 +381,7 @@ const Register = (props) => {
 
                         <div className='col-12  form-group'>
                             <label >
-                                {t('Created-user.Thirteen')} :
+                                {t('Register.Ten')}
                             </label>
                             <select className='form-select'
                                 onChange={(event) => setSex(event.target.value)}
@@ -385,19 +399,23 @@ const Register = (props) => {
                             </select >
                         </div>
 
-                        <button className='btn btn-primary' onClick={() => handleRegister()}> Submit</button>
+                        <button className='btn btn-primary' onClick={() => handleRegister()}>
+                            {t('Register.Twelve')}
+                        </button>
 
 
                         <hr />
                         <div className='text-center' >
                             <button className='btn btn-success' onClick={() => handleBackLogin()}>
-                                Back to Login
+                                {t('Register.Thirteen')}
 
                             </button>
                             <div className='mt-3 return'>
                                 <Link to="/">
                                     <i className='fa fa-arrow-circle-left mx-1'></i>
-                                    <span title='Return to Homepage'>Return to Homepage</span>
+                                    <span title='Return to Homepage'>
+                                        {t('Register.Fourteen')}
+                                    </span>
                                 </Link>
                             </div>
                         </div>

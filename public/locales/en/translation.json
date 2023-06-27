@@ -272,6 +272,10 @@
         "One": "All",
         "Two": "Unread",
         "Three": "Notifications",
+        "Four": "You don't have any message",
+        "Five": "Please login to view your notifications",
+        "Six": "The system has a new user",
+        "Seven": "You have no unread notifications",
         "Customer": {
             "One": "Employee",
             "Two": "Taking Orders",
@@ -712,5 +716,35 @@
         "Two": "Forgot you password",
         "Three": "Create new account",
         "Four": "Return to Homepage"
+    },
+    "Profile": {
+        "One": "My profile",
+        "Two": "No avata",
+        "Three": "Change avatar",
+        "Four": "Name",
+        "Five": "Phone",
+        "Six": "Sex",
+        "Seven": "Email",
+        "Eight": "Group",
+        "Night": "Address",
+        "Ten": "Created at",
+        "Eleven": "Unit",
+        "Twelve": "Position"
+    },
+    "Register": {
+        "One": "Email :",
+        "Two": "Phone Number :",
+        "Three": "UserName :",
+        "Four": "Password :",
+        "Five": "Re-enter Password :",
+        "Six": "Address Province :",
+        "Seven": "Address district :",
+        "Eight": "Address ward :",
+        "Night": "Detail address :",
+        "Ten": "Sex :",
+        "Eleven": "SigUp",
+        "Twelve": "Submit",
+        "Thirteen": "Back to Login ",
+        "Fourteen": "Return to Homepage"
     }
 }
