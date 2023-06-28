@@ -42,7 +42,6 @@ body {
 
     .navbar {
         padding-bottom: 0 !important;
-        height: 66px;
     }
 
     .bg-header {
@@ -68,6 +67,8 @@ body {
         }
 
     }
+
+
 
     .navbar-nav {
 
@@ -98,6 +99,7 @@ body {
     }
 
     .nav-link {
+
         &.active {
             color: #61dafb !important;
             border-bottom: 4px solid;
@@ -115,6 +117,8 @@ body {
 
         }
     }
+
+
 }
 
 .language {

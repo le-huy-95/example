@@ -43,8 +43,11 @@
         .left {
 
             .image {
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 width: 300px;
-                height: 300px;
+                height: 200px;
                 cursor: pointer;
 
                 img {
@@ -81,7 +84,7 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    font-size: 30px;
+                    font-size: 23px;
                     background-color: #fff;
                     border-radius: 10px;
                     box-shadow: 0 2px 4px rgba(17, 6, 6, 0.1), 0 8px 16px rgb(0 0 0/10%);

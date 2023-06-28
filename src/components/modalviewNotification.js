@@ -229,7 +229,7 @@ const ModalViewNotification = (props) => {
                                                                 history.push("/listuser"); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                             }}>
                                                                 <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                </span>}  Hệ thống có người dùng mới có id là <b>{item.id}</b> và tên là <b>{item.CreatedBy} </b>  </span>
+                                                                </span>}  {t('Notifications.Six')} <b>{item.CreatedBy} </b>  </span>
                                                                 <br />
                                                                 <span className='time'>
                                                                     {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1090,19 +1090,19 @@ const ModalViewNotification = (props) => {
 
                                     }
                                     {user && user?.account?.groupWithRound?.name === "Customer" && list.length === 0 &&
-                                        <div className='Not-Found'> Bạn không có thông báo nào </div >
+                                        <div className='Not-Found'>{t('Notifications.Four')} </div >
 
                                     }
                                     {user && user?.account?.groupWithRound?.name === "Staff" && listStaff.length === 0 &&
-                                        <div className='Not-Found'> Bạn không có thông báo nào </div >
+                                        <div className='Not-Found'> {t('Notifications.Four')} </div >
 
                                     }
                                     {user && user?.account?.groupWithRound?.name === "Dev" && listAdmin.length === 0 &&
-                                        <div className='Not-Found'> Bạn không có thông báo nào </div >
+                                        <div className='Not-Found'> {t('Notifications.Four')} </div >
 
                                     }
                                     {user.isAuthenticated === false &&
-                                        < div className='Not-Found'> Vui lòng đăng nhập để xem thông báo của bạn </div >
+                                        < div className='Not-Found'> {t('Notifications.Five')} </div >
 
                                     }
                                 </div >
@@ -1124,7 +1124,9 @@ const ModalViewNotification = (props) => {
                                                                 history.push("/listuser"); handleShowNotificationModal(); UpdateStatusProduct(item)
                                                             }}>
                                                                 <span className='mx-3'>{+item.ViewByStaff === 0 && <span style={{ color: "red" }}><i class="fa fa-bell" aria-hidden="true"></i>
-                                                                </span>} Hệ thống có người dùng mới </span>
+                                                                </span>}
+                                                                    {t('Notifications.Six')} <b>{item.CreatedBy} </b>
+                                                                </span>
                                                                 <br />
                                                                 <span className='time'>
                                                                     {moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}
@@ -1985,19 +1987,19 @@ const ModalViewNotification = (props) => {
 
                                     }
                                     {user && user?.account?.groupWithRound?.name === "Customer" && ListFillterNosee.length === 0 &&
-                                        <div className='Not-Found'> Bạn không có thông báo nào chưa đọc </div >
+                                        <div className='Not-Found'> {t('Notifications.Seven')} </div >
 
                                     }
                                     {user && user?.account?.groupWithRound?.name === "Staff" && listStaffFillterNosee.length === 0 &&
-                                        <div className='Not-Found'> Bạn không có thông báo nào chưa đọc </div >
+                                        <div className='Not-Found'> {t('Notifications.Seven')} </div >
 
                                     }
                                     {user && user?.account?.groupWithRound?.name === "Dev" && listDevFillterNosee.length === 0 &&
-                                        <div className='Not-Found'> Bạn không có thông báo nào chưa đọc </div >
+                                        <div className='Not-Found'> {t('Notifications.Seven')} </div >
 
                                     }
                                     {user.isAuthenticated === false &&
-                                        < div className='Not-Found'> Vui lòng đăng nhập để xem thông báo của bạn </div >
+                                        < div className='Not-Found'> {t('Notifications.Five')}  </div >
 
                                     }
 

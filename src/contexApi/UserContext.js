@@ -76,7 +76,7 @@ const UserProvider = ({ children }) => {
     return (
         <Suspense fallback={<div>Loading... </div>}>
 
-            <UserContext.Provider value={{ user, login, logout }}>
+            <UserContext.Provider value={{ user, login, logout, fetchUser }}>
                 {children}
             </UserContext.Provider>
         </Suspense>
