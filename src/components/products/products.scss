@@ -113,6 +113,19 @@
 
                 .name-page {
 
+                    .title_name_page-mobile {
+                        display: flex;
+                        align-items: center;
+                        flex-direction: column;
+                    }
+
+
+                    .more-mobile {
+                        display: flex;
+                        align-items: center;
+                        flex-direction: column;
+                        justify-content: center;
+                    }
 
                     .more {
                         display: flex;
@@ -266,7 +279,7 @@
 
     .pagination-mobile {
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
     }
 }
 

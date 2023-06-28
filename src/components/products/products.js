@@ -944,7 +944,7 @@ const Products = (props) => {
 
                                             <div className='row'>
 
-                                                <div className='title_name_page col-12'>
+                                                <div className='title_name_page-mobile col-12'>
                                                     <h4>
                                                         {t('Product.tittleOne')}
                                                     </h4>
@@ -959,17 +959,20 @@ const Products = (props) => {
                                                         </button>
                                                     </Link>
                                                 </div>
-                                                <div className='more col-12 mt-3 mx-2 '>
-                                                    <div className='row'>
-                                                        <button className='btn btn-warning col-10 my-3' onClick={() => handleExportData()}>
-                                                            <i class="fa fa-cloud-download" aria-hidden="true"></i>
-                                                            {t('Product.tittleThree')}
-                                                        </button>
-                                                        <button className='btn btn-primary col-10 ' onClick={() => handleShowHideModalCreatNewProject()}>
-                                                            <i className="fa fa-plus-circle" aria-hidden="true"></i>
-                                                            {t('Product.tittleFour')}
-                                                        </button>
+                                                <div className='more-mobile col-8 mt-2 mx-2 '>
+                                                    <div className='container'>
+                                                        <div className='row d-flex align-item-center justify-content-center '>
+                                                            <button className='btn btn-warning col-12 my-3' onClick={() => handleExportData()}>
+                                                                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                                                {t('Product.tittleThree')}
+                                                            </button>
+                                                            <button className='btn btn-primary col-12 ' onClick={() => handleShowHideModalCreatNewProject()}>
+                                                                <i className="fa fa-plus-circle" aria-hidden="true"></i>
+                                                                {t('Product.tittleFour')}
+                                                            </button>
+                                                        </div>
                                                     </div>
+
 
                                                 </div>
                                             </div>
