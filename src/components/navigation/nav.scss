@@ -42,8 +42,8 @@ body {
 
     .navbar {
         padding-bottom: 0 !important;
-        height: 60px;
     }
+
 
     .bg-header {
         // css background cho thanh nav
@@ -123,6 +123,107 @@ body {
 
 
 }
+
+.nav-header-mobile {
+    position: fixed;
+    /* Set the navbar to fixed position */
+    top: 0;
+    left: 0;
+    right: 0;
+    /* Position the navbar at the top of the page */
+    width: 100%;
+
+    /* Full width */
+    padding-bottom: 0.5rem !important;
+    z-index: 999;
+
+    .navbar {
+        padding-bottom: 0 !important;
+        height: 60px;
+    }
+
+
+    .bg-header {
+        // css background cho thanh nav
+        background-color: #20232a;
+    }
+
+    .navbar-brand {
+        color: #61dafb !important;
+
+        img {
+            animation: App-logo-spin infinite 20s linear;
+        }
+
+        @keyframes App-logo-spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+    }
+
+    .navbar-collapse {
+        background-color: #20232a;
+
+    }
+
+    .navbar-nav {
+        margin: 0 10px;
+
+        a,
+        .nav-link {
+            color: white !important;
+
+
+
+            &:hover {
+                color: #61dafb !important;
+            }
+
+
+
+        }
+    }
+
+
+    .image {
+        width: 50px;
+        height: 49%;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+
+    .nav-link {
+
+        &.active {
+            color: #61dafb !important;
+            border-bottom: 4px solid;
+        }
+
+        b {
+            color: #4cbcdb !important;
+
+        }
+    }
+
+    .dropdown-menu {
+        a {
+            color: #212529 !important;
+
+        }
+    }
+
+
+}
+
 
 .language {
     a {

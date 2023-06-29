@@ -33,8 +33,8 @@ const updateProjectChat = (data) => {
 const deleteChatProject = (id) => {
     return axios.delete("/api/v4/Project/delete/chat ", { data: { id: id } })
 }
-const getDataSearch = (data) => {
-    return axios.get(`/api/v4/Project/search?data=${data}`)
+const getDataSearch = (text, phone) => {
+    return axios.get(`/api/v4/Project/search?text=${text}&phone=${phone}`)
 }
 
 const getDataWithTime = (StartDateCalendar, endDateCalendar) => {

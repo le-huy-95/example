@@ -108,8 +108,8 @@
                     display: flex;
                     align-items: center;
                     flex-direction: column;
-                    width: 28%;
-                    height: 20vh;
+                    width: 20%;
+                    height: 10vh;
                     border-radius: 10px;
                     color: #7790b6;
                     border: none;
@@ -118,6 +118,23 @@
                     justify-content: space-between;
                     opacity: 0.9;
                     justify-content: flex-end;
+
+
+                }
+
+                .preview-image-mobile {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    width: 28%;
+                    height: 20vh;
+                    border-radius: 10px;
+                    color: #7790b6;
+                    border: none;
+                    cursor: pointer;
+                    position: relative;
+                    justify-content: center;
+                    opacity: 0.9;
 
 
                 }

@@ -468,7 +468,7 @@ const CreateNewProject = (props) => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className='create_new_Project-container col-12'>
+                    <div className='create_new_Project-container '>
                         <div className='container'>
                             <div className='tittle my-3'>
                                 <h4 className='order '>
@@ -481,16 +481,16 @@ const CreateNewProject = (props) => {
 
                             </div>
                             <div className='row'>
-                                <div className='left-table col-8'>
+                                <div className='left-table col-12 col-lg-8'>
 
                                     <div className='create-product '
 
                                     >
-                                        <h4 className='mb-3 d-flex align-item-center justify-content-center'>
+                                        <h4 className='mb-3 d-flex align-item-center justify-content-center' style={{ fontSize: "18px" }}>
                                             {t('CreateProduct.tittleNineteen')}
                                         </h4>
                                         <div className='row'>
-                                            <div className='name-product col-5 mb-2'>
+                                            <div className='name-product col-12 col-lg-5 mb-2'>
                                                 <label htmlFor='input-name-product' className='mb-2' >
                                                     {t('CreateProduct.tittleTwo')} (<span className='red'>*</span>)</label>
 
@@ -532,7 +532,7 @@ const CreateNewProject = (props) => {
                                                 }
 
                                             </div>
-                                            <div className='number-product col-4 mb-2'>
+                                            <div className='number-product col-12 col-lg-4 mb-2'>
                                                 <label htmlFor='input-number-product' className='mb-2' >
                                                     {t('CreateProduct.tittleThree')} (<span className='red'>*</span>)</label>
                                                 <input
@@ -558,7 +558,7 @@ const CreateNewProject = (props) => {
                                                 }
 
                                             </div>
-                                            <div className='unit col-3 mb-2'>
+                                            <div className='unit col-12 col-lg-3 mb-2'>
                                                 <label htmlFor='input-product'>
                                                     {t('CreateProduct.tittleFour')}                                                    </label>
                                                 <select
@@ -609,7 +609,7 @@ const CreateNewProject = (props) => {
                                                 </select >
                                             </div>
 
-                                            <div className='money-product col-6'>
+                                            <div className='money-product col-12 col-lg-6'>
                                                 <label htmlFor='input-money-product' className='mb-2' >
                                                     {t('CreateProduct.tittleSix')} (<span className='red'>*</span>)</label>
                                                 <input
@@ -622,7 +622,7 @@ const CreateNewProject = (props) => {
 
                                                 />
                                             </div>
-                                            <div className='total-product col-6'>
+                                            <div className='total-product col-12 col-lg-6'>
                                                 <label htmlFor='input-total-product' className='mb-2' >
                                                     {t('CreateProduct.tittleSeven')}
                                                 </label>
@@ -636,7 +636,7 @@ const CreateNewProject = (props) => {
 
                                                 />
                                             </div>
-                                            <div className='StatusPayment col-6 mb-1'>
+                                            <div className='StatusPayment col-12 col-lg-6 mb-1'>
                                                 <label htmlFor='input-StatusPayment' className='mb-2' >
                                                     {t('CreateProduct.tittleEight')} (<span className='red'>*</span>)</label>
                                                 <select
@@ -661,7 +661,7 @@ const CreateNewProject = (props) => {
                                                 </select >
                                             </div>
                                             {userdata.StatusPaymentId === "3" &&
-                                                <div className='total-product col-6'>
+                                                <div className='total-product col-12 col-lg-6'>
                                                     <label htmlFor='input-total-product' className='mb-2' >
                                                         {t('CreateProduct.tittleTwentyFour')}
                                                     </label>
@@ -678,7 +678,7 @@ const CreateNewProject = (props) => {
 
                                             }
                                             {userdata.StatusPaymentId === "2" &&
-                                                <div className='total-product col-6'>
+                                                <div className='total-product col-12 col-lg-6'>
                                                     <label htmlFor='input-total-product' className='mb-2' >
                                                         {t('CreateProduct.tittleTwentyFour')}
                                                     </label>
@@ -695,7 +695,7 @@ const CreateNewProject = (props) => {
 
                                             }
                                             {userdata.StatusPaymentId === "1" &&
-                                                <div className='total-product col-6'>
+                                                <div className='total-product col-12 col-lg-6'>
                                                     <label htmlFor='input-total-product' className='mb-2' >
                                                         {t('CreateProduct.tittleTwentyFour')}
                                                     </label>
@@ -712,7 +712,7 @@ const CreateNewProject = (props) => {
 
                                             }
 
-                                            <div className='total-product col-6'>
+                                            <div className='total-product col-12 col-lg-6'>
                                                 <label htmlFor='input-total-product' className='mb-2' >
                                                     {t('CreateProduct.tittleNight')} <b>{userdata.number}</b> {t('CreateProduct.tittleTwentyFive')} </label>
                                                 <input
@@ -730,7 +730,7 @@ const CreateNewProject = (props) => {
                                             </div>
 
 
-                                            <div className='unitMoney col-6 mb-2'>
+                                            <div className='unitMoney col-12 col-lg-6 mb-2'>
                                                 <label htmlFor='input-product'>
                                                     {t('CreateProduct.tittleTen')}
                                                 </label>
@@ -751,7 +751,7 @@ const CreateNewProject = (props) => {
                                             </div>
 
 
-                                            <div className='unitMoney col-6 mb-2'>
+                                            <div className='unitMoney col-12 col-lg-6 mb-2'>
                                                 <label htmlFor='input-product'>
                                                     {t('CreateProduct.tittleTwelve')}
                                                 </label>
@@ -774,7 +774,7 @@ const CreateNewProject = (props) => {
                                                 &&
                                                 <>
 
-                                                    <div className='total-product col-6'>
+                                                    <div className='total-product col-12 col-lg-6'>
                                                         <label htmlFor='input-total-product' className='mb-2' >
                                                             {t('CreateProduct.tittleThirteen')}
                                                         </label>
@@ -789,7 +789,7 @@ const CreateNewProject = (props) => {
 
                                                     </div>
 
-                                                    <div className='unitMoney col-6 mb-2'>
+                                                    <div className='unitMoney col-12 col-lg-6 mb-2'>
                                                         <label htmlFor='input-product'>
                                                             {t('CreateProduct.tittleFourteen')}
                                                         </label>
@@ -813,7 +813,7 @@ const CreateNewProject = (props) => {
                                                             <option value="VIB">VIB</option>
                                                         </select >
                                                     </div>
-                                                    <div className='total-product col-6'>
+                                                    <div className='total-product col-12 col-lg-6'>
                                                         <label htmlFor='input-total-product' className='mb-2' >
                                                             {t('CreateProduct.tittleFifteen')}
                                                         </label>
@@ -839,7 +839,7 @@ const CreateNewProject = (props) => {
 
                                         </h4>
                                         <div className='row'>
-                                            <div className='name-customer col-6 mb-2'>
+                                            <div className='name-customer col-12 col-lg-6 mb-2'>
                                                 <label htmlFor='input-name-customer' className='mb-2' >
                                                     {t('CreateProduct.Customer.tittleTwo')}
 
@@ -853,7 +853,7 @@ const CreateNewProject = (props) => {
 
                                                 />
                                             </div>
-                                            <div className='phone-customer col-6 mb-2'>
+                                            <div className='phone-customer col-12 col-lg-6 mb-2'>
                                                 <label htmlFor='input-phone-customer' className='mb-2' >
                                                     {t('CreateProduct.Customer.tittleThree')} (<span className='red'>*</span>)</label>
                                                 <input
@@ -878,7 +878,7 @@ const CreateNewProject = (props) => {
 
                                                 />
                                             </div>
-                                            <div className='age-customer col-6'>
+                                            <div className='age-customer col-12 col-lg-6'>
                                                 <label htmlFor='input-age-customer' className='mb-2' >
                                                     {t('CreateProduct.Customer.tittleFive')}
 
@@ -892,7 +892,7 @@ const CreateNewProject = (props) => {
 
                                                 />
                                             </div>
-                                            <div className='address-customer col-6'>
+                                            <div className='address-customer col-12 col-lg-6'>
                                                 <label htmlFor='select-address-product' >
                                                     {t('CreateProduct.Customer.tittleSix')} (<span className='red'>*</span>)
                                                 </label>
@@ -967,7 +967,7 @@ const CreateNewProject = (props) => {
                                     </div>
 
                                 </div>
-                                <div className='right-table col-4 '>
+                                <div className='right-table col-12 col-lg-4 '>
                                     <div className='create-note  '>
                                         <h5 className='mb-4 d-flex align-item-center justify-content-center'>
                                             {t('CreateProduct.Additional information.tittleOne')}
@@ -1261,103 +1261,200 @@ const CreateNewProject = (props) => {
 
 
                             </div>
-                            <div className='create-image '>
-                                <h4 className=' d-flex align-item-center justify-content-center '>
-                                    {t('CreateProduct.Upload image.tittleOne')}
-                                </h4>
-                                {selecCheckSubtmitImage === true &&
-                                    <div className=' d-flex align-item-center justify-content-center '>
-                                        {t('CreateProduct.Upload image.tittleThree')} <h5 className='mx-2'>{previreImage.length}</h5> {t('CreateProduct.Upload image.tittleFour')}
-                                    </div>}
-                                <div className='image-product col-12 '>
-                                    <div className='container'>
-                                        <form
-                                            onSubmit={handleSubmitImage}
-                                            method='POST'
-                                            encType='multipart/form-data'
-                                            action='upload-multiple-pic'
-                                        >
-                                            <div className='image col-12'>
-                                                <div className='row'>
-                                                    <div className='col-12 d-flex icon '>
+                            <div className='create-image d-none d-lg-block col-lg-12 '>
+                                <div className='row'>
 
-                                                        <input
-                                                            type="file"
-                                                            id='previewimage'
-                                                            name="multiple-image"
-                                                            multiple
-                                                            hidden
-                                                            onChange={(event) => handleOnchangeImage(event.target.files)}
-                                                        />
-                                                        <label
-                                                            htmlFor="previewimage"
-                                                            className='Update-image col-3  d-flex align-item-center justify-content-center'>
-                                                            <span>
-                                                                <i className="fa fa-upload " aria-hidden="true"></i>
-                                                            </span>
-                                                            <span > {t('CreateProduct.Upload image.tittleTwo')}</span>
+                                    <h4 className=' d-flex align-item-center justify-content-center col-12 '>
+                                        {t('CreateProduct.Upload image.tittleOne')}
+                                    </h4>
+                                    {selecCheckSubtmitImage === true &&
+                                        <div className=' d-flex align-item-center justify-content-center '>
+                                            {t('CreateProduct.Upload image.tittleThree')} <h5 className='mx-2'>{previreImage.length}</h5> {t('CreateProduct.Upload image.tittleFour')}
+                                        </div>}
+                                    <div className='image-product col-12 '>
+                                        <div className='container'>
+                                            <form
+                                                onSubmit={handleSubmitImage}
+                                                method='POST'
+                                                encType='multipart/form-data'
+                                                action='upload-multiple-pic'
+                                            >
+                                                <div className='image col-12'>
+                                                    <div className='row'>
+                                                        <div className='col-12 d-flex icon '>
 
-                                                        </label>
-                                                        <div className='col-6'></div>
-                                                        {previreImage.length > 0 &&
-                                                            <button className='btn btn-success col-3'>
-                                                                <i class="fa fa-check" aria-hidden="true"></i>
-
-                                                                <span className='mx-2'>
-                                                                    {t('CreateProduct.Upload image.tittleFive')}
+                                                            <input
+                                                                type="file"
+                                                                id='previewimage'
+                                                                name="multiple-image"
+                                                                multiple
+                                                                hidden
+                                                                onChange={(event) => handleOnchangeImage(event.target.files)}
+                                                            />
+                                                            <label
+                                                                htmlFor="previewimage"
+                                                                className='Update-image col-6 col-lg-3  d-flex align-item-center justify-content-center'>
+                                                                <span>
+                                                                    <i className="fa fa-upload " aria-hidden="true"></i>
                                                                 </span>
-                                                            </button>
+                                                                <span > {t('CreateProduct.Upload image.tittleTwo')}</span>
+
+                                                            </label>
+                                                            <div className='col-6'></div>
+                                                            {previreImage.length > 0 &&
+                                                                <button className='btn btn-success col-3'>
+                                                                    <i class="fa fa-check" aria-hidden="true"></i>
+
+                                                                    <span className='mx-2'>
+                                                                        {t('CreateProduct.Upload image.tittleFive')}
+                                                                    </span>
+                                                                </button>
 
 
-                                                        }
+                                                            }
 
+
+                                                        </div>
 
                                                     </div>
 
-                                                </div>
+                                                    <div className=' container '>
+                                                        <div className='row d-flex justify-content-center gap-1'>
 
-                                                <div className=' container '>
-                                                    <div className='row d-flex justify-content-center gap-1'>
-
-                                                        {previreImage && previreImage.length > 0 &&
-                                                            previreImage.map((item, index) => {
+                                                            {previreImage && previreImage.length > 0 &&
+                                                                previreImage.map((item, index) => {
 
 
-                                                                return (
-                                                                    <div className='preview-image ' key={`image - ${index}`}
+                                                                    return (
+                                                                        <div className='preview-image  ' key={`image - ${index}`}
 
-                                                                        style={{ backgroundImage: `url(${item})`, height: "150px" }}
-                                                                    >
-                                                                        <div className='cancel' onClick={() => handleDeleteImage(item)} title="Delete Image">
-                                                                            <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                                                                            style={{ backgroundImage: `url(${item})`, height: "150px" }}
+                                                                        >
+                                                                            <div className='cancel' onClick={() => handleDeleteImage(item)} title="Delete Image">
+                                                                                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
+
+                                                                    )
+                                                                })
+
+                                                            }
+
+                                                        </div>
 
 
-                                                                )
-                                                            })
-
-                                                        }
 
                                                     </div>
 
 
-
                                                 </div>
+                                            </form>
+                                        </div>
 
 
-                                            </div>
-                                        </form>
+
                                     </div>
 
 
+                                </div>
+                            </div>
+                            <div className='create-image d-block d-lg-none col-lg-12 '>
+                                <div className='row'>
+
+                                    <h4 className=' d-flex align-item-center justify-content-center col-12 '>
+                                        {t('CreateProduct.Upload image.tittleOne')}
+                                    </h4>
+                                    {selecCheckSubtmitImage === true &&
+                                        <div className=' d-flex align-item-center justify-content-center '>
+                                            {t('CreateProduct.Upload image.tittleThree')} <h5 className='mx-2'>{previreImage.length}</h5> {t('CreateProduct.Upload image.tittleFour')}
+                                        </div>}
+                                    <div className='image-product col-12 '>
+                                        <div className='row'>
+                                            <form
+                                                onSubmit={handleSubmitImage}
+                                                method='POST'
+                                                encType='multipart/form-data'
+                                                action='upload-multiple-pic'
+                                            >
+                                                <div className='image col-12'>
+                                                    <div className='row'>
+                                                        <div className='col-12  icon '>
+
+                                                            <input
+                                                                type="file"
+                                                                id='previewimage'
+                                                                name="multiple-image"
+                                                                multiple
+                                                                hidden
+                                                                onChange={(event) => handleOnchangeImage(event.target.files)}
+                                                            />
+                                                            <label
+                                                                htmlFor="previewimage"
+                                                                className='Update-image col-12  d-flex align-item-center justify-content-center'>
+                                                                <span>
+                                                                    <i className="fa fa-upload " aria-hidden="true"></i>
+                                                                </span>
+                                                                <span > {t('CreateProduct.Upload image.tittleTwo')}</span>
+
+                                                            </label>
+                                                            {previreImage.length > 0 &&
+                                                                <button className='btn btn-success col-12 mt-3'>
+                                                                    <i class="fa fa-check" aria-hidden="true"></i>
+
+                                                                    <span className='mx-2'>
+                                                                        {t('CreateProduct.Upload image.tittleFive')}
+                                                                    </span>
+                                                                </button>
+
+
+                                                            }
+
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className=' container '>
+                                                        <div className='row d-flex justify-content-center gap-1'>
+
+                                                            {previreImage && previreImage.length > 0 &&
+                                                                previreImage.map((item, index) => {
+
+
+                                                                    return (
+                                                                        <div className='preview-image ' key={`image - ${index}`}
+
+                                                                            style={{ backgroundImage: `url(${item})`, height: "150px" }}
+                                                                        >
+                                                                            <div className='cancel' onClick={() => handleDeleteImage(item)} title="Delete Image">
+                                                                                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    )
+                                                                })
+
+                                                            }
+
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+                                                </div>
+                                            </form>
+                                        </div>
+
+
+
+                                    </div>
+
 
                                 </div>
-
-
                             </div>
                         </div>
-
 
                     </div>
 

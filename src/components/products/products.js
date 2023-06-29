@@ -129,7 +129,7 @@ const Products = (props) => {
         localStorage.getItem("infomation Page") ? localStorage.getItem("infomation Page") : 1
 
     )
-    const [currentLimit, setCurrentLimit] = useState(10)
+    const [currentLimit, setCurrentLimit] = useState(7)
 
     const [listProjectbyUser, setListProjectbyUser] = useState([])
     const [totalPage, setTotalPage] = useState(0)
@@ -142,7 +142,6 @@ const Products = (props) => {
     const [showNotificationCreateSuccess, setShowNotificationCreateSuccess] = useState(false);
     const [sortBy, setSortBy] = useState("")
     const [fieldSort, setFieldSort] = useState("")
-    const [lengProject, setLengProject] = useState("")
 
     const [sortId, setSortId] = useState(false)
     const [sorttime, setSortTime] = useState(false)
@@ -155,6 +154,7 @@ const Products = (props) => {
     const [sortDataSearchWithTime, setSortDataSearchWithTime] = useState(false)
 
     const [listDataSearch, setListDataSearch] = useState([])
+    const [listDataSearchNotime, setListDataSearchNotime] = useState([])
 
     const [stateDate, setStateDate] = useState([
         {
@@ -283,11 +283,11 @@ const Products = (props) => {
         if (data) {
             setSortDataSearch(true)
 
-            let res = await getDataSearch(data)
+            let res = await getDataSearch(data, user.account.phone)
             if (res && +res.EC === 0) {
                 let data = res.DT
-                let resultsSearch = data.filter(item => item.createdBy === user.account.phone)
-                setListProjectbyUser(resultsSearch)
+                setListDataSearchNotime(data)
+
                 if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
                     await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
                 }
@@ -838,14 +838,14 @@ const Products = (props) => {
     }
 
     return (
-        <div className='Contact-container '>
-            <div className='left  '>
+        <div className='Contact-container  '>
+            <div className='left d-none d-lg-block '>
                 <Sidebar collapsed={collapsed} />
 
             </div>
 
             <div className='right  '>
-                <div className='btn-toggle'>
+                <div className='btn-toggle d-none d-lg-block'>
                     <span onClick={() => setCollapsed(!collapsed)} className=" d-sm-block ">
                         {collapsed === false ?
                             <i className="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
@@ -855,12 +855,12 @@ const Products = (props) => {
                         }
                     </span>
                 </div>
-                <div className='right-body'>
+                <div className='right-body d-none d-lg-block'>
                     <div className='container'>
                         <div className='row'>
 
 
-                            <div className='header d-block d-lg-none col-lg-12'>
+                            <div className='header'>
                                 <div className='location-path col'>
                                     <Link to="/"> Home</Link>
 
@@ -868,7 +868,7 @@ const Products = (props) => {
                                     </span>
                                     <Link to="/Products"> Product manager </Link>
                                 </div>
-                                <div className='col search my-3'>
+                                <div className='col search'>
                                     <div className='search-icon'>
                                         <i className="fa fa-search" aria-hidden="true"></i>
 
@@ -881,29 +881,7 @@ const Products = (props) => {
                                 </div>
                             </div>
 
-                            <div className='header d-none d-lg-block col-lg-12'>
-                                {/* mobile */}
-                                <div className='row'>
-                                    <div className='location-path col-6'>
-                                        <Link to="/"> Home</Link>
 
-                                        <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
-                                        </span>
-                                        <Link to="/Products"> Product manager </Link>
-                                    </div>
-                                    <div className='col-6 search my-3'>
-                                        <div className='search-icon'>
-                                            <i className="fa fa-search" aria-hidden="true"></i>
-
-                                        </div>
-                                        <input
-                                            type="text"
-                                            placeholder='Search infomation'
-                                            onChange={(event) => handleSearch(event)}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
                             <div className='body'>
                                 <div className="container">
                                     <div className='row'>
@@ -939,48 +917,8 @@ const Products = (props) => {
                                             </div>
 
                                         </div>
-                                        <div className='name-page d-block d-lg-none col-lg-12'>
-                                            {/* mobile */}
 
-                                            <div className='row'>
-
-                                                <div className='title_name_page-mobile col-12'>
-                                                    <h4>
-                                                        {t('Product.tittleOne')}
-                                                    </h4>
-                                                    <Link to="/dashboard_Product" style={{ textDecoration: "none", color: "#474141" }}>
-                                                        <button className='btn btn-primary'>
-                                                            <span>
-                                                                <i class="fa fa-line-chart" aria-hidden="true"></i>
-                                                            </span>
-                                                            <span className='mx-3'>
-                                                                {t('Product.tittleTwo')}
-                                                            </span>
-                                                        </button>
-                                                    </Link>
-                                                </div>
-                                                <div className='more-mobile col-8 mt-2 mx-2 '>
-                                                    <div className='container'>
-                                                        <div className='row d-flex align-item-center justify-content-center '>
-                                                            <button className='btn btn-warning col-12 my-3' onClick={() => handleExportData()}>
-                                                                <i class="fa fa-cloud-download" aria-hidden="true"></i>
-                                                                {t('Product.tittleThree')}
-                                                            </button>
-                                                            <button className='btn btn-primary col-12 ' onClick={() => handleShowHideModalCreatNewProject()}>
-                                                                <i className="fa fa-plus-circle" aria-hidden="true"></i>
-                                                                {t('Product.tittleFour')}
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-
-                                        </div>
                                         <div className='table-wrapper'>
-
-
                                             <div className='row'>
                                                 <div className=' d-none d-lg-block col-lg-12'>
                                                     <div className='header-table'>
@@ -1012,37 +950,7 @@ const Products = (props) => {
                                                     </div>
 
                                                 </div>
-                                                <div className=' d-block d-lg-none col-lg-12'>
-                                                    {/* mobile */}
-                                                    <div className='header-table-mobile'>
-                                                        <span onClick={() => handlegetAllProject()} style={{ borderBottom: "6px solid #61dafb " }}>
-                                                            {t('Product.tittleTable')}
-                                                        </span>
-                                                        <span style={{ borderBottom: "6px solid white" }}>
-                                                            <Link to="/ProductsWithStatuspayment" style={{ textDecoration: "none", color: "#474141" }}>
-                                                                {t('Product.tittleTableOne')}
-                                                            </Link>
-                                                        </span>
-                                                        <span style={{ borderBottom: "6px solid white" }}>
-                                                            <Link to="/ProductsWithStatusdeliveryNull" style={{ textDecoration: "none", color: "#474141" }}>
-                                                                {t('Product.tittleTableTwo')}
-                                                            </Link>
-                                                        </span>
-                                                        <span style={{ borderBottom: "6px solid white" }}>
-                                                            <Link to="/ProductsWithStatusdeliveryOne" style={{ textDecoration: "none", color: "#474141" }}>
-                                                                {t('Product.tittleTableThree')}
-                                                            </Link>
-                                                        </span>
-                                                        <span style={{ borderBottom: "6px solid white" }}>
-                                                            <Link to="/ProductsWithStatusdeliveryTwo" style={{ textDecoration: "none", color: "#474141" }}>
-                                                                {t('Product.tittleTableFoure')}
-                                                            </Link>
-                                                        </span>
 
-
-                                                    </div>
-
-                                                </div>
                                                 <div className=' d-none d-lg-block col-lg-12'>
                                                     <div className='title d-flex align-items-center justify-content-center'>
                                                         <div className='container '>
@@ -1110,84 +1018,13 @@ const Products = (props) => {
 
                                                     </div>
                                                 </div>
-                                                <div className=' d-block d-lg-none col-lg-12'>
-                                                    {/* mobile */}
-                                                    <div className='title d-flex align-items-center justify-content-center'>
-                                                        <div className='container '>
-                                                            <div className='row '>
-                                                                <div className='col-12' style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                                                    {t('Product.TimeTittle')}
-                                                                </div>
-                                                                <div className='col-12'>
-                                                                    <input
-                                                                        className="form-control my-3 "
-                                                                        readOnly
-                                                                        value={StartDateCalendar}
-                                                                    />
-                                                                </div>
-                                                                <div className='col-1' style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                                                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                                                                </div>
-                                                                <div className='col-12'>
-                                                                    <input
-                                                                        className="form-control my-3 "
-                                                                        readOnly
-                                                                        value={endDateCalendar}
-                                                                    />
-                                                                </div>
-                                                                <div className='row my-3'>
-                                                                    <div className='col-12'
-                                                                        style={{ display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "black" }}
-                                                                        onClick={() => setIsOpenCalendar(!isOpenCalendar)}
-                                                                        title='Lọc đơn hàng theo thời gian'
-                                                                    >
-                                                                        <button className='btn btn-primary'>
-                                                                            {t('Product.tittleTimeSelectButton')}
-                                                                        </button>
 
-                                                                    </div>
-
-                                                                    <div className='col-12 my-3'
-                                                                        style={{ display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "black" }}
-                                                                        onClick={() => handledeleteSortTime()}
-                                                                        title='xóa thời gian đã chọn'
-                                                                    >
-
-                                                                        <button className='btn btn-danger'>
-                                                                            {t('Product.tittleTimeDeleteButton')}
-
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-
-
-
-                                                                <div className='col-10' ref={refCalendar} style={{ overflow: "auto" }}>
-                                                                    {isOpenCalendar === true &&
-                                                                        <DateRangePicker
-                                                                            onChange={item => handleChangDate(item)}
-                                                                            showSelectionPreview={true}
-                                                                            moveRangeOnFirstSelection={false}
-                                                                            months={2}
-                                                                            ranges={stateDate}
-                                                                            direction="horizontal"
-                                                                        />
-                                                                    }
-
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
-                                                </div>
                                                 <hr />
 
                                                 <div className='body-table'>
                                                     <div className=' d-none d-lg-block col-lg-12'>
-                                                        <div className='d-flex align-item-center justify-content-between'>
-                                                            <div className='my-2 d-flex align-item-center gap-3'>
+                                                        <div className='d-flex align-item-center justify-content-between flex-column'>
+                                                            <div className='my-2 d-flex align-item-center justify-content-around gap-3'>
                                                                 <div className='my-2 d-flex align-item-center gap-2'>
                                                                     <div style={{ backgroundColor: "blue", width: "30px", height: "30px", borderRadius: "50%" }}></div>
                                                                     <div style={{ fontSize: "20px", fontWeight: "700" }}>
@@ -1217,7 +1054,7 @@ const Products = (props) => {
                                                                         nextLabel="next >"
                                                                         onPageChange={handlePageClick}
                                                                         pageRangeDisplayed={2}
-                                                                        marginPagesDisplayed={3}
+                                                                        marginPagesDisplayed={2}
                                                                         pageCount={totalPage}
                                                                         previousLabel="< previous"
                                                                         pageClassName="page-item"
@@ -1239,62 +1076,7 @@ const Products = (props) => {
                                                             }
                                                         </div>
                                                     </div>
-                                                    <div className=' d-block d-lg-none col-lg-12 mobile'>
-                                                        {/* mobile */}
-                                                        <div className='row'>
-                                                            <div className='my-2 col-12 '>
 
-                                                                <div style={{ backgroundColor: "blue", width: "30px", height: "30px", borderRadius: "50%", margin: "auto" }}></div>
-                                                                <div className='item' style={{ fontSize: "20px", fontWeight: "700" }}>
-                                                                    {t('Product.tittleBodyOne')}
-                                                                </div>
-                                                            </div>
-                                                            <div className='my-2 col-12'>
-                                                                <div style={{ backgroundColor: "violet", width: "30px", height: "30px", borderRadius: "50%", margin: "auto" }}></div>
-                                                                <div className='item' style={{ fontSize: "20px", fontWeight: "700" }}>
-                                                                    {t('Product.tittleBodyTwo')}
-                                                                </div>
-                                                            </div>
-                                                            <div className='my-2 col-12'>
-                                                                <div style={{ backgroundColor: "#A0522D", width: "30px", height: "30px", borderRadius: "50%", margin: "auto" }}></div>
-                                                                <div className='item' style={{ fontSize: "20px", fontWeight: "700" }}>
-                                                                    {t('Product.tittleBodyThree')}
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                        {sortDataSearch === false && sortDataSearchWithTime === false
-                                                            &&
-
-                                                            <div className='pagination-mobile my-3'>
-                                                                < ReactPaginate
-                                                                    nextLabel="next >"
-                                                                    onPageChange={handlePageClick}
-                                                                    pageRangeDisplayed={2}
-                                                                    marginPagesDisplayed={3}
-                                                                    pageCount={totalPage}
-                                                                    previousLabel="< previous"
-                                                                    pageClassName="page-item"
-                                                                    pageLinkClassName="page-link"
-                                                                    previousClassName="page-item"
-                                                                    previousLinkClassName="page-link"
-                                                                    nextClassName="page-item"
-                                                                    nextLinkClassName="page-link"
-                                                                    breakLabel="..."
-                                                                    breakClassName="page-item"
-                                                                    breakLinkClassName="page-link"
-                                                                    containerClassName="pagination"
-                                                                    activeClassName="active"
-                                                                    renderOnZeroPageCount={null}
-                                                                    forcePage={+currentPage - 1}
-
-                                                                />
-                                                            </div>
-
-
-                                                        }
-                                                    </div>
                                                     <table className="table table-set table-hover ">
                                                         <thead className='table-success'>
                                                             <tr>
@@ -1343,7 +1125,7 @@ const Products = (props) => {
 
                                                                 </th>
 
-                                                                <th >
+                                                                <th>
                                                                     {sorttime === true ?
                                                                         <span>
                                                                             {t('Product.tittleBodyOrdersFive')}
@@ -1406,143 +1188,14 @@ const Products = (props) => {
                                                             </tr>
                                                         </thead>
 
-
-                                                        < tbody >
-
-                                                            {listProjectbyUser && listProjectbyUser.length > 0
-                                                                ?
-
-                                                                listProjectbyUser.map((item, index) => {
-                                                                    return (
-                                                                        <>    <tr key={`row-${index}`}>
-                                                                            {item?.flag === true ?
-                                                                                <td>
-                                                                                    <span style={{ fontSize: "20px", color: "red" }}>
-                                                                                        <i class="fa fa-flag" aria-hidden="true"></i>
-                                                                                    </span>
-                                                                                </td>
-                                                                                :
-                                                                                <td></td>
-
-                                                                            }
-
-                                                                            {item?.done_status == 1
-                                                                                &&
-                                                                                <td>
-                                                                                    <div class="form-check">
-                                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked />
-
-                                                                                    </div>
-                                                                                </td>
-
-                                                                            }
-                                                                            {item?.done_status == 0
-                                                                                &&
-                                                                                <td>
-                                                                                    <div class="form-check">
-                                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" disabled />
-
-                                                                                    </div>
-                                                                                </td>
-
-                                                                            }
-
-                                                                            <td scope="row">{(currentPage - 1) * currentLimit + index + 1}</td>
-
-                                                                            <td scope="row">{item.order}
-
-                                                                            </td>
-                                                                            <td scope="row" >{item.id}</td>
-                                                                            {/* <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td> */}
-                                                                            <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
-                                                                            <td>{item?.name_customer?.toLocaleUpperCase() ? item?.name_customer?.toLocaleUpperCase() : "chưa cập nhật "}</td>
-                                                                            <td>{item?.Warehouse?.product
-                                                                                ? item?.Warehouse?.product
-                                                                                : "chưa cập nhật "}
-                                                                            </td>
-                                                                            {item?.Status_Payment?.status === "Đã thanh toán toàn bộ"
-                                                                                &&
-                                                                                <td >{item?.Status_Payment?.status ?
-                                                                                    <div style={{ backgroundColor: "blue", width: "20px", height: "20px", borderRadius: "50%" }}></div>
-                                                                                    :
-                                                                                    "Đang xử lý"
-                                                                                }</td>
-
-                                                                            }
-                                                                            {item?.Status_Payment?.status === "Thanh toán khi giao hàng"
-                                                                                &&
-                                                                                <td style={{ color: "violet", fontWeight: "700" }}>{item?.Status_Payment?.status ?
-                                                                                    <div style={{ backgroundColor: "violet", width: "20px", height: "20px", borderRadius: "50%" }}></div>
-                                                                                    : "Đang xử lý"}</td>
-
-                                                                            }
-                                                                            {item?.Status_Payment?.status === "Đã thanh toán trước một phần"
-                                                                                &&
-                                                                                <td style={{ color: "#A0522D", fontWeight: "700" }} >{item?.Status_Payment?.status ?
-                                                                                    <div style={{ backgroundColor: "#A0522D", width: "20px", height: "20px", borderRadius: "50%" }}></div>
-                                                                                    : "Đang xử lý"}</td>
-
-                                                                            }
-
-
-                                                                            {item?.Status_Delivery?.status &&
-                                                                                <td > {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
-
-                                                                            }
-                                                                            {!item?.Status_Delivery?.status &&
-                                                                                <td > {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
-
-                                                                            }
-                                                                            <td>{item.total}</td>
-                                                                            <td>{item?.Sales_Channel?.name}</td>
-                                                                            <td >
-                                                                                <div className='d-flex'>
-                                                                                    <button className='btn btn-primary' style={{ cursor: "pointer", borderRadius: "50%" }} title="Chi tiết đơn hàng" onClick={() => handleViewProduct(item)}>
-                                                                                        <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                                                                    </button>
-                                                                                    {item?.flag == 0 &&
-                                                                                        <button className='btn btn-danger mx-2' style={{ cursor: "pointer", borderRadius: "50%" }} title="Giục giao hàng nhanh" onClick={() => handleCreateFlag(item)} >
-                                                                                            <i class="fa fa-flag" aria-hidden="true"></i>
-                                                                                        </button>
-                                                                                    }
-                                                                                    {item?.flag == 1 &&
-                                                                                        <button className='btn btn-danger mx-2' style={{ cursor: "pointer", borderRadius: "50%" }} title="Tắt giục giao hàng nhanh" onClick={() => handleCancelFlag(item)} >
-                                                                                            <i class="fa fa-times" aria-hidden="true"></i>
-                                                                                        </button>
-                                                                                    }
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-
-                                                                        </>
-                                                                    )
-                                                                })
-                                                                :
-                                                                <tr>
-                                                                    <td colSpan={13}>
-                                                                        <div className='image'>
-                                                                            <img src="https://cdn3d.iconscout.com/3d/premium/thumb/open-box-7072010-5751948.png?f=webp" alt="" />
-                                                                            <h3> Not Found</h3>
-
-                                                                        </div>
-                                                                    </td>
-
-                                                                </tr>
-
-                                                            }
-
-
-
-                                                        </tbody>
-
-
-
-
-                                                        {sortDataSearch === true &&
+                                                        {sortDataSearch === false && sortDataSearchWithTime === false
+                                                            &&
                                                             < tbody >
-                                                                {listDataSearch && listDataSearch.length > 0 &&
 
-                                                                    listDataSearch.map((item, index) => {
+                                                                {listProjectbyUser && listProjectbyUser.length > 0
+                                                                    ?
+
+                                                                    listProjectbyUser.map((item, index) => {
                                                                         return (
                                                                             <>    <tr key={`row-${index}`}>
                                                                                 {item?.flag === true ?
@@ -1576,11 +1229,15 @@ const Products = (props) => {
                                                                                     </td>
 
                                                                                 }
-                                                                                <td scope="row">{index + 1}</td>
 
-                                                                                <td scope="row">{item.order}</td>
+                                                                                <td scope="row">{(currentPage - 1) * currentLimit + index + 1}</td>
+
+                                                                                <td scope="row">{item.order}
+
+                                                                                </td>
                                                                                 <td scope="row" >{item.id}</td>
-                                                                                <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY")}</td>
+                                                                                {/* <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td> */}
+                                                                                <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
                                                                                 <td>{item?.name_customer?.toLocaleUpperCase() ? item?.name_customer?.toLocaleUpperCase() : "chưa cập nhật "}</td>
                                                                                 <td>{item?.Warehouse?.product
                                                                                     ? item?.Warehouse?.product
@@ -1588,34 +1245,35 @@ const Products = (props) => {
                                                                                 </td>
                                                                                 {item?.Status_Payment?.status === "Đã thanh toán toàn bộ"
                                                                                     &&
-                                                                                    <td style={{ color: "blue", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+                                                                                    <td >{item?.Status_Payment?.status ?
+                                                                                        <div style={{ backgroundColor: "blue", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                        :
+                                                                                        "Đang xử lý"
+                                                                                    }</td>
 
                                                                                 }
                                                                                 {item?.Status_Payment?.status === "Thanh toán khi giao hàng"
                                                                                     &&
-                                                                                    <td style={{ color: "violet", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+                                                                                    <td style={{ color: "violet", fontWeight: "700" }}>{item?.Status_Payment?.status ?
+                                                                                        <div style={{ backgroundColor: "violet", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                        : "Đang xử lý"}</td>
 
                                                                                 }
                                                                                 {item?.Status_Payment?.status === "Đã thanh toán trước một phần"
                                                                                     &&
-                                                                                    <td style={{ color: "#A0522D", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+                                                                                    <td style={{ color: "#A0522D", fontWeight: "700" }} >{item?.Status_Payment?.status ?
+                                                                                        <div style={{ backgroundColor: "#A0522D", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                        : "Đang xử lý"}</td>
 
                                                                                 }
-                                                                                {!item?.Status_Payment?.status
-                                                                                    &&
-                                                                                    <td style={{ color: "red", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+
+
+                                                                                {item?.Status_Delivery?.status &&
+                                                                                    <td > {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
 
                                                                                 }
                                                                                 {!item?.Status_Delivery?.status &&
-                                                                                    <td style={{ color: "red", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
-
-                                                                                }
-                                                                                {item?.Status_Delivery?.status === "Đơn đang giao" &&
-                                                                                    <td style={{ color: "orange", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
-
-                                                                                }
-                                                                                {item?.Status_Delivery?.status === "Đơn đã giao" &&
-                                                                                    <td style={{ color: "gray", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
+                                                                                    <td > {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
 
                                                                                 }
                                                                                 <td>{item.total}</td>
@@ -1637,13 +1295,156 @@ const Products = (props) => {
                                                                                         }
                                                                                     </div>
                                                                                 </td>
-
                                                                             </tr>
 
                                                                             </>
                                                                         )
                                                                     })
+                                                                    :
+                                                                    <tr>
+                                                                        <td colSpan={13}>
+                                                                            <div className='image'>
+                                                                                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/open-box-7072010-5751948.png?f=webp" alt="" />
+                                                                                <h3> Not Found</h3>
+
+                                                                            </div>
+                                                                        </td>
+
+                                                                    </tr>
+
                                                                 }
+
+
+
+                                                            </tbody>
+                                                        }
+
+
+
+                                                        {sortDataSearch === true &&
+                                                            < tbody >
+                                                                {listDataSearchNotime && listDataSearchNotime.length > 0
+                                                                    ?
+
+                                                                    listDataSearchNotime.map((item, index) => {
+                                                                        return (
+                                                                            <>    <tr key={`row-${index}`}>
+                                                                                {item?.flag === true ?
+                                                                                    <td>
+                                                                                        <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                            <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                        </span>
+                                                                                    </td>
+                                                                                    :
+                                                                                    <td></td>
+
+                                                                                }
+
+                                                                                {item?.done_status == 1
+                                                                                    &&
+                                                                                    <td>
+                                                                                        <div class="form-check">
+                                                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked />
+
+                                                                                        </div>
+                                                                                    </td>
+
+                                                                                }
+                                                                                {item?.done_status == 0
+                                                                                    &&
+                                                                                    <td>
+                                                                                        <div class="form-check">
+                                                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" disabled />
+
+                                                                                        </div>
+                                                                                    </td>
+
+                                                                                }
+
+                                                                                <td scope="row">{(currentPage - 1) * currentLimit + index + 1}</td>
+
+                                                                                <td scope="row">{item.order}
+
+                                                                                </td>
+                                                                                <td scope="row" >{item.id}</td>
+                                                                                {/* <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td> */}
+                                                                                <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
+                                                                                <td>{item?.name_customer?.toLocaleUpperCase() ? item?.name_customer?.toLocaleUpperCase() : "chưa cập nhật "}</td>
+                                                                                <td>{item?.Warehouse?.product
+                                                                                    ? item?.Warehouse?.product
+                                                                                    : "chưa cập nhật "}
+                                                                                </td>
+                                                                                {item?.Status_Payment?.status === "Đã thanh toán toàn bộ"
+                                                                                    &&
+                                                                                    <td >{item?.Status_Payment?.status ?
+                                                                                        <div style={{ backgroundColor: "blue", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                        :
+                                                                                        "Đang xử lý"
+                                                                                    }</td>
+
+                                                                                }
+                                                                                {item?.Status_Payment?.status === "Thanh toán khi giao hàng"
+                                                                                    &&
+                                                                                    <td style={{ color: "violet", fontWeight: "700" }}>{item?.Status_Payment?.status ?
+                                                                                        <div style={{ backgroundColor: "violet", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                        : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                {item?.Status_Payment?.status === "Đã thanh toán trước một phần"
+                                                                                    &&
+                                                                                    <td style={{ color: "#A0522D", fontWeight: "700" }} >{item?.Status_Payment?.status ?
+                                                                                        <div style={{ backgroundColor: "#A0522D", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                        : "Đang xử lý"}</td>
+
+                                                                                }
+
+
+                                                                                {item?.Status_Delivery?.status &&
+                                                                                    <td > {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                {!item?.Status_Delivery?.status &&
+                                                                                    <td > {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                <td>{item.total}</td>
+                                                                                <td>{item?.Sales_Channel?.name}</td>
+                                                                                <td >
+                                                                                    <div className='d-flex'>
+                                                                                        <button className='btn btn-primary' style={{ cursor: "pointer", borderRadius: "50%" }} title="Chi tiết đơn hàng" onClick={() => handleViewProduct(item)}>
+                                                                                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                                                        </button>
+                                                                                        {item?.flag == 0 &&
+                                                                                            <button className='btn btn-danger mx-2' style={{ cursor: "pointer", borderRadius: "50%" }} title="Giục giao hàng nhanh" onClick={() => handleCreateFlag(item)} >
+                                                                                                <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                            </button>
+                                                                                        }
+                                                                                        {item?.flag == 1 &&
+                                                                                            <button className='btn btn-danger mx-2' style={{ cursor: "pointer", borderRadius: "50%" }} title="Tắt giục giao hàng nhanh" onClick={() => handleCancelFlag(item)} >
+                                                                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                                                                            </button>
+                                                                                        }
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            </>
+                                                                        )
+                                                                    })
+                                                                    :
+                                                                    <tr>
+                                                                        <td colSpan={13}>
+                                                                            <div className='image'>
+                                                                                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/open-box-7072010-5751948.png?f=webp" alt="" />
+                                                                                <h3> Not Found</h3>
+
+                                                                            </div>
+                                                                        </td>
+
+                                                                    </tr>
+
+                                                                }
+
 
 
 
@@ -1785,9 +1586,754 @@ const Products = (props) => {
 
                     />
                 </div>
+                <div className='right-body d-block d-lg-none mt-3'>
+                    <div className='container'>
+                        <div className='row'>
+                            <div className='header d-block d-lg-none col-lg-12 mt-2'>
+                                <div className='location-path col'>
+                                    <Link to="/"> Home</Link>
 
+                                    <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
+                                    </span>
+                                    <Link to="/Products"> Product manager </Link>
+                                </div>
+                                <div className='col search my-3'>
+                                    <div className='search-icon'>
+                                        <i className="fa fa-search" aria-hidden="true"></i>
+
+                                    </div>
+                                    <input
+                                        type="text"
+                                        placeholder='Search infomation'
+                                        onChange={(event) => handleSearch(event)}
+                                    />
+                                </div>
+                            </div>
+                            <div className='body'>
+                                <div className="container">
+                                    <div className='row'>
+
+                                        <div className='name-page d-block d-lg-none col-lg-12'>
+                                            {/* mobile */}
+
+                                            <div className='row'>
+
+                                                <div className='title_name_page-mobile col-12'>
+                                                    <h4>
+                                                        {t('Product.tittleOne')}
+                                                    </h4>
+                                                    <Link to="/dashboard_Product" style={{ textDecoration: "none", color: "#474141" }}>
+                                                        <button className='btn btn-primary'>
+                                                            <span>
+                                                                <i class="fa fa-line-chart" aria-hidden="true"></i>
+                                                            </span>
+                                                            <span className='mx-3'>
+                                                                {t('Product.tittleTwo')}
+                                                            </span>
+                                                        </button>
+                                                    </Link>
+                                                </div>
+                                                <div className='more-mobile mx-2 '>
+                                                    <div className='container'>
+                                                        <div className='row d-flex align-item-center justify-content-center '>
+                                                            <button className='btn btn-warning col-5 my-3' onClick={() => handleExportData()}>
+                                                                <span className='mx-1' style={{ fontSize: "13px" }}>{t('Product.tittleThree')}</span>
+                                                            </button>
+                                                            <div className='col-2'></div>
+                                                            <button className='btn btn-primary col-5 my-3' style={{ fontSize: "13px" }} onClick={() => handleShowHideModalCreatNewProject()}>
+                                                                <span className='mx-1'>{t('Product.tittleFour')}</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div className='table-wrapper'>
+
+
+                                            <div className='row'>
+
+                                                <div className=' d-block d-lg-none col-lg-12'>
+                                                    {/* mobile */}
+                                                    <div className='header-table-mobile'>
+                                                        <span onClick={() => handlegetAllProject()} style={{ borderBottom: "6px solid #61dafb " }}>
+                                                            {t('Product.tittleTable')}
+                                                        </span>
+                                                        <span style={{ borderBottom: "6px solid white" }}>
+                                                            <Link to="/ProductsWithStatuspayment" style={{ textDecoration: "none", color: "#474141" }}>
+                                                                {t('Product.tittleTableOne')}
+                                                            </Link>
+                                                        </span>
+                                                        <span style={{ borderBottom: "6px solid white" }}>
+                                                            <Link to="/ProductsWithStatusdeliveryNull" style={{ textDecoration: "none", color: "#474141" }}>
+                                                                {t('Product.tittleTableTwo')}
+                                                            </Link>
+                                                        </span>
+                                                        <span style={{ borderBottom: "6px solid white" }}>
+                                                            <Link to="/ProductsWithStatusdeliveryOne" style={{ textDecoration: "none", color: "#474141" }}>
+                                                                {t('Product.tittleTableThree')}
+                                                            </Link>
+                                                        </span>
+                                                        <span style={{ borderBottom: "6px solid white" }}>
+                                                            <Link to="/ProductsWithStatusdeliveryTwo" style={{ textDecoration: "none", color: "#474141" }}>
+                                                                {t('Product.tittleTableFoure')}
+                                                            </Link>
+                                                        </span>
+
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div className=' d-block d-lg-none col-lg-12'>
+                                                    {/* mobile */}
+                                                    <div className='title d-flex align-items-center justify-content-center'>
+                                                        <div className='row '>
+                                                            <div className='col-12' style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                {t('Product.TimeTittle')}
+                                                            </div>
+                                                            <div className='col-12'>
+                                                                <input
+                                                                    className="form-control my-3 "
+                                                                    readOnly
+                                                                    value={StartDateCalendar}
+                                                                />
+                                                            </div>
+                                                            <div className='col-1' style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div className='col-12'>
+                                                                <input
+                                                                    className="form-control my-3 "
+                                                                    readOnly
+                                                                    value={endDateCalendar}
+                                                                />
+                                                            </div>
+                                                            <div className='container'>
+                                                                <div className='row my-3'>
+                                                                    <div className='col-6'
+                                                                        style={{ display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "black" }}
+                                                                        onClick={() => setIsOpenCalendar(!isOpenCalendar)}
+                                                                        title='Lọc đơn hàng theo thời gian'
+                                                                    >
+                                                                        <button className='btn btn-primary'>
+                                                                            {t('Product.tittleTimeSelectButton')}
+                                                                        </button>
+
+                                                                    </div>
+
+                                                                    <div className='col-6 my-3'
+                                                                        style={{ display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "black" }}
+                                                                        onClick={() => handledeleteSortTime()}
+                                                                        title='xóa thời gian đã chọn'
+                                                                    >
+
+                                                                        <button className='btn btn-danger'>
+                                                                            {t('Product.tittleTimeDeleteButton')}
+
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+
+                                                            <div className='col-12' ref={refCalendar} style={{ overflow: "auto" }}>
+                                                                {isOpenCalendar === true &&
+                                                                    <DateRangePicker
+                                                                        onChange={item => handleChangDate(item)}
+                                                                        showSelectionPreview={true}
+                                                                        moveRangeOnFirstSelection={false}
+                                                                        months={2}
+                                                                        ranges={stateDate}
+                                                                        direction="horizontal"
+                                                                    />
+                                                                }
+
+                                                            </div>
+
+                                                        </div>
+
+
+
+                                                    </div>
+                                                </div>
+                                                <hr />
+
+                                                <div className='body-table'>
+
+                                                    <div className=' d-block d-lg-none col-lg-12 mobile'>
+                                                        {/* mobile */}
+                                                        <div className='row'>
+                                                            <div className='my-2 col-12 '>
+
+                                                                <div style={{ backgroundColor: "blue", width: "30px", height: "30px", borderRadius: "50%", margin: "auto" }}></div>
+                                                                <div className='item' style={{ fontSize: "20px", fontWeight: "700" }}>
+                                                                    {t('Product.tittleBodyOne')}
+                                                                </div>
+                                                            </div>
+                                                            <div className='my-2 col-12'>
+                                                                <div style={{ backgroundColor: "violet", width: "30px", height: "30px", borderRadius: "50%", margin: "auto" }}></div>
+                                                                <div className='item' style={{ fontSize: "20px", fontWeight: "700" }}>
+                                                                    {t('Product.tittleBodyTwo')}
+                                                                </div>
+                                                            </div>
+                                                            <div className='my-2 col-12'>
+                                                                <div style={{ backgroundColor: "#A0522D", width: "30px", height: "30px", borderRadius: "50%", margin: "auto" }}></div>
+                                                                <div className='item' style={{ fontSize: "20px", fontWeight: "700" }}>
+                                                                    {t('Product.tittleBodyThree')}
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        {sortDataSearch === false && sortDataSearchWithTime === false
+                                                            &&
+
+                                                            <div className='pagination-mobile my-3'>
+                                                                < ReactPaginate
+                                                                    nextLabel="next >"
+                                                                    onPageChange={handlePageClick}
+                                                                    pageRangeDisplayed={1}
+                                                                    marginPagesDisplayed={1}
+                                                                    pageCount={totalPage}
+                                                                    previousLabel="< previous"
+                                                                    pageClassName="page-item"
+                                                                    pageLinkClassName="page-link"
+                                                                    previousClassName="page-item"
+                                                                    previousLinkClassName="page-link"
+                                                                    nextClassName="page-item"
+                                                                    nextLinkClassName="page-link"
+                                                                    breakLabel="..."
+                                                                    breakClassName="page-item"
+                                                                    breakLinkClassName="page-link"
+                                                                    containerClassName="pagination"
+                                                                    activeClassName="active"
+                                                                    renderOnZeroPageCount={null}
+                                                                    forcePage={+currentPage - 1}
+
+                                                                />
+                                                            </div>
+
+
+                                                        }
+                                                    </div>
+                                                    <table className="table table-set table-hover ">
+                                                        <thead className='table-success'>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th scope="col">
+                                                                    {t('Product.tittleBodyOrdersOne')}
+
+                                                                </th>
+                                                                <th scope="col" >
+                                                                    {t('Product.tittleBodyOrdersTwo')}
+
+                                                                </th>
+                                                                <th scope="col" style={{ width: "50px" }} >
+                                                                    {t('Product.tittleBodyOrdersThree')}
+
+                                                                </th>
+                                                                <th scope="col" style={{ width: "80px" }} >
+                                                                    {sortId === true ?
+                                                                        <span>
+                                                                            {t('Product.tittleBodyOrdersFour')}
+                                                                            <span style={{ paddingLeft: "10px", cursor: "pointer" }}
+                                                                            >
+                                                                                <span onClick={() =>
+                                                                                    handleChangsortItem("desc", "id")}
+                                                                                >
+                                                                                    <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+                                                                                </span>
+
+                                                                            </span>
+                                                                        </span>
+                                                                        :
+                                                                        <span>
+                                                                            {t('Product.tittleBodyOrdersFour')}
+                                                                            <span style={{ paddingLeft: "10px", cursor: "pointer" }}
+                                                                            >
+                                                                                <span onClick={() =>
+                                                                                    handleChangsortItem("asc", "id")}
+                                                                                >
+                                                                                    <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+                                                                                </span>
+
+                                                                            </span>
+                                                                        </span>
+                                                                    }
+
+
+                                                                </th>
+
+                                                                <th>
+                                                                    {sorttime === true ?
+                                                                        <span>
+                                                                            {t('Product.tittleBodyOrdersFive')}
+                                                                            <span style={{ paddingLeft: "10px", cursor: "pointer" }}
+                                                                            >
+                                                                                <span onClick={() =>
+                                                                                    handleChangsortItem("desc", "createdAt")}
+                                                                                >
+                                                                                    <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+                                                                                </span>
+
+                                                                            </span>
+                                                                        </span>
+                                                                        :
+                                                                        <span>
+                                                                            {t('Product.tittleBodyOrdersFive')}
+                                                                            <span style={{ paddingLeft: "10px", cursor: "pointer" }}
+                                                                            >
+                                                                                <span onClick={() =>
+                                                                                    handleChangsortItem("asc", "createdAt")}
+                                                                                >
+                                                                                    <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+                                                                                </span>
+
+                                                                            </span>
+                                                                        </span>
+                                                                    }
+
+
+
+                                                                </th>
+                                                                <th scope="col" >
+                                                                    {t('Product.tittleBodyOrdesSix')}
+
+                                                                </th>
+                                                                <th scope="col" >
+                                                                    {t('Product.tittleBodyOrdesSeven')}
+                                                                </th>
+                                                                <th scope="col" >
+                                                                    {t('Product.tittleBodyOrdesEight')}
+
+                                                                </th>
+                                                                <th scope="col" >
+                                                                    {t('Product.tittleBodyOrdesNight')}
+
+                                                                </th>
+                                                                <th scope="col" >
+                                                                    {t('Product.tittleBodyOrdesTen')}
+
+                                                                </th>
+                                                                <th scope="col" >
+                                                                    {t('Product.tittleBodyOrdeseleven')}
+
+                                                                </th>
+                                                                <th scope="col" >
+                                                                    {t('Product.tittleBodyOrdestwelve')}
+
+                                                                </th>
+
+                                                            </tr>
+                                                        </thead>
+
+                                                        {sortDataSearch === false && sortDataSearchWithTime === false &&
+                                                            < tbody >
+
+                                                                {listProjectbyUser && listProjectbyUser.length > 0
+                                                                    ?
+
+                                                                    listProjectbyUser.map((item, index) => {
+                                                                        return (
+                                                                            <>    <tr key={`row-${index}`}>
+                                                                                {item?.flag === true ?
+                                                                                    <td>
+                                                                                        <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                            <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                        </span>
+                                                                                    </td>
+                                                                                    :
+                                                                                    <td></td>
+
+                                                                                }
+
+                                                                                {item?.done_status == 1
+                                                                                    &&
+                                                                                    <td>
+                                                                                        <div class="form-check">
+                                                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked />
+
+                                                                                        </div>
+                                                                                    </td>
+
+                                                                                }
+                                                                                {item?.done_status == 0
+                                                                                    &&
+                                                                                    <td>
+                                                                                        <div class="form-check">
+                                                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" disabled />
+
+                                                                                        </div>
+                                                                                    </td>
+
+                                                                                }
+
+                                                                                <td scope="row">{(currentPage - 1) * currentLimit + index + 1}</td>
+
+                                                                                <td scope="row">{item.order}
+
+                                                                                </td>
+                                                                                <td scope="row" >{item.id}</td>
+                                                                                {/* <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td> */}
+                                                                                <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
+                                                                                <td>{item?.name_customer?.toLocaleUpperCase() ? item?.name_customer?.toLocaleUpperCase() : "chưa cập nhật "}</td>
+                                                                                <td>{item?.Warehouse?.product
+                                                                                    ? item?.Warehouse?.product
+                                                                                    : "chưa cập nhật "}
+                                                                                </td>
+                                                                                {item?.Status_Payment?.status === "Đã thanh toán toàn bộ"
+                                                                                    &&
+                                                                                    <td >{item?.Status_Payment?.status ?
+                                                                                        <div style={{ backgroundColor: "blue", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                        :
+                                                                                        "Đang xử lý"
+                                                                                    }</td>
+
+                                                                                }
+                                                                                {item?.Status_Payment?.status === "Thanh toán khi giao hàng"
+                                                                                    &&
+                                                                                    <td style={{ color: "violet", fontWeight: "700" }}>{item?.Status_Payment?.status ?
+                                                                                        <div style={{ backgroundColor: "violet", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                        : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                {item?.Status_Payment?.status === "Đã thanh toán trước một phần"
+                                                                                    &&
+                                                                                    <td style={{ color: "#A0522D", fontWeight: "700" }} >{item?.Status_Payment?.status ?
+                                                                                        <div style={{ backgroundColor: "#A0522D", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                        : "Đang xử lý"}</td>
+
+                                                                                }
+
+
+                                                                                {item?.Status_Delivery?.status &&
+                                                                                    <td > {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                {!item?.Status_Delivery?.status &&
+                                                                                    <td > {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                <td>{item.total}</td>
+                                                                                <td>{item?.Sales_Channel?.name}</td>
+                                                                                <td >
+                                                                                    <div className='d-flex'>
+                                                                                        <button className='btn btn-primary' style={{ cursor: "pointer", borderRadius: "50%" }} title="Chi tiết đơn hàng" onClick={() => handleViewProduct(item)}>
+                                                                                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                                                        </button>
+                                                                                        {item?.flag == 0 &&
+                                                                                            <button className='btn btn-danger mx-2' style={{ cursor: "pointer", borderRadius: "50%" }} title="Giục giao hàng nhanh" onClick={() => handleCreateFlag(item)} >
+                                                                                                <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                            </button>
+                                                                                        }
+                                                                                        {item?.flag == 1 &&
+                                                                                            <button className='btn btn-danger mx-2' style={{ cursor: "pointer", borderRadius: "50%" }} title="Tắt giục giao hàng nhanh" onClick={() => handleCancelFlag(item)} >
+                                                                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                                                                            </button>
+                                                                                        }
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            </>
+                                                                        )
+                                                                    })
+                                                                    :
+                                                                    <tr>
+                                                                        <td colSpan={13}>
+                                                                            <div className='image'>
+                                                                                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/open-box-7072010-5751948.png?f=webp" alt="" />
+                                                                                <h3> Not Found</h3>
+
+                                                                            </div>
+                                                                        </td>
+
+                                                                    </tr>
+
+                                                                }
+
+
+
+
+
+                                                            </tbody>
+                                                        }
+
+
+
+
+                                                        {sortDataSearch === true &&
+                                                            < tbody >
+                                                                {listDataSearchNotime && listDataSearchNotime.length > 0
+                                                                    ?
+
+                                                                    listDataSearchNotime.map((item, index) => {
+                                                                        return (
+                                                                            <>    <tr key={`row-${index}`}>
+                                                                                {item?.flag === true ?
+                                                                                    <td>
+                                                                                        <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                            <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                        </span>
+                                                                                    </td>
+                                                                                    :
+                                                                                    <td></td>
+
+                                                                                }
+
+                                                                                {item?.done_status == 1
+                                                                                    &&
+                                                                                    <td>
+                                                                                        <div class="form-check">
+                                                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked />
+
+                                                                                        </div>
+                                                                                    </td>
+
+                                                                                }
+                                                                                {item?.done_status == 0
+                                                                                    &&
+                                                                                    <td>
+                                                                                        <div class="form-check">
+                                                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" disabled />
+
+                                                                                        </div>
+                                                                                    </td>
+
+                                                                                }
+
+                                                                                <td scope="row">{(currentPage - 1) * currentLimit + index + 1}</td>
+
+                                                                                <td scope="row">{item.order}
+
+                                                                                </td>
+                                                                                <td scope="row" >{item.id}</td>
+                                                                                {/* <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td> */}
+                                                                                <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
+                                                                                <td>{item?.name_customer?.toLocaleUpperCase() ? item?.name_customer?.toLocaleUpperCase() : "chưa cập nhật "}</td>
+                                                                                <td>{item?.Warehouse?.product
+                                                                                    ? item?.Warehouse?.product
+                                                                                    : "chưa cập nhật "}
+                                                                                </td>
+                                                                                {item?.Status_Payment?.status === "Đã thanh toán toàn bộ"
+                                                                                    &&
+                                                                                    <td >{item?.Status_Payment?.status ?
+                                                                                        <div style={{ backgroundColor: "blue", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                        :
+                                                                                        "Đang xử lý"
+                                                                                    }</td>
+
+                                                                                }
+                                                                                {item?.Status_Payment?.status === "Thanh toán khi giao hàng"
+                                                                                    &&
+                                                                                    <td style={{ color: "violet", fontWeight: "700" }}>{item?.Status_Payment?.status ?
+                                                                                        <div style={{ backgroundColor: "violet", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                        : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                {item?.Status_Payment?.status === "Đã thanh toán trước một phần"
+                                                                                    &&
+                                                                                    <td style={{ color: "#A0522D", fontWeight: "700" }} >{item?.Status_Payment?.status ?
+                                                                                        <div style={{ backgroundColor: "#A0522D", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                        : "Đang xử lý"}</td>
+
+                                                                                }
+
+
+                                                                                {item?.Status_Delivery?.status &&
+                                                                                    <td > {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                {!item?.Status_Delivery?.status &&
+                                                                                    <td > {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                <td>{item.total}</td>
+                                                                                <td>{item?.Sales_Channel?.name}</td>
+                                                                                <td >
+                                                                                    <div className='d-flex'>
+                                                                                        <button className='btn btn-primary' style={{ cursor: "pointer", borderRadius: "50%" }} title="Chi tiết đơn hàng" onClick={() => handleViewProduct(item)}>
+                                                                                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                                                        </button>
+                                                                                        {item?.flag == 0 &&
+                                                                                            <button className='btn btn-danger mx-2' style={{ cursor: "pointer", borderRadius: "50%" }} title="Giục giao hàng nhanh" onClick={() => handleCreateFlag(item)} >
+                                                                                                <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                            </button>
+                                                                                        }
+                                                                                        {item?.flag == 1 &&
+                                                                                            <button className='btn btn-danger mx-2' style={{ cursor: "pointer", borderRadius: "50%" }} title="Tắt giục giao hàng nhanh" onClick={() => handleCancelFlag(item)} >
+                                                                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                                                                            </button>
+                                                                                        }
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            </>
+                                                                        )
+                                                                    })
+                                                                    :
+                                                                    <tr>
+                                                                        <td colSpan={13}>
+                                                                            <div className='image'>
+                                                                                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/open-box-7072010-5751948.png?f=webp" alt="" />
+                                                                                <h3> Not Found</h3>
+
+                                                                            </div>
+                                                                        </td>
+
+                                                                    </tr>
+
+                                                                }
+
+
+
+
+                                                            </tbody>
+                                                        }
+                                                        {sortDataSearchWithTime === true &&
+                                                            < tbody >
+                                                                {listDataSearch && listDataSearch.length > 0 &&
+
+                                                                    listDataSearch.map((item, index) => {
+                                                                        return (
+                                                                            <>    <tr key={`row-${index}`}>
+                                                                                <td scope="row">{index + 1}</td>
+
+                                                                                <td scope="row">{item.order}</td>
+                                                                                <td scope="row" >{item.id}</td>
+                                                                                <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY")}</td>
+                                                                                <td>{item?.name_customer?.toLocaleUpperCase() ? item?.name_customer?.toLocaleUpperCase() : "chưa cập nhật "}</td>
+                                                                                {item?.Status_Payment?.status === "Đã thanh toán toàn bộ"
+                                                                                    &&
+                                                                                    <td style={{ color: "blue", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                {item?.Status_Payment?.status === "Thanh toán khi giao hàng"
+                                                                                    &&
+                                                                                    <td style={{ color: "violet", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                {item?.Status_Payment?.status === "Đã thanh toán trước một phần"
+                                                                                    &&
+                                                                                    <td style={{ color: "#A0522D", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                {!item?.Status_Payment?.status
+                                                                                    &&
+                                                                                    <td style={{ color: "red", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                {!item?.Status_Delivery?.status &&
+                                                                                    <td style={{ color: "red", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                {item?.Status_Delivery?.status === "Đơn đang giao" &&
+                                                                                    <td style={{ color: "orange", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                {item?.Status_Delivery?.status === "Đơn đã giao" &&
+                                                                                    <td style={{ color: "gray", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
+
+                                                                                }
+                                                                                <td>{item.total}</td>
+                                                                                <td>{item?.Sales_Channel?.name}</td>
+                                                                                <td style={{ cursor: "pointer" }} title="Chi tiết đơn hàng" onClick={() => handleViewProduct(item)}>
+                                                                                    <i class="fa fa-cog" aria-hidden="true"></i>
+                                                                                </td>
+
+                                                                            </tr>
+
+                                                                            </>
+                                                                        )
+                                                                    })
+                                                                }
+
+
+
+                                                            </tbody>
+                                                        }
+
+                                                    </table>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* :
+                                    <div className='loading-data-container'>
+                                        <Bars
+                                            height={100}
+                                            width={100}
+                                            radius={5}
+                                            color="#1877f2"
+                                            ariaLabel="ball-triangle-loading"
+                                            wrapperClass={{}}
+                                            wrapperStyle=""
+                                            visible={true}
+                                        />
+
+                                    </div>
+
+
+                                } */}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <CreateNewProject
+                        showModalCreatNewProject={showModalCreatNewProject}
+                        setShowModalCreatNewProject={setShowModalCreatNewProject}
+                        handleShowHideModalCreatNewProject={handleShowHideModalCreatNewProject}
+                        listProjectbyUser={listProjectbyUser}
+                        fetchProjectUser={fetchProjectUser}
+                        setShowNotificationCreateSuccess={setShowNotificationCreateSuccess}
+                        userdata={userdata}
+                        setUserdata={setUserdata}
+                        order={order}
+                        validInput={validInput}
+                        setValidInput={setValidInput}
+                        defaultUserData={defaultUserData}
+                        ValidInputsDefault={ValidInputsDefault}
+                        productAfterCreate={productAfterCreate}
+                        setProductAfterCreate={setProductAfterCreate}
+                        selecCheckSubtmitImage={selecCheckSubtmitImage}
+                        setSelecCheckSubtmitImage={setSelecCheckSubtmitImage}
+                        previreImage={previreImage}
+                        setprevireImage={setprevireImage}
+                        handleConfirmUser={handleConfirmUser}
+                        Product={Product}
+                        SetProduct={SetProduct}
+                        ProductNumber={ProductNumber}
+                        SetProductNumber={SetProductNumber}
+                        handleOnchangeInput={handleOnchangeInput}
+                        numberProduct={numberProduct}
+                        setNumberProduct={setNumberProduct}
+                        setId={setId}
+                        id={id}
+
+                    />
+                    <NotificationSuccessModal
+                        showNotificationCreateSuccess={showNotificationCreateSuccess}
+                        handleShowNotificationCreateSuccess={handleShowNotificationCreateSuccess}
+                        order={order}
+                        productAfterCreate={productAfterCreate}
+                        projectId={projectId}
+                        numberProduct={numberProduct}
+                        userdata={userdata}
+                        id={id}
+
+                    />
+                </div>
             </div>
-
         </div >
     )
 }
