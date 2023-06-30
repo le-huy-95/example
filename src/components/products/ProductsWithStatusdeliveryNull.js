@@ -291,8 +291,10 @@ const ProductsWithStatusdeliveryNull = (props) => {
 
         let data = event.target.value
         if (data) {
+            setSortDataSearchWithTime(false)
+            setstartDateCalendar("")
+            setendDateCalendar("")
             setSortDataSearch(true)
-
             let res = await getDataSearch(data, user.account.phone)
             if (res && +res.EC === 0) {
                 let data = res.DT
@@ -437,29 +439,27 @@ const ProductsWithStatusdeliveryNull = (props) => {
 
     const dataWithSortTime = async () => {
         let res = await getDataWithTime(StartDateCalendar, endDateCalendar)
-        if (StartDateCalendar && endDateCalendar) { }
-        if (res && +res.EC === 0) {
+        if (StartDateCalendar && endDateCalendar) {
             setSortDataSearchWithTime(true)
-            let data = res.DT
-            let resultsSearch = data.filter(item => item?.createdBy === user.account.phone)
-            let results = resultsSearch.filter(item => item.statusDeliveryId === null)
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+            setSortDataSearch(false)
+            if (res && +res.EC === 0) {
+
+                let data = res.DT
+                let resultsSearch = data.filter(item => item?.createdBy === user.account.phone)
+                let results = resultsSearch.filter(item => item.statusDeliveryId === 0)
+                if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
+                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
+                }
+                if (user?.account?.groupWithRound?.name === "Dev") {
+                    await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
+                }
+                setListDataSearch(results)
+                setIsOpenCalendar(false)
+
             }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
-            setListProjectbyUser(results)
-            setIsOpenCalendar(false)
         } else {
             setSortDataSearchWithTime(false)
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-            }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
-            await fetchProjectUser()
+
 
         }
     }
@@ -899,30 +899,35 @@ const ProductsWithStatusdeliveryNull = (props) => {
                         }
                     </span>
                 </div>
-                <div className='right-body d-none d-lg-block'>
+                <div className='right-body '>
                     <div className='container'>
                         <div className='row'>
-                            <div className='header'>
-                                <div className='location-path col'>
-                                    <Link to="/"> Home</Link>
+                            <div className='header mt-2'>
+                                <div className='container'>
+                                    <div className='row'>
+                                        <div className='location-path col-12 col-lg-6'>
+                                            <Link to="/"> Home</Link>
 
-                                    <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
-                                    </span>
-                                    <Link to="/Products"> Product manager </Link>
-                                </div>
-                                <div className='col search'>
-                                    <div className='search-icon'>
-                                        <i className="fa fa-search" aria-hidden="true"></i>
+                                            <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
+                                            </span>
+                                            <Link to="/Products"> Product manager </Link>
+                                        </div>
+                                        <div className='col-12 mt-2 col-lg-6 search'>
+                                            <div className='search-icon'>
+                                                <i className="fa fa-search" aria-hidden="true"></i>
 
+                                            </div>
+                                            <input
+                                                type="text"
+                                                placeholder='Search infomation'
+                                                onChange={(event) => handleSearch(event)}
+                                            />
+                                        </div>
                                     </div>
-                                    <input
-                                        type="text"
-                                        placeholder='Search infomation'
-                                        onChange={(event) => handleSearch(event)}
-                                    />
                                 </div>
+
                             </div>
-                            <div className='body'>
+                            <div className='body d-none d-lg-block'>
                                 <div className="container">
                                     <div className='row'>
                                         <div className='name-page d-none d-lg-block col-lg-12'>
@@ -955,6 +960,7 @@ const ProductsWithStatusdeliveryNull = (props) => {
                                                     </button>
                                                 </div>
                                             </div>
+
 
                                         </div>
 
@@ -1433,59 +1439,78 @@ const ProductsWithStatusdeliveryNull = (props) => {
 
                                                                                         </div>
                                                                                     </td>
-
                                                                                 </tr>
-
                                                                             }
-
-
-
-
                                                                         </tbody>
                                                                     }
                                                                     {sortDataSearchWithTime === true &&
                                                                         < tbody >
-                                                                            {listDataSearch && listDataSearch.length > 0 &&
-
+                                                                            {listDataSearch && listDataSearch.length > 0
+                                                                                ?
                                                                                 listDataSearch.map((item, index) => {
                                                                                     return (
                                                                                         <>    <tr key={`row-${index}`}>
-                                                                                            <td scope="row">{index + 1}</td>
+                                                                                            {item?.flag === true ?
+                                                                                                <td>
+                                                                                                    <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                                        <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                                    </span>
+                                                                                                </td>
+                                                                                                :
+                                                                                                <td></td>
 
-                                                                                            <td scope="row">{item.order}</td>
+                                                                                            }
+
+                                                                                            {item?.done_status == 1
+                                                                                                &&
+                                                                                                <td>
+                                                                                                    <div class="form-check">
+                                                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked />
+
+                                                                                                    </div>
+                                                                                                </td>
+
+                                                                                            }
+                                                                                            {item?.done_status == 0
+                                                                                                &&
+                                                                                                <td>
+                                                                                                    <div class="form-check">
+                                                                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" disabled />
+
+                                                                                                    </div>
+                                                                                                </td>
+
+                                                                                            }
+
+                                                                                            <td scope="row">{(currentPage - 1) * currentLimit + index + 1}</td>
+
+                                                                                            <td scope="row">{item.order}
+
+                                                                                            </td>
                                                                                             <td scope="row" >{item.id}</td>
-                                                                                            <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY")}</td>
+                                                                                            {/* <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td> */}
+                                                                                            <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
                                                                                             <td>{item?.name_customer?.toLocaleUpperCase() ? item?.name_customer?.toLocaleUpperCase() : "chưa cập nhật "}</td>
-                                                                                            {item?.Status_Payment?.status === "Đã thanh toán toàn bộ"
+                                                                                            <td>{item?.Warehouse?.product
+                                                                                                ? item?.Warehouse?.product
+                                                                                                : "chưa cập nhật "}
+                                                                                            </td>
+                                                                                            {item?.Status_Payment?.status
                                                                                                 &&
-                                                                                                <td style={{ color: "blue", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
-
-                                                                                            }
-                                                                                            {item?.Status_Payment?.status === "Thanh toán khi giao hàng"
-                                                                                                &&
-                                                                                                <td style={{ color: "violet", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
-
-                                                                                            }
-                                                                                            {item?.Status_Payment?.status === "Đã thanh toán trước một phần"
-                                                                                                &&
-                                                                                                <td style={{ color: "#A0522D", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+                                                                                                <td style={{ fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
 
                                                                                             }
                                                                                             {!item?.Status_Payment?.status
                                                                                                 &&
-                                                                                                <td style={{ color: "red", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+                                                                                                <td style={{ fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
 
                                                                                             }
-                                                                                            {!item?.Status_Delivery?.status &&
-                                                                                                <td style={{ color: "red", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
 
-                                                                                            }
-                                                                                            {item?.Status_Delivery?.status === "Đơn đang giao" &&
-                                                                                                <td style={{ color: "orange", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
-
-                                                                                            }
-                                                                                            {item?.Status_Delivery?.status === "Đơn đã giao" &&
-                                                                                                <td style={{ color: "gray", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
+                                                                                            {!item?.Status_Delivery?.status
+                                                                                                &&
+                                                                                                <td style={{ color: "red", fontWeight: "700" }} >{item?.Status_Payment?.status ?
+                                                                                                    <div style={{ backgroundColor: "red", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                                    : "Đang xử lý"}</td>
 
                                                                                             }
                                                                                             <td>{item.total}</td>
@@ -1507,19 +1532,28 @@ const ProductsWithStatusdeliveryNull = (props) => {
                                                                                                     }
                                                                                                 </div>
                                                                                             </td>
-
                                                                                         </tr>
 
                                                                                         </>
                                                                                     )
                                                                                 })
+                                                                                :
+                                                                                <tr>
+                                                                                    <td colSpan={13}>
+                                                                                        <div className='image'>
+                                                                                            <img src="https://cdn3d.iconscout.com/3d/premium/thumb/open-box-7072010-5751948.png?f=webp" alt="" />
+                                                                                            <h3> Not Found</h3>
+
+                                                                                        </div>
+                                                                                    </td>
+
+                                                                                </tr>
                                                                             }
 
 
 
                                                                         </tbody>
                                                                     }
-
                                                                 </table>
                                                             </div>
                                                         </div>
@@ -1552,75 +1586,7 @@ const ProductsWithStatusdeliveryNull = (props) => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <CreateNewProject
-                            showModalCreatNewProject={showModalCreatNewProject}
-                            setShowModalCreatNewProject={setShowModalCreatNewProject}
-                            handleShowHideModalCreatNewProject={handleShowHideModalCreatNewProject}
-                            listProjectbyUser={listProjectbyUser}
-                            fetchProjectUser={fetchProjectUser}
-                            setShowNotificationCreateSuccess={setShowNotificationCreateSuccess}
-                            userdata={userdata}
-                            setUserdata={setUserdata}
-                            order={order}
-                            validInput={validInput}
-                            setValidInput={setValidInput}
-                            defaultUserData={defaultUserData}
-                            ValidInputsDefault={ValidInputsDefault}
-                            productAfterCreate={productAfterCreate}
-                            setProductAfterCreate={setProductAfterCreate}
-                            selecCheckSubtmitImage={selecCheckSubtmitImage}
-                            setSelecCheckSubtmitImage={setSelecCheckSubtmitImage}
-                            previreImage={previreImage}
-                            setprevireImage={setprevireImage}
-                            handleConfirmUser={handleConfirmUser}
-                            Product={Product}
-                            SetProduct={SetProduct}
-                            ProductNumber={ProductNumber}
-                            SetProductNumber={SetProductNumber}
-                            handleOnchangeInput={handleOnchangeInput}
-                            numberProduct={numberProduct}
-                            setNumberProduct={setNumberProduct}
-                            setId={setId}
-                            id={id}
-                        />
-                        <NotificationSuccessModal
-                            showNotificationCreateSuccess={showNotificationCreateSuccess}
-                            handleShowNotificationCreateSuccess={handleShowNotificationCreateSuccess}
-                            order={order}
-                            productAfterCreate={productAfterCreate}
-                            projectId={projectId}
-                            numberProduct={numberProduct}
-                            userdata={userdata}
-                            id={id}
-
-                        />
-                    </div>
-                </div>
-                <div className='right-body d-block d-lg-none'>
-                    <div className='container'>
-                        <div className='row'>
-                            <div className='header d-block d-lg-none col-lg-12 mt-2'>
-                                <div className='location-path col'>
-                                    <Link to="/"> Home</Link>
-
-                                    <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
-                                    </span>
-                                    <Link to="/Products"> Product manager </Link>
-                                </div>
-                                <div className='col search my-3'>
-                                    <div className='search-icon'>
-                                        <i className="fa fa-search" aria-hidden="true"></i>
-
-                                    </div>
-                                    <input
-                                        type="text"
-                                        placeholder='Search infomation'
-                                        onChange={(event) => handleSearch(event)}
-                                    />
-                                </div>
-                            </div>
-                            <div className='body'>
+                            <div className='body '>
                                 <div className="container">
                                     <div className='row'>
 
@@ -1696,98 +1662,94 @@ const ProductsWithStatusdeliveryNull = (props) => {
 
                                                     </div>
                                                     <div className=' d-block d-lg-none col-lg-12'>
-                                                        <div className='title d-flex align-items-center justify-content-center'>
-                                                            <div className='container '>
-                                                                <div className='row '>
-                                                                    <div className='col-12' style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                                                        {t('Product.TimeTittle')}
+                                                        <div className='title d-flex align-items-center justify-content-center flex-column'>
+                                                            <div className='row '>
+                                                                <div className='col-12' style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                    {t('Product.TimeTittle')}
 
-                                                                    </div>
-                                                                    <div className='col-12'>
-                                                                        <input
-                                                                            className="form-control my-3 "
-                                                                            readOnly
-                                                                            value={StartDateCalendar}
-                                                                        />
-                                                                    </div>
-                                                                    <div className='col-1' style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                                                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                                                                    </div>
-                                                                    <div className='col-12'>
-                                                                        <input
-                                                                            className="form-control my-3 "
-                                                                            readOnly
-                                                                            value={endDateCalendar}
-                                                                        />
-                                                                    </div>
-                                                                    <div className='container'>
-                                                                        <div className='row my-3'>
-                                                                            <div className='col-6'
-                                                                                style={{ display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "black" }}
-                                                                                onClick={() => setIsOpenCalendar(!isOpenCalendar)}
-                                                                                title='Lọc đơn hàng theo thời gian'
-                                                                            >
-                                                                                <button className='btn btn-primary'>
-                                                                                    {t('Product.tittleTimeSelectButton')}
-                                                                                </button>
+                                                                </div>
+                                                                <div className='col-12'>
+                                                                    <input
+                                                                        className="form-control my-3 "
+                                                                        readOnly
+                                                                        value={StartDateCalendar}
+                                                                    />
+                                                                </div>
+                                                                <div className='col-1' style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                                                </div>
+                                                                <div className='col-12'>
+                                                                    <input
+                                                                        className="form-control my-3 "
+                                                                        readOnly
+                                                                        value={endDateCalendar}
+                                                                    />
+                                                                </div>
+                                                                <div className='container'>
+                                                                    <div className='row my-3'>
+                                                                        <div className='col-6'
+                                                                            style={{ display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "black" }}
+                                                                            onClick={() => setIsOpenCalendar(!isOpenCalendar)}
+                                                                            title='Lọc đơn hàng theo thời gian'
+                                                                        >
+                                                                            <button className='btn btn-primary'>
+                                                                                {t('Product.tittleTimeSelectButton')}
+                                                                            </button>
 
-                                                                            </div>
+                                                                        </div>
 
-                                                                            <div className='col-6 my-3'
-                                                                                style={{ display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "black" }}
-                                                                                onClick={() => handledeleteSortTime()}
-                                                                                title='xóa thời gian đã chọn'
-                                                                            >
+                                                                        <div className='col-6 my-3'
+                                                                            style={{ display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "black" }}
+                                                                            onClick={() => handledeleteSortTime()}
+                                                                            title='xóa thời gian đã chọn'
+                                                                        >
 
-                                                                                <button className='btn btn-danger'>
-                                                                                    {t('Product.tittleTimeDeleteButton')}
+                                                                            <button className='btn btn-danger'>
+                                                                                {t('Product.tittleTimeDeleteButton')}
 
-                                                                                </button>
-                                                                            </div>
+                                                                            </button>
                                                                         </div>
                                                                     </div>
-
-
-
-                                                                    <div className='col-12' ref={refCalendar}>
-                                                                        {isOpenCalendar === true &&
-                                                                            <DateRangePicker
-                                                                                onChange={item => handleChangDate(item)}
-                                                                                showSelectionPreview={true}
-                                                                                moveRangeOnFirstSelection={false}
-                                                                                months={2}
-                                                                                ranges={stateDate}
-                                                                                direction="horizontal"
-                                                                            />
-                                                                        }
-
-                                                                    </div>
-
                                                                 </div>
                                                             </div>
 
+                                                            <div className='col-12' ref={refCalendar} style={{ overflow: "auto" }}>
+                                                                {isOpenCalendar === true &&
+                                                                    <DateRangePicker
+                                                                        onChange={item => handleChangDate(item)}
+                                                                        showSelectionPreview={true}
+                                                                        moveRangeOnFirstSelection={false}
+                                                                        months={2}
+                                                                        ranges={stateDate}
+                                                                        direction="horizontal"
+                                                                    />
+                                                                }
 
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <hr />
                                                     {isLoading === true
                                                         ?
                                                         <div className='body-table'>
-                                                            <div className=' d-block d-lg-none col-lg-12 mobile'>
+                                                            <div className='d-block d-lg-none col-lg-12 mobile'>
                                                                 <div className='row '>
                                                                     <div className='my-2 col-12'>
-                                                                        <div className='my-2 justify-content-center d-flex align-item-center gap-3'>
-                                                                            <div className='my-2 d-flex align-item-center gap-2'>
-                                                                                <div style={{ backgroundColor: "red", width: "30px", height: "30px", borderRadius: "50%" }}></div>
-                                                                                <div style={{ fontSize: "20px", fontWeight: "700" }}>
-                                                                                    {t('Product.tittleTableTwo')}
+                                                                        <div className='d-flex align-item-center justify-content-between'>
+                                                                            <div className='my-2 d-flex align-item-center gap-3'>
+                                                                                <div className='my-2 d-flex align-item-center gap-2'>
+                                                                                    <div style={{ backgroundColor: "red", width: "30px", height: "30px", borderRadius: "50%" }}></div>
+                                                                                    <div style={{ fontSize: "20px", fontWeight: "700" }}>
+                                                                                        {t('Product.tittleTableTwo')}
 
+                                                                                    </div>
                                                                                 </div>
+
+
                                                                             </div>
-
-
                                                                         </div>
                                                                     </div>
+
                                                                     {sortDataSearch === false && sortDataSearchWithTime === false
                                                                         &&
                                                                         <div className='pagination-mobile'>
@@ -2164,47 +2126,72 @@ const ProductsWithStatusdeliveryNull = (props) => {
                                                                 }
                                                                 {sortDataSearchWithTime === true &&
                                                                     < tbody >
-                                                                        {listDataSearch && listDataSearch.length > 0 &&
-
+                                                                        {listDataSearch && listDataSearch.length > 0
+                                                                            ?
                                                                             listDataSearch.map((item, index) => {
                                                                                 return (
                                                                                     <>    <tr key={`row-${index}`}>
-                                                                                        <td scope="row">{index + 1}</td>
+                                                                                        {item?.flag === true ?
+                                                                                            <td>
+                                                                                                <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                                    <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                            </td>
+                                                                                            :
+                                                                                            <td></td>
 
-                                                                                        <td scope="row">{item.order}</td>
+                                                                                        }
+
+                                                                                        {item?.done_status == 1
+                                                                                            &&
+                                                                                            <td>
+                                                                                                <div class="form-check">
+                                                                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked />
+
+                                                                                                </div>
+                                                                                            </td>
+
+                                                                                        }
+                                                                                        {item?.done_status == 0
+                                                                                            &&
+                                                                                            <td>
+                                                                                                <div class="form-check">
+                                                                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" disabled />
+
+                                                                                                </div>
+                                                                                            </td>
+
+                                                                                        }
+
+                                                                                        <td scope="row">{(currentPage - 1) * currentLimit + index + 1}</td>
+
+                                                                                        <td scope="row">{item.order}
+
+                                                                                        </td>
                                                                                         <td scope="row" >{item.id}</td>
-                                                                                        <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY")}</td>
+                                                                                        {/* <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td> */}
+                                                                                        <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
                                                                                         <td>{item?.name_customer?.toLocaleUpperCase() ? item?.name_customer?.toLocaleUpperCase() : "chưa cập nhật "}</td>
-                                                                                        {item?.Status_Payment?.status === "Đã thanh toán toàn bộ"
+                                                                                        <td>{item?.Warehouse?.product
+                                                                                            ? item?.Warehouse?.product
+                                                                                            : "chưa cập nhật "}
+                                                                                        </td>
+                                                                                        {item?.Status_Payment?.status
                                                                                             &&
-                                                                                            <td style={{ color: "blue", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
-
-                                                                                        }
-                                                                                        {item?.Status_Payment?.status === "Thanh toán khi giao hàng"
-                                                                                            &&
-                                                                                            <td style={{ color: "violet", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
-
-                                                                                        }
-                                                                                        {item?.Status_Payment?.status === "Đã thanh toán trước một phần"
-                                                                                            &&
-                                                                                            <td style={{ color: "#A0522D", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+                                                                                            <td style={{ fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
 
                                                                                         }
                                                                                         {!item?.Status_Payment?.status
                                                                                             &&
-                                                                                            <td style={{ color: "red", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+                                                                                            <td style={{ fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
 
                                                                                         }
-                                                                                        {!item?.Status_Delivery?.status &&
-                                                                                            <td style={{ color: "red", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
 
-                                                                                        }
-                                                                                        {item?.Status_Delivery?.status === "Đơn đang giao" &&
-                                                                                            <td style={{ color: "orange", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
-
-                                                                                        }
-                                                                                        {item?.Status_Delivery?.status === "Đơn đã giao" &&
-                                                                                            <td style={{ color: "gray", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
+                                                                                        {!item?.Status_Delivery?.status
+                                                                                            &&
+                                                                                            <td style={{ color: "red", fontWeight: "700" }} >{item?.Status_Payment?.status ?
+                                                                                                <div style={{ backgroundColor: "red", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                                : "Đang xử lý"}</td>
 
                                                                                         }
                                                                                         <td>{item.total}</td>
@@ -2226,12 +2213,22 @@ const ProductsWithStatusdeliveryNull = (props) => {
                                                                                                 }
                                                                                             </div>
                                                                                         </td>
-
                                                                                     </tr>
 
                                                                                     </>
                                                                                 )
                                                                             })
+                                                                            :
+                                                                            <tr>
+                                                                                <td colSpan={13}>
+                                                                                    <div className='image'>
+                                                                                        <img src="https://cdn3d.iconscout.com/3d/premium/thumb/open-box-7072010-5751948.png?f=webp" alt="" />
+                                                                                        <h3> Not Found</h3>
+
+                                                                                    </div>
+                                                                                </td>
+
+                                                                            </tr>
                                                                         }
 
 
@@ -2315,6 +2312,7 @@ const ProductsWithStatusdeliveryNull = (props) => {
                         />
                     </div>
                 </div>
+
             </div >
         </div >
     )
