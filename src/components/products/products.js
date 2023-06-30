@@ -410,7 +410,8 @@ const Products = (props) => {
     const dataWithSortTime = async () => {
         let res = await getDataWithTime(StartDateCalendar, endDateCalendar)
         if (StartDateCalendar && endDateCalendar) {
-
+            setSortDataSearchWithTime(true)
+            setSortDataSearch(false)
 
             if (res && +res.EC === 0) {
                 let data = res.DT

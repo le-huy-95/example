@@ -1607,49 +1607,73 @@ const ProductsWithStatusdeliveryTwo = (props) => {
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div className='col-12' ref={refCalendar} style={{ overflow: "auto" }}>
+                                                                {isOpenCalendar === true &&
+                                                                    <DateRangePicker
+                                                                        onChange={item => handleChangDate(item)}
+                                                                        showSelectionPreview={true}
+                                                                        moveRangeOnFirstSelection={false}
+                                                                        months={2}
+                                                                        ranges={stateDate}
+                                                                        direction="horizontal"
+                                                                    />
+                                                                }
+
+                                                            </div>
                                                         </div>
 
                                                     </div>
                                                     <hr />
+
+
                                                     {isLoading === true
                                                         ?
                                                         <div className='body-table'>
-                                                            <div className='d-flex align-item-center justify-content-between'>
-                                                                <div className='my-2 d-flex align-item-center gap-3'>
-                                                                    <div className='my-2 d-flex align-item-center gap-2'>
-                                                                        <div style={{ backgroundColor: "gray", width: "30px", height: "30px", borderRadius: "50%" }}></div>
-                                                                        <div style={{ fontSize: "20px", fontWeight: "700" }}>
-                                                                            {t('Product.tittleTableFoure')}
+                                                            <div className=' d-block d-lg-none col-lg-12 mobile'>
+                                                                <div className='row '>
+                                                                    <div className='my-2 col-12'>
+                                                                        <div className='d-flex align-item-center justify-content-between'>
+                                                                            <div className='my-2 d-flex align-item-center gap-3'>
+                                                                                <div className='my-2 d-flex align-item-center gap-2'>
+                                                                                    <div style={{ backgroundColor: "orange", width: "30px", height: "30px", borderRadius: "50%" }}></div>
+                                                                                    <div style={{ fontSize: "20px", fontWeight: "700" }}>
+                                                                                        {t('Product.tittleTableFoure')}
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
                                                                         </div>
+
                                                                     </div>
+                                                                    {sortDataSearch === false && sortDataSearchWithTime === false
+                                                                        &&
+                                                                        <div className='pagination-mobile'>
+                                                                            < ReactPaginate
+                                                                                nextLabel="next >"
+                                                                                onPageChange={handlePageClick}
+                                                                                pageRangeDisplayed={2}
+                                                                                marginPagesDisplayed={2}
+                                                                                pageCount={totalPage}
+                                                                                previousLabel="< previous"
+                                                                                pageClassName="page-item"
+                                                                                pageLinkClassName="page-link"
+                                                                                previousClassName="page-item"
+                                                                                previousLinkClassName="page-link"
+                                                                                nextClassName="page-item"
+                                                                                nextLinkClassName="page-link"
+                                                                                breakLabel="..."
+                                                                                breakClassName="page-item"
+                                                                                breakLinkClassName="page-link"
+                                                                                containerClassName="pagination"
+                                                                                activeClassName="active"
+                                                                                renderOnZeroPageCount={null}
+                                                                                forcePage={+currentPage - 1}
 
+                                                                            />
+                                                                        </div>
 
+                                                                    }
                                                                 </div>
-                                                                {sortDataSearch === false && sortDataSearchWithTime === false
-                                                                    &&
-                                                                    < ReactPaginate
-                                                                        nextLabel="next >"
-                                                                        onPageChange={handlePageClick}
-                                                                        pageRangeDisplayed={2}
-                                                                        marginPagesDisplayed={3}
-                                                                        pageCount={totalPage}
-                                                                        previousLabel="< previous"
-                                                                        pageClassName="page-item"
-                                                                        pageLinkClassName="page-link"
-                                                                        previousClassName="page-item"
-                                                                        previousLinkClassName="page-link"
-                                                                        nextClassName="page-item"
-                                                                        nextLinkClassName="page-link"
-                                                                        breakLabel="..."
-                                                                        breakClassName="page-item"
-                                                                        breakLinkClassName="page-link"
-                                                                        containerClassName="pagination"
-                                                                        activeClassName="active"
-                                                                        renderOnZeroPageCount={null}
-                                                                        forcePage={+currentPage - 1}
-
-                                                                    />
-                                                                }
                                                             </div>
                                                             <table className="table  table-hover ">
                                                                 <thead className='table-success'>
@@ -1659,10 +1683,13 @@ const ProductsWithStatusdeliveryTwo = (props) => {
                                                                             {t('Product.tittleBodyOrdersOne')}
 
                                                                         </th>
-                                                                        <th scope="col" >
-                                                                            {t('Product.tittleBodyOrdersTwo')}
+                                                                        {sortDataSearch === false && sortDataSearchWithTime === false
+                                                                            &&
+                                                                            <th scope="col" >
+                                                                                {t('Product.tittleBodyOrdersTwo')}
 
-                                                                        </th>
+                                                                            </th>
+                                                                        }
                                                                         <th scope="col" style={{ width: "50px" }} >
                                                                             {t('Product.tittleBodyOrdersThree')}
 
@@ -1811,18 +1838,25 @@ const ProductsWithStatusdeliveryTwo = (props) => {
                                                                                             ? item?.Warehouse?.product
                                                                                             : "chưa cập nhật "}
                                                                                         </td>
-
-
-                                                                                        {item?.Status_Delivery?.status &&
-                                                                                            <td style={{ color: "red", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
+                                                                                        {item?.Status_Payment?.status
+                                                                                            &&
+                                                                                            <td style={{ fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
 
                                                                                         }
-                                                                                        {item?.Status_Delivery?.status == "Đã giao hàng thành công" &&
+                                                                                        {!item?.Status_Payment?.status
+                                                                                            &&
+                                                                                            <td style={{ fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+
+                                                                                        }
+
+
+                                                                                        {item?.Status_Delivery?.status === "Đã giao hàng thành công" &&
                                                                                             <td style={{ color: "gray", fontWeight: "700" }} >{item?.Status_Payment?.status ?
                                                                                                 <div style={{ backgroundColor: "gray", width: "20px", height: "20px", borderRadius: "50%" }}></div>
                                                                                                 : "Đang xử lý"}</td>
 
                                                                                         }
+                                                                                        {/* <td>{item.money}</td> */}
                                                                                         <td>{item.total}</td>
                                                                                         <td>{item?.Sales_Channel?.name}</td>
                                                                                         <td >
@@ -1870,7 +1904,120 @@ const ProductsWithStatusdeliveryTwo = (props) => {
                                                                     < tbody >
                                                                         {listDataSearchNotime && listDataSearchNotime.length > 0
                                                                             ?
+
                                                                             listDataSearchNotime.map((item, index) => {
+                                                                                return (
+                                                                                    <>    <tr key={`row-${index}`}>
+                                                                                        {item?.flag === true ?
+                                                                                            <td>
+                                                                                                <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                                    <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                                </span>
+                                                                                            </td>
+                                                                                            :
+                                                                                            <td></td>
+
+                                                                                        }
+
+                                                                                        {item?.done_status == 1
+                                                                                            &&
+                                                                                            <td>
+                                                                                                <div class="form-check">
+                                                                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked />
+
+                                                                                                </div>
+                                                                                            </td>
+
+                                                                                        }
+                                                                                        {item?.done_status == 0
+                                                                                            &&
+                                                                                            <td>
+                                                                                                <div class="form-check">
+                                                                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" disabled />
+
+                                                                                                </div>
+                                                                                            </td>
+
+                                                                                        }
+
+                                                                                        <td scope="row">{item.order}</td>
+                                                                                        <td scope="row" >{item.id}</td>
+                                                                                        {/* <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td> */}
+                                                                                        <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
+                                                                                        <td>{item?.name_customer?.toLocaleUpperCase() ? item?.name_customer?.toLocaleUpperCase() : "chưa cập nhật "}</td>
+                                                                                        <td>{item?.Warehouse?.product
+                                                                                            ? item?.Warehouse?.product
+                                                                                            : "chưa cập nhật "}
+                                                                                        </td>
+                                                                                        {item?.Status_Payment?.status
+                                                                                            &&
+                                                                                            <td style={{ fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+
+                                                                                        }
+                                                                                        {!item?.Status_Payment?.status
+                                                                                            &&
+                                                                                            <td style={{ fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+
+                                                                                        }
+
+
+                                                                                        {item?.Status_Delivery?.status === "Đã giao hàng thành công" &&
+                                                                                            <td style={{ color: "gray", fontWeight: "700" }} >{item?.Status_Payment?.status ?
+                                                                                                <div style={{ backgroundColor: "gray", width: "20px", height: "20px", borderRadius: "50%" }}></div>
+                                                                                                : "Đang xử lý"}</td>
+
+                                                                                        }
+                                                                                        {/* <td>{item.money}</td> */}
+                                                                                        <td>{item.total}</td>
+                                                                                        <td>{item?.Sales_Channel?.name}</td>
+                                                                                        <td >
+                                                                                            <div className='d-flex'>
+                                                                                                <button className='btn btn-primary' style={{ cursor: "pointer", borderRadius: "50%" }} title="Chi tiết đơn hàng" onClick={() => handleViewProduct(item)}>
+                                                                                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                                                                </button>
+                                                                                                {item?.flag == 0 &&
+                                                                                                    <button className='btn btn-danger mx-2' style={{ cursor: "pointer", borderRadius: "50%" }} title="Giục giao hàng nhanh" onClick={() => handleCreateFlag(item)} >
+                                                                                                        <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                                    </button>
+                                                                                                }
+                                                                                                {item?.flag == 1 &&
+                                                                                                    <button className='btn btn-danger mx-2' style={{ cursor: "pointer", borderRadius: "50%" }} title="Tắt giục giao hàng nhanh" onClick={() => handleCancelFlag(item)} >
+                                                                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                                                                    </button>
+                                                                                                }
+                                                                                            </div>
+                                                                                        </td>
+
+                                                                                    </tr>
+
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                            :
+                                                                            <tr>
+                                                                                <td colSpan={13}>
+                                                                                    <div className='image'>
+                                                                                        <img src="https://cdn3d.iconscout.com/3d/premium/thumb/open-box-7072010-5751948.png?f=webp" alt="" />
+                                                                                        <h3> Not Found</h3>
+
+                                                                                    </div>
+                                                                                </td>
+
+                                                                            </tr>
+
+                                                                        }
+
+
+
+
+                                                                    </tbody>
+                                                                }
+                                                                {sortDataSearchWithTime === true
+                                                                    &&
+                                                                    < tbody >
+                                                                        {listDataSearch && listDataSearch.length > 0
+                                                                            ?
+                                                                            listDataSearch.map((item, index) => {
                                                                                 return (
                                                                                     <>    <tr key={`row-${index}`}>
                                                                                         {item?.flag === true ?
@@ -1915,107 +2062,25 @@ const ProductsWithStatusdeliveryTwo = (props) => {
                                                                                             ? item?.Warehouse?.product
                                                                                             : "chưa cập nhật "}
                                                                                         </td>
-
-
-                                                                                        {item?.Status_Delivery?.status &&
-                                                                                            <td style={{ color: "red", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
+                                                                                        {item?.Status_Payment?.status
+                                                                                            &&
+                                                                                            <td style={{ fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
 
                                                                                         }
-                                                                                        {item?.Status_Delivery?.status == "Đã giao hàng thành công" &&
+                                                                                        {!item?.Status_Payment?.status
+                                                                                            &&
+                                                                                            <td style={{ fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
+
+                                                                                        }
+
+
+                                                                                        {item?.Status_Delivery?.status === "Đã giao hàng thành công" &&
                                                                                             <td style={{ color: "gray", fontWeight: "700" }} >{item?.Status_Payment?.status ?
                                                                                                 <div style={{ backgroundColor: "gray", width: "20px", height: "20px", borderRadius: "50%" }}></div>
                                                                                                 : "Đang xử lý"}</td>
 
                                                                                         }
-                                                                                        <td>{item.total}</td>
-                                                                                        <td>{item?.Sales_Channel?.name}</td>
-                                                                                        <td >
-                                                                                            <div className='d-flex'>
-                                                                                                <button className='btn btn-primary' style={{ cursor: "pointer", borderRadius: "50%" }} title="Chi tiết đơn hàng" onClick={() => handleViewProduct(item)}>
-                                                                                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                                                                                </button>
-                                                                                                {item?.flag == 0 &&
-                                                                                                    <button className='btn btn-danger mx-2' style={{ cursor: "pointer", borderRadius: "50%" }} title="Giục giao hàng nhanh" onClick={() => handleCreateFlag(item)} >
-                                                                                                        <i class="fa fa-flag" aria-hidden="true"></i>
-                                                                                                    </button>
-                                                                                                }
-                                                                                                {item?.flag == 1 &&
-                                                                                                    <button className='btn btn-danger mx-2' style={{ cursor: "pointer", borderRadius: "50%" }} title="Tắt giục giao hàng nhanh" onClick={() => handleCancelFlag(item)} >
-                                                                                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                                                                                    </button>
-                                                                                                }
-                                                                                            </div>
-                                                                                        </td>
-
-                                                                                    </tr>
-
-                                                                                    </>
-                                                                                )
-                                                                            })
-                                                                            :
-                                                                            <tr>
-                                                                                <td colSpan={13}>
-                                                                                    <div className='image'>
-                                                                                        <img src="https://cdn3d.iconscout.com/3d/premium/thumb/open-box-7072010-5751948.png?f=webp" alt="" />
-                                                                                        <h3> Not Found</h3>
-
-                                                                                    </div>
-                                                                                </td>
-
-                                                                            </tr>
-                                                                        }
-
-
-
-                                                                    </tbody>
-
-                                                                }
-                                                                {sortDataSearchWithTime === true
-                                                                    &&
-                                                                    < tbody >
-                                                                        {listDataSearch && listDataSearch.length > 0
-                                                                            ?
-                                                                            listDataSearch.map((item, index) => {
-                                                                                return (
-                                                                                    <>    <tr key={`row-${index}`}>
-                                                                                        <td scope="row">{index + 1}</td>
-
-                                                                                        <td scope="row">{item.order}</td>
-                                                                                        <td scope="row" >{item.id}</td>
-                                                                                        <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY")}</td>
-                                                                                        <td>{item?.name_customer?.toLocaleUpperCase() ? item?.name_customer?.toLocaleUpperCase() : "chưa cập nhật "}</td>
-                                                                                        {item?.Status_Payment?.status === "Đã thanh toán toàn bộ"
-                                                                                            &&
-                                                                                            <td style={{ color: "blue", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
-
-                                                                                        }
-                                                                                        {item?.Status_Payment?.status === "Thanh toán khi giao hàng"
-                                                                                            &&
-                                                                                            <td style={{ color: "violet", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
-
-                                                                                        }
-                                                                                        {item?.Status_Payment?.status === "Đã thanh toán trước một phần"
-                                                                                            &&
-                                                                                            <td style={{ color: "#A0522D", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
-
-                                                                                        }
-                                                                                        {!item?.Status_Payment?.status
-                                                                                            &&
-                                                                                            <td style={{ color: "red", fontWeight: "700" }}>{item?.Status_Payment?.status ? item?.Status_Payment?.status : "Đang xử lý"}</td>
-
-                                                                                        }
-                                                                                        {!item?.Status_Delivery?.status &&
-                                                                                            <td style={{ color: "red", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
-
-                                                                                        }
-                                                                                        {item?.Status_Delivery?.status === "Đơn đang giao" &&
-                                                                                            <td style={{ color: "orange", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
-
-                                                                                        }
-                                                                                        {item?.Status_Delivery?.status === "Đơn đã giao" &&
-                                                                                            <td style={{ color: "gray", fontWeight: "700" }}> {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "Đang xử lý"}</td>
-
-                                                                                        }
+                                                                                        {/* <td>{item.money}</td> */}
                                                                                         <td>{item.total}</td>
                                                                                         <td>{item?.Sales_Channel?.name}</td>
                                                                                         <td >
@@ -2089,6 +2154,7 @@ const ProductsWithStatusdeliveryTwo = (props) => {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <CreateNewProject
                             showModalCreatNewProject={showModalCreatNewProject}

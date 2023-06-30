@@ -1114,10 +1114,13 @@ const ProductsWithStatusdeliveryNull = (props) => {
                                                                                 {t('Product.tittleBodyOrdersOne')}
 
                                                                             </th>
-                                                                            <th scope="col" >
-                                                                                {t('Product.tittleBodyOrdersTwo')}
+                                                                            {sortDataSearch === false && sortDataSearchWithTime === false
+                                                                                &&
+                                                                                <th scope="col" >
+                                                                                    {t('Product.tittleBodyOrdersTwo')}
 
-                                                                            </th>
+                                                                                </th>
+                                                                            }
                                                                             <th scope="col" style={{ width: "50px" }} >
                                                                                 {t('Product.tittleBodyOrdersThree')}
 
@@ -1375,7 +1378,6 @@ const ProductsWithStatusdeliveryNull = (props) => {
 
                                                                                             }
 
-                                                                                            <td scope="row">{(currentPage - 1) * currentLimit + index + 1}</td>
 
                                                                                             <td scope="row">{item.order}
 
@@ -1482,7 +1484,6 @@ const ProductsWithStatusdeliveryNull = (props) => {
 
                                                                                             }
 
-                                                                                            <td scope="row">{(currentPage - 1) * currentLimit + index + 1}</td>
 
                                                                                             <td scope="row">{item.order}
 
