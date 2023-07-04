@@ -24,7 +24,10 @@ const fetchRoleByGroup = (groupId) => {
 const SaveChangleRole = (data) => {
     return axios.post("/api/v3/role/assign-to-group", { data })
 }
+const UpdateRole = (id, url, Description) => {
+    return axios.put("/api/v3/updateRow", { id, url, Description })
+}
 export {
     CreateRole, getRoleWithPagination, DeleteRole, getRole,
-    fetchRoleByGroup, SaveChangleRole
+    fetchRoleByGroup, SaveChangleRole, UpdateRole
 }

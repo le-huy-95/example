@@ -52,6 +52,7 @@ const FindUserWithphone = (phone) => {
 const GetProfile = (phone) => {
     return axios.get(`/api/v2/user/profile?phone=${phone}`)
 }
+
 export {
     registerNewUser, LoginUser, showList,
     DeleteUser, GetGroup, CreateNewUser,

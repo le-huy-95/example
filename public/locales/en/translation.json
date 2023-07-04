@@ -420,7 +420,8 @@
             "Ten": " Do not pick up",
             "Eleven": "Do not warehouse",
             "Twelve": "Do not delivery",
-            "Thirteen": "Do not check money"
+            "Thirteen": "Do not check money",
+            "Fourteen": "Time"
         },
         "Create-time": {
             "One": "Time :",

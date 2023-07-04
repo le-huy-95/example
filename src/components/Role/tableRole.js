@@ -4,12 +4,20 @@ import { toast } from 'react-toastify';
 import { useTranslation, Trans } from 'react-i18next';
 import { UserContext } from "../../contexApi/UserContext"
 import { NotificationContext } from "../../contexApi/NotificationContext"
+import UpdateRoles from "../Role/UpdateRoles"
 
 const TableRole = (props) => {
     const { fetchUserRole, currentPage, currentLimit, setCurrentPage, listRole, totalPage } = props
     const { t, i18n } = useTranslation();
     const { list, getALlListNotification, listStaff } = React.useContext(NotificationContext);
     const { user } = React.useContext(UserContext);
+    const [show, setshow] = useState(false)
+    const [data, setData] = useState("")
+
+    const handleShowhide = (item) => {
+        setshow(!show)
+        setData(item)
+    }
 
 
     useEffect(() => {
@@ -66,7 +74,7 @@ const TableRole = (props) => {
                                         <td className='table-light'>{item.url}</td>
                                         <td className='table-light'>{item.description}</td>
                                         <td className='table-light  '>
-                                            <button className='btn btn-warning mt-2 mx-2 ' title="Edit">
+                                            <button className='btn btn-warning mt-2 mx-2 ' title="Edit" onClick={() => handleShowhide(item)}>
                                                 <i className="fa fa-pencil button-space" ></i>
                                             </button>
                                             <button className='btn btn-danger mt-2 mx-2' title="Delete">
@@ -90,7 +98,12 @@ const TableRole = (props) => {
 
 
                 </tbody>
-
+                <UpdateRoles
+                    handleShowhide={handleShowhide}
+                    show={show}
+                    data={data}
+                    fetchUserRole={fetchUserRole}
+                />
             </table>
 
 

@@ -406,7 +406,7 @@
             "Three": "Gửi"
         },
         "history": {
-            "One": "Order history",
+            "One": "Lịch sử đơn hàng",
             "Two": "Tạo đơn",
             "Three": "Nhân viên lấy hàng :",
             "Four": "Số điện thoại :",
@@ -418,7 +418,8 @@
             "Ten": " Chưa Lấy hàng",
             "Eleven": "Chưa Nhập kho",
             "Twelve": "Chưa giao hàng",
-            "Thirteen": "Chưa đối soát"
+            "Thirteen": "Chưa đối soát",
+            "Fourteen": "Chưa đối soát"
         },
         "Create-time": {
             "One": "Giờ :",

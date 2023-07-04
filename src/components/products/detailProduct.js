@@ -2386,7 +2386,7 @@ const DetailProduct = (props) => {
                                                                                                                     {t('detail.Chat.Two')}  {item.CreatedByName}
                                                                                                                 </div>
                                                                                                             </div>
-                                                                                                            <div className='col-2 d-flex align-items-center' style={{ paddingBottom: "61px" }}>
+                                                                                                            <div className='col-2 d-flex align-items-center' >
                                                                                                                 <button className='btn btn-warning ' style={{ borderRadius: "50%" }} onClick={() => handlUpdateChatProject()}>
                                                                                                                     <i class="fa fa-floppy-o" aria-hidden="true"></i>
                                                                                                                 </button>
@@ -2419,7 +2419,7 @@ const DetailProduct = (props) => {
                                                                                                                     {t('detail.Chat.Two')}  {item.CreatedByName}
                                                                                                                 </div>
                                                                                                             </div>
-                                                                                                            <div className='col-2 d-flex align-items-center' style={{ paddingBottom: "61px" }}>
+                                                                                                            <div className='col-2 d-flex align-items-center' >
                                                                                                                 <button className='btn btn-warning ' style={{ borderRadius: "50%" }} onClick={() => handleChangeStatusEditChat(item)}>
                                                                                                                     <i class="fa fa-pencil-square" aria-hidden="true"></i>
                                                                                                                 </button>
@@ -2506,8 +2506,7 @@ const DetailProduct = (props) => {
                                                         </SRLWrapper>
 
                                                     </div>
-
-                                                    <div class="container history py-5">
+                                                    <div class="container history py-5 d-none d-lg-block">
                                                         <h5 style={{ color: "#637381" }}>
                                                             {t('detail.history.One')}
                                                         </h5>
@@ -2649,6 +2648,173 @@ const DetailProduct = (props) => {
                                                                                 <br />
                                                                                 <span> {t('detail.history.Four')} <b>{projects?.Number_Overview}</b>  </span>
 
+                                                                            </li>
+
+                                                                        }
+                                                                    </ul>
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="container history py-5 d-block d-lg-none">
+                                                        <h5 style={{ color: "#637381" }}>
+                                                            {t('detail.history.One')}
+                                                        </h5>
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div id="content">
+
+                                                                    <ul class="timeline-1 text-black" >
+                                                                        <li class="event" >
+                                                                            <h4 class="mb-3" >
+                                                                                {t('detail.history.Two')}
+                                                                            </h4>
+                                                                            <br />
+                                                                            <span> {t('detail.history.Fourteen')} : <b>{moment(`${projects.createdAt}`).format(" DD/MM/YYYY  HH:mm:ss ")}</b></span>
+
+                                                                        </li>
+                                                                        {!projects.statuspickupId &&
+                                                                            <li class="event" style={{ opacity: "0.7" }}>
+                                                                                <h4 class="mb-3 pt-3">
+                                                                                    {t('detail.history.Ten')}                                                                                </h4>
+                                                                            </li>
+                                                                        }
+                                                                        {projects.statuspickupId === 1 &&
+                                                                            <li class="event" >
+                                                                                <h4 class="mb-3">{projects?.Status_Pickup?.status}</h4>
+                                                                                <span> {t('detail.history.Three')} <b>{projects?.User_PickUp}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_PickUp}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Fourteen')} <b>{moment(`${projects?.pickup_time}`).format(" DD/MM/YYYY  HH:mm:ss ")}</b>  </span>
+                                                                            </li>
+
+                                                                        }
+                                                                        {projects.statuspickupId === 2 &&
+                                                                            <li class="event" >
+                                                                                <h4 class="mb-3">{projects?.Status_Pickup?.status}</h4>
+                                                                                <span> {t('detail.history.Three')} <b>{projects?.User_PickUp}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_PickUp}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Fourteen')} <b>{moment(`${projects?.pickupDone_time}`).format(" DD/MM/YYYY  HH:mm:ss ")}</b>  </span>
+                                                                            </li>
+
+                                                                        }
+                                                                        {!projects.statuswarehouseId &&
+                                                                            <li class="event" style={{ opacity: "0.7" }} >
+                                                                                <h4 class="mb-3 pt-3">
+                                                                                    {t('detail.history.Eleven')}
+                                                                                </h4>
+                                                                            </li>
+                                                                        }
+                                                                        {projects?.statuswarehouseId === 1 &&
+                                                                            <li class="event" >
+                                                                                <h4 class="mb-3">{projects?.Status_Warehouse?.status}</h4>
+                                                                                <span> {t('detail.history.Five')} <b>{projects?.User_Warehouse}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Warehouse}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Fourteen')} <b>{moment(`${projects?.warehouse_time}`).format("DD/MM/YYYY  HH:mm:ss ")}</b>  </span>
+
+                                                                            </li>
+
+                                                                        }
+                                                                        {projects?.statuswarehouseId === 2 &&
+                                                                            <li class="event" >
+                                                                                <h4 class="mb-3">{projects?.Status_Warehouse?.status}</h4>
+                                                                                <span> {t('detail.history.Five')} <b>{projects?.User_Warehouse}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Warehouse}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Fourteen')} <b>{moment(`${projects?.warehouseDone_time}`).format("DD/MM/YYYY  HH:mm:ss ")}</b>  </span>
+                                                                            </li>
+
+                                                                        }
+                                                                        {!projects.statusDeliveryId &&
+                                                                            <li class="event" style={{ opacity: "0.7" }} >
+                                                                                <h4 class="mb-3 pt-3">
+                                                                                    {t('detail.history.Twelve')}
+                                                                                </h4>
+                                                                            </li>
+                                                                        }
+                                                                        {projects?.statusDeliveryId === 1 && !projects?.Notice_Delivery &&
+                                                                            <li class="event" >
+                                                                                <h4 class="mb-3">{projects?.Status_Delivery?.status}</h4>
+                                                                                <span> {t('detail.history.Six')} <b>{projects?.User_Delivery}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Delivery}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Fourteen')} <b>{moment(`${projects?.Delivery_time}`).format("DD/MM/YYYY  HH:mm:ss ")}</b>  </span>
+                                                                            </li>
+
+                                                                        }
+                                                                        {projects?.statusDeliveryId === 2 &&
+                                                                            <li class="event" >
+                                                                                <h4 class="mb-3">{projects?.Status_Delivery?.status}</h4>
+                                                                                <span> {t('detail.history.Six')} <b>{projects?.User_Delivery}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Delivery}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Fourteen')} <b>{moment(`${projects?.Delivery_time}`).format("DD/MM/YYYY  HH:mm:ss ")}</b>  </span>
+                                                                            </li>
+
+                                                                        }
+                                                                        {projects?.statusDeliveryId === 3 &&
+                                                                            <li class="event" >
+                                                                                <h4 class="mb-3">{projects?.Status_Delivery?.status}</h4>
+                                                                                <span> {t('detail.history.Six')} <b>{projects?.User_Delivery}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Delivery}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Seven')} <b>{projects?.Cancel_reason}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Fourteen')} <b>{moment(`${projects?.Delivery_time}`).format("DD/MM/YYYY  HH:mm:ss ")}</b>  </span>
+                                                                            </li>
+
+                                                                        }
+                                                                        {projects?.statusDeliveryId === 1 && projects?.Notice_Delivery &&
+                                                                            <li class="event" >
+                                                                                <h4 class="mb-3">Giao lại</h4>
+                                                                                <span> {t('detail.history.Six')} <b>{projects?.User_Delivery}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Delivery}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Eight')} <b>{projects?.Cancel_reason}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Fourteen')} <b>{moment(`${projects?.Delivery_time}`).format("DD/MM/YYYY  HH:mm:ss ")}</b>  </span>
+                                                                            </li>
+
+                                                                        }
+                                                                        {!projects.receiveMoneyId &&
+                                                                            <li class="event" style={{ opacity: "0.7" }} >
+                                                                                <h4 class="mb-3 pt-3">
+                                                                                    {t('detail.history.Thirteen')}
+                                                                                </h4>
+                                                                            </li>
+                                                                        }
+                                                                        {projects?.receiveMoneyId === 1 &&
+                                                                            <li class="event" >
+                                                                                <h4 class="mb-3">{projects?.Status_Received_money?.status}</h4>
+                                                                                <span> {t('detail.history.Night')} <b>{projects?.User_Overview}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Overview}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Fourteen')} <b>{moment(`${projects?.Overview_time}`).format("DD/MM/YYYY  HH:mm:ss ")}</b>  </span>
+                                                                            </li>
+
+                                                                        }
+                                                                        {projects?.receiveMoneyId === 2 || projects?.receiveMoneyId === 3 &&
+                                                                            <li class="event" >
+                                                                                <h4 class="mb-3">{projects?.Status_Received_money?.status}</h4>
+                                                                                <span> {t('detail.history.Night')} <b>{projects?.User_Overview}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Four')} <b>{projects?.Number_Overview}</b>  </span>
+                                                                                <br />
+                                                                                <span> {t('detail.history.Fourteen')} <b>{moment(`${projects?.Overview_time}`).format("DD/MM/YYYY  HH:mm:ss ")}</b>  </span>
                                                                             </li>
 
                                                                         }

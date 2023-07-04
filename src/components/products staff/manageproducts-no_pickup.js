@@ -222,12 +222,12 @@ const ManageproductsNoPickup = (props) => {
 
     return (
         <div className='employer-container '>
-            <div className='left-employer  '>
+            <div className='left-employer d-none d-lg-block '>
                 <SidebarStaff collapsed={collapsed} />
 
             </div>
             <div className='right-employer  '>
-                <div className='btn-toggle-employer'>
+                <div className='btn-toggle-employer d-none d-lg-block'>
                     <span onClick={() => setCollapsed(!collapsed)} className=" d-sm-block ">
                         {collapsed === false ?
                             <i className="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
@@ -240,24 +240,28 @@ const ManageproductsNoPickup = (props) => {
                 <div className='right-body-employer'>
                     <div className='container'>
                         <div className='header-employer'>
-                            <div className='location-path-employer col'>
-                                <Link to="/"> Home</Link>
+                            <div className='container'>
+                                <div className='row'>
+                                    <div className='location-path-employer my-2 col-12 col-lg-6'>
+                                        <Link to="/"> Home</Link>
 
-                                <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
-                                </span>
-                                <Link to="/order-processing">Order-processing </Link>
-                            </div>
-                            <div className='col search-employer'>
-                                <div className='search-icon-employer'>
-                                    <i className="fa fa-search" aria-hidden="true"></i>
+                                        <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
+                                        </span>
+                                        <Link to="/order-processing">Order-processing </Link>
+                                    </div>
+                                    <div className='col-12 col-lg-6 search-employer'>
+                                        <div className='search-icon-employer'>
+                                            <i className="fa fa-search" aria-hidden="true"></i>
 
+                                        </div>
+                                        <input
+                                            type="text"
+                                            placeholder='Search infomation'
+                                            onChange={(event) => HandleSearchData(event.target.value)}
+
+                                        />
+                                    </div>
                                 </div>
-                                <input
-                                    type="text"
-                                    placeholder='Search infomation'
-                                    onChange={(event) => HandleSearchData(event.target.value)}
-
-                                />
                             </div>
                         </div>
                         <div className='body-employer'>
@@ -273,54 +277,54 @@ const ManageproductsNoPickup = (props) => {
                                 <div className='sort my-3'>
                                     <div className='container my-3'>
                                         <div className='row mx-3'>
-                                            <div className='col-4 my-2 content ' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 my-2 content ' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/order-processing" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Manage-employer.Three')} ({dataNumber.allNum})</Link>
                                             </div>
-                                            <div className='col-4 content' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
                                                 {t('Manage-employer.Four')} ({dataNumber.no_pick_up})
                                             </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Manageproducts_Picking" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Manage-employer.Five')} ({dataNumber.picking_up}) </Link>
 
                                             </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Manageproducts_pick_ok" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Manage-employer.Six')} ({dataNumber.pickupOk})</Link>
 
                                             </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Manageproducts_No_Warehouse" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Manage-employer.Seven')} ({dataNumber.no_warehouse})</Link>
 
                                             </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Manageproducts_Warehouse_status_one" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Manage-employer.Eight')} ({dataNumber.warehouseStatusOne})</Link>
 
                                             </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Manageproducts_Warehouse_status_two" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Manage-employer.thirteen')} ({dataNumber.warehouseStatusTwo}) </Link>
 
                                             </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Manageproducts_No_delivery" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Manage-employer.Night')} ({dataNumber.No_delivery})</Link>
 
                                             </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Manageproducts_delivery_One" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Manage-employer.Ten')} ({dataNumber.deliveryStatusOne})</Link>
 
                                             </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Manageproducts_delivery_Two" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Manage-employer.Eleven')} ({dataNumber.delivery_ok})</Link>
 
                                             </div>
-                                            <div className='col-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Manageproducts_delivery_Three" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Manage-employer.Twelve')} ({dataNumber.delivery_cancel})</Link>
 
@@ -338,211 +342,258 @@ const ManageproductsNoPickup = (props) => {
                                             <div className='title-employer-one my-3'>
                                                 {t('Manage-employer.Body.Tittle-nineteen')} ({lenghtArr})</div>
                                             <hr />
-                                            <div className='sub-tittle'>
-                                                <div className='sub-left '>
-                                                    <div className=' mx-3' style={{ color: "red" }}><i class="fa fa-flag" aria-hidden="true"></i>
+                                            <div className='sub-tittle d-none d-lg-block'>
+                                                <div className='container'>
+
+                                                    <div className='row'>
+
+                                                        <div className='sub-left   '>
+                                                            <div className=' mx-3' style={{ color: "red" }}><i class="fa fa-flag" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div className='NameColor'>
+                                                                {t('Manage-employer.Body.Tittle-One')}                                                        </div>
+
+                                                        </div>
+                                                        <div className='sub-right '>
+                                                            < ReactPaginate
+                                                                nextLabel="next >"
+                                                                onPageChange={handlePageClick}
+                                                                pageRangeDisplayed={2}
+                                                                marginPagesDisplayed={2}
+                                                                pageCount={totalPage}
+                                                                previousLabel="< previous"
+                                                                pageClassName="page-item"
+                                                                pageLinkClassName="page-link"
+                                                                previousClassName="page-item"
+                                                                previousLinkClassName="page-link"
+                                                                nextClassName="page-item"
+                                                                nextLinkClassName="page-link"
+                                                                breakLabel="..."
+                                                                breakClassName="page-item"
+                                                                breakLinkClassName="page-link"
+                                                                containerClassName="pagination"
+                                                                activeClassName="active"
+                                                                renderOnZeroPageCount={null}
+                                                                forcePage={+currentPage - 1}
+
+                                                            />
+                                                        </div>
                                                     </div>
-                                                    <div className='NameColor'>
-                                                        {t('Manage-employer.Body.Tittle-One')}                                                        </div>
-
-                                                </div>
-                                                <div className='sub-right'>
-                                                    < ReactPaginate
-                                                        nextLabel="next >"
-                                                        onPageChange={handlePageClick}
-                                                        pageRangeDisplayed={2}
-                                                        marginPagesDisplayed={3}
-                                                        pageCount={totalPage}
-                                                        previousLabel="< previous"
-                                                        pageClassName="page-item"
-                                                        pageLinkClassName="page-link"
-                                                        previousClassName="page-item"
-                                                        previousLinkClassName="page-link"
-                                                        nextClassName="page-item"
-                                                        nextLinkClassName="page-link"
-                                                        breakLabel="..."
-                                                        breakClassName="page-item"
-                                                        breakLinkClassName="page-link"
-                                                        containerClassName="pagination"
-                                                        activeClassName="active"
-                                                        renderOnZeroPageCount={null}
-                                                        forcePage={+currentPage - 1}
-
-                                                    />
                                                 </div>
                                             </div>
+                                            <div className='sub-tittle-mobile d-block d-lg-none'>
+                                                <div className='container'>
 
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr className='table-secondary'>
-                                                        <th></th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Two')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Three')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Four')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Five')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Six')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Seven')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Eight')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Night')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Ten')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Eleven')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Twelve')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-thirteen')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-fourteen')}
-                                                        </th>
+                                                    <div className='row'>
+
+                                                        <div className='sub-left-mobile col-12   '>
+                                                            <div className=' mx-3' style={{ color: "red" }}><i class="fa fa-flag" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div className='NameColor'>
+                                                                {t('Manage-employer.Body.Tittle-One')}                                                        </div>
+
+                                                        </div>
+                                                        <div className='sub-right-mobile col-12 mt-2 '>
+                                                            < ReactPaginate
+                                                                nextLabel="next >"
+                                                                onPageChange={handlePageClick}
+                                                                pageRangeDisplayed={2}
+                                                                marginPagesDisplayed={3}
+                                                                pageCount={totalPage}
+                                                                previousLabel="< previous"
+                                                                pageClassName="page-item"
+                                                                pageLinkClassName="page-link"
+                                                                previousClassName="page-item"
+                                                                previousLinkClassName="page-link"
+                                                                nextClassName="page-item"
+                                                                nextLinkClassName="page-link"
+                                                                breakLabel="..."
+                                                                breakClassName="page-item"
+                                                                breakLinkClassName="page-link"
+                                                                containerClassName="pagination"
+                                                                activeClassName="active"
+                                                                renderOnZeroPageCount={null}
+                                                                forcePage={+currentPage - 1}
+
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div style={{ overflow: "auto" }}>
+
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr className='table-secondary'>
+                                                            <th></th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Two')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Three')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Four')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Five')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Six')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Seven')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Eight')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Night')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Ten')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Eleven')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Twelve')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-thirteen')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-fourteen')}
+                                                            </th>
 
 
-                                                    </tr>
-                                                </thead>
-                                                {listProjectbyAllstatusPIckup && listProjectbyAllstatusPIckup.length > 0
-                                                    ?
-                                                    listProjectbyAllstatusPIckup.map((item, index) => {
-                                                        return (
+                                                        </tr>
+                                                    </thead>
+                                                    {listProjectbyAllstatusPIckup && listProjectbyAllstatusPIckup.length > 0
+                                                        ?
+                                                        listProjectbyAllstatusPIckup.map((item, index) => {
+                                                            return (
 
-                                                            <tbody key={`item-${index}`}>
-                                                                <tr class="table-info">
-                                                                    {item?.flag === true ?
+                                                                <tbody key={`item-${index}`}>
+                                                                    <tr class="table-info">
+                                                                        {item?.flag === true ?
+                                                                            <td>
+                                                                                <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                    <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                </span>
+                                                                            </td>
+                                                                            :
+                                                                            <td></td>
+
+                                                                        }
+
+                                                                        <td >{(currentPage - 1) * currentLimit + index + 1}</td>
+                                                                        <td>{item.id}</td>
+
+                                                                        <td>{item.order}</td>
+                                                                        <td> {item?.Warehouse?.product}</td>
                                                                         <td>
-                                                                            <span style={{ fontSize: "20px", color: "red" }}>
-                                                                                <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                            {item.quantity}/{item.unit}
+                                                                        </td>
+                                                                        <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
+                                                                        <td> {item?.name_customer}</td>
+                                                                        <td>
+                                                                            <span style={{ color: "red" }}>
+                                                                                {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
+                                                                            </span>
+                                                                            <br />
+                                                                            {item.User_PickUp && item.Number_PickUp &&
+                                                                                <span>
+                                                                                    {t('Manage-employer.Body.Tittle-fifteen')}
+                                                                                    <br />
+                                                                                    <b>{item.User_PickUp}-{item.Number_PickUp}</b>
+                                                                                </span>
+
+                                                                            }
+
+
+                                                                        </td>
+
+                                                                        <td>
+
+                                                                            <span >
+                                                                                {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa xử lý"}
+                                                                            </span>
+                                                                            <br />
+                                                                            {item.User_Warehouse && item.Number_Warehouse
+                                                                                &&
+                                                                                <span>
+                                                                                    {t('Manage-employer.Body.Tittle-fifteen')}
+                                                                                    <br />
+                                                                                    <b>{item.User_Warehouse}-{item.Number_Warehouse}</b>
+                                                                                </span>
+
+                                                                            }
+
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <span >
+                                                                                {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
+                                                                            </span>
+                                                                            <br />
+                                                                            {item.User_Delivery && item.Number_Delivery &&
+                                                                                <span>
+                                                                                    {t('Manage-employer.Body.Tittle-fifteen')}
+                                                                                    <br />
+                                                                                    <b>{item.User_Delivery}-{item.Number_Delivery}</b>
+                                                                                </span>
+
+                                                                            }
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <span >
+                                                                                {item?.Status_Received_money?.status ? item?.Status_Received_money?.status : "chưa thanh toán "}
+                                                                            </span>
+                                                                            <br />
+                                                                            {item.User_Overview && item.Number_Overview &&
+                                                                                <span>
+                                                                                    {t('Manage-employer.Body.Tittle-fifteen')}
+                                                                                    <br />
+                                                                                    <b>{item.User_Overview}-{item.Number_Overview} </b>
+                                                                                </span>
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {item.createdByName}
+                                                                            <br />
+                                                                            {item.createdBy}
+                                                                        </td>                                                                    <td>
+
+                                                                            <span className='mx-2' style={{ color: "blue", cursor: "pointer" }} title='Nhắn tin với Người tạo đơn' onClick={() => handleShowModal(item)}>
+                                                                                <i class="fa fa-comments" aria-hidden="true"></i>
+
                                                                             </span>
                                                                         </td>
-                                                                        :
-                                                                        <td></td>
+                                                                    </tr>
 
-                                                                    }
+                                                                </tbody>
+                                                            )
+                                                        })
+                                                        :
+                                                        <tr class="table-info">
+                                                            <td colSpan={14}>
+                                                                <div className='d-flex align-item-center justify-content-center'>
 
-                                                                    <td >{(currentPage - 1) * currentLimit + index + 1}</td>
-                                                                    <td>{item.id}</td>
+                                                                    <h5>
+                                                                        {t('Manage-employer.Body.Tittle-sixteen')}
+                                                                    </h5>
 
-                                                                    <td>{item.order}</td>
-                                                                    <td> {item?.Warehouse?.product}</td>
-                                                                    <td>
-                                                                        {item.quantity}/{item.unit}
-                                                                    </td>
-                                                                    <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
-                                                                    <td> {item?.name_customer}</td>
-                                                                    <td>
-                                                                        <span style={{ color: "red" }}>
-                                                                            {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
-                                                                        </span>
-                                                                        <br />
-                                                                        {item.User_PickUp && item.Number_PickUp &&
-                                                                            <span>
-                                                                                {t('Manage-employer.Body.Tittle-fifteen')}
-                                                                                <br />
-                                                                                <b>{item.User_PickUp}-{item.Number_PickUp}</b>
-                                                                            </span>
+                                                                </div>
 
-                                                                        }
+                                                            </td>
 
+                                                        </tr>
+                                                    }
 
-                                                                    </td>
-
-                                                                    <td>
-
-                                                                        <span >
-                                                                            {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa xử lý"}
-                                                                        </span>
-                                                                        <br />
-                                                                        {item.User_Warehouse && item.Number_Warehouse
-                                                                            &&
-                                                                            <span>
-                                                                                {t('Manage-employer.Body.Tittle-fifteen')}
-                                                                                <br />
-                                                                                <b>{item.User_Warehouse}-{item.Number_Warehouse}</b>
-                                                                            </span>
-
-                                                                        }
-
-
-                                                                    </td>
-                                                                    <td>
-                                                                        <span >
-                                                                            {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
-                                                                        </span>
-                                                                        <br />
-                                                                        {item.User_Delivery && item.Number_Delivery &&
-                                                                            <span>
-                                                                                {t('Manage-employer.Body.Tittle-fifteen')}
-                                                                                <br />
-                                                                                <b>{item.User_Delivery}-{item.Number_Delivery}</b>
-                                                                            </span>
-
-                                                                        }
-
-                                                                    </td>
-                                                                    <td>
-                                                                        <span >
-                                                                            {item?.Status_Received_money?.status ? item?.Status_Received_money?.status : "chưa thanh toán "}
-                                                                        </span>
-                                                                        <br />
-                                                                        {item.User_Overview && item.Number_Overview &&
-                                                                            <span>
-                                                                                {t('Manage-employer.Body.Tittle-fifteen')}
-                                                                                <br />
-                                                                                <b>{item.User_Overview}-{item.Number_Overview} </b>
-                                                                            </span>
-                                                                        }
-                                                                    </td>
-                                                                    <td>
-                                                                        {item.createdByName}
-                                                                        <br />
-                                                                        {item.createdBy}
-                                                                    </td>                                                                    <td>
-
-                                                                        <span className='mx-2' style={{ color: "blue", cursor: "pointer" }} title='Nhắn tin với Người tạo đơn' onClick={() => handleShowModal(item)}>
-                                                                            <i class="fa fa-comments" aria-hidden="true"></i>
-
-                                                                        </span>
-                                                                    </td>
-                                                                </tr>
-
-                                                            </tbody>
-                                                        )
-                                                    })
-                                                    :
-                                                    <tr class="table-info">
-                                                        <td colSpan={14}>
-                                                            <div className='d-flex align-item-center justify-content-center'>
-
-                                                                <h5>
-                                                                    {t('Manage-employer.Body.Tittle-sixteen')}
-                                                                </h5>
-
-                                                            </div>
-
-                                                        </td>
-
-                                                    </tr>
-                                                }
-
-                                            </table>
+                                                </table>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -554,175 +605,177 @@ const ManageproductsNoPickup = (props) => {
                                                 {t('Manage-employer.Body.Tittle-seventeen')} ({listProjectSearch.length})</div>
                                             <hr />
 
+                                            <div style={{ overflow: "auto" }}>
 
-                                            <table class="table table-bordered">
+                                                <table class="table table-bordered">
 
-                                                <thead>
-                                                    <tr className='table-secondary'>
-                                                        <th></th>
+                                                    <thead>
+                                                        <tr className='table-secondary'>
+                                                            <th></th>
 
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Three')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Four')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Five')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Six')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Seven')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Eight')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Night')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Ten')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Eleven')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-Twelve')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-thirteen')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Manage-employer.Body.Tittle-fourteen')}
-                                                        </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Three')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Four')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Five')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Six')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Seven')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Eight')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Night')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Ten')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Eleven')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-Twelve')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-thirteen')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Manage-employer.Body.Tittle-fourteen')}
+                                                            </th>
 
-                                                    </tr>
-                                                </thead>
-                                                {listProjectSearch && listProjectSearch.length > 0
-                                                    ?
-                                                    listProjectSearch.map((item, index) => {
-                                                        return (
+                                                        </tr>
+                                                    </thead>
+                                                    {listProjectSearch && listProjectSearch.length > 0
+                                                        ?
+                                                        listProjectSearch.map((item, index) => {
+                                                            return (
 
-                                                            <tbody key={`item-${index}`}>
-                                                                <tr class="table-info">
+                                                                <tbody key={`item-${index}`}>
+                                                                    <tr class="table-info">
 
-                                                                    {item?.flag === true ?
+                                                                        {item?.flag === true ?
+                                                                            <td>
+                                                                                <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                    <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                </span>
+                                                                            </td>
+                                                                            :
+                                                                            <td></td>
+
+                                                                        }
+                                                                        <td>{item.id}</td>
+
+                                                                        <td>{item.order}</td>
+                                                                        <td> {item?.Warehouse?.product}</td>
                                                                         <td>
-                                                                            <span style={{ fontSize: "20px", color: "red" }}>
-                                                                                <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                            {item.quantity}/{item.unit}
+                                                                        </td>
+                                                                        <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
+                                                                        <td> {item?.name_customer}</td>
+                                                                        <td>
+                                                                            <span style={{ color: "red" }}>
+                                                                                {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
+                                                                            </span>
+                                                                            <br />
+                                                                            {item.User_PickUp && item.Number_PickUp &&
+                                                                                <span>
+                                                                                    {t('Manage-employer.Body.Tittle-fifteen')}
+                                                                                    <br />
+                                                                                    <b>{item.User_PickUp}-{item.Number_PickUp}</b>
+                                                                                </span>
+
+                                                                            }
+
+
+                                                                        </td>
+
+                                                                        <td>
+
+                                                                            <span >
+                                                                                {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa xử lý"}
+                                                                            </span>
+                                                                            <br />
+                                                                            {item.User_Warehouse && item.Number_Warehouse
+                                                                                &&
+                                                                                <span>
+                                                                                    {t('Manage-employer.Body.Tittle-fifteen')}
+                                                                                    <br />
+                                                                                    <b>{item.User_Warehouse}-{item.Number_Warehouse}</b>
+                                                                                </span>
+
+                                                                            }
+
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <span >
+                                                                                {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
+                                                                            </span>
+                                                                            <br />
+                                                                            {item.User_Delivery && item.Number_Delivery &&
+                                                                                <span>
+                                                                                    {t('Manage-employer.Body.Tittle-fifteen')}
+                                                                                    <br />
+                                                                                    <b>{item.User_Delivery}-{item.Number_Delivery}</b>
+                                                                                </span>
+
+                                                                            }
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <span >
+                                                                                {item?.Status_Received_money?.status ? item?.Status_Received_money?.status : "chưa thanh toán "}
+                                                                            </span>
+                                                                            <br />
+                                                                            {item.User_Overview && item.Number_Overview &&
+                                                                                <span>
+                                                                                    {t('Manage-employer.Body.Tittle-fifteen')}
+                                                                                    <br />
+                                                                                    <b>{item.User_Overview}-{item.Number_Overview} </b>
+                                                                                </span>
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {item.createdByName}
+                                                                            <br />
+                                                                            {item.createdBy}
+                                                                        </td>                                                                             <td>
+
+                                                                            <span className='mx-2' style={{ color: "blue", cursor: "pointer" }} title='Nhắn tin với Người tạo đơn' onClick={() => handleShowModal(item)}>
+                                                                                <i class="fa fa-comments" aria-hidden="true"></i>
+
                                                                             </span>
                                                                         </td>
-                                                                        :
-                                                                        <td></td>
+                                                                    </tr>
 
-                                                                    }
-                                                                    <td>{item.id}</td>
+                                                                </tbody>
+                                                            )
+                                                        })
+                                                        :
+                                                        <tr class="table-info">
+                                                            <td colSpan={14}>
+                                                                <div className='d-flex align-item-center justify-content-center'>
 
-                                                                    <td>{item.order}</td>
-                                                                    <td> {item?.Warehouse?.product}</td>
-                                                                    <td>
-                                                                        {item.quantity}/{item.unit}
-                                                                    </td>
-                                                                    <td>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
-                                                                    <td> {item?.name_customer}</td>
-                                                                    <td>
-                                                                        <span style={{ color: "red" }}>
-                                                                            {item?.Status_Pickup?.status ? item?.Status_Pickup?.status : "chưa lấy hàng"}
-                                                                        </span>
-                                                                        <br />
-                                                                        {item.User_PickUp && item.Number_PickUp &&
-                                                                            <span>
-                                                                                {t('Manage-employer.Body.Tittle-fifteen')}
-                                                                                <br />
-                                                                                <b>{item.User_PickUp}-{item.Number_PickUp}</b>
-                                                                            </span>
+                                                                    <h5>
+                                                                        {t('Manage-employer.Body.Tittle-eighteen')}
+                                                                    </h5>
 
-                                                                        }
+                                                                </div>
 
+                                                            </td>
 
-                                                                    </td>
+                                                        </tr>
+                                                    }
 
-                                                                    <td>
-
-                                                                        <span >
-                                                                            {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa xử lý"}
-                                                                        </span>
-                                                                        <br />
-                                                                        {item.User_Warehouse && item.Number_Warehouse
-                                                                            &&
-                                                                            <span>
-                                                                                {t('Manage-employer.Body.Tittle-fifteen')}
-                                                                                <br />
-                                                                                <b>{item.User_Warehouse}-{item.Number_Warehouse}</b>
-                                                                            </span>
-
-                                                                        }
-
-
-                                                                    </td>
-                                                                    <td>
-                                                                        <span >
-                                                                            {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
-                                                                        </span>
-                                                                        <br />
-                                                                        {item.User_Delivery && item.Number_Delivery &&
-                                                                            <span>
-                                                                                {t('Manage-employer.Body.Tittle-fifteen')}
-                                                                                <br />
-                                                                                <b>{item.User_Delivery}-{item.Number_Delivery}</b>
-                                                                            </span>
-
-                                                                        }
-
-                                                                    </td>
-                                                                    <td>
-                                                                        <span >
-                                                                            {item?.Status_Received_money?.status ? item?.Status_Received_money?.status : "chưa thanh toán "}
-                                                                        </span>
-                                                                        <br />
-                                                                        {item.User_Overview && item.Number_Overview &&
-                                                                            <span>
-                                                                                {t('Manage-employer.Body.Tittle-fifteen')}
-                                                                                <br />
-                                                                                <b>{item.User_Overview}-{item.Number_Overview} </b>
-                                                                            </span>
-                                                                        }
-                                                                    </td>
-                                                                    <td>
-                                                                        {item.createdByName}
-                                                                        <br />
-                                                                        {item.createdBy}
-                                                                    </td>                                                                             <td>
-
-                                                                        <span className='mx-2' style={{ color: "blue", cursor: "pointer" }} title='Nhắn tin với Người tạo đơn' onClick={() => handleShowModal(item)}>
-                                                                            <i class="fa fa-comments" aria-hidden="true"></i>
-
-                                                                        </span>
-                                                                    </td>
-                                                                </tr>
-
-                                                            </tbody>
-                                                        )
-                                                    })
-                                                    :
-                                                    <tr class="table-info">
-                                                        <td colSpan={14}>
-                                                            <div className='d-flex align-item-center justify-content-center'>
-
-                                                                <h5>
-                                                                    {t('Manage-employer.Body.Tittle-eighteen')}
-                                                                </h5>
-
-                                                            </div>
-
-                                                        </td>
-
-                                                    </tr>
-                                                }
-
-                                            </table>
+                                                </table>
+                                            </div>
                                         </div>
 
                                     </div>

@@ -180,12 +180,12 @@ const WarehouseStatusOne = (props) => {
     }, [currentPage])
     return (
         <div className='employer-warehouse-container '>
-            <div className='left-employer-warehouse  '>
+            <div className='left-employer-warehouse d-none d-lg-block  '>
                 <SidebarStaff collapsed={collapsed} />
 
             </div>
             <div className='right-employer-warehouse  '>
-                <div className='btn-toggle-employer-warehouse'>
+                <div className='btn-toggle-employer-warehouse d-none d-lg-block'>
                     <span onClick={() => setCollapsed(!collapsed)} className=" d-sm-block ">
                         {collapsed === false ?
                             <i className="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
@@ -198,25 +198,28 @@ const WarehouseStatusOne = (props) => {
                 <div className='right-body-employer-warehouse'>
                     <div className='container'>
                         <div className='header-employer-warehouse'>
-                            <div className='location-path-employer-warehouse col'>
-                                <Link to="/"> Home</Link>
+                            <div className='container'>
+                                <div className='row'>
+                                    <div className='location-path-employer-warehouse my-2 col-12 col-lg-6'>
+                                        <Link to="/"> Home</Link>
 
-                                <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
-                                </span>
-                                <Link to="/Warehouse_staff">Warehouse</Link>
-                            </div>
-                            <div className='col search-employer-warehouse'>
-                                <div className='search-icon-employer-warehouse'>
-                                    <i className="fa fa-search" aria-hidden="true"></i>
+                                        <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
+                                        </span>
+                                        <Link to="/Warehouse_staff">Warehouse</Link>
+                                    </div>
+                                    <div className='search-employer-warehouse my-2 col-12 col-lg-6'>
+                                        <div className='search-icon-employer-warehouse'>
+                                            <i className="fa fa-search" aria-hidden="true"></i>
 
+                                        </div>
+                                        <input
+                                            type="text"
+                                            placeholder='Search infomation'
+                                            onChange={(event) => HandleSearchData(event.target.value)}
+
+                                        />
+                                    </div>
                                 </div>
-                                <input
-                                    type="text"
-                                    placeholder='Search infomation'
-                                    onChange={(event) => HandleSearchData(event.target.value)}
-
-
-                                />
                             </div>
                         </div>
                         <div className='body-employer-warehouse'>
@@ -236,21 +239,21 @@ const WarehouseStatusOne = (props) => {
                                 <div className='sort_warehouse my-3'>
                                     <div className='container my-3'>
                                         <div className='row mx-3'>
-                                            <div className='col-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Warehouse_staff" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Warehouse-employer.Two')}
                                                 </Link>
                                             </div>
-                                            <div className='col-3 my-2 content-warehouse ' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-3 my-2 content-warehouse ' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Warehouse_no_status" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Warehouse-employer.Three')}
                                                 </Link>
                                             </div>
 
-                                            <div className='col-3 my-2 content-warehouse ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-3 my-2 content-warehouse ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
                                                 {t('Warehouse-employer.Four')}
                                             </div>
-                                            <div className='col-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Warehouse_status_two" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Warehouse-employer.Five')}
                                                 </Link>
@@ -266,132 +269,134 @@ const WarehouseStatusOne = (props) => {
                                                 {t('Warehouse-employer.Six')} ({ListProjectbyStaffWarehouse.length})
                                             </div>
                                             <hr />
-                                            <table class="table table-bordered table-body-employer-warehouse-One">
-                                                <thead>
-                                                    <tr className='table-secondary'>
-                                                        <th></th>
+                                            <div style={{ overflow: "auto" }}>
+                                                <table class="table table-bordered table-body-employer-warehouse-One">
+                                                    <thead>
+                                                        <tr className='table-secondary'>
+                                                            <th></th>
 
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Two')}
-                                                        </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Two')}
+                                                            </th>
 
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Three')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Four')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Five')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Seven')}
-                                                        </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Three')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Four')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Five')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Seven')}
+                                                            </th>
 
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Eight')}
-                                                        </th>
-                                                        <th scope="col" >
-                                                            {t('Warehouse-employer.Body.Night')}
-                                                        </th>
-                                                        <th scope="col" >
-                                                            {t('Warehouse-employer.Body.Ten')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Eleven')}
-                                                        </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Eight')}
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Warehouse-employer.Body.Night')}
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Warehouse-employer.Body.Ten')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Eleven')}
+                                                            </th>
 
 
-                                                    </tr>
-                                                </thead>
-                                                {ListProjectbyStaffWarehouse && ListProjectbyStaffWarehouse.length > 0
-                                                    ?
-                                                    ListProjectbyStaffWarehouse.map((item, index) => {
-                                                        return (
-                                                            <tbody key={`item-${index}`}>
+                                                        </tr>
+                                                    </thead>
+                                                    {ListProjectbyStaffWarehouse && ListProjectbyStaffWarehouse.length > 0
+                                                        ?
+                                                        ListProjectbyStaffWarehouse.map((item, index) => {
+                                                            return (
+                                                                <tbody key={`item-${index}`}>
 
-                                                                <tr>
-                                                                    {item?.flag === true ?
+                                                                    <tr>
+                                                                        {item?.flag === true ?
+                                                                            <td>
+                                                                                <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                    <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                </span>
+                                                                            </td>
+                                                                            :
+                                                                            <td></td>
+
+                                                                        }
+                                                                        <td>{item.id}</td>
+                                                                        <td>{item.order}</td>
+                                                                        <td> {item?.Warehouse?.product}</td>
                                                                         <td>
-                                                                            <span style={{ fontSize: "20px", color: "red" }}>
-                                                                                <i class="fa fa-flag" aria-hidden="true"></i>
-                                                                            </span>
+                                                                            {item.quantity}/{item.unit}
                                                                         </td>
-                                                                        :
-                                                                        <td></td>
-
-                                                                    }
-                                                                    <td>{item.id}</td>
-                                                                    <td>{item.order}</td>
-                                                                    <td> {item?.Warehouse?.product}</td>
-                                                                    <td>
-                                                                        {item.quantity}/{item.unit}
-                                                                    </td>
-                                                                    <td>
-                                                                        <span style={{ color: "red", fontWeight: "500" }}>  {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa nhập kho"}</span>
-                                                                    </td>
-
-                                                                    <td>
-                                                                        {item?.User_Warehouse ? item?.User_Warehouse : "chưa ai nhận đơn"}
-                                                                        <br />
-                                                                        {item?.Number_Warehouse ? item?.Number_Warehouse : ""}
-
-                                                                    </td>
-                                                                    <td>{item?.warehouse_time ? moment(`${item?.warehouse_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                    <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                    {item.statuswarehouseId == 1
-                                                                        &&
-                                                                        user?.account?.phone === item.Number_Warehouse
-                                                                        &&
                                                                         <td>
-                                                                            <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)}>
-                                                                                {t('Warehouse-employer.Body.Thirteen')}
-                                                                            </button>
+                                                                            <span style={{ color: "red", fontWeight: "500" }}>  {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa nhập kho"}</span>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            {item?.User_Warehouse ? item?.User_Warehouse : "chưa ai nhận đơn"}
                                                                             <br />
-                                                                            <button className='btn btn-warning mx-3 my-1' onClick={() => updateWArehouse(item)}>
-                                                                                {t('Warehouse-employer.Body.Fourteen')}
-                                                                            </button>
+                                                                            {item?.Number_Warehouse ? item?.Number_Warehouse : ""}
 
                                                                         </td>
-                                                                    }
-                                                                    {item.statuswarehouseId === 1
+                                                                        <td>{item?.warehouse_time ? moment(`${item?.warehouse_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
+                                                                        <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
+                                                                        {item.statuswarehouseId == 1
+                                                                            &&
+                                                                            user?.account?.phone === item.Number_Warehouse
+                                                                            &&
+                                                                            <td>
+                                                                                <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)}>
+                                                                                    {t('Warehouse-employer.Body.Thirteen')}
+                                                                                </button>
+                                                                                <br />
+                                                                                <button className='btn btn-warning mx-3 my-1' onClick={() => updateWArehouse(item)}>
+                                                                                    {t('Warehouse-employer.Body.Fourteen')}
+                                                                                </button>
 
-                                                                        &&
-                                                                        user?.account?.phone !== item.Number_Warehouse
+                                                                            </td>
+                                                                        }
+                                                                        {item.statuswarehouseId === 1
 
-                                                                        &&
+                                                                            &&
+                                                                            user?.account?.phone !== item.Number_Warehouse
 
-                                                                        <td>
-                                                                            <span style={{ color: "blue", fontWeight: "700" }} >
-                                                                                {t('Warehouse-employer.Four')}
-                                                                            </span>
+                                                                            &&
 
-
-                                                                        </td>
-                                                                    }
-
-                                                                </tr>
-                                                            </tbody>
-                                                        )
-                                                    })
-                                                    :
-
-                                                    <tr class="table-info">
-                                                        <td colSpan={14}>
-                                                            <div className='d-flex align-item-center justify-content-center'>
-
-                                                                <h5>
-                                                                    {t('Warehouse-employer.Body.Sixteen')}
-                                                                </h5>
-                                                            </div>
-
-                                                        </td>
-
-                                                    </tr>
-                                                }
+                                                                            <td>
+                                                                                <span style={{ color: "blue", fontWeight: "700" }} >
+                                                                                    {t('Warehouse-employer.Four')}
+                                                                                </span>
 
 
-                                            </table>
+                                                                            </td>
+                                                                        }
+
+                                                                    </tr>
+                                                                </tbody>
+                                                            )
+                                                        })
+                                                        :
+
+                                                        <tr class="table-info">
+                                                            <td colSpan={14}>
+                                                                <div className='d-flex align-item-center justify-content-center'>
+
+                                                                    <h5>
+                                                                        {t('Warehouse-employer.Body.Sixteen')}
+                                                                    </h5>
+                                                                </div>
+
+                                                            </td>
+
+                                                        </tr>
+                                                    }
+
+
+                                                </table>
+                                            </div>
                                         </div>
 
 
@@ -403,133 +408,135 @@ const WarehouseStatusOne = (props) => {
                                             <div className='title-employer-warehouse-One my-3'>
                                                 {t('Warehouse-employer.Body.Nineteen')} ({listProjectSearch.length})</div>
                                             <hr />
-                                            <table class="table table-bordered table-body-employer-warehouse-One">
-                                                <thead>
-                                                    <tr className='table-secondary'>
-                                                        <th></th>
+                                            <div style={{ overflow: "auto" }}>
+                                                <table class="table table-bordered table-body-employer-warehouse-One">
+                                                    <thead>
+                                                        <tr className='table-secondary'>
+                                                            <th></th>
 
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Two')}
-                                                        </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Two')}
+                                                            </th>
 
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Three')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Four')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Five')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Seven')}
-                                                        </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Three')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Four')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Five')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Seven')}
+                                                            </th>
 
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Eight')}
-                                                        </th>
-                                                        <th scope="col" >
-                                                            {t('Warehouse-employer.Body.Night')}
-                                                        </th>
-                                                        <th scope="col" >
-                                                            {t('Warehouse-employer.Body.Ten')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Eleven')}
-                                                        </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Eight')}
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Warehouse-employer.Body.Night')}
+                                                            </th>
+                                                            <th scope="col" >
+                                                                {t('Warehouse-employer.Body.Ten')}
+                                                            </th>
+                                                            <th scope="col">
+                                                                {t('Warehouse-employer.Body.Eleven')}
+                                                            </th>
 
-                                                    </tr>
-                                                </thead>
-                                                {listProjectSearch && listProjectSearch.length > 0
-                                                    ?
-                                                    listProjectSearch.map((item, index) => {
-                                                        return (
-                                                            <tbody key={`item-${index}`}>
+                                                        </tr>
+                                                    </thead>
+                                                    {listProjectSearch && listProjectSearch.length > 0
+                                                        ?
+                                                        listProjectSearch.map((item, index) => {
+                                                            return (
+                                                                <tbody key={`item-${index}`}>
 
-                                                                <tr>
-                                                                    {item?.flag === true ?
+                                                                    <tr>
+                                                                        {item?.flag === true ?
+                                                                            <td>
+                                                                                <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                    <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                </span>
+                                                                            </td>
+                                                                            :
+                                                                            <td></td>
+
+                                                                        }
+                                                                        <td>{item.id}</td>
+                                                                        <td>{item.order}</td>
+                                                                        <td> {item?.Warehouse?.product}</td>
                                                                         <td>
-                                                                            <span style={{ fontSize: "20px", color: "red" }}>
-                                                                                <i class="fa fa-flag" aria-hidden="true"></i>
-                                                                            </span>
+                                                                            {item.quantity}/{item.unit}
                                                                         </td>
-                                                                        :
-                                                                        <td></td>
-
-                                                                    }
-                                                                    <td>{item.id}</td>
-                                                                    <td>{item.order}</td>
-                                                                    <td> {item?.Warehouse?.product}</td>
-                                                                    <td>
-                                                                        {item.quantity}/{item.unit}
-                                                                    </td>
-                                                                    <td>
-                                                                        <span style={{ color: "red", fontWeight: "500" }}>  {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa nhập kho"}</span>
-                                                                    </td>
-
-                                                                    <td>
-                                                                        {item?.User_Warehouse ? item?.User_Warehouse : "chưa ai nhận đơn"}
-                                                                        <br />
-                                                                        {item?.Number_Warehouse ? item?.Number_Warehouse : ""}
-
-                                                                    </td>
-                                                                    <td>{item?.warehouse_time ? moment(`${item?.warehouse_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                    <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                    {item.statuswarehouseId == 1
-                                                                        &&
-                                                                        user?.account?.phone === item.Number_Warehouse
-                                                                        &&
                                                                         <td>
-                                                                            <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)}>
-                                                                                {t('Warehouse-employer.Body.Thirteen')}
-                                                                            </button>
+                                                                            <span style={{ color: "red", fontWeight: "500" }}>  {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa nhập kho"}</span>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            {item?.User_Warehouse ? item?.User_Warehouse : "chưa ai nhận đơn"}
                                                                             <br />
-                                                                            <button className='btn btn-warning mx-3 my-1' onClick={() => updateWArehouse(item)}>
-                                                                                {t('Warehouse-employer.Body.Fourteen')}
-                                                                            </button>
+                                                                            {item?.Number_Warehouse ? item?.Number_Warehouse : ""}
 
                                                                         </td>
-                                                                    }
-                                                                    {item.statuswarehouseId === 1
+                                                                        <td>{item?.warehouse_time ? moment(`${item?.warehouse_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
+                                                                        <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
+                                                                        {item.statuswarehouseId == 1
+                                                                            &&
+                                                                            user?.account?.phone === item.Number_Warehouse
+                                                                            &&
+                                                                            <td>
+                                                                                <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)}>
+                                                                                    {t('Warehouse-employer.Body.Thirteen')}
+                                                                                </button>
+                                                                                <br />
+                                                                                <button className='btn btn-warning mx-3 my-1' onClick={() => updateWArehouse(item)}>
+                                                                                    {t('Warehouse-employer.Body.Fourteen')}
+                                                                                </button>
 
-                                                                        &&
-                                                                        user?.account?.phone !== item.Number_Warehouse
+                                                                            </td>
+                                                                        }
+                                                                        {item.statuswarehouseId === 1
 
-                                                                        &&
+                                                                            &&
+                                                                            user?.account?.phone !== item.Number_Warehouse
 
-                                                                        <td>
-                                                                            <span style={{ color: "blue", fontWeight: "700" }} >
-                                                                                {t('Warehouse-employer.Four')}
-                                                                            </span>
+                                                                            &&
 
-
-                                                                        </td>
-                                                                    }
-
-
-                                                                </tr>
-                                                            </tbody>
-                                                        )
-                                                    })
-                                                    :
-
-                                                    <tr class="table-info">
-                                                        <td colSpan={14}>
-                                                            <div className='d-flex align-item-center justify-content-center'>
-
-                                                                <h5>
-                                                                    {t('Warehouse-employer.Body.Seventeen')}
-                                                                </h5>
-
-                                                            </div>
-
-                                                        </td>
-
-                                                    </tr>
-                                                }
+                                                                            <td>
+                                                                                <span style={{ color: "blue", fontWeight: "700" }} >
+                                                                                    {t('Warehouse-employer.Four')}
+                                                                                </span>
 
 
-                                            </table>
+                                                                            </td>
+                                                                        }
+
+
+                                                                    </tr>
+                                                                </tbody>
+                                                            )
+                                                        })
+                                                        :
+
+                                                        <tr class="table-info">
+                                                            <td colSpan={14}>
+                                                                <div className='d-flex align-item-center justify-content-center'>
+
+                                                                    <h5>
+                                                                        {t('Warehouse-employer.Body.Seventeen')}
+                                                                    </h5>
+
+                                                                </div>
+
+                                                            </td>
+
+                                                        </tr>
+                                                    }
+
+
+                                                </table>
+                                            </div>
                                         </div>
 
 

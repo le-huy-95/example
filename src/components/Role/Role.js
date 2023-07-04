@@ -187,12 +187,12 @@ const Role = (props) => {
 
                                     </div>
                                     <div className='col-2 mt-4 action'>
-                                        <button className='btn btn-success ' title="Add New Role" onClick={() => handleAddNewRole()}>
+                                        <button className='btn btn-success my-1' title="Add New Role" onClick={() => handleAddNewRole()}>
                                             <i className="fa fa-plus" ></i>
 
                                         </button>
                                         {index >= 1 &&
-                                            <button className='btn btn-danger ' title="Delete Role" onClick={() => handleDeleteRole(key)}>
+                                            <button className='btn btn-danger my-1' title="Delete Role" onClick={() => handleDeleteRole(key)}>
                                                 <i className="fa fa-trash-o" ></i>
 
                                             </button>}
@@ -217,7 +217,10 @@ const Role = (props) => {
 
                 <div className='mt-3  List-role container'>
                     <h3> {t('Role.Four')}</h3>
-                    <TableRole currentPage={currentPage} currentLimit={currentLimit} setCurrentPage={setCurrentPage} fetchUserRole={fetchUserRole} listRole={listRole} totalPage={totalPage} />
+                    <div style={{ overflow: "auto" }}>
+                        <TableRole currentPage={currentPage} currentLimit={currentLimit} setCurrentPage={setCurrentPage} fetchUserRole={fetchUserRole} listRole={listRole} totalPage={totalPage} />
+
+                    </div>
                     {totalPage > 0 &&
                         <div className='user-footer'>
                             <ReactPaginate

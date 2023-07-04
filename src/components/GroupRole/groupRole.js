@@ -165,9 +165,9 @@ const GroupRole = (props) => {
 
 
     return (
-        <div className=" GroupRole-container">
+        <div className=" GroupRole-container ">
             <div className='container'>
-                <h3>  {t('Group-role.One')}</h3>
+                <h3 >  {t('Group-role.One')}</h3>
 
                 <div className='container '>
                     <div className='row'>

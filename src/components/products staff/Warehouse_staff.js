@@ -259,25 +259,30 @@ const Warehouse_staff = (props) => {
                 </div>
                 <div className='right-body-employer-warehouse'>
                     <div className='container'>
+
                         <div className='header-employer-warehouse'>
-                            <div className='location-path-employer-warehouse col'>
-                                <Link to="/"> Home</Link>
+                            <div className='container'>
+                                <div className='row'>
+                                    <div className='location-path-employer-warehouse my-2 col-12 col-lg-6'>
+                                        <Link to="/"> Home</Link>
 
-                                <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
-                                </span>
-                                <Link to="/Warehouse_staff">Warehouse</Link>
-                            </div>
-                            <div className='col search-employer-warehouse'>
-                                <div className='search-icon-employer-warehouse'>
-                                    <i className="fa fa-search" aria-hidden="true"></i>
+                                        <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
+                                        </span>
+                                        <Link to="/Warehouse_staff">Warehouse</Link>
+                                    </div>
+                                    <div className='search-employer-warehouse my-2 col-12 col-lg-6'>
+                                        <div className='search-icon-employer-warehouse'>
+                                            <i className="fa fa-search" aria-hidden="true"></i>
 
+                                        </div>
+                                        <input
+                                            type="text"
+                                            placeholder='Search infomation'
+                                            onChange={(event) => HandleSearchData(event.target.value)}
+
+                                        />
+                                    </div>
                                 </div>
-                                <input
-                                    type="text"
-                                    placeholder='Search infomation'
-                                    onChange={(event) => HandleSearchData(event.target.value)}
-
-                                />
                             </div>
                         </div>
                         <div className='body-employer-warehouse'>
@@ -297,20 +302,20 @@ const Warehouse_staff = (props) => {
                                 <div className='sort_warehouse my-3'>
                                     <div className='container my-3'>
                                         <div className='row mx-3'>
-                                            <div className='col-3 my-2 content-warehouse ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-3 my-2 content-warehouse ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
                                                 {t('Warehouse-employer.Two')}
                                             </div>
-                                            <div className='col-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Warehouse_no_status" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Warehouse-employer.Three')}
                                                 </Link>
                                             </div>
-                                            <div className='col-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Warehouse_status_one" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Warehouse-employer.Four')}
                                                 </Link>
                                             </div>
-                                            <div className='col-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-3 content-warehouse' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Warehouse_status_two" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Warehouse-employer.Five')}
                                                 </Link>
@@ -323,174 +328,219 @@ const Warehouse_staff = (props) => {
                                     <>
                                         <div className='table-wrapper-employer-warehouse my-5'>
                                             <div className='container'>
+
                                                 <div className='title-employer-warehouse my-3'>
                                                     {t('Warehouse-employer.Six')} ({length})
                                                 </div>
                                                 <hr />
 
-                                                <div className='sub-title-employer-warehouse'>
+                                                <div className='sub-title-employer-warehouse d-none d-lg-block'>
+                                                    <div className='container'>
+                                                        <div className='row'>
+                                                            <div className='sub-left col-3 '>
+                                                                <div className=' mx-3' style={{ color: "red" }}><i class="fa fa-flag" aria-hidden="true"></i>
+                                                                </div>
+                                                                <div className='NameColor'>
+                                                                    {t('Warehouse-employer.Seven')}
+                                                                </div>
 
-                                                    <div className='sub-left '>
-                                                        <div className=' mx-3' style={{ color: "red" }}><i class="fa fa-flag" aria-hidden="true"></i>
-                                                        </div>
-                                                        <div className='NameColor'>
-                                                            {t('Warehouse-employer.Seven')}
-                                                        </div>
+                                                            </div>
 
+                                                            <div className='col-9 d-flex align-item-center justify-content-end'>
+                                                                < ReactPaginate
+                                                                    nextLabel="next >"
+                                                                    onPageChange={handlePageClick}
+                                                                    pageRangeDisplayed={1}
+                                                                    marginPagesDisplayed={1}
+                                                                    pageCount={totalPage}
+                                                                    previousLabel="< previous"
+                                                                    pageClassName="page-item"
+                                                                    pageLinkClassName="page-link"
+                                                                    previousClassName="page-item"
+                                                                    previousLinkClassName="page-link"
+                                                                    nextClassName="page-item"
+                                                                    nextLinkClassName="page-link"
+                                                                    breakLabel="..."
+                                                                    breakClassName="page-item"
+                                                                    breakLinkClassName="page-link"
+                                                                    containerClassName="pagination"
+                                                                    activeClassName="active"
+                                                                    renderOnZeroPageCount={null}
+                                                                    forcePage={+currentPage - 1}
+
+                                                                />
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                </div>
+                                                <div className='sub-title-employer-warehouse d-block d-lg-none'>
+                                                    <div className='container'>
 
-                                                    <div className='sub-title-employer-pickup-right ' >
-                                                        < ReactPaginate
-                                                            nextLabel="next >"
-                                                            onPageChange={handlePageClick}
-                                                            pageRangeDisplayed={2}
-                                                            marginPagesDisplayed={3}
-                                                            pageCount={totalPage}
-                                                            previousLabel="< previous"
-                                                            pageClassName="page-item"
-                                                            pageLinkClassName="page-link"
-                                                            previousClassName="page-item"
-                                                            previousLinkClassName="page-link"
-                                                            nextClassName="page-item"
-                                                            nextLinkClassName="page-link"
-                                                            breakLabel="..."
-                                                            breakClassName="page-item"
-                                                            breakLinkClassName="page-link"
-                                                            containerClassName="pagination"
-                                                            activeClassName="active"
-                                                            renderOnZeroPageCount={null}
-                                                            forcePage={+currentPage - 1}
+                                                        <div className='row'>
+                                                            <div className='sub-left-mobile '>
+                                                                <div className=' mx-3' style={{ color: "red" }}><i class="fa fa-flag" aria-hidden="true"></i>
+                                                                </div>
+                                                                <div className='NameColor'>
+                                                                    {t('Warehouse-employer.Seven')}
+                                                                </div>
 
-                                                        />
+                                                            </div>
+
+                                                            <div className='sub-title-employer-warehouse-right mt-3 ' >
+                                                                < ReactPaginate
+                                                                    nextLabel="next >"
+                                                                    onPageChange={handlePageClick}
+                                                                    pageRangeDisplayed={1}
+                                                                    marginPagesDisplayed={1}
+                                                                    pageCount={totalPage}
+                                                                    previousLabel="< previous"
+                                                                    pageClassName="page-item"
+                                                                    pageLinkClassName="page-link"
+                                                                    previousClassName="page-item"
+                                                                    previousLinkClassName="page-link"
+                                                                    nextClassName="page-item"
+                                                                    nextLinkClassName="page-link"
+                                                                    breakLabel="..."
+                                                                    breakClassName="page-item"
+                                                                    breakLinkClassName="page-link"
+                                                                    containerClassName="pagination"
+                                                                    activeClassName="active"
+                                                                    renderOnZeroPageCount={null}
+                                                                    forcePage={+currentPage - 1}
+
+                                                                />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
 
+                                                <div style={{ overflow: "auto" }}>
+                                                    <table class="table table-bordered table-body-employer-warehouse">
+                                                        <thead>
+                                                            <tr className='table-secondary'>
+                                                                <th></th>
+                                                                <th scope="col">
+                                                                    {t('Warehouse-employer.Body.One')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Warehouse-employer.Body.Two')}
+                                                                </th>
 
-                                                <table class="table table-bordered table-body-employer-warehouse">
-                                                    <thead>
-                                                        <tr className='table-secondary'>
-                                                            <th></th>
-                                                            <th scope="col">
-                                                                {t('Warehouse-employer.Body.One')}
-                                                            </th>
-                                                            <th scope="col">
-                                                                {t('Warehouse-employer.Body.Two')}
-                                                            </th>
+                                                                <th scope="col">
+                                                                    {t('Warehouse-employer.Body.Three')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Warehouse-employer.Body.Four')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Warehouse-employer.Body.Five')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Warehouse-employer.Body.Seven')}
+                                                                </th>
 
-                                                            <th scope="col">
-                                                                {t('Warehouse-employer.Body.Three')}
-                                                            </th>
-                                                            <th scope="col">
-                                                                {t('Warehouse-employer.Body.Four')}
-                                                            </th>
-                                                            <th scope="col">
-                                                                {t('Warehouse-employer.Body.Five')}
-                                                            </th>
-                                                            <th scope="col">
-                                                                {t('Warehouse-employer.Body.Seven')}
-                                                            </th>
-
-                                                            <th scope="col">
-                                                                {t('Warehouse-employer.Body.Eight')}
-                                                            </th>
-                                                            <th scope="col" >
-                                                                {t('Warehouse-employer.Body.Night')}
-                                                            </th>
-                                                            <th scope="col" >
-                                                                {t('Warehouse-employer.Body.Ten')}
-                                                            </th>
-                                                            <th scope="col">
-                                                                {t('Warehouse-employer.Body.Eleven')}
-                                                            </th>
+                                                                <th scope="col">
+                                                                    {t('Warehouse-employer.Body.Eight')}
+                                                                </th>
+                                                                <th scope="col" >
+                                                                    {t('Warehouse-employer.Body.Night')}
+                                                                </th>
+                                                                <th scope="col" >
+                                                                    {t('Warehouse-employer.Body.Ten')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Warehouse-employer.Body.Eleven')}
+                                                                </th>
 
 
-                                                        </tr>
-                                                    </thead>
-                                                    {ListProjectbyStaffWarehouse && ListProjectbyStaffWarehouse.length > 0
-                                                        ?
+                                                            </tr>
+                                                        </thead>
+                                                        {ListProjectbyStaffWarehouse && ListProjectbyStaffWarehouse.length > 0
+                                                            ?
 
-                                                        ListProjectbyStaffWarehouse.map((item, index) => {
-                                                            return (
-                                                                <tbody key={`item-${index}`}>
+                                                            ListProjectbyStaffWarehouse.map((item, index) => {
+                                                                return (
+                                                                    <tbody key={`item-${index}`}>
 
-                                                                    <tr >
-                                                                        {item?.flag === 1 ?
+                                                                        <tr >
+                                                                            {item?.flag === 1 ?
+                                                                                <td>
+                                                                                    <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                        <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                    </span>
+                                                                                </td>
+                                                                                :
+                                                                                <td></td>
+
+                                                                            }
+                                                                            <td >{(currentPage - 1) * currentLimit + index + 1}</td>
+
+                                                                            <td>{item.id}</td>
+                                                                            <td>{item.order}</td>
+                                                                            <td> {item?.Warehouse?.product}</td>
                                                                             <td>
-                                                                                <span style={{ fontSize: "20px", color: "red" }}>
-                                                                                    <i class="fa fa-flag" aria-hidden="true"></i>
-                                                                                </span>
+                                                                                {item.quantity}/{item.unit}
                                                                             </td>
-                                                                            :
-                                                                            <td></td>
-
-                                                                        }
-                                                                        <td >{(currentPage - 1) * currentLimit + index + 1}</td>
-
-                                                                        <td>{item.id}</td>
-                                                                        <td>{item.order}</td>
-                                                                        <td> {item?.Warehouse?.product}</td>
-                                                                        <td>
-                                                                            {item.quantity}/{item.unit}
-                                                                        </td>
-                                                                        <td>
-                                                                            <span style={{ color: "red", fontWeight: "500" }}>  {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa nhập kho"}</span>
-                                                                        </td>
-
-                                                                        <td>
-                                                                            {item?.User_Warehouse ? item?.User_Warehouse : "chưa ai nhận đơn"}
-                                                                            <br />
-                                                                            {item?.Number_Warehouse ? item?.Number_Warehouse : ""}
-
-                                                                        </td>
-                                                                        <td>{item?.warehouse_time ? moment(`${item?.warehouse_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                        <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                        {!item?.User_Warehouse && !item?.Number_Warehouse &&
-                                                                            < td >
-                                                                                <button className='btn btn-danger' onClick={() => updateWArehouse(item)}>
-                                                                                    {t('Warehouse-employer.Body.Twelve')}
-                                                                                </button>
-                                                                            </td>
-                                                                        }
-
-                                                                        {+item?.statuswarehouseId === 1 &&
                                                                             <td>
-                                                                                <span style={{ color: "blue", fontWeight: "700" }}>
-                                                                                    {t('Warehouse-employer.Four')}
-                                                                                </span>
+                                                                                <span style={{ color: "red", fontWeight: "500" }}>  {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa nhập kho"}</span>
                                                                             </td>
-                                                                        }
-                                                                        {+item?.statuswarehouseId === 2 &&
+
                                                                             <td>
-                                                                                <span style={{ color: "green", fontWeight: "700" }} >
-                                                                                    {t('Warehouse-employer.Five')}
-                                                                                </span>
+                                                                                {item?.User_Warehouse ? item?.User_Warehouse : "chưa ai nhận đơn"}
+                                                                                <br />
+                                                                                {item?.Number_Warehouse ? item?.Number_Warehouse : ""}
+
                                                                             </td>
-                                                                        }
+                                                                            <td>{item?.warehouse_time ? moment(`${item?.warehouse_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
+                                                                            <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
+                                                                            {!item?.User_Warehouse && !item?.Number_Warehouse &&
+                                                                                < td >
+                                                                                    <button className='btn btn-danger' onClick={() => updateWArehouse(item)}>
+                                                                                        {t('Warehouse-employer.Body.Twelve')}
+                                                                                    </button>
+                                                                                </td>
+                                                                            }
+
+                                                                            {+item?.statuswarehouseId === 1 &&
+                                                                                <td>
+                                                                                    <span style={{ color: "blue", fontWeight: "700" }}>
+                                                                                        {t('Warehouse-employer.Four')}
+                                                                                    </span>
+                                                                                </td>
+                                                                            }
+                                                                            {+item?.statuswarehouseId === 2 &&
+                                                                                <td>
+                                                                                    <span style={{ color: "green", fontWeight: "700" }} >
+                                                                                        {t('Warehouse-employer.Five')}
+                                                                                    </span>
+                                                                                </td>
+                                                                            }
 
 
-                                                                    </tr>
-                                                                </tbody>
-                                                            )
-                                                        })
-                                                        :
+                                                                        </tr>
+                                                                    </tbody>
+                                                                )
+                                                            })
+                                                            :
 
-                                                        <tr class="table-info">
-                                                            <td colSpan={14}>
-                                                                <div className='d-flex align-item-center justify-content-center'>
+                                                            <tr class="table-info">
+                                                                <td colSpan={14}>
+                                                                    <div className='d-flex align-item-center justify-content-center'>
 
-                                                                    <h5>
-                                                                        {t('Warehouse-employer.Body.Sixteen')}
-                                                                    </h5>
+                                                                        <h5>
+                                                                            {t('Warehouse-employer.Body.Sixteen')}
+                                                                        </h5>
 
-                                                                </div>
+                                                                    </div>
 
-                                                            </td>
+                                                                </td>
 
-                                                        </tr>
-                                                    }
+                                                            </tr>
+                                                        }
 
 
-                                                </table>
+                                                    </table>
+                                                </div>
                                             </div>
 
 
@@ -501,9 +551,144 @@ const Warehouse_staff = (props) => {
                                                     {t('Warehouse-employer.Body.Fifteen')} ({listProjectbyUsernameStaffWarehouse.length})
                                                 </div>
                                                 <hr />
+                                                <div style={{ overflow: "auto" }}>
+                                                    <table class="table table-bordered table-body-employer-warehouse-One">
+                                                        <thead>
+                                                            <tr className='table-secondary'>
+                                                                <th></th>
+
+                                                                <th scope="col">
+                                                                    {t('Warehouse-employer.Body.Two')}
+                                                                </th>
+
+                                                                <th scope="col">
+                                                                    {t('Warehouse-employer.Body.Three')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Warehouse-employer.Body.Four')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Warehouse-employer.Body.Five')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Warehouse-employer.Body.Seven')}
+                                                                </th>
+
+                                                                <th scope="col">
+                                                                    {t('Warehouse-employer.Body.Eight')}
+                                                                </th>
+                                                                <th scope="col" >
+                                                                    {t('Warehouse-employer.Body.Night')}
+                                                                </th>
+                                                                <th scope="col" >
+                                                                    {t('Warehouse-employer.Body.Ten')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Warehouse-employer.Body.Eleven')}
+                                                                </th>
+
+
+
+                                                            </tr>
+                                                        </thead>
+                                                        {listProjectbyUsernameStaffWarehouse && listProjectbyUsernameStaffWarehouse.length > 0
+                                                            ?
+                                                            listProjectbyUsernameStaffWarehouse.map((item, index) => {
+                                                                return (
+                                                                    <tbody key={`item-${index}`}>
+
+                                                                        <tr>
+                                                                            {item?.flag === 1 ?
+                                                                                <td>
+                                                                                    <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                        <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                    </span>
+                                                                                </td>
+                                                                                :
+                                                                                <td></td>
+
+                                                                            }
+                                                                            <td>{item.id}</td>
+                                                                            <td>{item.order}</td>
+                                                                            <td> {item?.Warehouse?.product}</td>
+                                                                            <td>
+                                                                                {item.quantity}/{item.unit}
+                                                                            </td>
+                                                                            <td>
+                                                                                <span style={{ color: "red", fontWeight: "500" }}>  {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa nhập kho"}</span>
+                                                                            </td>
+
+                                                                            <td>
+                                                                                {item?.User_Warehouse ? item?.User_Warehouse : "chưa ai nhận đơn"}
+                                                                                <br />
+                                                                                {item?.Number_Warehouse ? item?.Number_Warehouse : ""}
+
+                                                                            </td>
+                                                                            <td>{item?.warehouse_time ? moment(`${item?.warehouse_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
+                                                                            <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
+                                                                            {item.statuswarehouseId === 2 ?
+                                                                                <td>
+                                                                                    <span style={{ color: "green", fontWeight: "700" }}>
+                                                                                        {t('Warehouse-employer.Five')}
+                                                                                    </span>
+                                                                                </td>
+
+                                                                                :
+                                                                                <td>
+                                                                                    <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)}>
+                                                                                        {t('Warehouse-employer.Body.Thirteen')}
+                                                                                    </button>
+                                                                                    <br />
+                                                                                    <button className='btn btn-warning mx-3 my-1' onClick={() => updateWArehouse(item)}>
+                                                                                        {t('Warehouse-employer.Body.Fourteen')}
+                                                                                    </button>
+
+                                                                                </td>
+                                                                            }
+
+                                                                        </tr>
+                                                                    </tbody>
+                                                                )
+                                                            })
+                                                            :
+
+
+                                                            <tr class="table-info">
+                                                                <td colSpan={14}>
+                                                                    <div className='d-flex align-item-center justify-content-center'>
+
+                                                                        <h5>
+                                                                            {t('Warehouse-employer.Body.Seventeen')}
+                                                                        </h5>
+
+                                                                    </div>
+
+                                                                </td>
+
+                                                            </tr>
+                                                        }
+
+
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </>
+
+                                }
+                                {isSearch === true &&
+                                    <div className='table-wrapper-employer-warehouse-One my-5'>
+                                        <div className='container'>
+                                            <div className='title-employer-warehouse-One my-3'>
+                                                {t('Warehouse-employer.Body.Nineteen')} ({listProjectSearch.length})
+                                            </div>
+                                            <hr />
+                                            <div style={{ overflow: "auto" }}>
+
                                                 <table class="table table-bordered table-body-employer-warehouse-One">
                                                     <thead>
-                                                        <tr className='table-secondary'>
+                                                        <tr className='table-secondary' >
                                                             <th></th>
 
                                                             <th scope="col">
@@ -538,11 +723,12 @@ const Warehouse_staff = (props) => {
 
 
 
+
                                                         </tr>
                                                     </thead>
-                                                    {listProjectbyUsernameStaffWarehouse && listProjectbyUsernameStaffWarehouse.length > 0
+                                                    {listProjectSearch && listProjectSearch.length > 0
                                                         ?
-                                                        listProjectbyUsernameStaffWarehouse.map((item, index) => {
+                                                        listProjectSearch.map((item, index) => {
                                                             return (
                                                                 <tbody key={`item-${index}`}>
 
@@ -575,14 +761,18 @@ const Warehouse_staff = (props) => {
                                                                         </td>
                                                                         <td>{item?.warehouse_time ? moment(`${item?.warehouse_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                         <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                        {item.statuswarehouseId === 2 ?
+                                                                        {item.statuswarehouseId === 0 &&
                                                                             <td>
-                                                                                <span style={{ color: "green", fontWeight: "700" }}>
-                                                                                    {t('Warehouse-employer.Five')}
-                                                                                </span>
+                                                                                <button className='btn btn-danger mx-3 my-1' onClick={() => updateWArehouse(item)} >
+                                                                                    {t('Warehouse-employer.Body.Twelve')}
+                                                                                </button>
                                                                             </td>
+                                                                        }
 
-                                                                            :
+                                                                        {item.statuswarehouseId == 1
+                                                                            &&
+                                                                            user?.account?.phone === item.Number_Warehouse
+                                                                            &&
                                                                             <td>
                                                                                 <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)}>
                                                                                     {t('Warehouse-employer.Body.Thirteen')}
@@ -594,6 +784,31 @@ const Warehouse_staff = (props) => {
 
                                                                             </td>
                                                                         }
+                                                                        {item.statuswarehouseId === 1
+
+                                                                            &&
+                                                                            user?.account?.phone !== item.Number_Warehouse
+
+                                                                            &&
+
+                                                                            <td>
+                                                                                <span style={{ color: "blue", fontWeight: "700" }} >
+                                                                                    {t('Warehouse-employer.Four')}
+                                                                                </span>
+
+
+                                                                            </td>
+                                                                        }
+                                                                        {item.statuswarehouseId === 2 &&
+                                                                            <td>
+                                                                                <span style={{ color: "green", fontWeight: "700" }} >
+                                                                                    {t('Warehouse-employer.Five')}
+                                                                                </span>
+                                                                            </td>
+
+
+                                                                        }
+
 
                                                                     </tr>
                                                                 </tbody>
@@ -601,13 +816,12 @@ const Warehouse_staff = (props) => {
                                                         })
                                                         :
 
-
                                                         <tr class="table-info">
                                                             <td colSpan={14}>
                                                                 <div className='d-flex align-item-center justify-content-center'>
 
                                                                     <h5>
-                                                                        {t('Warehouse-employer.Body.Seventeen')}
+                                                                        {t('Warehouse-employer.Body.Eighteen')}
                                                                     </h5>
 
                                                                 </div>
@@ -620,166 +834,6 @@ const Warehouse_staff = (props) => {
 
                                                 </table>
                                             </div>
-
-
-                                        </div>
-                                    </>
-
-                                }
-                                {isSearch === true &&
-                                    <div className='table-wrapper-employer-warehouse-One my-5'>
-                                        <div className='container'>
-                                            <div className='title-employer-warehouse-One my-3'>
-                                                {t('Warehouse-employer.Body.Nineteen')} ({listProjectSearch.length})
-                                            </div>
-                                            <hr />
-                                            <table class="table table-bordered table-body-employer-warehouse-One">
-                                                <thead>
-                                                    <tr className='table-secondary' >
-                                                        <th></th>
-
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Two')}
-                                                        </th>
-
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Three')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Four')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Five')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Seven')}
-                                                        </th>
-
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Eight')}
-                                                        </th>
-                                                        <th scope="col" >
-                                                            {t('Warehouse-employer.Body.Night')}
-                                                        </th>
-                                                        <th scope="col" >
-                                                            {t('Warehouse-employer.Body.Ten')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Warehouse-employer.Body.Eleven')}
-                                                        </th>
-
-
-
-
-                                                    </tr>
-                                                </thead>
-                                                {listProjectSearch && listProjectSearch.length > 0
-                                                    ?
-                                                    listProjectSearch.map((item, index) => {
-                                                        return (
-                                                            <tbody key={`item-${index}`}>
-
-                                                                <tr>
-                                                                    {item?.flag === 1 ?
-                                                                        <td>
-                                                                            <span style={{ fontSize: "20px", color: "red" }}>
-                                                                                <i class="fa fa-flag" aria-hidden="true"></i>
-                                                                            </span>
-                                                                        </td>
-                                                                        :
-                                                                        <td></td>
-
-                                                                    }
-                                                                    <td>{item.id}</td>
-                                                                    <td>{item.order}</td>
-                                                                    <td> {item?.Warehouse?.product}</td>
-                                                                    <td>
-                                                                        {item.quantity}/{item.unit}
-                                                                    </td>
-                                                                    <td>
-                                                                        <span style={{ color: "red", fontWeight: "500" }}>  {item?.Status_Warehouse?.status ? item?.Status_Warehouse?.status : "chưa nhập kho"}</span>
-                                                                    </td>
-
-                                                                    <td>
-                                                                        {item?.User_Warehouse ? item?.User_Warehouse : "chưa ai nhận đơn"}
-                                                                        <br />
-                                                                        {item?.Number_Warehouse ? item?.Number_Warehouse : ""}
-
-                                                                    </td>
-                                                                    <td>{item?.warehouse_time ? moment(`${item?.warehouse_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                    <td>{item?.warehouseDone_time ? moment(`${item?.warehouseDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                    {item.statuswarehouseId === 0 &&
-                                                                        <td>
-                                                                            <button className='btn btn-danger mx-3 my-1' onClick={() => updateWArehouse(item)} >
-                                                                                {t('Warehouse-employer.Body.Twelve')}
-                                                                            </button>
-                                                                        </td>
-                                                                    }
-
-                                                                    {item.statuswarehouseId == 1
-                                                                        &&
-                                                                        user?.account?.phone === item.Number_Warehouse
-                                                                        &&
-                                                                        <td>
-                                                                            <button className='btn btn-success mx-3 my-1' onClick={() => complete(item)}>
-                                                                                {t('Warehouse-employer.Body.Thirteen')}
-                                                                            </button>
-                                                                            <br />
-                                                                            <button className='btn btn-warning mx-3 my-1' onClick={() => updateWArehouse(item)}>
-                                                                                {t('Warehouse-employer.Body.Fourteen')}
-                                                                            </button>
-
-                                                                        </td>
-                                                                    }
-                                                                    {item.statuswarehouseId === 1
-
-                                                                        &&
-                                                                        user?.account?.phone !== item.Number_Warehouse
-
-                                                                        &&
-
-                                                                        <td>
-                                                                            <span style={{ color: "blue", fontWeight: "700" }} >
-                                                                                {t('Warehouse-employer.Four')}
-                                                                            </span>
-
-
-                                                                        </td>
-                                                                    }
-                                                                    {item.statuswarehouseId === 2 &&
-                                                                        <td>
-                                                                            <span style={{ color: "green", fontWeight: "700" }} >
-                                                                                {t('Warehouse-employer.Five')}
-                                                                            </span>
-                                                                        </td>
-
-
-                                                                    }
-
-
-                                                                </tr>
-                                                            </tbody>
-                                                        )
-                                                    })
-                                                    :
-
-                                                    <tr class="table-info">
-                                                        <td colSpan={14}>
-                                                            <div className='d-flex align-item-center justify-content-center'>
-
-                                                                <h5>
-                                                                    {t('Warehouse-employer.Body.Eighteen')}
-                                                                </h5>
-
-                                                            </div>
-
-                                                        </td>
-
-                                                    </tr>
-                                                }
-
-
-                                            </table>
                                         </div>
 
 

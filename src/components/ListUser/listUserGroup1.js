@@ -366,7 +366,7 @@ const UserGroupBoss = (props) => {
     return (
         <div className='container px-3'>
             <div className='listUser-container'>
-                <div className='user-header'>
+                <div className='user-header d-none d-md-block'>
                     <div className='title mt-3 '>
                         <h2>
                             {t('List-user.One')}
@@ -409,28 +409,82 @@ const UserGroupBoss = (props) => {
                     </div>
 
                 </div>
+                <div className='user-header d-block d-md-none'>
+                    <div className='title mt-3 '>
+                        <h2>
+                            {t('List-user.One')}
+                        </h2>
+                    </div>
+                    <div className='more '>
+                        <div className='container'>
+                            <div className='row'>
+                                <div className=' search'>
+                                    <div className='search-icon'>
+                                        <i className="fa fa-search" aria-hidden="true"></i>
+
+                                    </div>
+                                    <input type="text"
+                                        placeholder='Search infomation'
+                                        onChange={(event) => handleSearch(event)}
+
+                                    />
+                                </div>
+                                <div className='action mt-3'>
+                                    <div className='container'>
+                                        <div className='row'>
+                                            <button className='btn btn-primary refresh col-12 col-lg-3 '
+                                                onClick={() => {
+                                                    setshowCreateUserModal(true);
+                                                    setActionModal("Create")
+                                                }}>
+                                                <i className="fa fa-user-plus" ></i>
+
+                                                {t('List-user.Two')}
+                                            </button>
+                                            <button className='btn btn-success refresh col-12 col-lg-3 my-3' onClick={() => handleRefesh()}>
+                                                <i className="fa fa-refresh"
+                                                ></i>
+
+                                                {t('List-user.Three')}
+                                            </button>
+                                            <button className="btn btn-primary col-12 col-lg-3" onClick={() => handleExportData()}>
+                                                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+
+                                                {t('List-user.Four')}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
                 <div className='sort-unit my-3'>
                     <div className='container my-3'>
                         <div className='row mx-3'>
-                            <div className='col-3 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                            <div className='col-12 col-lg-3 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                 <Link to="/listuser" style={{ textDecoration: "none", color: "#474141" }}>
                                     {t('List-user.Five')}
                                 </Link>
                             </div>
-                            <div className='col-2 my-2 content boder-bottom' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                            <div className='col-12 col-lg-2 my-2 content boder-bottom' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                 <Link to="/listuserbygroupCustomer" style={{ textDecoration: "none", color: "#474141" }}>
                                     {t('List-user.Six')}
                                 </Link>
                             </div>
-                            <div className='col-2 my-2 content boder-bottom' style={{ borderBottom: "5px solid #61dafb", cursor: "pointer" }}>
+                            <div className='col-12 col-lg-2 my-2 content boder-bottom' style={{ borderBottom: "5px solid #61dafb", cursor: "pointer" }}>
                                 {t('List-user.Seven')} ({listUserlenght > 0 ? listUserlenght : "0"})</div>
-                            <div className='col-2 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                            <div className='col-12 col-lg-2 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                 <Link to="/listuserbygroupDev" style={{ textDecoration: "none", color: "#474141" }}>
                                     {t('List-user.Eight')}
                                 </Link>
 
                             </div>
-                            <div className='col-2 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                            <div className='col-12 col-lg-2 content' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                 <Link to="/listuserbygroupStaff" style={{ textDecoration: "none", color: "#474141" }}>
                                     {t('List-user.Night')}
                                 </Link>
@@ -445,8 +499,8 @@ const UserGroupBoss = (props) => {
                         <ReactPaginate
                             nextLabel="next >"
                             onPageChange={handlePageClick}
-                            pageRangeDisplayed={2}
-                            marginPagesDisplayed={3}
+                            pageRangeDisplayed={1}
+                            marginPagesDisplayed={1}
                             pageCount={totalPage}
                             previousLabel="< previous"
                             pageClassName="page-item"
@@ -679,18 +733,19 @@ const UserGroupBoss = (props) => {
                                                     <td className='table-light'>{item.sex}</td>
                                                     <td className='table-light'>{item.Group ? item.Group.name : ""}</td>
                                                     <td className='table-light'>{moment(`${item.createdAt}`).format("DD/MM/YYYY HH:mm:ss")}</td>
-                                                    <td className='table-light  '>
-                                                        <div className="dropdown">
-                                                            <div type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <td className='table-light ' >
 
-                                                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                                        <div className='d-flex'>
+                                                            <div onClick={() => handleOpenModalEdit(item)} style={{ cursor: "pointer", fontSize: "25px" }}>
+                                                                <i class="fa fa-pencil" aria-hidden="true"></i>
 
                                                             </div>
-                                                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                                <li style={{ cursor: "pointer" }}><a className="dropdown-item" onClick={() => handleOpenModalEdit(item)} title="Edit">Edit user</a></li>
-                                                                <li style={{ cursor: "pointer" }}><a className="dropdown-item" onClick={() => handleOpenModalDelete(item)} title="Delete">Delete user</a></li>
-                                                            </ul>
+                                                            <div className='mx-3' onClick={() => handleOpenModalDelete(item)} style={{ color: "red", cursor: "pointer", fontSize: "25px" }}>
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            </div>
+
                                                         </div>
+
                                                     </td>
                                                     {isOpen && previewsImage &&
                                                         <Lightbox
