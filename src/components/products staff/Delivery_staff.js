@@ -65,6 +65,7 @@ const Delivery_staff = (props) => {
             let res = await getDataSearchByEmplyer(data, user.account.Position, +user.account.shippingUnit_Id)
             if (res && +res.EC === 0) {
                 let data = res.DT.filter(item => item.statuswarehouseId === 2)
+                console.log("data", data)
                 setListProjectSearch(data)
                 if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
                     await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
@@ -249,12 +250,12 @@ const Delivery_staff = (props) => {
     }, [currentPage])
     return (
         <div className='employer-Delivery-container '>
-            <div className='left-employer-Delivery  '>
+            <div className='left-employer-Delivery d-none d-lg-block '>
                 <SidebarStaff collapsed={collapsed} />
 
             </div>
             <div className='right-employer-Delivery  '>
-                <div className='btn-toggle-employer-Delivery'>
+                <div className='btn-toggle-employer-Delivery d-none d-lg-block'>
                     <span onClick={() => setCollapsed(!collapsed)} className=" d-sm-block ">
                         {collapsed === false ?
                             <i className="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
@@ -266,27 +267,33 @@ const Delivery_staff = (props) => {
                 </div>
                 <div className='right-body-employer-Delivery'>
                     <div className='container'>
-                        <div className='header-employer-Delivery'>
-                            <div className='location-path-employer-Delivery col'>
-                                <Link to="/"> Home</Link>
 
-                                <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
-                                </span>
-                                <Link to="/Delivery_staff">Delivery</Link>
-                            </div>
-                            <div className='col search-employer-Delivery'>
-                                <div className='search-icon-employer-Delivery'>
-                                    <i className="fa fa-search" aria-hidden="true"></i>
+                        <div className='header-employer-Delivery mt-2'>
+                            <div className='container'>
+                                <div className='row'>
+                                    <div className='location-path-employer-Delivery col-12 col-lg-6'>
+                                        <Link to="/"> Home</Link>
 
+                                        <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
+                                        </span>
+                                        <Link to="/Delivery_staff">Delivery</Link>
+                                    </div>
+                                    <div className='search-employer-Delivery col-12 col-lg-6 my-2'>
+                                        <div className='search-icon-employer-Delivery'>
+                                            <i className="fa fa-search" aria-hidden="true"></i>
+
+                                        </div>
+                                        <input
+                                            type="text"
+                                            placeholder='Search infomation'
+                                            onChange={(event) => HandleSearchData(event.target.value)}
+
+                                        />
+                                    </div>
                                 </div>
-                                <input
-                                    type="text"
-                                    placeholder='Search infomation'
-                                    onChange={(event) => HandleSearchData(event.target.value)}
-
-                                />
                             </div>
                         </div>
+
                         <div className='body-employer-Delivery'>
                             <div className="container">
                                 <div className='name-page-employer-Delivery'>
@@ -304,30 +311,30 @@ const Delivery_staff = (props) => {
                                 <div className='sort_Delivery my-3'>
                                     <div className='container my-3'>
                                         <div className='row mx-3'>
-                                            <div className='col-3 my-2 content-Delivery ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-3 my-2 content-Delivery ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
                                                 {t('Delivery-employer.Two')}
                                             </div>
-                                            <div className='col-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Delivery_no_status" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Delivery-employer.Three')}
                                                 </Link>
                                             </div>
-                                            <div className='col-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Delivery_status_one" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Delivery-employer.Four')}
                                                 </Link>
                                             </div>
-                                            <div className='col-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Delivery_status_one" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Delivery-employer.Five')}
                                                 </Link>
                                             </div>
-                                            <div className='col-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Delivery_status_four" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Delivery-employer.Six')}
                                                 </Link>
                                             </div>
-                                            <div className='col-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-3 content-Delivery' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Delivery_status_three" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Delivery-employer.Seven')}
                                                 </Link>
@@ -339,245 +346,291 @@ const Delivery_staff = (props) => {
                                     <>
                                         <div className='table-wrapper-employer-Delivery my-5'>
                                             <div className='container'>
-                                                <div className='title-employer-Delivery my-3'>
+                                                <div className='title-employer-Delivery my-2'>
                                                     {t('Delivery-employer.Eight')} ({listProjectbyStaffDelivery.length})
                                                 </div>
                                                 <hr />
-
-                                                <div className='sub-title-employer-Delivery'>
-                                                    <div className='sub-left '>
-                                                        <div className=' mx-3' style={{ color: "red" }}><i class="fa fa-flag" aria-hidden="true"></i>
-                                                        </div>
-
-                                                        <div className='NameColor'>
-                                                            {t('Delivery-employer.Night')}
-                                                        </div>
-
-                                                    </div>
-                                                    <div className='sub-title-employer-pickup-right ' >
-                                                        < ReactPaginate
-                                                            nextLabel="next >"
-                                                            onPageChange={handlePageClick}
-                                                            pageRangeDisplayed={2}
-                                                            marginPagesDisplayed={3}
-                                                            pageCount={totalPage}
-                                                            previousLabel="< previous"
-                                                            pageClassName="page-item"
-                                                            pageLinkClassName="page-link"
-                                                            previousClassName="page-item"
-                                                            previousLinkClassName="page-link"
-                                                            nextClassName="page-item"
-                                                            nextLinkClassName="page-link"
-                                                            breakLabel="..."
-                                                            breakClassName="page-item"
-                                                            breakLinkClassName="page-link"
-                                                            containerClassName="pagination"
-                                                            activeClassName="active"
-                                                            renderOnZeroPageCount={null}
-                                                            forcePage={+currentPage - 1}
-
-                                                        />
-                                                    </div>
-
-                                                </div>
-                                                <table class="table table-bordered table-body-employer-Delivery">
-                                                    <thead>
-                                                        <tr className='table-secondary' >
-                                                            <th></th>
-                                                            <th scope="col">
-                                                                {t('Delivery-employer.Body.One')}
-                                                            </th>
-                                                            <th scope="col">
-                                                                {t('Delivery-employer.Body.Two')}
-                                                            </th>
-                                                            <th scope="col">
-                                                                {t('Delivery-employer.Body.Three')}
-                                                            </th>
-                                                            <th scope="col">
-                                                                {t('Delivery-employer.Body.Four')}
-                                                            </th>
-                                                            <th scope="col">
-                                                                {t('Delivery-employer.Body.Five')}
-                                                            </th>
-                                                            <th scope="col">
-                                                                {t('Delivery-employer.Body.Seven')}
-                                                            </th>
-                                                            <th scope="col">
-                                                                {t('Delivery-employer.Body.Eight')}
-                                                            </th>
-
-                                                            <th scope="col">
-                                                                {t('Delivery-employer.Body.Ten')}
-                                                            </th>
-                                                            <th scope="col" style={{ width: "120px" }}>
-                                                                {t('Delivery-employer.Body.Eleven')}
-                                                            </th>
-                                                            <th scope="col">
-                                                                {t('Delivery-employer.Body.Twelve')}
-                                                            </th>
-                                                            <th scope="col">
-                                                                {t('Delivery-employer.Body.Thirteen')}
-                                                            </th>
-
-                                                            <th scope="col">
-                                                                {t('Delivery-employer.Body.Fifteen')}
-                                                            </th>
-                                                            <th scope="col">
-                                                                {t('Delivery-employer.Body.Sixteen')}
-                                                            </th>
-                                                            <th scope="col">
-                                                                {t('Delivery-employer.Body.Seventeen')}
-                                                            </th>
-
-
-                                                        </tr>
-                                                    </thead>
-                                                    {listProjectbyStaffDelivery && listProjectbyStaffDelivery.length > 0
-                                                        ?
-                                                        listProjectbyStaffDelivery.map((item, index) => {
-                                                            return (
-                                                                <tbody key={`item-${index}`}>
-
-                                                                    <tr >
-                                                                        {item?.flag === true ?
-                                                                            <td>
-                                                                                <span style={{ fontSize: "20px", color: "red" }}>
-                                                                                    <i class="fa fa-flag" aria-hidden="true"></i>
-                                                                                </span>
-                                                                            </td>
-                                                                            :
-                                                                            <td></td>
-
-                                                                        }
-                                                                        <td >{(currentPage - 1) * currentLimit + index + 1}</td>
-
-                                                                        <td>{item.id}</td>
-                                                                        <td>{item.order}</td>
-                                                                        <td> {item?.Warehouse?.product}</td>
-                                                                        <td>
-                                                                            {item?.name_customer}
-                                                                            <br />
-                                                                            {item?.phoneNumber_customer}
-                                                                            <hr />
-                                                                            <b> {t('Delivery-employer.Body.Six')}  </b>
-                                                                            <br />
-                                                                            {item.addressDetail},{item?.Ward_customer?.name},{item?.District_customer?.name},{item?.Province_customer?.name}
-                                                                        </td>
-
-                                                                        <td>
-                                                                            <span style={{ color: "red", fontWeight: "700" }}>
-                                                                                {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
-
-                                                                            </span>
-                                                                        </td>
-                                                                        <td>
-                                                                            {item?.Note ? item?.Note : ""}
-                                                                            <br />
-                                                                            {item?.Notemore ? item?.Notemore : ""}
-
-                                                                        </td>
-                                                                        <td>
-                                                                            {item?.User_Delivery ? item?.User_Delivery : "chưa ai nhận đơn"}
-                                                                            <br />
-                                                                            {item?.Number_Delivery ? item?.Number_Delivery : ""}
-
-                                                                        </td>
-                                                                        <td>
-                                                                            {item.totalWithShippingCost} {item.unit_money}
-                                                                            <br />
-                                                                            <hr />
-                                                                            <b>{t('Delivery-employer.Body.Fourteen')}</b>
-                                                                            {item.Sub_money ?
-                                                                                <td style={{ color: "red", fontWeight: "500" }}>{item.Sub_money}</td>
-                                                                                :
-                                                                                <td> </td>
-
-                                                                            }
-                                                                        </td>
-                                                                        <td style={{ color: "red", fontWeight: "700" }}>{item?.Cancel_reason ? item?.Cancel_reason : ""}</td>
-                                                                        <td style={{ color: "red", fontWeight: "700" }}>{item?.Notice_Delivery ? item?.Notice_Delivery : ""}</td>
-
-
-                                                                        <td>{item?.Delivery_time ? moment(`${item?.Delivery_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                        <td>{item?.DeliveryDone_time ? moment(`${item?.DeliveryDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                        {!item.statusDeliveryId
-                                                                            &&
-                                                                            <td>
-                                                                                <button className='btn btn-warning' onClick={() => updateDelivery(item)}>
-                                                                                    {t('Delivery-employer.Body.TwentyThree')}
-                                                                                </button>
-                                                                                <br />
-
-
-                                                                            </td>
-                                                                        }
-                                                                        {item.statusDeliveryId === 3
-                                                                            &&
-                                                                            <td>
-                                                                                <span style={{ color: "red", fontWeight: "700" }} >
-                                                                                    {t('Delivery-employer.Body.TwentyFour')}
-                                                                                </span>
-                                                                                <br />
-
-
-                                                                            </td>
-                                                                        }
-                                                                        {item.statusDeliveryId === 4
-                                                                            &&
-                                                                            <td>
-                                                                                <span style={{ color: "blue", fontWeight: "700" }} >
-                                                                                    {t('Delivery-employer.Body.TwentyFive')}
-                                                                                </span>
-                                                                                <br />
-
-
-                                                                            </td>
-                                                                        }
-                                                                        {item.statusDeliveryId === 1
-                                                                            &&
-                                                                            <td>
-                                                                                <span style={{ color: "blue", fontWeight: "700" }} >
-                                                                                    {t('Delivery-employer.Body.TwentyFive')}
-                                                                                </span>
-                                                                                <br />
-
-
-                                                                            </td>
-                                                                        }
-                                                                        {item.statusDeliveryId === 2
-                                                                            &&
-                                                                            <td>
-                                                                                <span style={{ color: "Green", fontWeight: "700" }} >
-                                                                                    {t('Delivery-employer.Body.TwentySix')}
-                                                                                </span>
-                                                                                <br />
-
-
-                                                                            </td>
-                                                                        }
-
-                                                                    </tr>
-                                                                </tbody>
-                                                            )
-                                                        })
-                                                        :
-                                                        <tr class="table-primary">
-                                                            <td colSpan={17}>
-                                                                <div className='d-flex align-item-center justify-content-center'>
-
-                                                                    {t('Delivery-employer.Body.Eighteen')}
-
+                                                <div className='sub-title-employer-Delivery d-none d-lg-block '>
+                                                    <div className='container'>
+                                                        <div className='row'>
+                                                            <div className='sub-left col-12 col-lg-3'>
+                                                                <div className=' mx-3' style={{ color: "red" }}><i class="fa fa-flag" aria-hidden="true"></i>
                                                                 </div>
 
-                                                            </td>
+                                                                <div className='NameColor'>
+                                                                    {t('Delivery-employer.Night')}
+                                                                </div>
 
-                                                        </tr>
-                                                    }
+                                                            </div>
+                                                            <div className='d-flex align-item-center justify-content-end col-12 col-lg-9' >
+                                                                < ReactPaginate
+                                                                    nextLabel="next >"
+                                                                    onPageChange={handlePageClick}
+                                                                    pageRangeDisplayed={2}
+                                                                    marginPagesDisplayed={3}
+                                                                    pageCount={totalPage}
+                                                                    previousLabel="< previous"
+                                                                    pageClassName="page-item"
+                                                                    pageLinkClassName="page-link"
+                                                                    previousClassName="page-item"
+                                                                    previousLinkClassName="page-link"
+                                                                    nextClassName="page-item"
+                                                                    nextLinkClassName="page-link"
+                                                                    breakLabel="..."
+                                                                    breakClassName="page-item"
+                                                                    breakLinkClassName="page-link"
+                                                                    containerClassName="pagination"
+                                                                    activeClassName="active"
+                                                                    renderOnZeroPageCount={null}
+                                                                    forcePage={+currentPage - 1}
+
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
 
-                                                </table>
+                                                </div>
+                                                <div className='sub-title-employer-Delivery d-block d-lg-none '>
+                                                    <div className='container'>
+                                                        <div className='row'>
+                                                            <div className='d-flex align-item-center justify-content-endcol-12 col-lg-3'>
+                                                                <div className=' mx-3' style={{ color: "red" }}><i class="fa fa-flag" aria-hidden="true"></i>
+                                                                </div>
+
+                                                                <div className='NameColor'>
+                                                                    {t('Delivery-employer.Night')}
+                                                                </div>
+
+                                                            </div>
+                                                            <div className='d-flex align-item-center justify-content-center col-12 col-lg-9 mt-2' style={{ fontSize: "10px" }} >
+                                                                < ReactPaginate
+                                                                    nextLabel="next >"
+                                                                    onPageChange={handlePageClick}
+                                                                    pageRangeDisplayed={2}
+                                                                    marginPagesDisplayed={3}
+                                                                    pageCount={totalPage}
+                                                                    previousLabel="< previous"
+                                                                    pageClassName="page-item"
+                                                                    pageLinkClassName="page-link"
+                                                                    previousClassName="page-item"
+                                                                    previousLinkClassName="page-link"
+                                                                    nextClassName="page-item"
+                                                                    nextLinkClassName="page-link"
+                                                                    breakLabel="..."
+                                                                    breakClassName="page-item"
+                                                                    breakLinkClassName="page-link"
+                                                                    containerClassName="pagination"
+                                                                    activeClassName="active"
+                                                                    renderOnZeroPageCount={null}
+                                                                    forcePage={+currentPage - 1}
+
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <div style={{ overflow: "auto" }}>
+                                                    <table class="table table-bordered table-body-employer-Delivery">
+                                                        <thead>
+                                                            <tr className='table-secondary' >
+                                                                <th></th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.One')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Two')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Three')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Four')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Five')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Seven')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Eight')}
+                                                                </th>
+
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Ten')}
+                                                                </th>
+                                                                <th scope="col" style={{ width: "120px" }}>
+                                                                    {t('Delivery-employer.Body.Eleven')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Twelve')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Thirteen')}
+                                                                </th>
+
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Fifteen')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Sixteen')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Seventeen')}
+                                                                </th>
+
+
+                                                            </tr>
+                                                        </thead>
+                                                        {listProjectbyStaffDelivery && listProjectbyStaffDelivery.length > 0
+                                                            ?
+                                                            listProjectbyStaffDelivery.map((item, index) => {
+                                                                return (
+                                                                    <tbody key={`item-${index}`}>
+
+                                                                        <tr >
+                                                                            {item?.flag === true ?
+                                                                                <td>
+                                                                                    <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                        <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                    </span>
+                                                                                </td>
+                                                                                :
+                                                                                <td></td>
+
+                                                                            }
+                                                                            <td >{(currentPage - 1) * currentLimit + index + 1}</td>
+
+                                                                            <td>{item.id}</td>
+                                                                            <td>{item.order}</td>
+                                                                            <td> {item?.Warehouse?.product}</td>
+                                                                            <td>
+                                                                                {item?.name_customer}
+                                                                                <br />
+                                                                                {item?.phoneNumber_customer}
+                                                                                <hr />
+                                                                                <b> {t('Delivery-employer.Body.Six')}  </b>
+                                                                                <br />
+                                                                                {item.addressDetail},{item?.Ward_customer?.name},{item?.District_customer?.name},{item?.Province_customer?.name}
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <span style={{ color: "red", fontWeight: "700" }}>
+                                                                                    {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
+
+                                                                                </span>
+                                                                            </td>
+                                                                            <td>
+                                                                                {item?.Note ? item?.Note : ""}
+                                                                                <br />
+                                                                                {item?.Notemore ? item?.Notemore : ""}
+
+                                                                            </td>
+                                                                            <td>
+                                                                                {item?.User_Delivery ? item?.User_Delivery : "chưa ai nhận đơn"}
+                                                                                <br />
+                                                                                {item?.Number_Delivery ? item?.Number_Delivery : ""}
+
+                                                                            </td>
+                                                                            <td>
+                                                                                {item.totalWithShippingCost} {item.unit_money}
+                                                                                <br />
+                                                                                <hr />
+                                                                                <b>{t('Delivery-employer.Body.Fourteen')}</b>
+                                                                                {item.Sub_money ?
+                                                                                    <td style={{ color: "red", fontWeight: "500" }}>{item.Sub_money}</td>
+                                                                                    :
+                                                                                    <td> </td>
+
+                                                                                }
+                                                                            </td>
+                                                                            <td style={{ color: "red", fontWeight: "700" }}>{item?.Cancel_reason ? item?.Cancel_reason : ""}</td>
+                                                                            <td style={{ color: "red", fontWeight: "700" }}>{item?.Notice_Delivery ? item?.Notice_Delivery : ""}</td>
+
+
+                                                                            <td>{item?.Delivery_time ? moment(`${item?.Delivery_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
+                                                                            <td>{item?.DeliveryDone_time ? moment(`${item?.DeliveryDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
+                                                                            {item.statusDeliveryId === 0
+                                                                                &&
+                                                                                <td>
+                                                                                    <button className='btn btn-warning' onClick={() => updateDelivery(item)}>
+                                                                                        {t('Delivery-employer.Body.TwentyThree')}
+                                                                                    </button>
+                                                                                    <br />
+
+
+                                                                                </td>
+                                                                            }
+                                                                            {item.statusDeliveryId === 3
+                                                                                &&
+                                                                                <td>
+                                                                                    <span style={{ color: "red", fontWeight: "700" }} >
+                                                                                        {t('Delivery-employer.Body.TwentyFour')}
+                                                                                    </span>
+                                                                                    <br />
+
+
+                                                                                </td>
+                                                                            }
+                                                                            {item.statusDeliveryId === 4
+                                                                                &&
+                                                                                <td>
+                                                                                    <span style={{ color: "blue", fontWeight: "700" }} >
+                                                                                        {t('Delivery-employer.Body.TwentyFive')}
+                                                                                    </span>
+                                                                                    <br />
+
+
+                                                                                </td>
+                                                                            }
+                                                                            {item.statusDeliveryId === 1
+                                                                                &&
+                                                                                <td>
+                                                                                    <span style={{ color: "blue", fontWeight: "700" }} >
+                                                                                        {t('Delivery-employer.Body.TwentyFive')}
+                                                                                    </span>
+                                                                                    <br />
+
+
+                                                                                </td>
+                                                                            }
+                                                                            {item.statusDeliveryId === 2
+                                                                                &&
+                                                                                <td>
+                                                                                    <span style={{ color: "Green", fontWeight: "700" }} >
+                                                                                        {t('Delivery-employer.Body.TwentySix')}
+                                                                                    </span>
+                                                                                    <br />
+
+
+                                                                                </td>
+                                                                            }
+
+                                                                        </tr>
+                                                                    </tbody>
+                                                                )
+                                                            })
+                                                            :
+                                                            <tr class="table-primary">
+                                                                <td colSpan={17}>
+                                                                    <div className='d-flex align-item-center justify-content-center'>
+
+                                                                        {t('Delivery-employer.Body.Eighteen')}
+
+                                                                    </div>
+
+                                                                </td>
+
+                                                            </tr>
+                                                        }
+
+
+                                                    </table>
+                                                </div>
                                             </div>
-
 
                                         </div>
                                         <div className='table-wrapper-employer-Delivery-One my-5'>
@@ -586,9 +639,255 @@ const Delivery_staff = (props) => {
                                                     {t('Delivery-employer.Body.TwentyTwo')} ({listProjectbyuserStaff.length})
                                                 </div>
                                                 <hr />
-                                                <table class="table table-bordered table-body-employer-Delivery-One">
+                                                <div style={{ overflow: "auto" }}>
+                                                    <table class="table table-bordered table-body-employer-Delivery-One">
+                                                        <thead>
+                                                            <tr className='table-secondary' >
+                                                                <th></th>
+
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Two')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Three')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Four')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Five')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Seven')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Eight')}
+                                                                </th>
+
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Ten')}
+                                                                </th>
+                                                                <th scope="col" style={{ width: "120px" }}>
+                                                                    {t('Delivery-employer.Body.Eleven')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Twelve')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Thirteen')}
+                                                                </th>
+
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Fifteen')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Sixteen')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Delivery-employer.Body.Seventeen')}
+                                                                </th>
+
+
+                                                            </tr>
+                                                        </thead>
+                                                        {listProjectbyuserStaff && listProjectbyuserStaff.length > 0
+                                                            ?
+                                                            listProjectbyuserStaff.map((item, index) => {
+                                                                return (
+                                                                    <tbody key={`item-${index}`}>
+
+                                                                        <tr class="table-primary">
+
+                                                                            {item.flag === 1 ?
+                                                                                <td>
+                                                                                    <span style={{ fontSize: "20px", color: "red" }}>
+                                                                                        <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                                    </span>
+                                                                                </td>
+                                                                                :
+                                                                                <td></td>
+
+                                                                            }
+                                                                            <td>{item.id}</td>
+                                                                            <td>{item.order}</td>
+                                                                            <td> {item?.Warehouse?.product}</td>
+                                                                            <td>
+                                                                                {item?.name_customer}
+                                                                                <br />
+                                                                                {item?.phoneNumber_customer}
+                                                                                <hr />
+                                                                                <b> {t('Delivery-employer.Body.Six')}  </b>
+                                                                                <br />
+                                                                                {item.addressDetail},{item?.Ward_customer?.name},{item?.District_customer?.name},{item?.Province_customer?.name}
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <span style={{ color: "red", fontWeight: "700" }}>
+                                                                                    {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
+
+                                                                                </span>
+                                                                            </td>
+                                                                            <td>
+                                                                                {item?.Note ? item?.Note : ""}
+                                                                                <br />
+                                                                                {item?.Notemore ? item?.Notemore : ""}
+
+                                                                            </td>
+                                                                            <td>
+                                                                                {item?.User_Delivery ? item?.User_Delivery : "chưa ai nhận đơn"}
+                                                                                <br />
+                                                                                {item?.Number_Delivery ? item?.Number_Delivery : ""}
+
+                                                                            </td>
+                                                                            <td>
+                                                                                {item.totalWithShippingCost} {item.unit_money}
+                                                                                <br />
+
+                                                                            </td>
+                                                                            <td style={{ color: "red", fontWeight: "700" }}>{item?.Cancel_reason ? item?.Cancel_reason : ""}</td>
+                                                                            <td style={{ color: "red", fontWeight: "700" }}>{item?.Notice_Delivery ? item?.Notice_Delivery : ""}</td>
+
+
+                                                                            <td>{item?.Delivery_time ? moment(`${item?.Delivery_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
+                                                                            <td>{item?.DeliveryDone_time ? moment(`${item?.DeliveryDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
+
+                                                                            {item.statusDeliveryId === 0
+                                                                                &&
+                                                                                <td>
+                                                                                    <button className='btn btn-warning' onClick={() => updateDelivery(item)}>
+                                                                                        {t('Delivery-employer.Body.TwentyThree')}
+                                                                                    </button>
+                                                                                    <br />
+
+
+                                                                                </td>
+                                                                            }
+
+                                                                            {item.statusDeliveryId == 4 &&
+
+                                                                                <td>
+
+                                                                                    <div className='d-flex align-item-center justify-content-center flex-column'>
+                                                                                        <button className='btn btn-success  ' onClick={() => completePickup(item)} >
+                                                                                            {t('Delivery-employer.Body.TwentySeven')}
+                                                                                        </button>
+                                                                                        <br />
+                                                                                        <button className='btn btn-danger  my-1' onClick={() => handleShowModal(item)}>
+                                                                                            {t('Delivery-employer.Body.TwentyFour')}
+                                                                                        </button>
+                                                                                        <br />
+                                                                                        <button className='btn btn-primary my-1' onClick={() => handleShowModalAgain(item)}>
+                                                                                            {t('Delivery-employer.Six')}
+                                                                                        </button>
+                                                                                        <br />
+                                                                                        <button className='btn btn-warning ' onClick={() => updateDelivery(item)} >
+                                                                                            {t('Delivery-employer.Body.TwentyEight')}
+                                                                                        </button>
+
+                                                                                    </div>
+                                                                                </td>
+                                                                            }
+
+
+                                                                            {item.statusDeliveryId === 1 && user?.account?.phone === item.Number_Delivery
+                                                                                &&
+
+                                                                                <td>
+
+                                                                                    <div className='d-flex align-item-center justify-content-center flex-column'>
+                                                                                        <button className='btn btn-success  ' onClick={() => completePickup(item)} >
+                                                                                            {t('Delivery-employer.Body.TwentySeven')}
+                                                                                        </button>
+                                                                                        <br />
+                                                                                        <button className='btn btn-danger  my-1' onClick={() => handleShowModal(item)}>
+                                                                                            {t('Delivery-employer.Body.TwentyFour')}
+                                                                                        </button>
+                                                                                        <br />
+                                                                                        <button className='btn btn-primary my-1' onClick={() => handleShowModalAgain(item)}>
+                                                                                            {t('Delivery-employer.Six')}
+                                                                                        </button>
+                                                                                        <br />
+                                                                                        <button className='btn btn-warning ' onClick={() => updateDelivery(item)} >
+                                                                                            {t('Delivery-employer.Body.TwentyEight')}
+                                                                                        </button>
+
+                                                                                    </div>
+                                                                                </td>
+                                                                            }
+                                                                            {item.statusDeliveryId === 1 && user?.account?.phone !== item.Number_Delivery
+                                                                                &&
+                                                                                <td >
+                                                                                    <span style={{ color: "blue", fontWeight: "700" }}>
+                                                                                        {t('Delivery-employer.Four')}
+                                                                                    </span>
+
+
+                                                                                </td>
+                                                                            }
+
+
+                                                                            {item.statusDeliveryId === 2
+                                                                                &&
+                                                                                <td>
+                                                                                    <span style={{ color: "Green", fontWeight: "700" }} >
+                                                                                        {t('Delivery-employer.Body.TwentySix')}
+                                                                                    </span>
+                                                                                    <br />
+
+
+                                                                                </td>
+                                                                            }
+
+                                                                            {item.statusDeliveryId === 3
+                                                                                &&
+                                                                                <td>
+                                                                                    <span style={{ color: "red", fontWeight: "700" }} >
+                                                                                        {t('Delivery-employer.Body.TwentyFour')}
+                                                                                    </span>
+                                                                                    <br />
+
+
+                                                                                </td>
+                                                                            }
+                                                                        </tr>
+                                                                    </tbody>
+                                                                )
+                                                            })
+                                                            :
+                                                            <tr class="table-info">
+                                                                <td colSpan={17}>
+                                                                    <div className='d-flex align-item-center justify-content-center'>
+
+                                                                        <h5> {t('Delivery-employer.Body.Nineteen')} </h5>
+
+                                                                    </div>
+
+                                                                </td>
+
+                                                            </tr>
+                                                        }
+
+
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </>
+
+                                }
+                                {isSearch === true &&
+                                    <div className='table-wrapper-employer-search my-5'>
+
+                                        <div className='container'>
+                                            <div className='title-employer-search my-3'>
+                                                {t('Delivery-employer.Body.Twenty')} ({listProjectSearch.length})
+                                            </div>
+                                            <hr />
+                                            <div style={{ overflow: "auto" }}>
+                                                <table class="table table-bordered table-body-employer-search">
                                                     <thead>
-                                                        <tr className='table-secondary' >
+                                                        <tr className='table-secondary'>
                                                             <th></th>
 
                                                             <th scope="col">
@@ -633,12 +932,11 @@ const Delivery_staff = (props) => {
                                                                 {t('Delivery-employer.Body.Seventeen')}
                                                             </th>
 
-
                                                         </tr>
                                                     </thead>
-                                                    {listProjectbyuserStaff && listProjectbyuserStaff.length > 0
+                                                    {listProjectSearch && listProjectSearch.length > 0
                                                         ?
-                                                        listProjectbyuserStaff.map((item, index) => {
+                                                        listProjectSearch.map((item, index) => {
                                                             return (
                                                                 <tbody key={`item-${index}`}>
 
@@ -697,7 +995,15 @@ const Delivery_staff = (props) => {
                                                                         <td>{item?.Delivery_time ? moment(`${item?.Delivery_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
                                                                         <td>{item?.DeliveryDone_time ? moment(`${item?.DeliveryDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
 
+                                                                        {item.statusDeliveryId === 0
+                                                                            &&
+                                                                            <td>
+                                                                                <button className='btn btn-warning' onClick={() => updateDelivery(item)}> Nhận đơn</button>
+                                                                                <br />
 
+
+                                                                            </td>
+                                                                        }
                                                                         {item.statusDeliveryId == 4 &&
 
                                                                             <td>
@@ -787,13 +1093,17 @@ const Delivery_staff = (props) => {
                                                                     </tr>
                                                                 </tbody>
                                                             )
-                                                        })
+
+                                                        }
+
+
+                                                        )
                                                         :
-                                                        <tr class="table-info">
-                                                            <td colSpan={17}>
+                                                        <tr class="table-primary">
+                                                            <td colSpan={15}>
                                                                 <div className='d-flex align-item-center justify-content-center'>
 
-                                                                    <h5> {t('Delivery-employer.Body.Nineteen')} </h5>
+                                                                    <h5>{t('Delivery-employer.Body.TwentyOne')}</h5>
 
                                                                 </div>
 
@@ -802,247 +1112,8 @@ const Delivery_staff = (props) => {
                                                         </tr>
                                                     }
 
-
                                                 </table>
                                             </div>
-
-
-                                        </div>
-                                    </>
-
-                                }
-                                {isSearch === true &&
-                                    <div className='table-wrapper-employer-search my-5'>
-
-                                        <div className='container'>
-                                            <div className='title-employer-search my-3'>
-                                                {t('Delivery-employer.Body.Twenty')} ({listProjectSearch.length})
-                                            </div>
-                                            <hr />
-                                            <table class="table table-bordered table-body-employer-search">
-                                                <thead>
-                                                    <tr className='table-secondary'>
-                                                        <th></th>
-
-                                                        <th scope="col">
-                                                            {t('Delivery-employer.Body.Two')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Delivery-employer.Body.Three')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Delivery-employer.Body.Four')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Delivery-employer.Body.Five')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Delivery-employer.Body.Seven')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Delivery-employer.Body.Eight')}
-                                                        </th>
-
-                                                        <th scope="col">
-                                                            {t('Delivery-employer.Body.Ten')}
-                                                        </th>
-                                                        <th scope="col" style={{ width: "120px" }}>
-                                                            {t('Delivery-employer.Body.Eleven')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Delivery-employer.Body.Twelve')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Delivery-employer.Body.Thirteen')}
-                                                        </th>
-
-                                                        <th scope="col">
-                                                            {t('Delivery-employer.Body.Fifteen')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Delivery-employer.Body.Sixteen')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Delivery-employer.Body.Seventeen')}
-                                                        </th>
-
-                                                    </tr>
-                                                </thead>
-                                                {listProjectSearch && listProjectSearch.length > 0
-                                                    ?
-
-                                                    listProjectSearch.map((item, index) => {
-                                                        return (
-                                                            <tbody key={`item-${index}`}>
-
-                                                                <tr class="table-primary">
-                                                                    {item.flag === 1 ?
-                                                                        <td>
-                                                                            <span style={{ fontSize: "20px", color: "red" }}>
-                                                                                <i class="fa fa-flag" aria-hidden="true"></i>
-                                                                            </span>
-                                                                        </td>
-                                                                        :
-                                                                        <td></td>
-
-                                                                    }
-                                                                    <td>{item.id}</td>
-                                                                    <td>{item.order}</td>
-                                                                    <td> {item?.Warehouse?.product}</td>
-                                                                    <td>
-                                                                        {item?.name_customer}
-                                                                        <br />
-                                                                        {item?.phoneNumber_customer}
-                                                                        <hr />
-                                                                        <b> {t('Delivery-employer.Body.Six')}  </b>
-                                                                        <br />
-                                                                        {item.addressDetail},{item?.Ward_customer?.name},{item?.District_customer?.name},{item?.Province_customer?.name}
-                                                                    </td>
-
-                                                                    <td>
-                                                                        <span style={{ color: "red", fontWeight: "700" }}>
-                                                                            {item?.Status_Delivery?.status ? item?.Status_Delivery?.status : "chưa giao hàng"}
-
-                                                                        </span>
-                                                                    </td>
-                                                                    <td>
-                                                                        {item?.Note ? item?.Note : ""}
-                                                                        <br />
-                                                                        {item?.Notemore ? item?.Notemore : ""}
-
-                                                                    </td>
-                                                                    <td>
-                                                                        {item?.User_Delivery ? item?.User_Delivery : "chưa ai nhận đơn"}
-                                                                        <br />
-                                                                        {item?.Number_Delivery ? item?.Number_Delivery : ""}
-
-                                                                    </td>
-                                                                    <td>
-                                                                        {item.totalWithShippingCost} {item.unit_money}
-                                                                        <br />
-                                                                        <hr />
-                                                                        <b>{t('Delivery-employer.Body.Fourteen')}</b>
-                                                                        {item.Sub_money ?
-                                                                            <td style={{ color: "red", fontWeight: "500" }}>{item.Sub_money}</td>
-                                                                            :
-                                                                            <td> </td>
-
-                                                                        }
-                                                                    </td>
-                                                                    <td style={{ color: "red", fontWeight: "700" }}>{item?.Cancel_reason ? item?.Cancel_reason : ""}</td>
-                                                                    <td style={{ color: "red", fontWeight: "700" }}>{item?.Notice_Delivery ? item?.Notice_Delivery : ""}</td>
-
-
-                                                                    <td>{item?.Delivery_time ? moment(`${item?.Delivery_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                    <td>{item?.DeliveryDone_time ? moment(`${item?.DeliveryDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-
-                                                                    {item.statusDeliveryId == 4 &&
-
-                                                                        <td>
-
-                                                                            <div className='d-flex align-item-center justify-content-center flex-column'>
-                                                                                <button className='btn btn-success  ' onClick={() => completePickup(item)} >
-                                                                                    {t('Delivery-employer.Body.TwentySeven')}
-                                                                                </button>
-                                                                                <br />
-                                                                                <button className='btn btn-danger  my-1' onClick={() => handleShowModal(item)}>
-                                                                                    {t('Delivery-employer.Body.TwentyFour')}
-                                                                                </button>
-                                                                                <br />
-                                                                                <button className='btn btn-primary my-1' onClick={() => handleShowModalAgain(item)}>
-                                                                                    {t('Delivery-employer.Six')}
-                                                                                </button>
-                                                                                <br />
-                                                                                <button className='btn btn-warning ' onClick={() => updateDelivery(item)} >
-                                                                                    {t('Delivery-employer.Body.TwentyEight')}
-                                                                                </button>
-
-                                                                            </div>
-                                                                        </td>
-                                                                    }
-
-
-                                                                    {item.statusDeliveryId === 1 && user?.account?.phone === item.Number_Delivery
-                                                                        &&
-                                                                        <td>
-
-                                                                            <div className='d-flex align-item-center justify-content-center flex-column'>
-                                                                                <button className='btn btn-success  ' onClick={() => completePickup(item)} >
-                                                                                    {t('Delivery-employer.Body.TwentySeven')}
-                                                                                </button>
-                                                                                <br />
-                                                                                <button className='btn btn-danger  my-1' onClick={() => handleShowModal(item)}>
-                                                                                    {t('Delivery-employer.Body.TwentyFour')}
-                                                                                </button>
-                                                                                <br />
-                                                                                <button className='btn btn-primary my-1' onClick={() => handleShowModalAgain(item)}>
-                                                                                    {t('Delivery-employer.Six')}
-                                                                                </button>
-                                                                                <br />
-                                                                                <button className='btn btn-warning ' onClick={() => updateDelivery(item)} >
-                                                                                    {t('Delivery-employer.Body.TwentyEight')}
-                                                                                </button>
-
-                                                                            </div>
-                                                                        </td>
-                                                                    }
-                                                                    {item.statusDeliveryId === 1 && user?.account?.phone !== item.Number_Delivery
-                                                                        &&
-                                                                        <td >
-                                                                            <span style={{ color: "blue", fontWeight: "700" }}>
-                                                                                {t('Delivery-employer.Four')}
-                                                                            </span>
-
-
-                                                                        </td>
-                                                                    }
-
-                                                                    {item.statusDeliveryId === 2
-                                                                        &&
-                                                                        <td>
-                                                                            <span style={{ color: "Green", fontWeight: "700" }} >
-                                                                                {t('Delivery-employer.Body.TwentySix')}
-                                                                            </span>
-                                                                            <br />
-
-
-                                                                        </td>
-                                                                    }
-
-                                                                    {item.statusDeliveryId === 3
-                                                                        &&
-                                                                        <td>
-                                                                            <span style={{ color: "red", fontWeight: "700" }} >
-                                                                                {t('Delivery-employer.Body.TwentyFour')}
-                                                                            </span>
-                                                                            <br />
-
-
-                                                                        </td>
-                                                                    }
-                                                                </tr>
-                                                            </tbody>
-                                                        )
-
-                                                    }
-
-
-                                                    )
-                                                    :
-                                                    <tr class="table-primary">
-                                                        <td colSpan={15}>
-                                                            <div className='d-flex align-item-center justify-content-center'>
-
-                                                                <h5>{t('Delivery-employer.Body.TwentyOne')}</h5>
-
-                                                            </div>
-
-                                                        </td>
-
-                                                    </tr>
-                                                }
-
-                                            </table>
                                         </div>
 
 
@@ -1053,8 +1124,8 @@ const Delivery_staff = (props) => {
                         </div>
 
                     </div>
-
                 </div>
+
 
                 <ModalCancelReason
                     showModal={showModal}

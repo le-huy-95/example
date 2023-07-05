@@ -89,12 +89,12 @@ const OverviewStatusTwo = (props) => {
     }, [])
     return (
         <div className='overview-container '>
-            <div className='left-overview  '>
+            <div className='left-overview d-none d-lg-block   '>
                 <SidebarStaff collapsed={collapsed} />
 
             </div>
             <div className='right-overview  '>
-                <div className='btn-toggle-overview'>
+                <div className='btn-toggle-overview d-none d-lg-block '>
                     <span onClick={() => setCollapsed(!collapsed)} className=" d-sm-block ">
                         {collapsed === false ?
                             <i className="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
@@ -106,25 +106,29 @@ const OverviewStatusTwo = (props) => {
                 </div>
                 <div className='right-body-overview'>
                     <div className='container'>
-                        <div className='header-overview'>
-                            <div className='location-path-overview col'>
-                                <Link to="/"> Home</Link>
+                        <div className='header-overview mt-2'>
+                            <div className='container'>
+                                <div className='row'>
+                                    <div className='location-path-overview col-12 col-lg-6'>
+                                        <Link to="/"> Home</Link>
 
-                                <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
-                                </span>
-                                <Link to="/Overview">Delivery</Link>
-                            </div>
-                            <div className='col search-overview'>
-                                <div className='search-icon-overview'>
-                                    <i className="fa fa-search" aria-hidden="true"></i>
+                                        <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
+                                        </span>
+                                        <Link to="/Overview">Delivery</Link>
+                                    </div>
+                                    <div className='search-overview col-12 col-lg-6 mt-2'>
+                                        <div className='search-icon-overview'>
+                                            <i className="fa fa-search" aria-hidden="true"></i>
 
+                                        </div>
+                                        <input
+                                            type="text"
+                                            placeholder='Search infomation'
+                                            onChange={(event) => HandleSearchData(event.target.value)}
+
+                                        />
+                                    </div>
                                 </div>
-                                <input
-                                    type="text"
-                                    placeholder='Search infomation'
-                                    onChange={(event) => HandleSearchData(event.target.value)}
-
-                                />
                             </div>
                         </div>
                         <div className='body-overview'>
@@ -148,27 +152,27 @@ const OverviewStatusTwo = (props) => {
                                 <div className='sort_Overview my-3'>
                                     <div className='container my-3'>
                                         <div className='row mx-3'>
-                                            <div className='col-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Overview" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Accountant-employer.Two')}
                                                 </Link>
                                             </div>
 
-                                            <div className='col-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Overview_no_status" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Accountant-employer.Three')}
                                                 </Link>
                                             </div>
-                                            <div className='col-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Overview_status-one" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Accountant-employer.Four')}
                                                 </Link>
                                             </div>
-                                            <div className='col-4 my-2 content-Overview ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 my-2 content-Overview ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
                                                 {t('Accountant-employer.Five')}
                                             </div>
 
-                                            <div className='col-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Overview_status-three" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Accountant-employer.Six')}
                                                 </Link>

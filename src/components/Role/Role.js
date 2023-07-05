@@ -28,7 +28,6 @@ const Role = (props) => {
     const fetchUserRole = async () => {
 
         let res = await getRoleWithPagination(currentPage, currentLimit)
-        console.log(res)
         if (res && +res.EC === 0) {
             setTotalPage(res.DT.totalPage)
             if (res.DT.totalPage > 0 && res.DT.dataUser.length === 0) {
@@ -125,6 +124,7 @@ const Role = (props) => {
                 }
             } else {
                 toast.info(res.EM)
+                setListchilds(dataDefault)
                 await fetchUserRole()
                 if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
                     await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)

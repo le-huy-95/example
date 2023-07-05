@@ -119,7 +119,10 @@ const UserGroupBoss = (props) => {
         }
 
     }
+    setTimeout(() => {
+        setIsloading(true)
 
+    }, 10000);
     useEffect(() => {
         if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
             getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)

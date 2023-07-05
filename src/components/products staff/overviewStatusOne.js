@@ -187,12 +187,12 @@ const OverviewStatusOne = (props) => {
     }, [])
     return (
         <div className='overview-container '>
-            <div className='left-overview  '>
+            <div className='left-overview d-none d-lg-block '>
                 <SidebarStaff collapsed={collapsed} />
 
             </div>
             <div className='right-overview  '>
-                <div className='btn-toggle-overview'>
+                <div className='btn-toggle-overview d-none d-lg-block'>
                     <span onClick={() => setCollapsed(!collapsed)} className=" d-sm-block ">
                         {collapsed === false ?
                             <i className="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
@@ -204,25 +204,29 @@ const OverviewStatusOne = (props) => {
                 </div>
                 <div className='right-body-overview'>
                     <div className='container'>
-                        <div className='header-overview'>
-                            <div className='location-path-overview col'>
-                                <Link to="/"> Home</Link>
+                        <div className='header-overview mt-2'>
+                            <div className='container'>
+                                <div className='row'>
+                                    <div className='location-path-overview col-12 col-lg-6'>
+                                        <Link to="/"> Home</Link>
 
-                                <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
-                                </span>
-                                <Link to="/Overview">Delivery</Link>
-                            </div>
-                            <div className='col search-overview'>
-                                <div className='search-icon-overview'>
-                                    <i className="fa fa-search" aria-hidden="true"></i>
+                                        <span> <i className="fa fa-arrow-right" aria-hidden="true"></i>
+                                        </span>
+                                        <Link to="/Overview">Delivery</Link>
+                                    </div>
+                                    <div className='search-overview col-12 col-lg-6 mt-2'>
+                                        <div className='search-icon-overview'>
+                                            <i className="fa fa-search" aria-hidden="true"></i>
 
+                                        </div>
+                                        <input
+                                            type="text"
+                                            placeholder='Search infomation'
+                                            onChange={(event) => HandleSearchData(event.target.value)}
+
+                                        />
+                                    </div>
                                 </div>
-                                <input
-                                    type="text"
-                                    placeholder='Search infomation'
-                                    onChange={(event) => HandleSearchData(event.target.value)}
-
-                                />
                             </div>
                         </div>
                         <div className='body-overview'>
@@ -248,28 +252,28 @@ const OverviewStatusOne = (props) => {
                                 <div className='sort_Overview my-3'>
                                     <div className='container my-3'>
                                         <div className='row mx-3'>
-                                            <div className='col-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Overview" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Accountant-employer.Two')}
                                                 </Link>
                                             </div>
 
-                                            <div className='col-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Overview_no_status" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Accountant-employer.Three')}
                                                 </Link>
                                             </div>
-                                            <div className='col-4 my-2 content-Overview ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 my-2 content-Overview ' style={{ backgroundColor: "#61dafb", cursor: "pointer" }}>
                                                 {t('Accountant-employer.Four')}
                                             </div>
 
 
-                                            <div className='col-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Overview_status-two" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Accountant-employer.Five')}
                                                 </Link>
                                             </div>
-                                            <div className='col-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
+                                            <div className='col-12 col-lg-4 content-Overview' style={{ borderBottom: "5px solid #f0f2f5", cursor: "pointer" }}>
                                                 <Link to="/Overview_status-three" style={{ textDecoration: "none", color: "#474141" }}>
                                                     {t('Accountant-employer.Six')}
                                                 </Link>
@@ -286,7 +290,169 @@ const OverviewStatusOne = (props) => {
                                                     {t('Accountant-employer.Eight')}({listProjectbyStaffOverview.length})
                                                 </div>
                                                 <hr />
+                                                <div style={{ overflow: "auto" }}>
+                                                    <table className="table table-bordered table-body-overview">
+                                                        <thead>
+                                                            <tr className='table-secondary'>
+                                                                <th scope="col">
+                                                                    {t('Accountant-employer.Body.Two')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Accountant-employer.Body.Three')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Accountant-employer.Body.Four')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Accountant-employer.Body.Five')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Accountant-employer.Body.Six')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Accountant-employer.Body.Seven')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Accountant-employer.Body.Eight')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Accountant-employer.Body.Ten')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Accountant-employer.Body.Eleven')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Accountant-employer.Body.Twelve')}
+                                                                </th>
+                                                                <th scope="col">
+                                                                    {t('Accountant-employer.Body.Thirteen')}
+                                                                </th>
 
+
+                                                            </tr>
+                                                        </thead>
+                                                        {listProjectbyStaffOverview && listProjectbyStaffOverview.length > 0
+                                                            ?
+                                                            listProjectbyStaffOverview.map((item, index) => {
+                                                                return (
+                                                                    <tbody key={`item-${index}`}>
+                                                                        <tr>
+                                                                            <td>{item.id}</td>
+                                                                            <td>{item.order}</td>
+                                                                            <td>
+                                                                                <span>
+                                                                                    {item.createdByName}
+                                                                                </span>
+                                                                                <br />
+                                                                                <span>
+                                                                                    {item.createdBy}
+
+                                                                                </span>
+                                                                            </td>
+                                                                            {item.receiveMoneyId === 1 &&
+                                                                                <td style={{ color: "blue", fontWeight: "600" }}>{item?.Status_Received_money?.status ? item?.Status_Received_money?.status : "Chưa xử lý"} </td>
+
+                                                                            }
+
+                                                                            {item.Mode_of_payment === "Nhận tiền thanh toán qua tài khoản ngân hàng" &&
+                                                                                <td>
+                                                                                    <span>
+                                                                                        <b>{t('Accountant-employer.Body.Six')}:</b>   <span style={{ color: "red", fontWeight: "600" }}>{item?.Mode_of_payment ? item?.Mode_of_payment : ""}</span>
+                                                                                    </span>
+                                                                                    <br />
+
+                                                                                    <span>
+                                                                                        <b>{t('Accountant-employer.Body.TwentyThree')}</b> {item?.Bank_name ? item?.Bank_name : ""}
+                                                                                    </span>
+                                                                                    <br />
+                                                                                    <span>
+                                                                                        <b>{t('Accountant-employer.Body.TwentyFour')}</b>   {item?.name_account ? item?.name_account : ""}
+                                                                                    </span>
+                                                                                    <br />
+
+                                                                                    <span>
+                                                                                        <b>{t('Accountant-employer.Body.TwentyFive')}</b>   {item?.Main_Account ? item?.Main_Account : ""}
+                                                                                    </span>
+                                                                                </td>
+                                                                            }
+                                                                            {item.Mode_of_payment === "Nhận tiền thanh toán ở trung tâm" &&
+                                                                                <td>
+                                                                                    <span>
+                                                                                        <b>{t('Accountant-employer.Body.Six')}:</b> <span style={{ color: "red", fontWeight: "600" }}>{item?.Mode_of_payment ? item?.Mode_of_payment : ""}</span>
+                                                                                    </span>
+
+                                                                                </td>
+                                                                            }
+
+                                                                            <td>{item.total}</td>
+                                                                            <td>{item.unit_money}</td>
+
+                                                                            <td>{item?.Overview_time ? moment(`${item?.Overview_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
+                                                                            <td>{item?.OverviewDone_time ? moment(`${item?.OverviewDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
+                                                                            <td>
+                                                                                {item.User_Overview ? item.User_Overview : "chưa ai nhận đơn"}
+                                                                                <br />
+                                                                                {item.Number_Overview && item.Number_Overview}
+
+                                                                            </td>
+
+
+                                                                            {item.receiveMoneyId === 1 && user?.account?.phone == item.Number_Overview &&
+                                                                                < td >
+                                                                                    <button className='btn btn-success mb-3' onClick={() => complete(item)}>
+                                                                                        {t('Accountant-employer.Body.Seventeen')}
+                                                                                    </button>
+                                                                                    <br />
+                                                                                    <button className='btn btn-danger mb-3' onClick={() => update(item)} >
+                                                                                        {t('Accountant-employer.Body.TwentySix')}
+                                                                                    </button>
+                                                                                </td>
+                                                                            }
+                                                                            {item.receiveMoneyId === 1 && user?.account?.phone !== item.Number_Overview &&
+                                                                                < td >
+
+                                                                                    <span style={{ color: "green", fontWeight: "700" }}>{t('Accountant-employer.Body.Fifteen')}</span>
+
+                                                                                </td>
+                                                                            }
+
+                                                                        </tr>
+                                                                    </tbody>
+                                                                )
+                                                            })
+                                                            :
+
+                                                            <tr class="table-info">
+                                                                <td colSpan={14}>
+                                                                    <div className='d-flex align-item-center justify-content-center'>
+
+                                                                        <h5> {t('Accountant-employer.Body.TwentyTwo')}</h5>
+
+                                                                    </div>
+
+                                                                </td>
+
+                                                            </tr>
+
+                                                        }
+
+
+
+
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </>
+                                }
+                                {isSearch === true &&
+                                    <div className='table-wrapper-overview-One my-5'>
+                                        <div className='container'>
+                                            <div className='title-overview-One my-3'>
+                                                {t('Accountant-employer.Body.Eighteen')} ({listProjectSearch.length})
+                                            </div>
+                                            <hr />
+                                            <div style={{ overflow: "auto" }}>
                                                 <table className="table table-bordered table-body-overview">
                                                     <thead>
                                                         <tr className='table-secondary'>
@@ -327,11 +493,12 @@ const OverviewStatusOne = (props) => {
 
                                                         </tr>
                                                     </thead>
-                                                    {listProjectbyStaffOverview && listProjectbyStaffOverview.length > 0
+                                                    {listProjectSearch && listProjectSearch.length > 0
                                                         ?
-                                                        listProjectbyStaffOverview.map((item, index) => {
+                                                        listProjectSearch.map((item, index) => {
                                                             return (
                                                                 <tbody key={`item-${index}`}>
+
                                                                     <tr>
                                                                         <td>{item.id}</td>
                                                                         <td>{item.order}</td>
@@ -395,13 +562,17 @@ const OverviewStatusOne = (props) => {
 
                                                                         {item.receiveMoneyId === 1 && user?.account?.phone == item.Number_Overview &&
                                                                             < td >
-                                                                                <button className='btn btn-success mb-3' onClick={() => complete(item)}>
-                                                                                    {t('Accountant-employer.Body.Seventeen')}
-                                                                                </button>
-                                                                                <br />
-                                                                                <button className='btn btn-danger mb-3' onClick={() => update(item)} >
-                                                                                    {t('Accountant-employer.Body.TwentySix')}
-                                                                                </button>
+
+                                                                                < td >
+                                                                                    <button className='btn btn-success mb-3' onClick={() => complete(item)}>
+                                                                                        {t('Accountant-employer.Body.Seventeen')}
+                                                                                    </button>
+                                                                                    <br />
+                                                                                    <button className='btn btn-danger mb-3' onClick={() => update(item)} >
+                                                                                        {t('Accountant-employer.Body.TwentySix')}
+                                                                                    </button>
+                                                                                </td>
+
                                                                             </td>
                                                                         }
                                                                         {item.receiveMoneyId === 1 && user?.account?.phone !== item.Number_Overview &&
@@ -413,6 +584,7 @@ const OverviewStatusOne = (props) => {
                                                                         }
 
                                                                     </tr>
+
                                                                 </tbody>
                                                             )
                                                         })
@@ -422,7 +594,7 @@ const OverviewStatusOne = (props) => {
                                                             <td colSpan={14}>
                                                                 <div className='d-flex align-item-center justify-content-center'>
 
-                                                                    <h5> {t('Accountant-employer.Body.TwentyTwo')}</h5>
+                                                                    <h5> {t('Accountant-employer.Body.TwentySeven')}</h5>
 
                                                                 </div>
 
@@ -437,177 +609,7 @@ const OverviewStatusOne = (props) => {
 
                                                 </table>
                                             </div>
-
-
                                         </div>
-                                    </>
-                                }
-                                {isSearch === true &&
-                                    <div className='table-wrapper-overview-One my-5'>
-                                        <div className='container'>
-                                            <div className='title-overview-One my-3'>
-                                                {t('Accountant-employer.Body.Eighteen')} ({listProjectSearch.length})
-                                            </div>
-                                            <hr />
-
-                                            <table className="table table-bordered table-body-overview">
-                                                <thead>
-                                                    <tr className='table-secondary'>
-                                                        <th scope="col">
-                                                            {t('Accountant-employer.Body.Two')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Accountant-employer.Body.Three')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Accountant-employer.Body.Four')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Accountant-employer.Body.Five')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Accountant-employer.Body.Six')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Accountant-employer.Body.Seven')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Accountant-employer.Body.Eight')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Accountant-employer.Body.Ten')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Accountant-employer.Body.Eleven')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Accountant-employer.Body.Twelve')}
-                                                        </th>
-                                                        <th scope="col">
-                                                            {t('Accountant-employer.Body.Thirteen')}
-                                                        </th>
-
-
-                                                    </tr>
-                                                </thead>
-                                                {listProjectSearch && listProjectSearch.length > 0
-                                                    ?
-                                                    listProjectSearch.map((item, index) => {
-                                                        return (
-                                                            <tbody key={`item-${index}`}>
-
-                                                                <tr>
-                                                                    <td>{item.id}</td>
-                                                                    <td>{item.order}</td>
-                                                                    <td>
-                                                                        <span>
-                                                                            {item.createdByName}
-                                                                        </span>
-                                                                        <br />
-                                                                        <span>
-                                                                            {item.createdBy}
-
-                                                                        </span>
-                                                                    </td>
-                                                                    {item.receiveMoneyId === 1 &&
-                                                                        <td style={{ color: "blue", fontWeight: "600" }}>{item?.Status_Received_money?.status ? item?.Status_Received_money?.status : "Chưa xử lý"} </td>
-
-                                                                    }
-
-                                                                    {item.Mode_of_payment === "Nhận tiền thanh toán qua tài khoản ngân hàng" &&
-                                                                        <td>
-                                                                            <span>
-                                                                                <b>{t('Accountant-employer.Body.Six')}:</b>   <span style={{ color: "red", fontWeight: "600" }}>{item?.Mode_of_payment ? item?.Mode_of_payment : ""}</span>
-                                                                            </span>
-                                                                            <br />
-
-                                                                            <span>
-                                                                                <b>{t('Accountant-employer.Body.TwentyThree')}</b> {item?.Bank_name ? item?.Bank_name : ""}
-                                                                            </span>
-                                                                            <br />
-                                                                            <span>
-                                                                                <b>{t('Accountant-employer.Body.TwentyFour')}</b>   {item?.name_account ? item?.name_account : ""}
-                                                                            </span>
-                                                                            <br />
-
-                                                                            <span>
-                                                                                <b>{t('Accountant-employer.Body.TwentyFive')}</b>   {item?.Main_Account ? item?.Main_Account : ""}
-                                                                            </span>
-                                                                        </td>
-                                                                    }
-                                                                    {item.Mode_of_payment === "Nhận tiền thanh toán ở trung tâm" &&
-                                                                        <td>
-                                                                            <span>
-                                                                                <b>{t('Accountant-employer.Body.Six')}:</b> <span style={{ color: "red", fontWeight: "600" }}>{item?.Mode_of_payment ? item?.Mode_of_payment : ""}</span>
-                                                                            </span>
-
-                                                                        </td>
-                                                                    }
-
-                                                                    <td>{item.total}</td>
-                                                                    <td>{item.unit_money}</td>
-
-                                                                    <td>{item?.Overview_time ? moment(`${item?.Overview_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                    <td>{item?.OverviewDone_time ? moment(`${item?.OverviewDone_time}`).format("DD/MM/YYYY HH:mm:ss") : ""}</td>
-                                                                    <td>
-                                                                        {item.User_Overview ? item.User_Overview : "chưa ai nhận đơn"}
-                                                                        <br />
-                                                                        {item.Number_Overview && item.Number_Overview}
-
-                                                                    </td>
-
-
-                                                                    {item.receiveMoneyId === 1 && user?.account?.phone == item.Number_Overview &&
-                                                                        < td >
-
-                                                                            < td >
-                                                                                <button className='btn btn-success mb-3' onClick={() => complete(item)}>
-                                                                                    {t('Accountant-employer.Body.Seventeen')}
-                                                                                </button>
-                                                                                <br />
-                                                                                <button className='btn btn-danger mb-3' onClick={() => update(item)} >
-                                                                                    {t('Accountant-employer.Body.TwentySix')}
-                                                                                </button>
-                                                                            </td>
-
-                                                                        </td>
-                                                                    }
-                                                                    {item.receiveMoneyId === 1 && user?.account?.phone !== item.Number_Overview &&
-                                                                        < td >
-
-                                                                            <span style={{ color: "green", fontWeight: "700" }}>{t('Accountant-employer.Body.Fifteen')}</span>
-
-                                                                        </td>
-                                                                    }
-
-                                                                </tr>
-
-                                                            </tbody>
-                                                        )
-                                                    })
-                                                    :
-
-                                                    <tr class="table-info">
-                                                        <td colSpan={14}>
-                                                            <div className='d-flex align-item-center justify-content-center'>
-
-                                                                <h5> {t('Accountant-employer.Body.TwentySeven')}</h5>
-
-                                                            </div>
-
-                                                        </td>
-
-                                                    </tr>
-
-                                                }
-
-
-
-
-                                            </table>
-                                        </div>
-
-
                                     </div>
                                 }
 
