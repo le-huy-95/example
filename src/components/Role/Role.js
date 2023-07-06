@@ -222,30 +222,57 @@ const Role = (props) => {
 
                     </div>
                     {totalPage > 0 &&
-                        <div className='user-footer'>
-                            <ReactPaginate
-                                nextLabel="next >"
-                                onPageChange={handlePageClick}
-                                pageRangeDisplayed={2}
-                                marginPagesDisplayed={3}
-                                pageCount={totalPage}
-                                previousLabel="< previous"
-                                pageClassName="page-item"
-                                pageLinkClassName="page-link"
-                                previousClassName="page-item"
-                                previousLinkClassName="page-link"
-                                nextClassName="page-item"
-                                nextLinkClassName="page-link"
-                                breakLabel="..."
-                                breakClassName="page-item"
-                                breakLinkClassName="page-link"
-                                containerClassName="pagination"
-                                activeClassName="active"
-                                renderOnZeroPageCount={null}
-                                // thuộc tính này dùng để khi xóa trang xong về trang trước thì active trang đó
-                                forcePage={+currentPage - 1}
-                            />
-                        </div>
+                        <>
+                            <div className='user-footer d-none d-lg-flex'>
+                                <ReactPaginate
+                                    nextLabel="next >"
+                                    onPageChange={handlePageClick}
+                                    pageRangeDisplayed={1}
+                                    marginPagesDisplayed={1}
+                                    pageCount={totalPage}
+                                    previousLabel="< previous"
+                                    pageClassName="page-item"
+                                    pageLinkClassName="page-link"
+                                    previousClassName="page-item"
+                                    previousLinkClassName="page-link"
+                                    nextClassName="page-item"
+                                    nextLinkClassName="page-link"
+                                    breakLabel="..."
+                                    breakClassName="page-item"
+                                    breakLinkClassName="page-link"
+                                    containerClassName="pagination"
+                                    activeClassName="active"
+                                    renderOnZeroPageCount={null}
+                                    // thuộc tính này dùng để khi xóa trang xong về trang trước thì active trang đó
+                                    forcePage={+currentPage - 1}
+                                />
+                            </div>
+                            <div className='d-flex align-item-center justify-content-center d-block d-lg-none'>
+                                <ReactPaginate
+                                    nextLabel="next >"
+                                    onPageChange={handlePageClick}
+                                    pageRangeDisplayed={1}
+                                    marginPagesDisplayed={1}
+                                    pageCount={totalPage}
+                                    previousLabel="< previous"
+                                    pageClassName="page-item"
+                                    pageLinkClassName="page-link"
+                                    previousClassName="page-item"
+                                    previousLinkClassName="page-link"
+                                    nextClassName="page-item"
+                                    nextLinkClassName="page-link"
+                                    breakLabel="..."
+                                    breakClassName="page-item"
+                                    breakLinkClassName="page-link"
+                                    containerClassName="pagination"
+                                    activeClassName="active"
+                                    renderOnZeroPageCount={null}
+                                    // thuộc tính này dùng để khi xóa trang xong về trang trước thì active trang đó
+                                    forcePage={+currentPage - 1}
+                                />
+                            </div>
+                        </>
+
                     }
                 </div>
 

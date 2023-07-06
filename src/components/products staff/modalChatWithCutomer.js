@@ -237,13 +237,13 @@ const ModalChatWithCutomer = (props) => {
                                                     <div className='container'>
                                                         <div className="row d-flex align-item-center justify-content-center">
                                                             {imagebase64 ?
-                                                                <div className='image col-2 my-4'
+                                                                <div className='image col-2 my-4 d-none d-lg-block'
                                                                     title="Xem chi tiết hình ảnh">
                                                                     <img src={imagebase64} alt="" />
 
                                                                 </div>
                                                                 :
-                                                                <div className='image col-2 my-4'
+                                                                <div className='image col-2 my-4 d-none d-lg-block'
                                                                     title="Xem chi tiết hình ảnh">
                                                                     <img src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg" alt="" />
 
@@ -273,7 +273,7 @@ const ModalChatWithCutomer = (props) => {
                                                                             Send by:  {item.CreatedBy}
                                                                         </div>
                                                                     </div>
-                                                                    <div className='col-2 d-flex align-items-center' style={{ paddingBottom: "61px" }}>
+                                                                    <div className='col-2 d-flex align-items-center' style={{ paddingBottom: "31px" }}>
                                                                         <button className='btn btn-warning ' style={{ borderRadius: "50%" }} onClick={() => handlUpdateChatProject()}>
                                                                             <i class="fa fa-floppy-o" aria-hidden="true"></i>
                                                                         </button>
@@ -282,7 +282,7 @@ const ModalChatWithCutomer = (props) => {
                                                                         </button>
                                                                     </div>
 
-
+                                                                    <hr />
                                                                 </>
                                                                 :
                                                                 <>
@@ -301,7 +301,7 @@ const ModalChatWithCutomer = (props) => {
                                                                             Send by:  {item.CreatedByName}
                                                                         </div>
                                                                     </div>
-                                                                    <div className='col-2 d-flex align-items-center' style={{ paddingBottom: "61px" }}>
+                                                                    <div className='col-2 d-flex align-items-center' style={{ paddingBottom: "31px" }}>
                                                                         {item.CreatedByPhone === user.account.phone
                                                                             &&
                                                                             <>
@@ -316,6 +316,7 @@ const ModalChatWithCutomer = (props) => {
                                                                         }
 
                                                                     </div>
+                                                                    <hr />
 
 
                                                                 </>
@@ -343,7 +344,7 @@ const ModalChatWithCutomer = (props) => {
                                         {imageUser
                                             ?
                                             <>
-                                                <div className='image-user col-1'>
+                                                <div className='image-user col-1 d-none d-lg-block'>
                                                     <img src={imageUser} alt="" />
                                                 </div>
                                                 <input type="text"
@@ -362,7 +363,7 @@ const ModalChatWithCutomer = (props) => {
                                             </>
                                             :
                                             <>
-                                                <div className='image-user col-1'>
+                                                <div className='image-user col-1 d-none d-lg-block'>
                                                     <img src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg" alt="" />
                                                 </div>
                                                 <input type="text"

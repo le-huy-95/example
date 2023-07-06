@@ -69,12 +69,7 @@ const CreateNewProject = (props) => {
             let res = await getNumberProductinWarehouse(id)
             if (res && +res.EC === 0) {
                 setNumberProduct(res.DT?.product_number)
-                if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-                }
-                if (user?.account?.groupWithRound?.name === "Dev") {
-                    await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-                }
+
             }
         } else {
             setNumberProduct("")
@@ -97,12 +92,7 @@ const CreateNewProject = (props) => {
         if (value) {
             let res = await fetchDistrictByProvince(value)
 
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-            }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
+
             if (res && +res.EC === 0) {
                 setassignDistrictByProvinceOfReceipt(res?.DT?.Address_Districts
 
@@ -123,12 +113,7 @@ const CreateNewProject = (props) => {
             if (res && +res.EC === 0) {
                 setassignDistrictByProvince(res?.DT?.District_customers
                 )
-                if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-                }
-                if (user?.account?.groupWithRound?.name === "Dev") {
-                    await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-                }
+
             }
 
         }
@@ -140,12 +125,8 @@ const CreateNewProject = (props) => {
             if (res && +res.EC === 0) {
                 setassignWardtByDistricOfReceipt(res?.DT?.Address_Wards
                 )
-                if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-                }
-                if (user?.account?.groupWithRound?.name === "Dev") {
-                    await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-                }
+
+
             }
 
 
@@ -161,12 +142,7 @@ const CreateNewProject = (props) => {
 
                 setassignWardtByDistric(res?.DT?.Ward_customers
                 )
-                if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-                }
-                if (user?.account?.groupWithRound?.name === "Dev") {
-                    await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-                }
+
             }
 
         }
@@ -180,12 +156,7 @@ const CreateNewProject = (props) => {
             if (res && +res.EC === 0) {
                 setassignShippingCostByShippingunit(res?.DT?.Shipping_Costs
                 )
-                if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-                }
-                if (user?.account?.groupWithRound?.name === "Dev") {
-                    await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-                }
+
             }
 
         }
@@ -201,12 +172,7 @@ const CreateNewProject = (props) => {
 
             let res = await getPriceByAddress(From, to, +shippingUnit_Id)
             if (res && +res.EC === 0) {
-                if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-                }
-                if (user?.account?.groupWithRound?.name === "Dev") {
-                    await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-                } setshippingCost(res?.DT?.Cost)
+                setshippingCost(res?.DT?.Cost)
             }
 
 
@@ -216,20 +182,10 @@ const CreateNewProject = (props) => {
         let res = await getSaleChannel()
         if (res && +res.EC === 0) {
             setSaleChannel(res.DT)
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-            }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
+
         } else {
             toast.error(res.EM)
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-            }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
+
         }
     }
 
@@ -237,20 +193,10 @@ const CreateNewProject = (props) => {
         let res = await getStastusPayment()
         if (res && +res.EC === 0) {
             setStatusPayment(res.DT)
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-            }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
+
         } else {
             toast.error(res.EM)
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-            }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
+
         }
     }
 
@@ -262,102 +208,50 @@ const CreateNewProject = (props) => {
             if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
                 await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
             }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                    await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-                }
-                if (user?.account?.groupWithRound?.name === "Dev") {
-                    await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-                }
-            }
+
         } else {
             toast.error(res.EM)
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-            }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
+
         }
     }
     const getProvince = async () => {
         let res = await getAllProvince()
         if (res && +res.EC === 0) {
             setAllProvince(res.DT)
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-            }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
+
         } else {
             toast.error(res.EM)
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-            }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
+
         }
     }
     const getAddressFrom = async () => {
         let res = await getAddress_from()
         if (res && +res.EC === 0) {
             setAllAddressFrom(res.DT)
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-            }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
+
         } else {
             toast.error(res.EM)
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-            }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
+
         }
     }
     const getAddressTo = async () => {
         let res = await getAddress_to()
         if (res && +res.EC === 0) {
             setAllAddressTo(res.DT)
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-            }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
+
         } else {
             toast.error(res.EM)
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-            }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
+
         }
     }
     const getShippingUnit = async () => {
         let res = await getAllShippingUnit()
         if (res && +res.EC === 0) {
             setShippingUnit(res.DT)
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-            }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
+
         } else {
             toast.error(res.EM)
-            if (user?.account?.groupWithRound?.name === "Customer" || user?.account?.groupWithRound?.name === "Staff" && user.account.Position) {
-                await getALlListNotification(+user.account.shippingUnit_Id, user.account.phone, user.account.Position)
-            }
-            if (user?.account?.groupWithRound?.name === "Dev") {
-                await getALlListNotification(+user.account.shippingUnit_Id, "Dev")
-            }
+
         }
     }
 

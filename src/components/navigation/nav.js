@@ -98,19 +98,45 @@ const NavHeader = (props) => {
                                     <NavLink className="nav-link" to="/" exact>
                                         {t('navigation.one')}
                                     </NavLink>
-                                    <NavDropdown title={`${t('navigation.Two')}`}
-                                        id="basic-nav-dropdown" className='dropdown'>
-                                        <NavDropdown.Item href='/listuser'  >
-                                            {t('navigation.three')}
+                                    {user?.account?.groupWithRound?.name === "Staff" &&
+                                        <NavDropdown title={`${t('navigation.Two')}`}
+                                            id="basic-nav-dropdown" className='dropdown'>
+                                            <NavDropdown.Item href='/listuser'  >
+                                                {t('navigation.three')}
 
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item href='/role' >
-                                            {t('navigation.Four')}
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item href='/grouprole'>
-                                            {t('navigation.Five')}
-                                        </NavDropdown.Item>
-                                    </NavDropdown>
+                                            </NavDropdown.Item>
+                                        </NavDropdown>
+                                    }
+                                    {user?.account?.groupWithRound?.name === "Dev" &&
+                                        <NavDropdown title={`${t('navigation.Two')}`}
+                                            id="basic-nav-dropdown" className='dropdown'>
+                                            <NavDropdown.Item href='/listuser'  >
+                                                {t('navigation.three')}
+
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/role' >
+                                                {t('navigation.Four')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/grouprole'>
+                                                {t('navigation.Five')}
+                                            </NavDropdown.Item>
+                                        </NavDropdown>
+                                    }
+                                    {user?.account?.groupWithRound?.name === "Boss" &&
+                                        <NavDropdown title={`${t('navigation.Two')}`}
+                                            id="basic-nav-dropdown" className='dropdown'>
+                                            <NavDropdown.Item href='/listuser'  >
+                                                {t('navigation.three')}
+
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/role' >
+                                                {t('navigation.Four')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/grouprole'>
+                                                {t('navigation.Five')}
+                                            </NavDropdown.Item>
+                                        </NavDropdown>
+                                    }
                                     {!user.account.Position &&
                                         <NavDropdown title={`${t('navigation.Six')}`} id="basic-nav-dropdown" className='dropdown'>
                                             <NavDropdown.Item href='/dashboard_Product'>
@@ -163,7 +189,25 @@ const NavHeader = (props) => {
 
                                         </NavDropdown>
                                     }
-
+                                    {user?.account?.groupWithRound?.name === "Boss" &&
+                                        <NavDropdown title={`${t('navigation.Eleven')}`} id="basic-nav-dropdown" className='dropdown'>
+                                            <NavDropdown.Item href='/order-processing'>
+                                                {t('navigation.Twelve')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/Pickup_staff'>
+                                                {t('navigation.Thirteen')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/Warehouse_staff'>
+                                                {t('navigation.Fourteen')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/Delivery_staff'>
+                                                {t('navigation.fifteen')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/Overview'>
+                                                {t('navigation.Sixteen')}
+                                            </NavDropdown.Item>
+                                        </NavDropdown>
+                                    }
 
                                 </Nav>
                                 <Nav>
@@ -171,20 +215,21 @@ const NavHeader = (props) => {
                                         <>
                                             <Nav.Item className='nav-link' >
                                                 {t('navigation.Seventeen')}
-                                                <b> {user.account.username.toLocaleUpperCase()}</b> !
+                                                <b> {user.account.username}</b> !
                                             </Nav.Item>
                                             <NavDropdown title={`${t('navigation.Eightteen')}`} id="basic-nav-dropdown">
                                                 <NavDropdown.Item onClick={() => handleShowChanePassModal()} >
                                                     {t('navigation.Nightteen')}
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Item href='/Profile' >
+                                                    {t('navigation.twentyTwo')}
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Item >
                                                     <span onClick={() => handleLogOut()}>
                                                         {t('navigation.twenty')}
                                                     </span>
                                                 </NavDropdown.Item>
-                                                <NavDropdown.Item href='/Profile' >
-                                                    {t('navigation.twentyTwo')}
-                                                </NavDropdown.Item>
+
 
                                             </NavDropdown>
                                         </>
@@ -198,40 +243,47 @@ const NavHeader = (props) => {
 
 
                                 </Nav>
-                                <Nav.Item className='nav-link' >
-                                    <span className=" btn btn-primary position-relative" onClick={() => handleShowNotificationModal()}>
-                                        <i className="fa fa-bell" aria-hidden="true"></i>
-                                        {!user.account.Position && ListUnread.length > 0
-                                            &&
-                                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                                {ListUnread.length}
+                                {user?.account?.groupWithRound?.name === "Boss" ?
+                                    <></>
+                                    :
+                                    <>
+
+                                        <Nav.Item className='nav-link' >
+                                            <span className=" btn btn-primary position-relative" onClick={() => handleShowNotificationModal()}>
+                                                <i className="fa fa-bell" aria-hidden="true"></i>
+                                                {!user.account.Position && ListUnread.length > 0
+                                                    &&
+                                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                        {ListUnread.length}
 
 
-                                                <span className="visually-hidden">unread messages</span>
+                                                        <span className="visually-hidden">unread messages</span>
+                                                    </span>
+                                                }
+                                                {user.account.Position && listStaffUnread.length > 0
+                                                    &&
+                                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                        {listStaffUnread.length}
+
+
+                                                        <span className="visually-hidden">unread messages</span>
+                                                    </span>
+                                                }
+                                                {!user.account.Position && listDevUnread.length > 0
+                                                    &&
+                                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                        {listDevUnread.length}
+
+
+                                                        <span className="visually-hidden">unread messages</span>
+                                                    </span>
+                                                }
+
                                             </span>
-                                        }
-                                        {user.account.Position && listStaffUnread.length > 0
-                                            &&
-                                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                                {listStaffUnread.length}
 
-
-                                                <span className="visually-hidden">unread messages</span>
-                                            </span>
-                                        }
-                                        {!user.account.Position && listDevUnread.length > 0
-                                            &&
-                                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                                {listDevUnread.length}
-
-
-                                                <span className="visually-hidden">unread messages</span>
-                                            </span>
-                                        }
-
-                                    </span>
-
-                                </Nav.Item>
+                                        </Nav.Item>
+                                    </>
+                                }
                                 <Language />
                             </Navbar.Collapse>
                         </Container>
@@ -260,20 +312,64 @@ const NavHeader = (props) => {
                                     <NavLink className="nav-link" to="/" exact>
                                         {t('navigation.one')}
                                     </NavLink>
-                                    <NavDropdown title={`${t('navigation.Two')}`}
-                                        id="basic-nav-dropdown" className='dropdown'>
-                                        <NavDropdown.Item href='/listuser'  >
-                                            {t('navigation.three')}
+                                    {user?.account?.groupWithRound?.name === "Staff" &&
+                                        <NavDropdown title={`${t('navigation.Two')}`}
+                                            id="basic-nav-dropdown" className='dropdown'>
+                                            <NavDropdown.Item href='/listuser'  >
+                                                {t('navigation.three')}
 
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item href='/role' >
-                                            {t('navigation.Four')}
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item href='/grouprole'>
-                                            {t('navigation.Five')}
-                                        </NavDropdown.Item>
-                                    </NavDropdown>
+                                            </NavDropdown.Item>
+                                        </NavDropdown>
+                                    }
+
+                                    {user?.account?.groupWithRound?.name === "Dev" &&
+                                        <NavDropdown title={`${t('navigation.Two')}`}
+                                            id="basic-nav-dropdown" className='dropdown'>
+                                            <NavDropdown.Item href='/listuser'  >
+                                                {t('navigation.three')}
+
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/role' >
+                                                {t('navigation.Four')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/grouprole'>
+                                                {t('navigation.Five')}
+                                            </NavDropdown.Item>
+                                        </NavDropdown>
+                                    }
+
+                                    {user?.account?.groupWithRound?.name === "Boss" &&
+                                        <NavDropdown title={`${t('navigation.Two')}`}
+                                            id="basic-nav-dropdown" className='dropdown'>
+                                            <NavDropdown.Item href='/listuser'  >
+                                                {t('navigation.three')}
+
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/role' >
+                                                {t('navigation.Four')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/grouprole'>
+                                                {t('navigation.Five')}
+                                            </NavDropdown.Item>
+                                        </NavDropdown>
+                                    }
                                     {!user.account.Position &&
+                                        <NavDropdown title={`${t('navigation.Six')}`} id="basic-nav-dropdown" className='dropdown'>
+                                            <NavDropdown.Item href='/dashboard_Product'>
+                                                {t('navigation.Seven')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/dashboard_Warehouse'>
+                                                {t('navigation.Eight')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/Products' >
+                                                {t('navigation.Night')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/Warehouse' >
+                                                {t('navigation.Ten')}
+                                            </NavDropdown.Item>
+                                        </NavDropdown>
+                                    }
+                                    {user?.account?.groupWithRound?.name === "Dev" &&
                                         <NavDropdown title={`${t('navigation.Six')}`} id="basic-nav-dropdown" className='dropdown'>
                                             <NavDropdown.Item href='/dashboard_Product'>
                                                 {t('navigation.Seven')}
@@ -325,7 +421,25 @@ const NavHeader = (props) => {
 
                                         </NavDropdown>
                                     }
-
+                                    {user?.account?.groupWithRound?.name === "Boss" &&
+                                        <NavDropdown title={`${t('navigation.Eleven')}`} id="basic-nav-dropdown" className='dropdown'>
+                                            <NavDropdown.Item href='/order-processing'>
+                                                {t('navigation.Twelve')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/Pickup_staff'>
+                                                {t('navigation.Thirteen')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/Warehouse_staff'>
+                                                {t('navigation.Fourteen')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/Delivery_staff'>
+                                                {t('navigation.fifteen')}
+                                            </NavDropdown.Item>
+                                            <NavDropdown.Item href='/Overview'>
+                                                {t('navigation.Sixteen')}
+                                            </NavDropdown.Item>
+                                        </NavDropdown>
+                                    }
 
                                 </Nav>
                                 <Nav>
@@ -333,20 +447,21 @@ const NavHeader = (props) => {
                                         <>
                                             <Nav.Item className='nav-link' >
                                                 {t('navigation.Seventeen')}
-                                                <b> {user.account.username.toLocaleUpperCase()}</b> !
+                                                <b> {user.account.username}</b> !
                                             </Nav.Item>
                                             <NavDropdown title={`${t('navigation.Eightteen')}`} id="basic-nav-dropdown">
                                                 <NavDropdown.Item onClick={() => handleShowChanePassModal()} >
                                                     {t('navigation.Nightteen')}
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Item href='/Profile' >
+                                                    {t('navigation.twentyTwo')}
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Item >
                                                     <span onClick={() => handleLogOut()}>
                                                         {t('navigation.twenty')}
                                                     </span>
                                                 </NavDropdown.Item>
-                                                <NavDropdown.Item href='/Profile' >
-                                                    {t('navigation.twentyTwo')}
-                                                </NavDropdown.Item>
+
 
                                             </NavDropdown>
                                         </>
@@ -357,43 +472,50 @@ const NavHeader = (props) => {
 
 
                                     }
+                                    {user?.account?.groupWithRound?.name === "Boss" ?
+                                        <></>
+                                        :
+                                        <>
 
+                                            <Nav.Item className='nav-link' >
+                                                <span className=" btn btn-primary position-relative" onClick={() => handleShowNotificationModal()}>
+                                                    <i className="fa fa-bell" aria-hidden="true"></i>
+                                                    {!user.account.Position && ListUnread.length > 0
+                                                        &&
+                                                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                            {ListUnread.length}
+
+
+                                                            <span className="visually-hidden">unread messages</span>
+                                                        </span>
+                                                    }
+                                                    {user.account.Position && listStaffUnread.length > 0
+                                                        &&
+                                                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                            {listStaffUnread.length}
+
+
+                                                            <span className="visually-hidden">unread messages</span>
+                                                        </span>
+                                                    }
+                                                    {!user.account.Position && listDevUnread.length > 0
+                                                        &&
+                                                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                            {listDevUnread.length}
+
+
+                                                            <span className="visually-hidden">unread messages</span>
+                                                        </span>
+                                                    }
+
+                                                </span>
+
+                                            </Nav.Item>
+                                        </>
+                                    }
 
                                 </Nav>
-                                <Nav.Item className='nav-link' >
-                                    <span className=" btn btn-primary position-relative" onClick={() => handleShowNotificationModal()}>
-                                        <i className="fa fa-bell" aria-hidden="true"></i>
-                                        {!user.account.Position && ListUnread.length > 0
-                                            &&
-                                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                                {ListUnread.length}
 
-
-                                                <span className="visually-hidden">unread messages</span>
-                                            </span>
-                                        }
-                                        {user.account.Position && listStaffUnread.length > 0
-                                            &&
-                                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                                {listStaffUnread.length}
-
-
-                                                <span className="visually-hidden">unread messages</span>
-                                            </span>
-                                        }
-                                        {!user.account.Position && listDevUnread.length > 0
-                                            &&
-                                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                                {listDevUnread.length}
-
-
-                                                <span className="visually-hidden">unread messages</span>
-                                            </span>
-                                        }
-
-                                    </span>
-
-                                </Nav.Item>
                                 <Language />
                             </Navbar.Collapse>
                         </Container>

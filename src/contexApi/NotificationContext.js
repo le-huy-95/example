@@ -83,6 +83,7 @@ const NotificationProvider = ({ children }) => {
             let res = await getAllNotificaltion(0, "Dev")
 
             if (res && +res.EC === 0) {
+                console.log("res.DT", res.DT)
                 seListAdmin(res.DT)
             }
         }

@@ -161,6 +161,7 @@ const ModalViewNotification = (props) => {
     }
     const RenderNoSeeDev = () => {
         let data = listAdmin.filter(item => item.ViewByStaff === "0")
+        console.log("listAdmin", listAdmin)
         setlistDevFillterNosee(data)
 
     }

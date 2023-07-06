@@ -141,30 +141,8 @@ const Profile = (props) => {
             toast.error("Empty Address detail !!!!")
             return;
         }
-        let res = await UpdateUser(data)
-        if (res && +res.EC === 0) {
-            await UpdateImageChat({
-                name: data.username,
-                phone: data.phone,
-                image: data.image
-
-            })
-            toast.success("create success")
-            await getProfile()
-
-            setEditName(false)
-            setEditSex(false)
-            setEditAddress(false)
-            setEditImage(false)
-            setisValidName(true)
-            setisValidDetailAddress(true)
-        } else {
-            toast.error(res.EM)
-        }
-
-
         if (!imageUpdate) {
-            let res = await UpdateUser({ ...data, image: data.image })
+            let res = await UpdateUser({ ...data, image: image })
             if (res && +res.EC === 0) {
                 await UpdateImageChat({
                     name: data.username,
@@ -172,6 +150,7 @@ const Profile = (props) => {
                     image: data.image
 
                 })
+                toast.success("create success")
                 await getProfile()
 
                 setEditName(false)
@@ -180,13 +159,12 @@ const Profile = (props) => {
                 setEditImage(false)
                 setisValidName(true)
                 setisValidDetailAddress(true)
-
-            }
-            else {
+            } else {
                 toast.error(res.EM)
             }
-
         }
+
+
         if (imageUpdate) {
             let res = await UpdateUser({ ...data, image: imageUpdate })
             if (res && +res.EC === 0) {
@@ -276,6 +254,7 @@ const Profile = (props) => {
 
     useEffect(() => {
         getProfile()
+        console.log("data", data)
 
     }, [])
 
